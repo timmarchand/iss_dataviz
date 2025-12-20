@@ -147,14 +147,14 @@ ggplot(mpg, aes(x = displ, y = hwy,
 # - https://github.com/hrbrmstr/hrbrthemes/issues/58
 #
 # So we need to revert it all back to the defaults
-default_point <- ggplot2:::check_subclass("point", "Geom")$default_aes
-default_line <- ggplot2:::check_subclass("line", "Geom")$default_aes
-default_area <- ggplot2:::check_subclass("area", "Geom")$default_aes
-default_rect <- ggplot2:::check_subclass("rect", "Geom")$default_aes
-default_density <- ggplot2:::check_subclass("density", "Geom")$default_aes
-default_bar <- ggplot2:::check_subclass("bar", "Geom")$default_aes
-default_col <- ggplot2:::check_subclass("col", "Geom")$default_aes
-default_text <- ggplot2:::check_subclass("text", "Geom")$default_aes
+default_point <- GeomPoint$default_aes
+default_line <- GeomLine$default_aes
+default_area <- GeomArea$default_aes
+default_rect <- GeomRect$default_aes
+default_density <- GeomDensity$default_aes
+default_bar <- GeomBar$default_aes
+default_col <- GeomCol$default_aes
+default_text <- GeomText$default_aes
 ```
 
 .left-code[
