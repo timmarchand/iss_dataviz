@@ -1,15 +1,6 @@
 ---
 title: "Enhancing graphics"
-date: "2025-11-03"
-format:
-  html:
-    include-in-header:
-      - text: |
-          <style>
-            p code.sourceCode, li code.sourceCode, td code.sourceCode {
-              background-color: inherit;
-            }
-          </style>
+date: "2026-03-30"
 ---
 
 ```{r setup, include=FALSE}

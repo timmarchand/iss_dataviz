@@ -8,10 +8,21 @@ To encourage engagement with the course content, especially the readings and vid
 
 You should answer these two questions each session:
 
-1. What were the **three (3)** most interesting or exciting things you learned from the session? Why?
-2. What were the **three (3)** muddiest or unclear things from the session? What are you still wondering about?
+- What were the **three (3)** most interesting or exciting things you learned from the session? Why?
+
+  1. Thing 1 (and why)
+  2. Thing 2 (and why)
+  3. Thing 3 (and why)
+
+- What were the **three (3)** muddiest or unclear things from the session? What are you still wondering about?
+
+  1. Thing 1 (and why)
+  2. Thing 2 (and why)
+  3. Thing 3 (and why)
 
 You can include more than three interesting or muddiest things, but you must include at least three. There should be six easily identifiable things in each check-in: three exciting things and three questions.
+
+**Each item should be 1–2 sentences long.** Do *not* write just a single word—that will merit a ✓−.
 
 ::: {.callout-important}
 ### Focus on the readings

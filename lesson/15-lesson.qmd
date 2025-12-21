@@ -1,7 +1,7 @@
 ---
 title: "Truth, beauty, and data revisited"
-date: "2025-12-08"
-date_end: "2025-12-09"
+date: "2026-04-27"
+date_end: "2026-04-28"
 ---
 
 There's no lesson for this session. You made it to the end of the course! Congratulations!
