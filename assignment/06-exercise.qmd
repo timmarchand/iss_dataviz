@@ -19,6 +19,27 @@ The example page for this week will be helpful!
 - [{{< fa laptop-code >}} Uncertainty](/example/06-example.qmd)
 :::
 
+::: {.callout-important}
+### {gghalves} updates!
+
+{ggplot2} 4.0 was released in September 2025 ([see here for all its new features](https://tidyverse.org/blog/2025/09/ggplot2-4-0-0/)) and it introduced some feautres that broke many packages that extend ggplot, including {gghalves}. If you install the version of {gghalves} from CRAN like normal, you'll get errors like this:
+
+```r
+#> Error in geom_half_point() : 
+#> ℹ Error occurred in the 1st layer.
+#> Caused by error in fun():
+#> ! argument "layout" is missing, with no default
+```
+
+This has been [reported as a bug here](https://github.com/erocoar/gghalves/issues/30). One of the main ggplot developers made a copy of {gghalves} and fixed the issue, though. The fix hasn't been incorporated into the main {gghalves} package yet, but you can install his version by (1) restarting your R session, and (2) running this:
+
+```r
+remotes::install_github("teunbrand/gghalves@compat_ggplot2_400")
+```
+
+That'll replace the normal version of {gghalves} with the fixed version for ggplot 4.0. Eventually the {gghalves} developer will merge those changes into the main package, but this works for now!
+:::
+
 ## Instructions
 
 1. Open the project either on your computer or in Posit.cloud
