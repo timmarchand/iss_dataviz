@@ -77,7 +77,7 @@ Right now the data contains a row for each line of dialogue. We need to split th
 Use `unnest_tokens()` and `anti_join()` to create a data frame named `all_words` that looks like this:
 
 ```r
-#> # A tibble: 170,426 × 5
+#> # A tibble: 170,545 × 5
 #>    season episode episode_name character word       
 #>     <dbl>   <dbl> <chr>        <chr>     <chr>      
 #>  1      1       1 Pilot        Michael   jim        
@@ -90,7 +90,7 @@ Use `unnest_tokens()` and `anti_join()` to create a data frame named `all_words`
 #>  8      1       1 Pilot        Michael   grasshopper
 #>  9      1       1 Pilot        Jim       called     
 #> 10      1       1 Pilot        Jim       yeah       
-#> # ℹ 170,416 more rows
+#> # ℹ 170,535 more rows
 ```
 
 **Some hints!**
@@ -106,7 +106,7 @@ Use `unnest_tokens()` and `anti_join()` to create a data frame named `all_words`
 
 - You'll want to anti join the `stop_words` dataset (which is invisibly loaded when you run `library(tidytext)`)
 
-- The dataset should have 170,426 rows
+- The dataset should have 170,545 rows
 
 ```{r}
 #| label: recreate-me-data-all-words
@@ -164,20 +164,20 @@ Fortunately you don't need to remember that formula. The `bind_tf_idf()` functio
 Take the `all_words` data frame and use `filter()`, `count()`, and `bind_tf_idf()` on create a data frame named `character_tf_idf` that looks like this:
 
 ```r
-#> # A tibble: 23,767 × 6
+#> # A tibble: 23,819 × 6
 #>    character word       n      tf   idf tf_idf
 #>    <chr>     <chr>  <int>   <dbl> <dbl>  <dbl>
 #>  1 Michael   yeah     563 0.0135      0      0
 #>  2 Michael   hey      501 0.0120      0      0
 #>  3 Jim       yeah     385 0.0240      0      0
-#>  4 Michael   dwight   354 0.00849     0      0
+#>  4 Michael   dwight   354 0.00848     0      0
 #>  5 Pam       yeah     341 0.0267      0      0
-#>  6 Michael   people   337 0.00808     0      0
-#>  7 Michael   pam      327 0.00784     0      0
+#>  6 Michael   people   337 0.00807     0      0
+#>  7 Michael   pam      327 0.00783     0      0
 #>  8 Jim       hey      312 0.0194      0      0
 #>  9 Dwight    jim      293 0.0120      0      0
-#> 10 Michael   gonna    288 0.00691     0      0
-#> # ℹ 23,757 more rows
+#> 10 Michael   gonna    288 0.00690     0      0
+#> # ℹ 23,809 more rows
 ```
 
 **Some hints!**
@@ -185,7 +185,7 @@ Take the `all_words` data frame and use `filter()`, `count()`, and `bind_tf_idf(
 - Remember to use the `%in%` operator in `filter()` to check if a character is in a list of possible characters (e.g. `filter(character %in% c("Andy", "Kelly", "Creed"))`).
 - After filtering, you'll want to count the number of words spoken by each character, likely with something like `count(character, word)`.
 - Use `bind_tf_idf()` to add columns for the tf, idf, and tf-idf values.
-- The dataset should have 23,767 rows
+- The dataset should have 23,819 rows
 
 ```{r}
 #| label: recreate-me-data-tf-idf
