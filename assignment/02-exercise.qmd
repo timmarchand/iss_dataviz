@@ -83,5 +83,5 @@ On iCollege, submit a PDF of your new poster, along with a PDF of your check-in 
 ::: {.callout-tip}
 ### Share!
 
-[As part of building class community](/news/2025-08-21_building-community.qmd), consider showing off your redesigned poster in the `#bragging` channel on Discord!
+[As part of building class community](/news/2026-01-12_building-community.qmd), consider showing off your redesigned poster in the `#bragging` channel on Discord!
 :::
