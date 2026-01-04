@@ -8,7 +8,7 @@ date_end: "2026-01-16"
 knitr::opts_chunk$set(fig.align = "center")
 ```
 
-## Part 1: The basics of R and dplyr
+## Part 1: The basics of R and {dplyr}
 
 For the first part of this week's lesson, you need to work through a few of Posit's introductory primers. You'll do these in your browser and type code and see results there.
 
@@ -74,6 +74,8 @@ Do the following things:
     - [How it Works](https://rmarkdown.rstudio.com/lesson-2.html)
     - [Code Chunks](https://rmarkdown.rstudio.com/lesson-3.html)
     - [Inline Code](https://rmarkdown.rstudio.com/lesson-4.html)
+    - [Publish and Share with Quarto cheatsheet](https://rstudio.github.io/cheatsheets/quarto.pdf)
+    - [Publish and Share with Quarto](https://rstudio.github.io/cheatsheets/html/quarto.html#publish)
 
 2. Watch this video:
 

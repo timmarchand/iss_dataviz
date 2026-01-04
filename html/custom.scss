@@ -272,7 +272,13 @@ div.sidebar-item-container .sidebar-link>code{
 // Content page stuff
 // Date bar
 .date-block {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  margin-top: 0.75em;
+
+  // This is needed now because I'm using the title-metadata.html template 
+  // partial and it puts each metadata-related item in a two-column grid, and I 
+  // want the date to span both columns
+  grid-column: 1 / -1;
 
   p.date {
     margin-bottom: 0 !important;
