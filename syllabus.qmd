@@ -327,7 +327,7 @@ grading |>
 
 ## Recipes
 
-Once you have read this entire syllabus and [the assignments page](/assignment/index.qmd), post your favorite recipe (either a link or the text) to the `#recipes` channel on Discord. I love cooking ([see here for a feed of some of my cooking adventures](https://bsky.app/search?q=from%3Aandrew.heiss.phd+%23pacooks)) and I'm always on the lookout for new things!
+Once you have read this entire syllabus and [the assignments page](/assignment/index.qmd), post your **favorite recipe** (either a link or the text) to the `#recipes` channel on Discord. I love cooking ([see here for a feed of some of my cooking adventures](https://bsky.app/search?q=from%3Aandrew.heiss.phd+%23pacooks)) and I'm always on the lookout for new things!
 
 :::::: {.content-visible when-format="typst"}
 
