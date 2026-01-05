@@ -5,7 +5,16 @@ reference-location: margin
 
 I *highly recommend* **not** using ChatGPT or similar large language models (LLMs) in this class.
 
-I am not opposed to LLMs in many situations. I use [GitHub Copilot](https://github.com/features/copilot) for computer programming-related tasks all the time, and I have ongoing research where we're experimenting with using [Meta's Ollama](https://ollama.com/) to try automatically categorizing thousands of nonprofit mission statements. Using LLMs requires careful skill and attention and practice, and they tend to be useful only in specific limited cases.
+I am not opposed to LLMs in many situations. I use [GitHub Copilot](https://github.com/features/copilot) and [Claude Code](https://code.claude.com/) for computer programming-related tasks all the time, and I have ongoing research where we're experimenting with using [Meta's Ollama](https://ollama.com/) to try automatically categorizing thousands of nonprofit mission statements. Using LLMs requires careful skill and attention and practice, and they tend to be useful only in specific limited cases.
+
+::: {.callout-note}
+#### My personal stance on AI and LLMs
+
+[Please check this short little page](https://www.andrewheiss.com/ai/) where I explain how I think about AI/LLMs and text, images, code, research, and learning.
+
+In short, **I do not use LLMs to create any of the materials for this class, and I do not use them to grade or evaluate any of your work.**
+:::
+
 
 ## Writing and thinking
 
@@ -43,7 +52,7 @@ I will not spend time trying to guess if your assignments are AI-generated.^[The
 
 I am less opposed to LLMs for coding. Kind of.
 
-I often use LLMs like ChatGPT and [GitHub Copilot](https://github.com/features/copilot) in my own work (GitHub Copilot in particular is *really really good* for code—it's better than ChatGPT, and free for students). These tools are phenomenal resources for coding ***when you already know what you are doing***.
+I often use LLMs like ChatGPT and [GitHub Copilot](https://github.com/features/copilot) and [Claude Code](https://code.claude.com/) in my own work (GitHub Copilot in particular is *really really good* for code—it's better than ChatGPT, and free for students). These tools are phenomenal resources for coding ***when you already know what you are doing***.
 
 However, using ChatGPT and other LLMs when *learning* R is **actually really detrimental to learning,** especially if you just copy/paste directly from what it spits out. It will give you code that is wrong or that contains extra stuff you don't need, and if you don't know enough of the language you're working with, you won't understand why or what's going on.
 
@@ -135,3 +144,5 @@ It's like when people first discover the thesaurus. You've all seen overwrought,
 In general, **don't ever just copy/paste from ChatGPT and hope it runs.** If you do use these tools, use them to ask for explanations. Make sure you know what every line of code is doing. For example, if it spits out `summarize(average_cty = mean(cty, na.rm = TRUE), .groups = "drop")`, and you don't know what those `na.rm = TRUE` or `.groups = "drop"` things mean, look at the help page for `mean()` and see what `na.rm` actually does so you can decide if you really need to use it or not, or ask the LLM why it included it.
 
 **I will call out code that looks vibe-coded in your assignments. Please don't do it.**
+
+**I will give you a zero if you include fake data in your assignments. Please don't do it.**
