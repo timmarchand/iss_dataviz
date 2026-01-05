@@ -2,7 +2,6 @@
 title: "Welcome to class!"
 date: "2026-01-05T11:26"
 categories: [getting started]
-draft: true
 ---
 
 Hello everyone!

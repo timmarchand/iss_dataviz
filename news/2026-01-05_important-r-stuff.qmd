@@ -2,7 +2,6 @@
 title: "Important R stuff"
 date: "2026-01-05T12:13"
 categories: [getting started]
-draft: true
 ---
 
 From reading the syllabus you'll notice that we're using R in this class. R is free (!!), and highly sought after by employers, but it has a little bit of an initial learning curve. You'll get the hang of it, though, I promise! I'm a certified RStudio instructor (see <https://education.rstudio.com/trainers/>), so I've been specially trained to teach statistical programming. Again, I promise that you'll learn a ton.

@@ -1,8 +1,7 @@
 ---
 title: "Building community on Discord"
-date: "2025-01-12T10:23"
+date: "2026-01-05T12:35"
 categories: [advice]
-draft: true
 ---
 
 The most common question I get from students before the class is this:

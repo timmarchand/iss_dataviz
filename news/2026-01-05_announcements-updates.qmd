@@ -2,9 +2,6 @@
 title: "Announcements and updates"
 date: "2026-01-05T11:55"
 categories: [getting started]
-draft: true
-language: 
-  draft: "This is a draft. This will go live once the semester starts."
 ---
 
 Over the course of the semester, I’ll be sending you lots of updates and announcements and FAQs. 
