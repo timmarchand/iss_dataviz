@@ -22,7 +22,7 @@ Before starting this exercise, make sure you complete the Posit Primers at [the 
 1. Open the project either on your computer or in Posit.cloud
 
    - [{{< fa file-archive >}} `03-exercise.zip`](/projects/03-exercise.zip): If you're using R on your own computer, download this file, [*unzip it*](/resource/unzipping.qmd), and double click on the file named `03-exercise.Rproj`
-   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/679548/content/10729160): Use this link if you're using Posit.cloud in your browser
+   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/737277/content/11693226): Use this link if you're using Posit.cloud in your browser
 
 2. Rename the Quarto file named `your-name_exercise-3.qmd` to something that matches your name and open it in RStudio.
 

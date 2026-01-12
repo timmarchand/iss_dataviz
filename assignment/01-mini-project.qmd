@@ -74,7 +74,7 @@ For this mini project, you will create **one (1) plot**. But with so many column
 1. Open the project either on your computer or in Posit.cloud
 
    - [{{< fa file-archive >}} `01-mini-project.zip`](/projects/01-mini-project.zip): If you're using R on your own computer, download this file, [*unzip it*](/resource/unzipping.qmd), and double click on the file named `01-mini-project.Rproj`
-   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/679548/content/10975528): Use this link if you're using Posit.cloud in your browser
+   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/737277/content/11693249): Use this link if you're using Posit.cloud in your browser
 
 2. Rename the Quarto file named `your-name_mini-project-1.qmd` to something that matches your name and open it in RStudio.
 

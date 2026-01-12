@@ -33,7 +33,7 @@ The example page for this week will be helpful!
 1. Open the project either on your computer or in Posit.cloud
 
    - [{{< fa file-archive >}} `11-exercise.zip`](/projects/11-exercise.zip): If you're using R on your own computer, download this file, [*unzip it*](/resource/unzipping.qmd), and double click on the file named `11-exercise.Rproj`
-   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/679548/content/11298617): Use this link if you're using Posit.cloud in your browser
+   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/737277/content/11693240): Use this link if you're using Posit.cloud in your browser
 
 2. Follow [the instructions here](https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/instructions.html) and complete the different tasks in the different `.qmd` files. Check [the data description](https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/) to learn more about what all the columns mean.
 

@@ -20,7 +20,7 @@ Here's what you'll need to do:
 0. Create a [new](https://datavizsp26.classes.andrewheiss.com/lesson/01-lesson.html#part-3-rstudio-projects) **RStudio project** on your computer, or use an empty starter project here:
 
    - [{{< fa file-archive >}} `final-project.zip`](/projects/final-project.zip): If you're using R on your own computer, download this file, [*unzip it*](/resource/unzipping.qmd), and double click on the file named `final-project.Rproj`
-   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/679548/content/11412333): Use this link if you're using Posit.cloud in your browser
+   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/737277/content/11693254): Use this link if you're using Posit.cloud in your browser
 
 1. **Download** a dataset and explore it. Many of these datasets are large and will not open (well) in Excel, so you'll need to load the CSV file into R with `read_csv()`. Most of these datasets have nice categorical variables that you can use for grouping and summarizing, and many have time components too, so you can look at trends. Your past problem sets and in-class examples will come in handy here.
 

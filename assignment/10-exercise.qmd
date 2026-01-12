@@ -40,7 +40,7 @@ The instructions for this are a little different from past exercises. Read every
 2. Open the project either on your computer or in Posit.cloud
 
    - [{{< fa file-archive >}} `10-exercise.zip`](/projects/10-exercise.zip): If you're using R on your own computer, download this file, [*unzip it*](/resource/unzipping.qmd), and double click on the file named `10-exercise.Rproj`
-   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/679548/content/11212291): Use this link if you're using Posit.cloud in your browser
+   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/737277/content/11693239): Use this link if you're using Posit.cloud in your browser
 
 3. Rename the Quarto file named `your-name_exercise-10.qmd` to something that matches your name and open it in RStudio.
 
