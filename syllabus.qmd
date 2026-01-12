@@ -12,7 +12,7 @@ format:
   html: default
   typst:
     # COURSE SUBJECT-COURSE NUMBER-FACULTY LAST NAME-CRN-TERMYEAR
-    output-file: "PMAP-8551-HEISS-89550-FA25.pdf"
+    output-file: "PMAP-8551-HEISS-89550-SP26.pdf"
     citeproc: true
     csl: files/bib/chicago-notes.csl
     include-in-header: 
