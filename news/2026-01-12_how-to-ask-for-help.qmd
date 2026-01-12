@@ -10,7 +10,7 @@ When working through the examples or exercises, you will get stuck. It's inevita
 
 This class is different from most of your other past classes. In many classes, you can work through the readings and materials without ever interacting with your classmates or professor—you can just follow the class schedule, get the assignments done, and finish it all.
 
-While you can theoretically do that here (and some students to), **I do not recommend it**. A[s I talk about here, building a class community is crucial for success in this course.](/news/2026-01-05_building-community.qmd)
+While you can theoretically do that here (and some students to), **I do not recommend it**. [As I talk about here, building a class community is crucial for success in this course.](/news/2026-01-05_building-community.qmd)
 
 You can (and should!) ask questions when you get stuck. Post them on Discord for everyone to see. Don't feel bad about asking me or anyone else for help!
 
