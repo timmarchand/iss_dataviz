@@ -1,5 +1,35 @@
 # This file is generated with data/extract-news-headings.R; do not edit by hand
 
+- title: "How to ask for help"
+  categories:
+  - "advice"
+  date_actual: '1768208520'
+  date: "2026-01-12T09:02:00"
+  href: "/news/2026-01-12_how-to-ask-for-help.html"
+  headings:
+  - id: "the-30-minute-rule"
+    text: "The 30-minute rule"
+  - id: "dont-suffer-in-silence"
+    text: "Don’t suffer in silence!"
+  - id: "use-discord-in-public"
+    text: "Use Discord in public"
+  - id: "help-us-help-you"
+    text: "Help us help you"
+  - id: "high-resolution-questions"
+    text: "High resolution questions"
+  - id: "unanswered-questions"
+    text: "Unanswered questions"
+  - id: "discord-question-etiquette"
+    text: "Discord question etiquette"
+  - id: "student-appointments"
+    text: "Student appointments"
+- title: "First day of class!"
+  categories:
+  - "getting started"
+  date_actual: '1768207920'
+  date: "2026-01-12T08:52:00"
+  href: "/news/2026-01-12_first-day-of-class.html"
+  headings: []
 - title: "Building community on Discord"
   categories:
   - "advice"

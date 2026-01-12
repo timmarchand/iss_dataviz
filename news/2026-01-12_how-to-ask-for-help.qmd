@@ -1,13 +1,21 @@
 ---
 title: "How to ask for help"
-date: "2026-01-12T10:42"
+date: "2026-01-12T09:02"
 categories: [advice]
-draft: true
 ---
 
 When working through the examples or exercises, you will get stuck. It's inevitable.
 
-You **absolutely** can (and should) reach out when stuck. I'm super responsive on Discord and e-mail. If you ask a question on the `#help-me` channel in Discord, others can help too. No question is too tricky or embarrassing, I promise. Computers are extraordinarily literal and tiny typos will often mess you up for a long time—I've lost countless time because of missing commas and misspelled words (curse you `lenght()`). Please feel comfortable reaching out.
+**You absolutely can (and should) reach out when stuck.** I'm super responsive on Discord and e-mail. If you ask a question on the `#help-me` channel in Discord, others can help too. No question is too tricky or embarrassing, I promise. Computers are extraordinarily literal and tiny typos will often mess you up for a long time—I've lost countless time because of missing commas and misspelled words (curse you `lenght()`). 
+
+This class is different from most of your other past classes. In many classes, you can work through the readings and materials without ever interacting with your classmates or professor—you can just follow the class schedule, get the assignments done, and finish it all.
+
+While you can theoretically do that here (and some students to), **I do not recommend it**. A[s I talk about here, building a class community is crucial for success in this course.](/news/2026-01-05_building-community.qmd)
+
+You can (and should!) ask questions when you get stuck. Post them on Discord for everyone to see. Don't feel bad about asking me or anyone else for help!
+
+
+### The 30-minute rule
 
 I’m a big believer in the 30-minute rule: 
 
@@ -185,16 +193,16 @@ The `#help-me` channel on Discord is a little different from the other channels.
 3. **Close the question if it's been answered**: Similar to the idea of [unanswered questions](#unanswered-questions), if your question has been answered, it's generally good practice to say so in the post. Like, add a comment like "Thanks! That fixed it!" or something—or even add a ✅ emoji reaction. That'll signal to me that I can close the post. The post will still be there in `#help-me`, but it won't be up at the top with active questions.
 
 
-### Calendly + Webex appointments
+### Student appointments
 
-You can meet with me for [student hours](/syllabus.qmd#student-hours) by signing up for an appointment [at my Calendly page](https://calendly.com/andrewheiss/). The link is also accessible at the [top of the syllabus page](/syllabus.qmd) and on [the main homepage](/) of the class site.
+You can meet with me for [student hours](/syllabus.qmd#student-hours) by signing up for an appointment [at my scheduling page](https://scheduler.zoom.us/andrewheiss). The link is also accessible at the [top of the syllabus page](/syllabus.qmd) and on [the main homepage](/) of the class site.
 
-Calendly connects to my personal and work calendars and should only show times when I'm available. If you sign up for an online appointment, you'll receive an e-mail with a special Webex link that you can use for the meeting.
+The scheduling page connects to my personal and work calendars and should only show times when I'm available. If you sign up for an online appointment, you'll receive an e-mail with a special Zoom link that you can use for the meeting.
 
 **Make sure the e-mail you use is correct**—if you don't get a confirmation e-mail with the meeting details, it's likely that there was a typo in your e-mail address.
 
 If you need to change or cancel the appointment, you can do that using a link in the confirmation e-mail.
 
-On rare occasions, I will cancel an appointment from my end. This only happens if I forget to put a work or personal appointment on my calendar, so Calendly thinks I'm free when I'm really not.
+On rare occasions, I will cancel an appointment from my end. This only happens if I forget to put a work or personal appointment on my calendar, so Zoom thinks I'm free when I'm really not.
 
 If I cancel an appointment with you, **don't worry**. I don't hate you or anything. I'm not trying to avoid you. I most likely had some accidental or unforeseen scheduling conflict. In my cancellation note, I'll say something like "Oh no! I'm so sorry! Can you sign up for a different time please?!". Do that :)
