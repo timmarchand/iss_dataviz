@@ -26,7 +26,7 @@ Join the server and interact with me and your classmates! Don't lurk in silence 
 
 To that end, one of the best ways to get to know each other is to help each other. Ask questions on Discord. If you see someone's question there and you know how to help, answer! 
 
-You can also work on exercises and projects in groups if you want. Use Webex or Zoom to share screens with each other during calls so you can see what you're doing. In the real programming world, a common technique for working on code is [pair programming](https://en.wikipedia.org/wiki/Pair_programming), where two people work on the same script. If we were meeting in class, we'd do this face-to-face, working during class in groups of 2–3 with me walking around and helping. **Feel free to replicate that experience** and work with others. It's not cheating! (As long as you don't turn in identical work)
+You can also work on exercises and projects in groups if you want. Use Zoom to share screens with each other during calls so you can see what you're doing. In the real programming world, a common technique for working on code is [pair programming](https://en.wikipedia.org/wiki/Pair_programming), where two people work on the same script. If we were meeting in class, we'd do this face-to-face, working during class in groups of 2–3 with me walking around and helping. **Feel free to replicate that experience** and work with others. It's not cheating! (As long as you don't turn in identical work)
 
 ### Online community
 
