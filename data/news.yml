@@ -89,6 +89,13 @@
     text: "Fancy document settings"
   - id: "chunk-names"
     text: "Chunk names"
+- title: "Copy, paste, and tweak"
+  categories:
+  - "advice"
+  date_actual: '1769468760'
+  date: "2026-01-26T23:06:00"
+  href: "/news/2026-01-26_copy-paste-tweak.html"
+  headings: []
 - title: "Week 1 tips and FAQs"
   categories:
   - "FAQs"
@@ -178,12 +185,5 @@
   date_actual: '1767612360'
   date: "2026-01-05T11:26:00"
   href: "/news/2026-01-05_welcome.html"
-  headings: []
-- title: "Copy, paste, and tweak"
-  categories:
-  - "advice"
-  date_actual: '1757174280'
-  date: "2025-09-06T15:58:00"
-  href: "/news/2026-01-26_copy-paste-tweak.html"
   headings: []
 
