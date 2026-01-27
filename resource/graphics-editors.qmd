@@ -22,21 +22,15 @@ There are some alternative options though.
 You can use the whole Creative Cloud Suite for [$20/month as a student](https://www.adobe.com/creativecloud/buy/students.html), and they have a 14-day free trial. Creative Cloud is a subscription service, so you can subscribe on and off as often as you want.
 
 
-### Affinity Suite
+### Affinity Studio
 
-[Affinity](https://affinity.serif.com/en-us/) is a smaller rival to Adobe and they have their own set of three programs for graphic design-related tasks. Unlike Creative Cloud, the programs in the Affinity Suite are not subscription-based. You buy them and then you own them forever.
+[Affinity](https://www.affinity.studio/) is a smaller rival to Adobe and they have their own (***free!***) program for graphic design-related tasks named [Affinity Studio](https://www.affinity.studio/). Affinity Studio has three modes that are general equivalents of the core Adobe programs:
 
-There are three programs that are general equivalents of the core Adobe programs:
+- [Vector mode](https://www.affinity.studio/graphic-design-software) = Illustrator
+- [Pixel mode](https://www.affinity.studio/photo-editing-software) = Photoshop
+- [Layout mode](https://www.affinity.studio/page-layout-software) = InDesign
 
-- [Affinity Photo](https://affinity.serif.com/en-us/photo/) = Photoshop
-- [Affinity Designer](https://affinity.serif.com/en-us/designer/) = Illustrator
-- [Affinity Publisher](https://affinity.serif.com/en-us/publisher/) = InDesign
-
-::: {.callout-warning}
-### Caveat!
-
-Big caveat here: I've never actually used any of these Affinity programs. I use Adobe stuff for all my work. But I've heard fantastic things about them and have seen them in action—they're as good as Adobe's stuff.
-:::
+![Affinity modes](img/affinity-modes.png)
 
 
 ### Open source alternatives
@@ -47,7 +41,7 @@ The open source community has created **free** programs that are rough equivalen
 - [Inkscape](https://inkscape.org/) = Illustrator
 - [Scribus](https://www.scribus.net/) = InDesign
 
-These are all free and they work on macOS and Windows (and Linux if you're into that), but they can be a ~~little~~ lot rough around the edges and tricky to work with. Adobe, Affinity, and other companies have full time developers focused on making good user interfaces and experiences; these open source clones do not. You can make the same kind of output with GIMP, Inkscape, and Scribus that you can with Adobe Creative Cloud and the Affinity Suite, but there's a bit of an extra learning curve (and a lot of bumps along the way). 
+These are all free and they work on macOS and Windows (and Linux if you're into that), but they can be a ~~little~~ lot rough around the edges and tricky to work with. Adobe, Affinity, and other companies have full time developers focused on making good user interfaces and experiences; these open source clones do not. You can make the same kind of output with GIMP, Inkscape, and Scribus that you can with Adobe Creative Cloud and Affinity Studio, but there's a bit of an extra learning curve (and a lot of bumps along the way). 
 
 But you can't beat free.
 
@@ -59,12 +53,12 @@ library(tidyverse)
 library(tinytable)
 
 tribble(
-  ~`File type`, ~Adobe, ~Affinity, ~`Open source`,
-  "Bitmaps", "[Photoshop](https://www.adobe.com/products/photoshop.html)", "[Photo](https://affinity.serif.com/en-us/photo/)", "[GIMP](https://www.gimp.org/)",
-  "Vectors", "[Illustrator](https://www.adobe.com/products/illustrator.html)", "[Designer](https://affinity.serif.com/en-us/designer/)", "[Inkscape](https://inkscape.org/)",
-  "Layout", "[InDesign](https://www.adobe.com/products/indesign.html)", "[Publisher](https://affinity.serif.com/en-us/publisher/)", "[Scribus](https://www.scribus.net/)",
-  "Cost", "$$$<br><span class='smaller-note'>Monthly Creative Cloud subscription</span>", "$<br><span class='smaller-note'>One-time purchase</span>", "Free",
-  "Notes", "Industry standard", "", "Free, but rough learning curve"
+  ~`File type`, ~Adobe, ~`Affinity Studio`, ~`Open source`,
+  "Bitmaps", "[Photoshop](https://www.adobe.com/products/photoshop.html)", "[Pixel mode](https://www.affinity.studio/photo-editing-software)", "[GIMP](https://www.gimp.org/)",
+  "Vectors", "[Illustrator](https://www.adobe.com/products/illustrator.html)", "[Vector mode](https://www.affinity.studio/graphic-design-software)", "[Inkscape](https://inkscape.org/)",
+  "Layout", "[InDesign](https://www.adobe.com/products/indesign.html)", "[Layout mode](https://www.affinity.studio/page-layout-software)", "[Scribus](https://www.scribus.net/)",
+  "Cost", "$$$<br><span class='smaller-note'>Monthly Creative Cloud subscription</span>", "Free", "Free",
+  "Notes", "Industry standard", "Free", "Free, but rough learning curve"
 ) |>
   tt(width = c(15, 85 / 3, 85 / 3, 85 / 3)) |>
   format_tt(j = 2:4, markdown = TRUE) |>

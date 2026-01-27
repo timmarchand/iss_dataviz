@@ -1,5 +1,122 @@
 # This file is generated with data/extract-news-headings.R; do not edit by hand
 
+- title: "Week 2 FAQs"
+  categories:
+  - "FAQs"
+  date_actual: '1769530020'
+  date: "2026-01-27T16:07:00"
+  href: "/news/2026-01-27_faqs_week-02.html"
+  headings:
+  - id: "why-do-you-use-s-for-grades"
+    text: "Why do you use ✓s for grades?"
+  - id: "why-does-mean-both-headings-and-code-comments"
+    text: "Why does <code>#</code> mean both headings and code comments?"
+  - id: "i-will-never-do-anything-with-graphic-designwhy-did-we-have-to-learn-these-principles"
+    text: "I will never do anything with graphic design—why did we have to learn these
+      principles?"
+  - id: "what-does-all-this-graphic-design-stuff-have-to-do-with-r-and-ggplot"
+    text: "What does all this graphic design stuff have to do with R and ggplot?"
+  - id: "how-does-crap-relate-to-other-things-like-the-gestalt-principles"
+    text: "How does CRAP relate to other things like the Gestalt Principles?"
+  - id: "does-something-need-to-have-all-four-elements-to-be-well-designed-or-can-it-have-contrast-and-not-alignment"
+    text: "Does something need to have all four elements to be well designed? Or can
+      it have contrast and not alignment?"
+  - id: "are-the-crap-principles-hard-and-fast-rules-will-following-crap-lead-to-the-same-final-designs"
+    text: "Are the CRAP principles hard-and-fast rules? Will following CRAP lead to
+      the same final designs?"
+  - id: "does-crap-only-work-for-single-page-things-like-graphs-and-posters-or-does-it-work-for-reports-and-books"
+    text: "Does CRAP only work for single-page things like graphs and posters? Or
+      does it work for reports and books?"
+  - id: "i-wanted-to-try-other-fonts-but-i-can-only-see-a-few-in-microsoft-word-where-can-i-find-fonts-to-use"
+    text: "I wanted to try other fonts, but I can only see a few in Microsoft Word?
+      Where can I find fonts to use?"
+  - id: "are-there-resources-for-knowing-which-fonts-pair-well-together"
+    text: "Are there resources for knowing which fonts pair well together?"
+  - id: "are-there-other-color-palettes-we-can-use-in-r-beyond-the-defaults"
+    text: "Are there other color palettes we can use in R beyond the defaults?"
+  - id: "is-there-a-way-to-check-that-my-color-palettes-are-accessible-if-im-not-using-a-premade-one"
+    text: "Is there a way to check that my color palettes are accessible if I’m not
+      using a premade one?"
+  - id: "i-noticed-illustrator-isnt-free-for-gsu-students-anymore.-are-there-other-graphics-editors"
+    text: "I noticed Illustrator isn’t free for GSU students anymore. Are there other
+      graphics editors?"
+- title: "FAQs about LLMs, R, and this class"
+  categories:
+  - "FAQs"
+  date_actual: '1769513700'
+  date: "2026-01-27T11:35:00"
+  href: "/news/2026-01-27_llms-and-r.html"
+  headings:
+  - id: "will-r-ever-be-fully-replaced-by-ai"
+    text: "Will R ever be fully replaced by AI?"
+  - id: "will-you-incorporate-llms-and-ai-prompting-into-the-course-in-the-future"
+    text: "Will you incorporate LLMs and AI prompting into the course in the future?"
+  - id: "why-wont-you-incorporate-llms-and-ai-prompting-into-the-course"
+    text: "Why won’t you incorporate LLMs and AI prompting into the course?"
+- title: "LLMs are bad and dangerous for learning how to code in this class"
+  categories:
+  - "advice"
+  date_actual: '1769513220'
+  date: "2026-01-27T11:27:00"
+  href: "/news/2026-01-27_llms-bad-for-learning-code.html"
+  headings:
+  - id: "llms-are-only-useful-if-you-know-what-youre-doing-already"
+    text: "LLMs are only useful if you know what you’re doing already"
+  - id: "possible-ways-to-use-llms-to-help-with-learning-kind-of"
+    text: "Possible ways to use LLMs to help with learning, kind of"
+  - id: "even-if-you-use-them-to-help-you-learn-they-can-teach-you-the-wrong-things"
+    text: "Even if you use them to help you learn, they can teach you the wrong things"
+- title: "Making cleaner, nicer Quarto documents"
+  categories:
+  - "advice"
+  date_actual: '1769469660'
+  date: "2026-01-26T23:21:00"
+  href: "/news/2026-01-26_cleaner-nicer-qmd-output.html"
+  headings:
+  - id: "render-often"
+    text: "Render often"
+  - id: "check-for-broken-code-chunks"
+    text: "Check for broken code chunks"
+  - id: "check-that-your-text-looks-okay"
+    text: "Check that your text looks okay"
+  - id: "dont-install-packages-in-your-document"
+    text: "Don’t install packages in your document"
+  - id: "clean-up-warnings-and-messages"
+    text: "Clean up warnings and messages"
+  - id: "global-chunk-options"
+    text: "Global chunk options"
+  - id: "fancy-document-settings"
+    text: "Fancy document settings"
+  - id: "chunk-names"
+    text: "Chunk names"
+- title: "Week 1 tips and FAQs"
+  categories:
+  - "FAQs"
+  date_actual: '1769468580'
+  date: "2026-01-26T23:03:00"
+  href: "/news/2026-01-26_faqs_week-01.html"
+  headings:
+  - id: "whats-the-difference-between-source-and-visual-mode-in-the-editor-window"
+    text: "What’s the difference between Source and Visual mode in the editor window?"
+  - id: "whats-the-difference-between-r-markdown-and-quarto"
+    text: "What’s the difference between R Markdown and Quarto?"
+  - id: "why-dont-i-have-options-to-render-to-pdf-or-word-or-html"
+    text: "Why don’t I have options to render to PDF (or Word or HTML)?"
+  - id: "rendered-document-format-for-icollege"
+    text: "Rendered document format for iCollege"
+  - id: "what-is-this-typst-thing-that-we-can-render-to"
+    text: "What is this  thing that we can render to?"
+  - id: "how-does-group_by-work-why-did-we-have-to-group-by-island-and-not-body_mass-and-island"
+    text: "How does <code>group_by()</code> work? Why did we have to group by <code>island</code>
+      and not <code>body_mass</code> and <code>island</code>?"
+  - id: "how-do-we-know-which-type-of-graph-to-use-for-different-types-of-data"
+    text: "How do we know which type of graph to use for different types of data?"
+  - id: "do-you-have-any-tips-for-remembering-all-the-different-functions-were-learning-there-are-so-many"
+    text: "Do you have any tips for remembering all the different functions we’re
+      learning? There are so many!"
+  - id: "my-histogram-bars-are-too-wide-too-narrow-not-visible.-how-do-i-fix-that"
+    text: "My histogram bars are too wide / too narrow / not visible. How do I fix
+      that?"
 - title: "How to ask for help"
   categories:
   - "advice"
@@ -61,5 +178,12 @@
   date_actual: '1767612360'
   date: "2026-01-05T11:26:00"
   href: "/news/2026-01-05_welcome.html"
+  headings: []
+- title: "Copy, paste, and tweak"
+  categories:
+  - "advice"
+  date_actual: '1757174280'
+  date: "2025-09-06T15:58:00"
+  href: "/news/2026-01-26_copy-paste-tweak.html"
   headings: []
 

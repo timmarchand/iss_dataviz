@@ -28,7 +28,10 @@ title: Design
 ## Fonts
 
 - [**Google Fonts**](https://fonts.google.com/): Huge collection of free, well-made fonts.
-- [**The Ultimate Collection of Google Font Pairings**](https://www.reliablepsd.com/ultimate-google-font-pairings/): A list of great, well-designed font pairings from all those fonts hosted by Google (for when you're looking for good contrasting or complementary fonts).
+- [**fontpair**](https://www.fontpair.co/all): A directory of all sorts of Google Fonts pairings (for when you're looking for good contrasting or complementary fonts)
+- [**The Ultimate Collection of Google Font Pairings**](https://www.reliablepsd.com/ultimate-google-font-pairings/): Another list of great, well-designed font pairings
+- [**"Pairing typefaces"**](https://fonts.google.com/knowledge/choosing_type/pairing_typefaces): Google Fonts's own guidelines for finding good pairings
+- [**Font Mixer**](https://fontmixer.app/): An online app for finding and testing different font combinations
 
 
 ## Graphic assets
