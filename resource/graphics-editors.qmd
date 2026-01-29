@@ -30,7 +30,7 @@ You can use the whole Creative Cloud Suite for [$20/month as a student](https://
 - [Pixel mode](https://www.affinity.studio/photo-editing-software) = Photoshop
 - [Layout mode](https://www.affinity.studio/page-layout-software) = InDesign
 
-![Affinity modes](img/affinity-modes.png)
+![Affinity modes](img/affinity-modes.png){width="50%"}
 
 
 ### Open source alternatives

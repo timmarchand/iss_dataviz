@@ -59,7 +59,7 @@ Next, we need to tell RStudio that (1) Zotero exists and that (2) it should look
 
 1. In RStudio, go to Tools > Global Options > R Markdown > Citations.
 
-2. Set "Use libraries" to "Selected Libraries" and make sure "My Library" is checked (that's your stuff that you add on your own), and that [the group library that you've joined from here](https://datavizsp26.classes.andrewheiss.com/resource/citations.html) is checked.
+2. Set "Use libraries" to "Selected Libraries" and make sure "My Library" is checked (that's your stuff that you add on your own), and that [the group library that you've joined from here](/resource/citations.qmd) is checked.
 
 3. Make sure "Better BibTeX for citation keys and BibTeX export" is checked too.
 
