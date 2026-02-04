@@ -2,6 +2,12 @@
 title: "Week 2 FAQs"
 date: "2026-01-27T16:07"
 categories: [FAQs]
+filters:
+  - preview-colour
+extensions:
+  preview-colour:
+    code: true
+    text: false
 ---
 
 Hi everyone!
@@ -225,3 +231,38 @@ Yep! [Check out the "Accessibility" section](/resource/design.qmd#accessibility)
 ### I noticed Illustrator isn't free for GSU students anymore. Are there other graphics editors?
 
 Yeah, unfortunately GSU doesn't provide free access its Creative Cloud software for students (but it does for employees, including student employees). For future exercises and projects, you don't have to use Illustrator—there are (free!) alternatives. [See here for more details](/resource/graphics-editors.qmd).
+
+### How do hex codes work? How do they create colors?
+
+Oh man hex codes are so cool. Check out this *fascinating* video about one guy's journey to learn how to read them:
+
+<div class="ratio ratio-16x9 mb-4">
+<iframe src="https://www.youtube.com/embed/eqZqx6lRPe0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0"></iframe>
+</div>
+
+Put simply, a hex code shows you the proportion of red, green, and blue in a color. The first two digits of the 6-digit code are for red; the second two are for green; the last two are for blue.
+
+The digits are a little weird. Instead of being based on regular numbers, like where 0 means nothing and 9 means the max (with numbers in between, like 5 would be the middle-ish), the digits use base 16 (or hexadecimal), so the full range of numbers goes from 0 to F:
+
+```default
+0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F
+```
+
+So, if a hex color is `#000000` (or 00 00 00, with spaces to better see the R, G, and B values), it would be 0% red, 0% green, and 0% blue, which is black!
+
+To boost one of these colors to 100%, you'd use `F`, which is the highest value in hexadecimal notation. 
+
+- To get pure red, you'd make the red digits FF and leave the green and blue digits at 0, like `#FF0000`. 
+- Pure green would be 100% green and 0% of the other colors, or `#00FF00`
+- Pure blue would be 100% blue and 0% of the other colors, or `#0000FF`
+- You get white by setting *all* the colors to 100%, or `#FFFFFF`
+
+You can get tons of different colors by mixing different proportions of red, blue, and green. 
+
+- We know from kindergarten that purple is a mix of red and blue, so we can make red and blue both be 100% and leave green at 0: `#FF00FF`
+- If that's too bright, we can make the red and blue less intense. Instead of using 100% of each, we can use 50% of each with the hexadecimal number 8 (which is in the middle of the numbers 0 to F): `#800080`
+- Yellow light is a mix of red and green with no blue, so `#FFFF00`. If we lower the green to 50% we'll get orange, like `#FF8000`
+
+In practice, [as shown in this video](https://www.youtube.com/watch?v=eqZqx6lRPe0), very very few people can intuitively read these codes. Most of the time, you copy and paste them into whatever you're doing. You can find them by using color pickers, like this one that appears when you search Google for "color picker". These tools show you all sorts of different representations of the color, like RGB values that range from 0 to 255, CMYK values that range from 0% to 100%, hex codes, and so on:
+
+![](img/color-picker.png)
