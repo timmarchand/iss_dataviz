@@ -3,7 +3,7 @@
   <head>
     <title>Relationships</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Andrew Heiss" />
+    <meta name="author" content="Tim Marchand" />
     <meta name="date" content="2026-02-25" />
     <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
@@ -36,8 +36,8 @@ class: center middle main-title section-title-4
 
 **Session 7**
 
-.light[PMAP 8551/4551: Data Visualization with R&lt;br&gt;
-Andrew Young School of Policy Studies&lt;br&gt;
+.light[ISS Data Visualization with R&lt;br&gt;
+Faculty of International Social Sciences, Gakushuin University&lt;br&gt;
 Spring 2026]
 
 ]
@@ -535,11 +535,11 @@ tidy(car_model, conf.int = TRUE)
 ```
 
 ```
-## [38;5;246m# A tibble: 2 × 7[39m
+## # A tibble: 2 × 7
 ##   term        estimate std.error statistic   p.value conf.low conf.high
-##   [3m[38;5;246m&lt;chr&gt;[39m[23m          [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m1[39m (Intercept)    35.7      0.720      49.6 2.12[38;5;246me[39m[31m-125[39m    34.3      37.1 
-## [38;5;250m2[39m displ          -[31m3[39m[31m.[39m[31m53[39m     0.195     -[31m18[39m[31m.[39m[31m2[39m 2.04[38;5;246me[39m[31m- 46[39m    -[31m3[39m[31m.[39m[31m91[39m     -[31m3[39m[31m.[39m[31m15[39m
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    35.7      0.720      49.6 2.12e-125    34.3      37.1 
+## 2 displ          -3.53     0.195     -18.2 2.04e- 46    -3.91     -3.15
 ```
 ]
 
@@ -552,11 +552,11 @@ glance(car_model)
 ```
 
 ```
-## [38;5;246m# A tibble: 1 × 12[39m
+## # A tibble: 1 × 12
 ##   r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
-##       [3m[38;5;246m&lt;dbl&gt;[39m[23m         [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m  [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m1[39m     0.587         0.585  3.84      329. 2.04[38;5;246me[39m[31m-46[39m     1  -[31m646[39m[31m.[39m [4m1[24m297. [4m1[24m308.
-## [38;5;246m# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;[39m
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     0.587         0.585  3.84      329. 2.04e-46     1  -646. 1297. 1308.
+## # ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
 ```
 ]
 
@@ -569,11 +569,11 @@ glance(car_model)
 .small-code[
 
 ```
-## [38;5;246m# A tibble: 2 × 2[39m
+## # A tibble: 2 × 2
 ##   term        estimate
-##   [3m[38;5;246m&lt;chr&gt;[39m[23m          [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m1[39m (Intercept)    35.7 
-## [38;5;250m2[39m displ          -[31m3[39m[31m.[39m[31m53[39m
+##   &lt;chr&gt;          &lt;dbl&gt;
+## 1 (Intercept)    35.7 
+## 2 displ          -3.53
 ```
 ]
 
@@ -645,14 +645,14 @@ tidy(car_model_big, conf.int = TRUE)
 ```
 
 ```
-## [38;5;246m# A tibble: 5 × 7[39m
+## # A tibble: 5 × 7
 ##   term        estimate std.error statistic  p.value conf.low conf.high
-##   [3m[38;5;246m&lt;chr&gt;[39m[23m          [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m1[39m (Intercept)    33.1      1.03      32.1  9.49[38;5;246me[39m[31m-87[39m    31.1     35.1  
-## [38;5;250m2[39m displ          -[31m1[39m[31m.[39m[31m12[39m     0.461     -[31m2[39m[31m.[39m[31m44[39m 1.56[38;5;246me[39m[31m- 2[39m    -[31m2[39m[31m.[39m[31m0[39m[31m3[39m    -[31m0[39m[31m.[39m[31m215[39m
-## [38;5;250m3[39m cyl            -[31m1[39m[31m.[39m[31m45[39m     0.333     -[31m4[39m[31m.[39m[31m36[39m 1.99[38;5;246me[39m[31m- 5[39m    -[31m2[39m[31m.[39m[31m11[39m    -[31m0[39m[31m.[39m[31m796[39m
-## [38;5;250m4[39m drvf            5.04     0.513      9.83 3.07[38;5;246me[39m[31m-19[39m     4.03     6.06 
-## [38;5;250m5[39m drvr            4.89     0.712      6.86 6.20[38;5;246me[39m[31m-11[39m     3.48     6.29
+##   &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)    33.1      1.03      32.1  9.49e-87    31.1     35.1  
+## 2 displ          -1.12     0.461     -2.44 1.56e- 2    -2.03    -0.215
+## 3 cyl            -1.45     0.333     -4.36 1.99e- 5    -2.11    -0.796
+## 4 drvf            5.04     0.513      9.83 3.07e-19     4.03     6.06 
+## 5 drvr            4.89     0.712      6.86 6.20e-11     3.48     6.29
 ```
 ]
 
@@ -764,13 +764,13 @@ car_coefs
 ```
 
 ```
-## [38;5;246m# A tibble: 4 × 7[39m
+## # A tibble: 4 × 7
 ##   term  estimate std.error statistic  p.value conf.low conf.high
-##   [3m[38;5;246m&lt;chr&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m    [3m[38;5;246m&lt;dbl&gt;[39m[23m     [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m1[39m displ    -[31m1[39m[31m.[39m[31m12[39m     0.461     -[31m2[39m[31m.[39m[31m44[39m 1.56[38;5;246me[39m[31m- 2[39m    -[31m2[39m[31m.[39m[31m0[39m[31m3[39m    -[31m0[39m[31m.[39m[31m215[39m
-## [38;5;250m2[39m cyl      -[31m1[39m[31m.[39m[31m45[39m     0.333     -[31m4[39m[31m.[39m[31m36[39m 1.99[38;5;246me[39m[31m- 5[39m    -[31m2[39m[31m.[39m[31m11[39m    -[31m0[39m[31m.[39m[31m796[39m
-## [38;5;250m3[39m drvf      5.04     0.513      9.83 3.07[38;5;246me[39m[31m-19[39m     4.03     6.06 
-## [38;5;250m4[39m drvr      4.89     0.712      6.86 6.20[38;5;246me[39m[31m-11[39m     3.48     6.29
+##   &lt;chr&gt;    &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+## 1 displ    -1.12     0.461     -2.44 1.56e- 2    -2.03    -0.215
+## 2 cyl      -1.45     0.333     -4.36 1.99e- 5    -2.11    -0.796
+## 3 drvf      5.04     0.513      9.83 3.07e-19     4.03     6.06 
+## 4 drvr      4.89     0.712      6.86 6.20e-11     3.48     6.29
 ```
 ]
 
@@ -841,15 +841,15 @@ head(cars_new_data)
 ```
 
 ```
-## [38;5;246m# A tibble: 6 × 3[39m
+## # A tibble: 6 × 3
 ##   displ   cyl drv  
-##   [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m
-## [38;5;250m1[39m   2    5.89 f    
-## [38;5;250m2[39m   2.1  5.89 f    
-## [38;5;250m3[39m   2.2  5.89 f    
-## [38;5;250m4[39m   2.3  5.89 f    
-## [38;5;250m5[39m   2.4  5.89 f    
-## [38;5;250m6[39m   2.5  5.89 f
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1   2    5.89 f    
+## 2   2.1  5.89 f    
+## 3   2.2  5.89 f    
+## 4   2.3  5.89 f    
+## 5   2.4  5.89 f    
+## 6   2.5  5.89 f
 ```
 ]
 
@@ -869,15 +869,15 @@ head(predicted_mpg)
 ```
 
 ```
-## [38;5;246m# A tibble: 6 × 5[39m
+## # A tibble: 6 × 5
 ##   displ   cyl drv   .fitted .se.fit
-##   [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m1[39m   2    5.89 f        27.3   0.644
-## [38;5;250m2[39m   2.1  5.89 f        27.2   0.604
-## [38;5;250m3[39m   2.2  5.89 f        27.1   0.566
-## [38;5;250m4[39m   2.3  5.89 f        27.0   0.529
-## [38;5;250m5[39m   2.4  5.89 f        26.9   0.494
-## [38;5;250m6[39m   2.5  5.89 f        26.8   0.460
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1   2    5.89 f        27.3   0.644
+## 2   2.1  5.89 f        27.2   0.604
+## 3   2.2  5.89 f        27.1   0.566
+## 4   2.3  5.89 f        27.0   0.529
+## 5   2.4  5.89 f        26.9   0.494
+## 6   2.5  5.89 f        26.8   0.460
 ```
 ]
 
@@ -941,15 +941,15 @@ head(cars_new_data_fancy)
 ```
 
 ```
-## [38;5;246m# A tibble: 6 × 3[39m
+## # A tibble: 6 × 3
 ##   displ   cyl drv  
-##   [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m
-## [38;5;250m1[39m   2    5.89 f    
-## [38;5;250m2[39m   2    5.89 r    
-## [38;5;250m3[39m   2    5.89 4    
-## [38;5;250m4[39m   2.1  5.89 f    
-## [38;5;250m5[39m   2.1  5.89 r    
-## [38;5;250m6[39m   2.1  5.89 4
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
+## 1   2    5.89 f    
+## 2   2    5.89 r    
+## 3   2    5.89 4    
+## 4   2.1  5.89 f    
+## 5   2.1  5.89 r    
+## 6   2.1  5.89 4
 ```
 ]
 
@@ -969,15 +969,15 @@ head(predicted_mpg_fancy)
 ```
 
 ```
-## [38;5;246m# A tibble: 6 × 5[39m
+## # A tibble: 6 × 5
 ##   displ   cyl drv   .fitted .se.fit
-##   [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m
-## [38;5;250m1[39m   2    5.89 f        27.3   0.644
-## [38;5;250m2[39m   2    5.89 r        27.2   1.14 
-## [38;5;250m3[39m   2    5.89 4        22.3   0.805
-## [38;5;250m4[39m   2.1  5.89 f        27.2   0.604
-## [38;5;250m5[39m   2.1  5.89 r        27.1   1.10 
-## [38;5;250m6[39m   2.1  5.89 4        22.2   0.763
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1   2    5.89 f        27.3   0.644
+## 2   2    5.89 r        27.2   1.14 
+## 3   2    5.89 4        22.3   0.805
+## 4   2.1  5.89 f        27.2   0.604
+## 5   2.1  5.89 r        27.1   1.10 
+## 6   2.1  5.89 4        22.2   0.763
 ```
 ]
 

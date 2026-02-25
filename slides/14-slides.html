@@ -3,7 +3,7 @@
   <head>
     <title>Text</title>
     <meta charset="utf-8" />
-    <meta name="author" content="Andrew Heiss" />
+    <meta name="author" content="Tim Marchand" />
     <meta name="date" content="2026-02-25" />
     <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
@@ -36,8 +36,8 @@ class: center middle main-title section-title-4
 
 **Session 14**
 
-.light[PMAP 8551/4551: Data Visualization with R&lt;br&gt;
-Andrew Young School of Policy Studies&lt;br&gt;
+.light[ISS Data Visualization with R&lt;br&gt;
+Faculty of International Social Sciences, Gakushuin University&lt;br&gt;
 Spring 2026]
 
 ]
@@ -216,15 +216,15 @@ would say if the Potters a...
 .small-code[
 
 ```
-[38;5;246m# A tibble: 6 × 3[39m
+# A tibble: 6 × 3
   chapter book                                     text                                   
-    [3m[38;5;246m&lt;int&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m                                    [3m[38;5;246m&lt;chr&gt;[39m[23m                                  
-[38;5;250m1[39m       1 Harry Potter and the Philosopher's Stone [38;5;246m"[39mTHE BOY WHO LIVED　　Mr. and Mrs. Dursl…
-[38;5;250m2[39m       2 Harry Potter and the Philosopher's Stone [38;5;246m"[39mTHE VANISHING GLASS　　Nearly ten years…
-[38;5;250m3[39m       3 Harry Potter and the Philosopher's Stone [38;5;246m"[39mTHE LETTERS FROM NO ONE　　The escape o…
-[38;5;250m4[39m       4 Harry Potter and the Philosopher's Stone [38;5;246m"[39mTHE KEEPER OF THE KEYS　　BOOM. They kn…
-[38;5;250m5[39m       5 Harry Potter and the Philosopher's Stone [38;5;246m"[39mDIAGON ALLEY　　Harry woke early the ne…
-[38;5;250m6[39m       6 Harry Potter and the Philosopher's Stone [38;5;246m"[39mTHE JOURNEY FROM PLATFORM NINE AND TH…
+    &lt;int&gt; &lt;chr&gt;                                    &lt;chr&gt;                                  
+1       1 Harry Potter and the Philosopher's Stone "THE BOY WHO LIVED　　Mr. and Mrs. Dursl…
+2       2 Harry Potter and the Philosopher's Stone "THE VANISHING GLASS　　Nearly ten years…
+3       3 Harry Potter and the Philosopher's Stone "THE LETTERS FROM NO ONE　　The escape o…
+4       4 Harry Potter and the Philosopher's Stone "THE KEEPER OF THE KEYS　　BOOM. They kn…
+5       5 Harry Potter and the Philosopher's Stone "DIAGON ALLEY　　Harry woke early the ne…
+6       6 Harry Potter and the Philosopher's Stone "THE JOURNEY FROM PLATFORM NINE AND TH…
 ```
 ]
 
@@ -239,15 +239,15 @@ would say if the Potters a...
 .pull-left.small-code[
 
 ```
-[38;5;246m# A tibble: 6 × 3[39m
+# A tibble: 6 × 3
   word  chapter book           
-  [3m[38;5;246m&lt;chr&gt;[39m[23m   [3m[38;5;246m&lt;int&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m          
-[38;5;250m1[39m the         1 Harry Potter...
-[38;5;250m2[39m boy         1 Harry Potter...
-[38;5;250m3[39m who         1 Harry Potter...
-[38;5;250m4[39m lived       1 Harry Potter...
-[38;5;250m5[39m mr          1 Harry Potter...
-[38;5;250m6[39m and         1 Harry Potter...
+  &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;          
+1 the         1 Harry Potter...
+2 boy         1 Harry Potter...
+3 who         1 Harry Potter...
+4 lived       1 Harry Potter...
+5 mr          1 Harry Potter...
+6 and         1 Harry Potter...
 ```
 ]
 
@@ -256,15 +256,15 @@ would say if the Potters a...
 .pull-right.small-code[
 
 ```
-[38;5;246m# A tibble: 6 × 3[39m
+# A tibble: 6 × 3
   bigram    chapter book           
-  [3m[38;5;246m&lt;chr&gt;[39m[23m       [3m[38;5;246m&lt;int&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m          
-[38;5;250m1[39m the boy         1 Harry Potter...
-[38;5;250m2[39m boy who         1 Harry Potter...
-[38;5;250m3[39m who lived       1 Harry Potter...
-[38;5;250m4[39m lived mr        1 Harry Potter...
-[38;5;250m5[39m mr and          1 Harry Potter...
-[38;5;250m6[39m and mrs         1 Harry Potter...
+  &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;          
+1 the boy         1 Harry Potter...
+2 boy who         1 Harry Potter...
+3 who lived       1 Harry Potter...
+4 lived mr        1 Harry Potter...
+5 mr and          1 Harry Potter...
+6 and mrs         1 Harry Potter...
 ```
 ]
 
@@ -277,20 +277,20 @@ would say if the Potters a...
 .center.small-code[
 
 ```
-[38;5;246m# A tibble: 1,149 × 2[39m
+# A tibble: 1,149 × 2
    word        lexicon
-   [3m[38;5;246m&lt;chr&gt;[39m[23m       [3m[38;5;246m&lt;chr&gt;[39m[23m  
-[38;5;250m 1[39m a           SMART  
-[38;5;250m 2[39m a's         SMART  
-[38;5;250m 3[39m able        SMART  
-[38;5;250m 4[39m about       SMART  
-[38;5;250m 5[39m above       SMART  
-[38;5;250m 6[39m according   SMART  
-[38;5;250m 7[39m accordingly SMART  
-[38;5;250m 8[39m across      SMART  
-[38;5;250m 9[39m actually    SMART  
-[38;5;250m10[39m after       SMART  
-[38;5;246m# ℹ 1,139 more rows[39m
+   &lt;chr&gt;       &lt;chr&gt;  
+ 1 a           SMART  
+ 2 a's         SMART  
+ 3 able        SMART  
+ 4 about       SMART  
+ 5 above       SMART  
+ 6 according   SMART  
+ 7 accordingly SMART  
+ 8 across      SMART  
+ 9 actually    SMART  
+10 after       SMART  
+# ℹ 1,139 more rows
 ```
 ]
 
@@ -323,20 +323,20 @@ would say if the Potters a...
 .small-code[
 
 ```
-[38;5;246m# A tibble: 50 × 11[39m
+# A tibble: 50 × 11
    doc_id   sid   tid token   token_with_ws lemma   upos  xpos  feats  tid_source relation
-    [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m   [3m[38;5;246m&lt;chr&gt;[39m[23m         [3m[38;5;246m&lt;chr&gt;[39m[23m   [3m[38;5;246m&lt;chr&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m       [3m[38;5;246m&lt;dbl&gt;[39m[23m [3m[38;5;246m&lt;chr&gt;[39m[23m   
-[38;5;250m 1[39m      1     1     1 THE     THE           the     DET   DT    Defin…          2 det     
-[38;5;250m 2[39m      1     1     2 BOY     BOY           Boy     NOUN  NN    Numbe…         18 nsubj   
-[38;5;250m 3[39m      1     1     3 WHO     WHO           who     PRON  WP    PronT…          4 nsubj   
-[38;5;250m 4[39m      1     1     4 LIVED   LIVED　　     live    VERB  VBD   Mood=…          2 acl:rel…
-[38;5;250m 5[39m      1     1     5 Mr.     Mr.           Mr.     PROPN NNP   Numbe…          4 xcomp   
-[38;5;250m 6[39m      1     1     6 and     and           and     CCONJ CC    [31mNA[39m              7 cc      
-[38;5;250m 7[39m      1     1     7 Mrs.    Mrs.          Mrs.    PROPN NNP   Numbe…          5 conj    
-[38;5;250m 8[39m      1     1     8 Dursley Dursley       Dursley PROPN NNP   Numbe…          7 flat    
-[38;5;250m 9[39m      1     1     9 ,       ,             ,       PUNCT ,     [31mNA[39m              5 punct   
-[38;5;250m10[39m      1     1    10 of      of            of      ADP   IN    [31mNA[39m             11 case    
-[38;5;246m# ℹ 40 more rows[39m
+    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;chr&gt;         &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;       &lt;dbl&gt; &lt;chr&gt;   
+ 1      1     1     1 THE     THE           the     DET   DT    Defin…          2 det     
+ 2      1     1     2 BOY     BOY           Boy     NOUN  NN    Numbe…         18 nsubj   
+ 3      1     1     3 WHO     WHO           who     PRON  WP    PronT…          4 nsubj   
+ 4      1     1     4 LIVED   LIVED　　     live    VERB  VBD   Mood=…          2 acl:rel…
+ 5      1     1     5 Mr.     Mr.           Mr.     PROPN NNP   Numbe…          4 xcomp   
+ 6      1     1     6 and     and           and     CCONJ CC    &lt;NA&gt;            7 cc      
+ 7      1     1     7 Mrs.    Mrs.          Mrs.    PROPN NNP   Numbe…          5 conj    
+ 8      1     1     8 Dursley Dursley       Dursley PROPN NNP   Numbe…          7 flat    
+ 9      1     1     9 ,       ,             ,       PUNCT ,     &lt;NA&gt;            5 punct   
+10      1     1    10 of      of            of      ADP   IN    &lt;NA&gt;           11 case    
+# ℹ 40 more rows
 ```
 ]
 
@@ -351,20 +351,20 @@ would say if the Potters a...
 
 
 ```
-[38;5;246m# A tibble: 1,557 × 2[39m
+# A tibble: 1,557 × 2
    lemma     n
-   [3m[38;5;246m&lt;chr&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m
-[38;5;250m 1[39m say     920
-[38;5;250m 2[39m get     440
-[38;5;250m 3[39m have    417
-[38;5;250m 4[39m go      384
-[38;5;250m 5[39m look    380
-[38;5;250m 6[39m be      310
-[38;5;250m 7[39m know    310
-[38;5;250m 8[39m see     303
-[38;5;250m 9[39m think   230
-[38;5;250m10[39m do      227
-[38;5;246m# ℹ 1,547 more rows[39m
+   &lt;chr&gt; &lt;dbl&gt;
+ 1 say     920
+ 2 get     440
+ 3 have    417
+ 4 go      384
+ 5 look    380
+ 6 be      310
+ 7 know    310
+ 8 see     303
+ 9 think   230
+10 do      227
+# ℹ 1,547 more rows
 ```
 ]
 
@@ -375,20 +375,20 @@ would say if the Potters a...
 
 
 ```
-[38;5;246m# A tibble: 2,852 × 2[39m
+# A tibble: 2,852 × 2
    lemma          n
-   [3m[38;5;246m&lt;chr&gt;[39m[23m      [3m[38;5;246m&lt;dbl&gt;[39m[23m
-[38;5;250m 1[39m Harry       [4m1[24m315
-[38;5;250m 2[39m Ron          423
-[38;5;250m 3[39m Hagrid       258
-[38;5;250m 4[39m Professor    167
-[38;5;250m 5[39m Snape        154
-[38;5;250m 6[39m Hermione     153
-[38;5;250m 7[39m Dumbledore   144
-[38;5;250m 8[39m time         138
-[38;5;250m 9[39m Dudley       136
-[38;5;250m10[39m uncle        122
-[38;5;246m# ℹ 2,842 more rows[39m
+   &lt;chr&gt;      &lt;dbl&gt;
+ 1 Harry       1315
+ 2 Ron          423
+ 3 Hagrid       258
+ 4 Professor    167
+ 5 Snape        154
+ 6 Hermione     153
+ 7 Dumbledore   144
+ 8 time         138
+ 9 Dudley       136
+10 uncle        122
+# ℹ 2,842 more rows
 ```
 ]
 
@@ -399,20 +399,20 @@ would say if the Potters a...
 
 
 ```
-[38;5;246m# A tibble: 1,240 × 2[39m
+# A tibble: 1,240 × 2
    lemma     n
-   [3m[38;5;246m&lt;chr&gt;[39m[23m [3m[38;5;246m&lt;dbl&gt;[39m[23m
-[38;5;250m 1[39m back    223
-[38;5;250m 2[39m so      215
-[38;5;250m 3[39m just    180
-[38;5;250m 4[39m when    178
-[38;5;250m 5[39m very    171
-[38;5;250m 6[39m now     166
-[38;5;250m 7[39m then    165
-[38;5;250m 8[39m all     147
-[38;5;250m 9[39m how     136
-[38;5;250m10[39m there   123
-[38;5;246m# ℹ 1,230 more rows[39m
+   &lt;chr&gt; &lt;dbl&gt;
+ 1 back    223
+ 2 so      215
+ 3 just    180
+ 4 when    178
+ 5 very    171
+ 6 now     166
+ 7 then    165
+ 8 all     147
+ 9 how     136
+10 there   123
+# ℹ 1,230 more rows
 ```
 ]
 
@@ -441,20 +441,20 @@ get_sentiments("bing")
 ```
 
 ```
-[38;5;246m# A tibble: 6,786 × 2[39m
+# A tibble: 6,786 × 2
    word        sentiment
-   [3m[38;5;246m&lt;chr&gt;[39m[23m       [3m[38;5;246m&lt;chr&gt;[39m[23m    
-[38;5;250m 1[39m 2-faces     negative 
-[38;5;250m 2[39m abnormal    negative 
-[38;5;250m 3[39m abolish     negative 
-[38;5;250m 4[39m abominable  negative 
-[38;5;250m 5[39m abominably  negative 
-[38;5;250m 6[39m abominate   negative 
-[38;5;250m 7[39m abomination negative 
-[38;5;250m 8[39m abort       negative 
-[38;5;250m 9[39m aborted     negative 
-[38;5;250m10[39m aborts      negative 
-[38;5;246m# ℹ 6,776 more rows[39m
+   &lt;chr&gt;       &lt;chr&gt;    
+ 1 2-faces     negative 
+ 2 abnormal    negative 
+ 3 abolish     negative 
+ 4 abominable  negative 
+ 5 abominably  negative 
+ 6 abominate   negative 
+ 7 abomination negative 
+ 8 abort       negative 
+ 9 aborted     negative 
+10 aborts      negative 
+# ℹ 6,776 more rows
 ```
 ]
 
@@ -467,20 +467,20 @@ get_sentiments("afinn")
 ```
 
 ```
-[38;5;246m# A tibble: 2,477 × 2[39m
+# A tibble: 2,477 × 2
    word       value
-   [3m[38;5;246m&lt;chr&gt;[39m[23m      [3m[38;5;246m&lt;dbl&gt;[39m[23m
-[38;5;250m 1[39m abandon       -[31m2[39m
-[38;5;250m 2[39m abandoned     -[31m2[39m
-[38;5;250m 3[39m abandons      -[31m2[39m
-[38;5;250m 4[39m abducted      -[31m2[39m
-[38;5;250m 5[39m abduction     -[31m2[39m
-[38;5;250m 6[39m abductions    -[31m2[39m
-[38;5;250m 7[39m abhor         -[31m3[39m
-[38;5;250m 8[39m abhorred      -[31m3[39m
-[38;5;250m 9[39m abhorrent     -[31m3[39m
-[38;5;250m10[39m abhors        -[31m3[39m
-[38;5;246m# ℹ 2,467 more rows[39m
+   &lt;chr&gt;      &lt;dbl&gt;
+ 1 abandon       -2
+ 2 abandoned     -2
+ 3 abandons      -2
+ 4 abducted      -2
+ 5 abduction     -2
+ 6 abductions    -2
+ 7 abhor         -3
+ 8 abhorred      -3
+ 9 abhorrent     -3
+10 abhors        -3
+# ℹ 2,467 more rows
 ```
 ]
 
@@ -493,20 +493,20 @@ get_sentiments("nrc")
 ```
 
 ```
-[38;5;246m# A tibble: 13,872 × 2[39m
+# A tibble: 13,872 × 2
    word        sentiment
-   [3m[38;5;246m&lt;chr&gt;[39m[23m       [3m[38;5;246m&lt;chr&gt;[39m[23m    
-[38;5;250m 1[39m abacus      trust    
-[38;5;250m 2[39m abandon     fear     
-[38;5;250m 3[39m abandon     negative 
-[38;5;250m 4[39m abandon     sadness  
-[38;5;250m 5[39m abandoned   anger    
-[38;5;250m 6[39m abandoned   fear     
-[38;5;250m 7[39m abandoned   negative 
-[38;5;250m 8[39m abandoned   sadness  
-[38;5;250m 9[39m abandonment anger    
-[38;5;250m10[39m abandonment fear     
-[38;5;246m# ℹ 13,862 more rows[39m
+   &lt;chr&gt;       &lt;chr&gt;    
+ 1 abacus      trust    
+ 2 abandon     fear     
+ 3 abandon     negative 
+ 4 abandon     sadness  
+ 5 abandoned   anger    
+ 6 abandoned   fear     
+ 7 abandoned   negative 
+ 8 abandoned   sadness  
+ 9 abandonment anger    
+10 abandonment fear     
+# ℹ 13,862 more rows
 ```
 ]
 
