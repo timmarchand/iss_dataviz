@@ -60,7 +60,7 @@ div.csl-indent {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-1b3db88def35042d172274863c1cdcf0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-4b54fd47631bf6c5f3ebf8ab231abb68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-39e54efe698d158150328aebe0ca31b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
@@ -166,7 +166,10 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link active" data-scroll-target="#course-objectives">Course objectives</a></li>
+  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link active" data-scroll-target="#course-objectives">Course objectives</a>
+  <ul class="collapse">
+  <li><a href="#mandatory-registration-requirement" id="toc-mandatory-registration-requirement" class="nav-link" data-scroll-target="#mandatory-registration-requirement">Mandatory Registration Requirement</a></li>
+  </ul></li>
   <li><a href="#important-pep-talk" id="toc-important-pep-talk" class="nav-link" data-scroll-target="#important-pep-talk">Important pep talk!</a></li>
   <li><a href="#course-materials" id="toc-course-materials" class="nav-link" data-scroll-target="#course-materials">Course materials</a>
   <ul class="collapse">
@@ -176,21 +179,10 @@ div.csl-indent {
   </ul></li>
   <li><a href="#ai-llms-bs-and-vibe-coding" id="toc-ai-llms-bs-and-vibe-coding" class="nav-link" data-scroll-target="#ai-llms-bs-and-vibe-coding">AI, LLMs, BS, and vibe coding</a></li>
   <li><a href="#course-schedule" id="toc-course-schedule" class="nav-link" data-scroll-target="#course-schedule">Course schedule</a></li>
-  <li><a href="#learning-in-troubled-times" id="toc-learning-in-troubled-times" class="nav-link" data-scroll-target="#learning-in-troubled-times">Learning in troubled times</a></li>
-  <li><a href="#course-policies" id="toc-course-policies" class="nav-link" data-scroll-target="#course-policies">Course policies</a>
-  <ul class="collapse">
-  <li><a href="#student-hours" id="toc-student-hours" class="nav-link" data-scroll-target="#student-hours">Student hours</a></li>
-  <li><a href="#late-work" id="toc-late-work" class="nav-link" data-scroll-target="#late-work">Late work</a></li>
-  <li><a href="#counseling-and-psychological-services-cps" id="toc-counseling-and-psychological-services-cps" class="nav-link" data-scroll-target="#counseling-and-psychological-services-cps">Counseling and Psychological Services (CPS)</a></li>
-  <li><a href="#basic-needs-security" id="toc-basic-needs-security" class="nav-link" data-scroll-target="#basic-needs-security">Basic needs security</a></li>
-  <li><a href="#laurens-promise" id="toc-laurens-promise" class="nav-link" data-scroll-target="#laurens-promise">Lauren’s Promise</a></li>
-  <li><a href="#academic-honesty" id="toc-academic-honesty" class="nav-link" data-scroll-target="#academic-honesty">Academic honesty</a></li>
-  <li><a href="#special-needs" id="toc-special-needs" class="nav-link" data-scroll-target="#special-needs">Special needs</a></li>
-  </ul></li>
   <li><a href="#assignments-and-grades" id="toc-assignments-and-grades" class="nav-link" data-scroll-target="#assignments-and-grades">Assignments and grades</a></li>
   <li><a href="#recipes" id="toc-recipes" class="nav-link" data-scroll-target="#recipes">Recipes</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="PMAP-8551-HEISS-89550-SP26.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ISS-DATAVIZ-MARCHAND-SP26.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content page-columns page-full" id="quarto-document-content">
@@ -243,6 +235,8 @@ div.csl-indent {
 </div>
 <section id="course-objectives" class="level2">
 <h2 class="anchored" data-anchor-id="course-objectives">Course objectives</h2>
+<p>This course offers an in-depth exploration of data visualisation and analysis techniques for the social sciences. It covers a range of topics including data types, sources, and the practical application of various visualisation tools such as charts, graphs, and maps.</p>
+<p>As well as equipping the students with the skills to produce publication-ready plots, emphasis is placed on interpreting social science data accurately and ethically. The course methodology includes practical exercises, project work, and group discussions to reinforce learning. It builds upon foundational knowledge in social sciences, enhancing students’ ability to present and analyse data effectively.</p>
 <p><strong>Data rarely speaks for itself.</strong> On their own, the facts contained in raw data are difficult to understand, and in the absence of beauty and order, it is impossible to understand the truth that the data shows.</p>
 <p>In this class, you’ll learn how to use industry-standard graphic and data design techniques to create beautiful, understandable visualizations and uncover truth in data.</p>
 <p>By the end of this course, you will become (1) literate in data and graphic design principles, and (2) an ethical data communicator, by producing beautiful, powerful, and clear visualizations of your own data. Specifically, you should:</p>
@@ -255,6 +249,12 @@ div.csl-indent {
 <li>Be curious and confident in consuming and producing data visualizations</li>
 </ul>
 <p>This class will expose you to <a href="https://cran.r-project.org/">R</a>—one of the most popular, sought-after, and in-demand statistical programming languages. Armed with the foundation of R skills you’ll learn in this class, you’ll know enough to be able to find how to visualize and analyze any sort of data-based question in the future.</p>
+<section id="mandatory-registration-requirement" class="level3">
+<h3 class="anchored" data-anchor-id="mandatory-registration-requirement">Mandatory Registration Requirement</h3>
+<p>Attendance at the first course meeting is mandatory. Prior to that, students must email an academic self-introduction with the subject line, “Data Visualisation and Analysis” to the instructor at <code>tim.marchand@gakushuin.ac.jp</code> before the first class meeting.</p>
+<p>This should include a brief outline of your undergraduate studies, goals you wish to achieve during this graduate program, area(s) of interest in the social sciences, and specific reasons for enrolling in this course.</p>
+<p><strong>You will be required to bring your computer (PC or Mac) to every class meeting.</strong></p>
+</section>
 </section>
 <section id="important-pep-talk" class="level2">
 <h2 class="anchored" data-anchor-id="important-pep-talk">Important pep talk!</h2>
@@ -328,76 +328,15 @@ div.csl-indent {
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;There are tools that purport to be able to identify the percentage of a given text that is AI, but they do not work and result in all sorts of false positives.</p></div></div></section>
 <section id="course-schedule" class="level2">
 <h2 class="anchored" data-anchor-id="course-schedule">Course schedule</h2>
-<p>We have no regularly scheduled meeting times.</p>
-<p>Instead, 100% of the class content is asynchronous. You can do the readings and watch the videos on your own schedule at whatever time works best for you. Many of you work full time and you have childcare and parental care responsibilities, leaving you with only evenings for coursework. I’ve designed this asynchronous system with <em>you specifically</em> in mind. I also can only really do teaching work at night when my kids are in bed—I recorded all these videos between like 10 PM and 2 AM. We’re all in similar pandemic boats.</p>
-<p>Each week has (1) a set of readings and an accompanying lecture, (2) a lesson, (3) an example with lots of reference code, and (4) a short assignment. The <a href="./schedule.html">schedule page</a> provides an overview of all these moving parts.</p>
-<p>I recommend following this general process for each session:</p>
+<p>[cite_start]We meet in person every Thursday during the 3rd period on the Mejiro Campus[cite: 22, 23].</p>
+<p>This is a hands-on, synchronous course. [cite_start]Our time together will consist of lectures and discussions about the principles of data visualisation, followed directly by coding practice in class[cite: 117, 119]. [cite_start]Because of this, <strong>you are required to bring your computer (PC or Mac) to every class meeting</strong>.</p>
+<p>Each week revolves around a central theme and includes (1) a set of foundational readings, (2) an interactive coding lesson, and (3) reference examples with reproducible code. The <a href="./schedule.html">schedule page</a> provides an overview of all these moving parts.</p>
+<p>To succeed in this course, I recommend following this general process for each session:</p>
 <ul>
-<li>Do everything on the content page (<i class="fa-solid fa-book-open-reader" aria-label="book-open-reader"></i>)</li>
-<li>Work through the lesson page (<i class="fa-solid fa-chalkboard-teacher" aria-label="chalkboard-teacher"></i>)</li>
-<li>Complete the assignment (<i class="fa-solid fa-pen-ruler" aria-label="pen-ruler"></i>) while referencing the example (<i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i>)</li>
+<li><strong>Before class:</strong> Complete the assigned readings on the content page (<i class="fa-solid fa-book-open-reader" aria-label="book-open-reader"></i>) to understand the core design and ethical principles for that week.</li>
+<li><strong>During class:</strong> Participate in the discussion and work through the coding lesson (<i class="fa-solid fa-chalkboard-teacher" aria-label="chalkboard-teacher"></i>) and examples (<i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i>).</li>
+<li>[cite_start]<strong>After class:</strong> Spend an absolute minimum of 1.5 hours on coding practice and reflection. You will use this time to build your chart gallery and script portfolio, and work on your research project. [cite_start]Expect to spend more time outside of class as we approach the end of the semester[cite: 138].</li>
 </ul>
-</section>
-<section id="learning-in-troubled-times" class="level2">
-<h2 class="anchored" data-anchor-id="learning-in-troubled-times">Learning in troubled times</h2>
-<p>Life still sucks right now. None of us is really okay. <strong>We’re all just pretending.</strong></p>
-<p>You most likely know people who have lost their jobs, have been hospitalized, or have even died (I myself know people in all those categories). You all have increased (or possibly decreased) work responsibilities and increased family care responsibilities—you might be caring for extra people (young and/or old!) right now, and you are likely facing uncertain job prospects (or have been laid off!). You might know neighbors, relatives, or friends who have been detained or deported. You might face an uncertain legal future yourself.</p>
-<p><strong>I’m fully committed to making sure that you learn everything you were hoping to learn from this class!</strong> I will make whatever accommodations I can to help you finish your problem sets, do well on your projects, and learn and understand the class material. Under ordinary conditions, I am flexible and lenient with grading and course expectations when students face difficult challenges. During these troubled times, that flexibility and leniency is intensified.</p>
-<p>If you tell me you’re having trouble, I will not judge you or think less of you. I hope you’ll extend me the same grace.</p>
-<p>You <em>never</em> owe me personal information about your health (mental or physical). You are <em>always</em> welcome to talk to me about things that you’re going through, though. If I can’t help you, I usually know somebody who can.</p>
-<p>If you need extra help, or if you need more time with something, or if you feel like you’re behind or not understanding everything, <strong>do not suffer in silence!</strong> Talk to me! I will work with you. <strong>I promise.</strong></p>
-<p><em>Please</em> sign up for a time to meet with me during student hours at <a href="https://scheduler.zoom.us/andrewheiss" class="uri">https://scheduler.zoom.us/andrewheiss</a>. I’m also available through e-mail and Discord. I’ve enabled notifications on my Discord account, so I’ll see your messages quickly!</p>
-<p>I want you to learn lots of things from this class (Graphic design! Fancy charts! R! ggplot!), but I primarily want you to stay healthy, balanced, and grounded during these chaotic, awful times.</p>
-</section>
-<section id="course-policies" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="course-policies">Course policies</h2>
-<p><strong>Be nice. Be honest. Don’t cheat.</strong></p>
-<p>We will also follow <a href="https://codeofconduct.gsu.edu/">Georgia State’s Code of Conduct</a>.</p>
-<p>This syllabus reflects a plan for the semester. Deviations may become necessary as the course progresses.</p>
-<section id="student-hours" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="student-hours">Student hours</h3>
-<p>Please watch <a href="https://vimeo.com/270014784">this video</a>: <small>(<em>this is not me, btw—this is a different Andrew</em>)</small></p>
-<div class="ratio ratio-16x9">
-<iframe src="https://player.vimeo.com/video/270014784" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" style="display: block; margin: 0 auto 1rem;">
-</iframe>
-</div>
-<p>&nbsp;</p>
-<p>Student hours are set times dedicated to all of you (most professors call these “office hours”; I don’t<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>). This means that I will be waiting for you to talk to me (in person or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns.</p>
-<div class="no-row-height column-margin column-container"><div id="fn3"><p><sup>3</sup>&nbsp;There’s fairly widespread misunderstanding about what office hours actually are! <a href="https://www.chronicle.com/article/Can-This-Man-Change-How-Elite/245714/">Many students often think that they are the times I <em>shouldn’t</em> be disturbed</a>, which is the exact opposite of what they’re for!</p></div><div id="fn4"><p><sup>4</sup>&nbsp;Shuttling 5 kids around to different sports and music lessons, parenting while my wife is in her classes (she’s a PhD student at UGA), meeting and traveling for research, and so on</p></div></div><p>Since my schedule is often chaotic<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a> I don’t have official permanently-set student hours every week. Instead, the best way to meet with me is to <a href="https://scheduler.zoom.us/andrewheiss">make an appointment with me here</a>. You can choose an online or in-person slot—if you choose an online slot, the confirmation e-mail will contain a link for a Zoom meeting. You can also find me through e-mail and Discord.</p>
-</section>
-<section id="late-work" class="level3">
-<h3 class="anchored" data-anchor-id="late-work">Late work</h3>
-<p>My general philosophy towards late work is that I don’t care if stuff is late—if you turn it in, great! In past versions of this class (and other of my classes), I would have no late penalties and accept late work until the very end of the semester.</p>
-<p>While many students have appreciated the flexibility of this system, I’ve received <em>a lot</em> of feedback from students that such a system actually hurts them. With total freedom and no hard deadlines, lots of people put off assignments until the end and then end up not learning much and feel incredibly stressed for weeks and weeks.</p>
-<p>So to counter this, <strong>I use kinda-sorta-hard-ish deadlines</strong> to help you stay on schedule but also provide flexibility when needed.</p>
-<p>You will lose 0.5 points per day for each day an exercise is late. This is designed to not be a huge penalty (3 days late = 18.5/20 points on an exercise/session check-in that gets a ✓), but instead is a commitment device to help you stay on schedule.</p>
-<p>I will (typically) not accept work that is more than two weeks late. Again, this is not designed to be punitive—this is to help keep you on schedule. Being four or five weeks behind will only make you fall even more behind. HOWEVER if you have extenuating circumstances, I’m more than happy to accommodate. Just check in with me and let me know what’s up.</p>
-</section>
-<section id="counseling-and-psychological-services-cps" class="level3">
-<h3 class="anchored" data-anchor-id="counseling-and-psychological-services-cps">Counseling and Psychological Services (CPS)</h3>
-<p>Life at GSU can be complicated and challenging (especially during a pandemic!). You might feel overwhelmed, experience anxiety or depression, or struggle with relationships or family responsibilities. <a href="https://education.gsu.edu/cps/">Counseling and Psychological Services (CPS)</a> provides free, <em>confidential</em> support for students who are struggling with mental health and emotional challenges. The CPS office is staffed by professional psychologists who are attuned to the needs of all types of college and professional students. Please do not hesitate to contact CPS for assistance—getting help is a smart and courageous thing to do.</p>
-</section>
-<section id="basic-needs-security" class="level3">
-<h3 class="anchored" data-anchor-id="basic-needs-security">Basic needs security</h3>
-<p>If you have difficulty affording groceries or accessing sufficient food to eat every day, or if you lack a safe and stable place to live, and you believe this may affect your performance in this course, please contact the <a href="https://deanofstudents.gsu.edu/">Dean of Students</a> for support. They can provide a host of services including free groceries from the <a href="https://nutrition.gsu.edu/panther-pantry/">Panther Pantry</a> and assisting with homelessness with the <a href="https://deanofstudents.gsu.edu/student-assistance/embark/">Embark Network</a>. Additionally, please talk to me if you are comfortable in doing so. This will enable me to provide any resources that I might possess.</p>
-</section>
-<section id="laurens-promise" class="level3">
-<h3 class="anchored" data-anchor-id="laurens-promise">Lauren’s Promise</h3>
-<p><strong>I will listen and believe you if someone is threatening you.</strong></p>
-<p>Lauren McCluskey, a 21-year-old honors student athlete, <a href="https://www.sltrib.com/opinion/commentary/2019/02/10/commentary-failing-lauren/">was murdered on October 22, 2018 by a man she briefly dated on the University of Utah campus</a>. We must all take action to ensure that this never happens again.</p>
-<p>If you are in immediate danger, call 911 or GSU police (404-413-3333).</p>
-<p>If you are experiencing sexual assault, domestic violence, or stalking, please report it to me and I will connect you to resources or call <a href="https://counselingcenter.gsu.edu/crisis-services/concern-self/immediate-help/">GSU’s Counseling and Psychological Services</a> (404-413-1640).</p>
-<p>Any form of sexual harassment or violence will not be excused or tolerated at Georgia State. GSU has instituted procedures to respond to violations of these laws and standards, programs aimed at the prevention of such conduct, and intervention on behalf of the victims. Georgia State University Police officers will treat victims of sexual assault, domestic violence, and stalking with respect and dignity. Advocates on campus and in the community can help with victims’ physical and emotional health, reporting options, and academic concerns.</p>
-</section>
-<section id="academic-honesty" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="academic-honesty">Academic honesty</h3>
-<p>Violation of <a href="https://deanofstudents.gsu.edu/faculty-staff-resources/academic-honesty/">GSU’s Policy on Academic Honesty</a> will result in an F in the course and possible disciplinary action.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> All violations will be formally reported to the Dean of Students.</p>
-<div class="no-row-height column-margin column-container"><div id="fn5"><p><sup>5</sup>&nbsp;So seriously, just don’t cheat or plagiarize!</p></div></div></section>
-<section id="special-needs" class="level3">
-<h3 class="anchored" data-anchor-id="special-needs">Special needs</h3>
-<p>Students who wish to request accommodation for a disability may do so by registering with the <a href="https://disability.gsu.edu/">Office of Disability Services</a>. Students may only be accommodated upon issuance by the Office of Disability Services of a signed <a href="https://disability.gsu.edu/services/how-to-register/">Accommodation Plan</a> and are responsible for providing a copy of that plan to instructors of all classes in which accommodations are sought.</p>
-<p>Students with special needs should then make an appointment with me during the first week of class to discuss any accommodations that need to be made.</p>
-</section>
 </section>
 <section id="assignments-and-grades" class="level2">
 <h2 class="anchored" data-anchor-id="assignments-and-grades">Assignments and grades</h2>
@@ -411,20 +350,20 @@ div.csl-indent {
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_cusb6o78og5zhxvh6oj2 = TinyTable.createTableFunctions("tinytable_cusb6o78og5zhxvh6oj2");
+      const tableFns_zhhblawrmbp51bojic7i = TinyTable.createTableFunctions("tinytable_zhhblawrmbp51bojic7i");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '7', j: 1 }, { i: '7', j: 2 }, { i: '7', j: 3 } ], css_id: 'tinytable_css_wn87phns90sjxq1htgcr',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '6', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '6', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '6', j: 3 } ], css_id: 'tinytable_css_b7ef5a2j3saijzh491ci',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_ivt5tc2cjrlklbl2j7yd',}, 
+          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_n3ipibxnkgyvoeafw54x',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_n08z5c01vi1sp0sgwvho',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_k7epuqt5mw6h7klvv3b0',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_cusb6o78og5zhxvh6oj2.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_zhhblawrmbp51bojic7i.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -433,12 +372,12 @@ div.csl-indent {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_cusb6o78og5zhxvh6oj2 td.tinytable_css_wn87phns90sjxq1htgcr, #tinytable_cusb6o78og5zhxvh6oj2 th.tinytable_css_wn87phns90sjxq1htgcr {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
-    #tinytable_cusb6o78og5zhxvh6oj2 td.tinytable_css_b7ef5a2j3saijzh491ci, #tinytable_cusb6o78og5zhxvh6oj2 th.tinytable_css_b7ef5a2j3saijzh491ci {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_cusb6o78og5zhxvh6oj2 td.tinytable_css_ivt5tc2cjrlklbl2j7yd, #tinytable_cusb6o78og5zhxvh6oj2 th.tinytable_css_ivt5tc2cjrlklbl2j7yd {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_zhhblawrmbp51bojic7i td.tinytable_css_n3ipibxnkgyvoeafw54x, #tinytable_zhhblawrmbp51bojic7i th.tinytable_css_n3ipibxnkgyvoeafw54x {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
+    #tinytable_zhhblawrmbp51bojic7i td.tinytable_css_n08z5c01vi1sp0sgwvho, #tinytable_zhhblawrmbp51bojic7i th.tinytable_css_n08z5c01vi1sp0sgwvho {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_zhhblawrmbp51bojic7i td.tinytable_css_k7epuqt5mw6h7klvv3b0, #tinytable_zhhblawrmbp51bojic7i th.tinytable_css_k7epuqt5mw6h7klvv3b0 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_cusb6o78og5zhxvh6oj2" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_zhhblawrmbp51bojic7i" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -450,39 +389,24 @@ div.csl-indent {
         
         <tbody>
                 <tr>
-                  <td data-row="1" data-col="1">Session check-ins (15 × 10)</td>
-                  <td data-row="1" data-col="2">150</td>
-                  <td data-row="1" data-col="3">22.1%</td>
+                  <td data-row="1" data-col="1">Presentation, participation, and weekly tasks</td>
+                  <td data-row="1" data-col="2">20</td>
+                  <td data-row="1" data-col="3">20%</td>
                 </tr>
                 <tr>
-                  <td data-row="2" data-col="1">Exercises (15 × 10)</td>
-                  <td data-row="2" data-col="2">150</td>
-                  <td data-row="2" data-col="3">22.1%</td>
+                  <td data-row="2" data-col="1">Chart gallery and script portfolio</td>
+                  <td data-row="2" data-col="2">40</td>
+                  <td data-row="2" data-col="3">40%</td>
                 </tr>
                 <tr>
-                  <td data-row="3" data-col="1">#TidyTuesday</td>
-                  <td data-row="3" data-col="2">30</td>
-                  <td data-row="3" data-col="3">4.4%</td>
+                  <td data-row="3" data-col="1">Research project</td>
+                  <td data-row="3" data-col="2">40</td>
+                  <td data-row="3" data-col="3">40%</td>
                 </tr>
                 <tr>
-                  <td data-row="4" data-col="1">Mini project 1</td>
-                  <td data-row="4" data-col="2">75</td>
-                  <td data-row="4" data-col="3">11.0%</td>
-                </tr>
-                <tr>
-                  <td data-row="5" data-col="1">Mini project 2</td>
-                  <td data-row="5" data-col="2">75</td>
-                  <td data-row="5" data-col="3">11.0%</td>
-                </tr>
-                <tr>
-                  <td data-row="6" data-col="1">Final project</td>
-                  <td data-row="6" data-col="2">200</td>
-                  <td data-row="6" data-col="3">29.4%</td>
-                </tr>
-                <tr>
-                  <td data-row="7" data-col="1">Total</td>
-                  <td data-row="7" data-col="2">680</td>
-                  <td data-row="7" data-col="3">100.0%</td>
+                  <td data-row="4" data-col="1">Total</td>
+                  <td data-row="4" data-col="2">100</td>
+                  <td data-row="4" data-col="3">100%</td>
                 </tr>
         </tbody>
       </table>
@@ -500,21 +424,21 @@ div.csl-indent {
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_7163ytykb1eo3n9a2sj0 = TinyTable.createTableFunctions("tinytable_7163ytykb1eo3n9a2sj0");
+      const tableFns_k3lc59m185a5t3bodcvq = TinyTable.createTableFunctions("tinytable_k3lc59m185a5t3bodcvq");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '6', j: 1 }, { i: '6', j: 2 }, { i: '6', j: 3 }, { i: '6', j: 4 } ], css_id: 'tinytable_css_hhqr9b2syc9p3valk4wr',}, 
-          { positions: [ { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '4', j: 1 }, { i: '5', j: 1 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '4', j: 2 }, { i: '5', j: 2 }, { i: '2', j: 3 }, { i: '3', j: 3 }, { i: '4', j: 3 }, { i: '5', j: 3 }, { i: '2', j: 4 }, { i: '3', j: 4 }, { i: '4', j: 4 }, { i: '5', j: 4 } ], css_id: 'tinytable_css_l86ms4ahsdeila9undji',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '1', j: 2 }, { i: '1', j: 3 }, { i: '1', j: 4 } ], css_id: 'tinytable_css_jaetsq5sem8nh0nofio2',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_giywi6vp4atocqtpenye',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_oguizr0yhnw3ym5g556w',}, 
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_n3ky1tigeoec9oeqnqoc',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '1', j: 2 }, { i: '1', j: 3 }, { i: '1', j: 4 } ], css_id: 'tinytable_css_eixqx1mkhu8e6lrf21np',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_l79rum4dvljumpnjvs6e',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_7163ytykb1eo3n9a2sj0.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_k3lc59m185a5t3bodcvq.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -523,13 +447,13 @@ div.csl-indent {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_7163ytykb1eo3n9a2sj0 td.tinytable_css_hhqr9b2syc9p3valk4wr, #tinytable_7163ytykb1eo3n9a2sj0 th.tinytable_css_hhqr9b2syc9p3valk4wr {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_7163ytykb1eo3n9a2sj0 td.tinytable_css_l86ms4ahsdeila9undji, #tinytable_7163ytykb1eo3n9a2sj0 th.tinytable_css_l86ms4ahsdeila9undji {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_7163ytykb1eo3n9a2sj0 td.tinytable_css_jaetsq5sem8nh0nofio2, #tinytable_7163ytykb1eo3n9a2sj0 th.tinytable_css_jaetsq5sem8nh0nofio2 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_7163ytykb1eo3n9a2sj0 td.tinytable_css_giywi6vp4atocqtpenye, #tinytable_7163ytykb1eo3n9a2sj0 th.tinytable_css_giywi6vp4atocqtpenye {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_oguizr0yhnw3ym5g556w, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_oguizr0yhnw3ym5g556w {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_n3ky1tigeoec9oeqnqoc, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_n3ky1tigeoec9oeqnqoc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_eixqx1mkhu8e6lrf21np, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_eixqx1mkhu8e6lrf21np {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_l79rum4dvljumpnjvs6e, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_l79rum4dvljumpnjvs6e {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_7163ytykb1eo3n9a2sj0" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_k3lc59m185a5t3bodcvq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -542,40 +466,22 @@ div.csl-indent {
         
         <tbody>
                 <tr>
-                  <td data-row="1" data-col="1">A</td>
-                  <td data-row="1" data-col="2">93–100%</td>
+                  <td data-row="1" data-col="1">S</td>
+                  <td data-row="1" data-col="2">90–100%</td>
                   <td data-row="1" data-col="3">C</td>
-                  <td data-row="1" data-col="4">73–76%</td>
+                  <td data-row="1" data-col="4">60–69%</td>
                 </tr>
                 <tr>
-                  <td data-row="2" data-col="1">A−</td>
-                  <td data-row="2" data-col="2">90–92%</td>
-                  <td data-row="2" data-col="3">C−</td>
-                  <td data-row="2" data-col="4">70–72%</td>
+                  <td data-row="2" data-col="1">A</td>
+                  <td data-row="2" data-col="2">80–89%</td>
+                  <td data-row="2" data-col="3">F</td>
+                  <td data-row="2" data-col="4">&lt; 60%</td>
                 </tr>
                 <tr>
-                  <td data-row="3" data-col="1">B+</td>
-                  <td data-row="3" data-col="2">87–89%</td>
-                  <td data-row="3" data-col="3">D+</td>
-                  <td data-row="3" data-col="4">67–69%</td>
-                </tr>
-                <tr>
-                  <td data-row="4" data-col="1">B</td>
-                  <td data-row="4" data-col="2">83–86%</td>
-                  <td data-row="4" data-col="3">D</td>
-                  <td data-row="4" data-col="4">63–66%</td>
-                </tr>
-                <tr>
-                  <td data-row="5" data-col="1">B−</td>
-                  <td data-row="5" data-col="2">80–82%</td>
-                  <td data-row="5" data-col="3">D−</td>
-                  <td data-row="5" data-col="4">60–62%</td>
-                </tr>
-                <tr>
-                  <td data-row="6" data-col="1">C+</td>
-                  <td data-row="6" data-col="2">77–79%</td>
-                  <td data-row="6" data-col="3">F</td>
-                  <td data-row="6" data-col="4">&lt; 60%</td>
+                  <td data-row="3" data-col="1">B</td>
+                  <td data-row="3" data-col="2">70–79%</td>
+                  <td data-row="3" data-col="3"></td>
+                  <td data-row="3" data-col="4"></td>
                 </tr>
         </tbody>
       </table>
