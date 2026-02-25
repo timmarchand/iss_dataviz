@@ -1,0 +1,344 @@
+---
+title: "Text"
+subtitle: "Exercise 14 --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  typst:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+# Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+# Task 2: *The Office*
+
+## Data description and cleaning
+
+[*The Office*](https://en.wikipedia.org/wiki/The_Office_(American_TV_series)) was an American TV show that ran for 201 episodes over 9 seasons from 2005--2013. 
+
+In this exercise, you'll explore and visualize different trends and patterns in the complete script of the entire show. The data comes from [the {schrute} package](https://bradlindblad.github.io/schrute/index.html), which contains the script transcription for all 201 episodes, in addition to other episode-specific data. It includes 12 columns, plus a 13th that is added with the data cleaning code:
+
+- `index`: Row index
+- `season`: Season number
+- `episode`: Episode nmber
+- `episode_name`: Name of the episode
+- `director`: Director of the episode
+- `writer`: Writer(s) of the episode
+- `character`: Name of the character saying the line
+- `text`: Words spoken by that actor in that line
+- `text_w_direction`: Words spoken by that actor in that line, with stage direction included
+- `imdb_rating`: Episode rating on IMDB
+- `total_votes`: Total votes for the episode on IMDB
+- `air_date`: Date the episode originally aired
+- `season_cat`: A factor/categorical version of the `season` column
+
+The code below loads all the packages and datasets you'll need to use. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: load-libraries-data
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(scales)
+library(tidytext)
+
+# Add a categorical version of the season column
+theoffice <- read_csv("data/theoffice.csv") |> 
+  mutate(season_cat = factor(season))
+```
+
+## Most common words
+
+### Tokenize words and remove stop words
+
+Right now the data contains a row for each line of dialogue. We need to split those lines into indvidual words. Also, there are a lot of meaningless words like "the" and "and" in the text and we need to remove those to make cleaner, more meaningful visualizations.
+
+Use `unnest_tokens()` and `anti_join()` to create a data frame named `all_words` that looks like this:
+
+```r
+#> # A tibble: 170,545 × 5
+#>    season episode episode_name character word       
+#>     <dbl>   <dbl> <chr>        <chr>     <chr>      
+#>  1      1       1 Pilot        Michael   jim        
+#>  2      1       1 Pilot        Michael   quarterlies
+#>  3      1       1 Pilot        Michael   library    
+#>  4      1       1 Pilot        Jim       told       
+#>  5      1       1 Pilot        Jim       close      
+#>  6      1       1 Pilot        Michael   master     
+#>  7      1       1 Pilot        Michael   guidance   
+#>  8      1       1 Pilot        Michael   grasshopper
+#>  9      1       1 Pilot        Jim       called     
+#> 10      1       1 Pilot        Jim       yeah       
+#> # ℹ 170,535 more rows
+```
+
+**Some hints!**
+
+- The actual `all_words` dataset you make will have 13 columns. The one shown above only has 5. That's because I wanted to show the `words` column (and a few other columns) so you can more easily check your work. I did that by running this:
+
+  ```r
+  all_words |> 
+    select(season, episode, episode_name, character, word)
+  ```
+
+  You'll want to keep all the columns in your own data.
+
+- You'll want to anti join the `stop_words` dataset (which is invisibly loaded when you run `library(tidytext)`)
+
+- The dataset should have 170,545 rows
+
+```{r}
+#| label: recreate-me-data-all-words
+
+# Do stuff here
+```
+
+
+### Plot most common words
+
+Run the code chunk below to see a plot. It shows the top 10 most common words spoken across all nine seasons of *The Office*:
+
+```{r}
+#| label: recreate-me-show-total-words-plot
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-plot-total-words-1.png")
+```
+
+Use the `all_words` data to recreate this plot with `ggplot()`. 
+
+**Some hints**:
+
+- You'll need to make a smaller dataset (maybe named `top_words`, or whatever you want!) to calculate the count of words using either `group_by() |> summarize()` or `count()` ([see this from the example](https://datavizsp26.classes.andrewheiss.com/example/14-example.html#count) for the difference between the two approaches). You'll need to then keep the top 10 words using `slice_max()`
+- Make sure the words are plotted in descending order. You've done this several times in past exercises (like exercises 4, 6, 8) with functions like `fct_inorder()` or `fct_reorder()`
+- The plot uses `theme_bw()` and makes the plot title bold with `theme()`
+- The plot is 5 inches wide and 3.5 inches tall. Use chunk options to match those dimensions.
+- The plot uses `labs()` for nicer axis titles and the title, subtitle, and caption.
+- The x-axis is formatted with commas ([see this](https://datavizsp26.classes.andrewheiss.com/news/2025-10-08_faqs_week_06.html#i-have-numbers-like-20000-and-want-them-formatted-with-commas-like-20000.-can-i-do-that-automatically))
+
+```{r}
+#| label: recreate-me-total-words-plot
+
+# Do stuff here
+```
+
+
+## Most unique words by character
+
+### Calculate tf-idf for characters
+
+We want to see which words are most unique to the four main characters in the show: **Michael, Jim, Pam, and Dwight**. We can do this by calculating the term frequency-inverse document frequency score (tf-idf) for each word. In the example, we did this for words in actual documents, like individual Shakespeare plays. In this case, we'll treat all the words spoken by each character as a "document" so we can find which words are most unique for each character.
+
+$$
+\begin{aligned}
+\operatorname{tf}(\text{term}) &= \frac{n_{\text{term}}}{n_{\text{terms spoken by character}}} \\
+\operatorname{idf}(\text{term}) &= \ln{\left(\frac{n_{\text{characters}}}{n_{\text{characters speaking term}}}\right)} \\
+\operatorname{tf-idf}(\text{term}) &= \operatorname{tf}(\text{term}) \times \operatorname{idf}(\text{term})
+\end{aligned}
+$$
+
+Fortunately you don't need to remember that formula. The `bind_tf_idf()` function will calculate this for you. The higher the tf-idf value, the more unique the term is in the "document" (or words spoken by a character), but these numbers are unitless---you can't convert them to a percentage or anything.
+
+Take the `all_words` data frame and use `filter()`, `count()`, and `bind_tf_idf()` on create a data frame named `character_tf_idf` that looks like this:
+
+```r
+#> # A tibble: 23,819 × 6
+#>    character word       n      tf   idf tf_idf
+#>    <chr>     <chr>  <int>   <dbl> <dbl>  <dbl>
+#>  1 Michael   yeah     563 0.0135      0      0
+#>  2 Michael   hey      501 0.0120      0      0
+#>  3 Jim       yeah     385 0.0240      0      0
+#>  4 Michael   dwight   354 0.00848     0      0
+#>  5 Pam       yeah     341 0.0267      0      0
+#>  6 Michael   people   337 0.00807     0      0
+#>  7 Michael   pam      327 0.00783     0      0
+#>  8 Jim       hey      312 0.0194      0      0
+#>  9 Dwight    jim      293 0.0120      0      0
+#> 10 Michael   gonna    288 0.00690     0      0
+#> # ℹ 23,809 more rows
+```
+
+**Some hints!**
+
+- Remember to use the `%in%` operator in `filter()` to check if a character is in a list of possible characters (e.g. `filter(character %in% c("Andy", "Kelly", "Creed"))`).
+- After filtering, you'll want to count the number of words spoken by each character, likely with something like `count(character, word)`.
+- Use `bind_tf_idf()` to add columns for the tf, idf, and tf-idf values.
+- The dataset should have 23,819 rows
+
+```{r}
+#| label: recreate-me-data-tf-idf
+
+# Do stuff here
+```
+
+### Plot most unique words
+
+Run the code chunk below to see a plot. It shows the top 10 most unique words spoken by Michael, Jim, Pam, and Dwight:
+
+```{r}
+#| label: recreate-me-show-tf-idf-plot
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-plot-tf-idf-1.png")
+```
+
+Use the `character_tf_idf` data to recreate this plot with `ggplot()`. 
+
+**Some hints**:
+
+- You'll need to make a smaller dataset (maybe named `most_unique_by_character`, or whatever you want!) group by character and keep the top 10 words with the highest tf-idf for each character using `slice_max()`. You'll likely need to ungroup after using `slice_max()` if you want to sort words correctly later.
+- Make sure the words are plotted in descending order by tf-idf. You've done this several times in past exercises (like exercises 4, 6, 8) with functions like `fct_inorder()` or `fct_reorder()`.
+- If you sort the words normally, some of the bars might still be out of order because they could appear in multiple characters. Try using `reorder_within()` and `scale_y_reordered()` to plot the words in order within each character ([see here](https://juliasilge.github.io/tidytext/reference/reorder_within.html) or [here](https://juliasilge.com/blog/reorder-within/)).
+- The legend is removed because it's redundant with the facets.
+- The plot uses `theme_bw()` and makes the plot title bold with `theme()`
+- Since tf-idf values are unitless and fairly meaningless on their own, the plot uses `theme()` to remove the x-axis text (`axis.text.x`) and x-axis ticks (`axis.ticks.x`) with `element_blank()`.
+- The plot is 5.5 inches wide and 4.5 inches tall. Use chunk options to match those dimensions.
+- The plot uses `labs()` for nicer axis titles and the title, subtitle, and caption.
+- That subtitle is long! Normally you can use `\n` to add linebreaks (like `"One line\nanother line"`), but in this case, with so many line breaks, you can try using the `str_wrap()` function, which [wraps words into paragraphs automatically](https://stringr.tidyverse.org/reference/str_wrap.html). You'll need to adjust the `width` parameter, which controls how many characters R should try to include in each line (like `str_wrap("Here's some really really long text", width = 50)`)
+
+```{r}
+#| label: recreate-me-tf-idf-plot
+
+# Do stuff here
+```
+
+
+## Sentiment by character
+
+### Calculate average sentiment by character
+
+We want to see which characters use more positive or negative language, on average. We can do this with sentiment analysis, which involves joining a large database of words and their associated sentiment scores to the data. As you saw in the example, there are different ways of measuring sentiment, and {tidytext} comes with three different sentiment dictionaries:
+
+- `AFINN` from [Finn Årup Nielsen](http://www2.imm.dtu.dk/pubdb/views/publication_details.php?id=6010): This gives every word a score from -5 to 5, where negative scores indicate negative sentiment and positive scores indicate positive sentiment
+- `bing` from [Bing Liu and collaborators](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html): This categorizes every word into one of two categories: negative and positive
+- `nrc` from [Saif Mohammad and Peter Turney](http://saifmohammad.com/WebPages/NRC-Emotion-Lexicon.htm): This categorizes every word into one of ten categories: positive, negative, anger, anticipation, disgust, fear, joy, sadness, surprise, and trust
+
+You can access these different dictionaries with `get_sentiment("DICTIONARY_NAME")`, and you can join them to your words with `inner_join()`
+
+Here's how you'd join the `bing` dictionary to `all_words`. This adds a new column to the data named `sentiment` that contains either "negative" or "positive". (Don't try to run this chunk—it's not runnable; but you can copy/paste from it!)
+
+```r
+all_words_sentiment <- all_words |> 
+  inner_join(get_sentiments("bing"), by = join_by(word))
+```
+
+Take the `all_words` data frame and use `inner_join()`, `get_sentiments()`, `group_by()`, `summarize()`, `arrange()`, and `slice_max()` to create a new dataset named `prop_positive_character` that looks like this:
+
+```r
+# # A tibble: 15 × 3
+#    character n_words prop_positive
+#    <chr>       <int>         <dbl>
+#  1 Michael      6327         0.479
+#  2 Dwight       3520         0.414
+#  3 Jim          2249         0.542
+#  4 Andy         2047         0.489
+#  5 Pam          1717         0.510
+#  6 Angela        591         0.413
+#  7 Kevin         584         0.481
+#  8 Erin          551         0.510
+#  9 Darryl        503         0.487
+# 10 Oscar         493         0.460
+# 11 Kelly         460         0.420
+# 12 Ryan          435         0.538
+# 13 Nellie        317         0.410
+# 14 Phyllis       302         0.483
+# 15 Toby          282         0.415
+```
+
+**Some hints!**
+
+- I've already given you the code for inner joining the sentiment dictionary
+
+- The `prop_positive` column is the number of positive words divided by the total number of words spoken by each character. You can calculate it with `summarize()` like this (again, this chunk isn't runnable, but you can copy/paste from it):
+
+  ```r
+  ... |>
+    summarize(
+      n_words = n(),
+      prop_positive = sum(sentiment == "positive") / n_words,
+    ) |> 
+    ...
+  ```
+
+- The dataset should have 15 rows
+
+```{r}
+#| label: recreate-me-data-sentiment
+
+# Do stuff here
+```
+
+### Plot average sentiment by character
+
+Run the code chunk below to see a plot. It shows the top 10 most unique words spoken by Michael, Jim, Pam, and Dwight:
+
+```{r}
+#| label: recreate-me-show-sentiment-plot
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-plot-sentiment-1.png")
+```
+
+Use the `prop_positive_character` data to recreate this plot with `ggplot()`. 
+
+**Some hints**:
+
+- The lollipops are created with `geom_pointrange()` with `aes(xmin = 0, xmax = prop_positive, color = prop_positive)`
+- The lollipops are colored with the "managua" [diverging palette](https://datavizsp26.classes.andrewheiss.com/resource/colors.html#diverging) from {scico} ([see here for more](https://datavizsp26.classes.andrewheiss.com/resource/colors.html#scientific-colour-maps)). Make it so that the midpoint of the color palette is at 0.5 (since 0.5 here represents neutral sentiment). Look the help page for `scale_color_scico()` to see how to do that.
+- Make sure the characters are plotted in descending order by proportion. You've done this several times in past exercises (like exercises 4, 6, 8) with functions like `fct_inorder()` or `fct_reorder()`.
+- The legend is removed because it's redundant with the x-axis.
+- The plot uses `theme_bw()` and makes the plot title bold with `theme()`
+- The plot is 5 inches wide and 3.5 inches tall. Use chunk options to match those dimensions.
+- The plot uses `labs()` for nicer axis titles and the title and subtitle.
+- The x-axis is formatted with percents ([see this](https://datavizsp26.classes.andrewheiss.com/news/2025-10-08_faqs_week_06.html#i-have-numbers-like-20000-and-want-them-formatted-with-commas-like-20000.-can-i-do-that-automatically))
+
+```{r}
+#| label: recreate-me-sentiment-plot
+
+# Do stuff here
+```
+
+
+# Task 3: Extension
+
+You can do a ton of other things with this data and with text analysis and visualization techniques. Try doing one of these (or anything else!)
+
+- Most common pairs of words (bigrams) or larger chunks of words (like, maybe chunks of 4 words or 5 words) by character or season
+- Most unique words by season
+- Sentiment by season
+- Sentiment by character by season
+- Number of lines by character by season
+- (Super bonus) Use part of speech tagging to find the most common nouns or verbs or adjectives
+- (Super *super* bonus) Use topic modeling to see what possible episode topics are over time ([see this](https://tellingstorieswithdata.com/16-text.html#topic-models) for an example, [or this](https://datavizf18.classes.andrewheiss.com/class/11-class/#topic-modeling))
+
+**This is your chance to play around and explore. Do something neat.** (Just do one thing though!)
+
+```{r}
+#| label: extension
+
+# Do stuff here
+```

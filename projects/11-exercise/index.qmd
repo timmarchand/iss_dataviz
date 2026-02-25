@@ -1,0 +1,52 @@
+---
+title: "Exercise 11: Interactivity"
+toc: true
+---
+
+## Meet the Palmer Penguins!
+
+![Artwork by \@allison_horst](img/lter_penguins.png){fig-align="center" width="70%"}
+
+## Data description
+
+This data for this exercise comes from [Dr. Kristen Gorman](https://www.uaf.edu/cfos/people/faculty/detail/kristen-gorman.php) and her team of researchers at [Palmer Station, Antarctica](https://pallter.marine.rutgers.edu/), and it contains information on 344 penguins across three different Antarctic islands. The data was originally published in 2020 as [the {palmerpenguins} package](https://allisonhorst.github.io/palmerpenguins/) by [Allison Horst](https://www.allisonhorst.com/) and [Alison Hill](https://www.apreshill.com/). Since then, it has become *incredibly popular* as a teaching and demonstration dataset, and starting with R version 4.5, it is included as one of R's core built-in datasets as `penguins`.
+
+There are 8 columns:
+
+| Variable      | Definition          |
+|:--------------|:--------------------|
+| `species`     | Species             |
+| `island`      | Island              |
+| `bill_len`    | Bill length (mm)    |
+| `bill_dep`    | Bill depth (mm)     |
+| `flipper_len` | Flipper length (mm) |
+| `body_mass`   | Weight (g)          |
+| `sex`         | Sex                 |
+| `year`        | Study year          |
+
+
+::: {.callout-important}
+### Column names before R 4.5
+
+This exercise assumes that you're using R version 4.5+, which includes `penguins` automatically. If you're using an older version of R, install the {palmerpenguins} package and change the code in the different tasks to this:
+
+```{.r}
+penguins <- palmerpenguins::penguins
+```
+
+Four of the column names in the older {palmerpenguins} data differ from the built-in names:
+
+| dataset::penguins (R 4.5+) | palmerpenguins::penguins |
+|:---------------------------|:-------------------------|
+| `bill_len`                 | `bill_length_mm`         |
+| `bill_dep`                 | `bill_depth_mm`          |
+| `flipper_len`              | `flipper_length_mm`      |
+| `body_mass`                | `body_mass_g`            |
+:::
+
+
+## Bill length and bill depth
+
+Here's what bill length and bill depth refer to:
+
+![Artwork by \@allison_horst](img/culmen_depth.png){fig-align="center" width="70%"}

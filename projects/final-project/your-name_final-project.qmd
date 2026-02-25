@@ -1,0 +1,56 @@
+---
+title: "SOME GOOD USEFUL TITLE HERE"
+subtitle: "Final project --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  typst:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+```{r}
+#| label: setup
+#| warning: false
+#| message: false
+
+library(tidyverse)
+```
+
+# Executive summary
+
+What is (are) your main question(s)? What is your story? What does the final graphic show?
+
+
+# Data background
+
+Explain where the data came from, what agency or company made it, how it is structured, what it shows, etc.
+
+
+# Data cleaning
+
+Describe and show how you cleaned and reshaped the data
+
+
+# Individual figures
+
+## Figure 1
+
+Describe and show how you created the first figure. Why did you choose this figure type? What did you do to ensure it follows Cairo's principles from *A Truthful Art* and Robin Williams's CRAP?
+
+## Figure 2
+
+## Etc.
+
+
+# Final figure
+
+Show the final figure that you created in Illustrator/Affinity/Inkscape. Describe why you designed it the way you did? Why did you choose those colors, fonts, and other design elements? Does it convey truth?
+
+![Caption for your final figure](name_of_final_figure.pdf)

@@ -1,0 +1,15 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+*_files/*
+*.html
+*.pdf
+*.docx
+*.svg
+!img/*.png
+!img/*.svg
+!assets/*.svg
+
+/.quarto/

@@ -1,0 +1,208 @@
+---
+title: "Relationships"
+subtitle: "Exercise 7 --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  typst:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+# Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+# Task 2: WNBA stats
+
+```{r}
+#| label: setup
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(patchwork)
+library(broom)
+library(marginaleffects)
+```
+
+## Data description
+
+This data comes from <https://www.basketball-reference.com/wnba/players/> and contains information on WNBA basketball players from the 2019 season. The data was originally collected for the book [*Bayes Rules! An Introduction to Applied Bayesian Modeling*](https://www.bayesrulesbook.com/) and was included in the [{bayesrules} package](https://bayes-rules.github.io/bayesrules/docs/index.html) as `basketball`.
+
+There are 33 columns, and [they're documented here](https://bayes-rules.github.io/bayesrules/docs/reference/basketball.html)---make sure you consult that page!
+
+For this exercise, you'll only really worry about these columns (but you're free to use any others for your extension if you want!):
+
+| Variable        | Definition                                                        |
+|:----------------|:------------------------------------------------------------------|
+| `total_minutes` | Total number of minutes played throughout the season              |
+| `games_played`  | Number of games played throughout the season                      |
+| `starter`       | True if player started in more than half of the games they played |
+| `avg_points`    | Average number of points scored per game                          |
+| `age`           | Player age                                                        |
+
+The code below loads the data. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: load-data
+#| warning: false
+#| message: false
+
+wnba <- read_csv("data/wnba.csv")
+```
+
+## Combining plots with {patchwork}
+
+Make three plots from the `wnba` data:
+
+1. A histogram showing the distribution of player age (you'll probably want to use a binwidth of 1 so you can show bars with whole years)
+2. A scatterplot showing the relationship between average points (`x`) and total minutes (`y`), colored by `starter`
+3. A scatterplot showing the relationship between games played (`x`) and total minutes (`y`), colored by `starter`
+
+**Combine these three plots with {patchwork}**. Look at [the documentation](https://patchwork.data-imaginist.com/articles/guides/assembly.html) to see fancy ways of combining them, like having two rows inside a column.
+
+```{r}
+#| label: combine-plots
+
+# Make some plots and combine them here
+```
+
+
+## Visualizing regression
+
+### Recreate model
+
+Use the `wnba` data to create a model that predicts the total number of minutes a WNBA player played based on their average points, whether they're a starter, and the number of games they played in 2019 (hint: the formula will look like this: `total_minutes ~ avg_points + starter + games_played`)
+
+Use `lm()` and `tidy()` to recreate this table:
+
+```r
+model_minutes_results <- tidy(model_minutes, conf.int = TRUE)
+model_minutes_results
+
+#> # A tibble: 4 × 7
+#>   term         estimate std.error statistic  p.value conf.low conf.high
+#>   <chr>           <dbl>     <dbl>     <dbl>    <dbl>    <dbl>     <dbl>
+#> 1 (Intercept)    -140.     16.8       -8.37 5.06e-14   -174.     -107. 
+#> 2 avg_points       30.8     2.93      10.5  1.82e-19     25.0      36.6
+#> 3 starterTRUE     172.     19.9        8.66 9.70e-15    133.      212. 
+#> 4 games_played     14.9     0.832     17.9  3.46e-38     13.2      16.5
+```
+
+```{r}
+#| label: recreate-me-1
+
+# Do stuff here
+```
+
+### Recreate coefficient plot
+
+Run the code chunk below to see a plot.
+
+```{r}
+#| label: recreate-me-2
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-2-1.png")
+```
+
+This is a coefficient plot and it shows the partial slopes (or effect) of each of the explanatory variables in the model. Holding all else equal, a one-point increase in a player's average points is associated with ≈30 more total minutes played in a season; being a starter is associated with ≈170 more total minutes played in a season; and so on.
+
+Use `geom_pointrange()` in the chunk below to re-create the coefficient plot.
+
+- *Do not* try to plot the results of `lm()` directly. You need to feed the model you create to `tidy()` to create a plottable data frame:
+
+  ```r
+  your_model <- lm(...)
+
+  data_to_plot <- tidy(your_model, conf.int = TRUE)
+  ```
+
+- You'll need to calculate confidence intervale to plot the `xmin` and `xmax` values. Do this by setting `conf.int = TRUE` inside `tidy()`.
+
+- You'll need to remove the intercept. Use something like `filter(term != "(Intercept)")`
+
+- The plot uses `theme_light()`
+
+- Use `\n` to add line breaks in the label (like `labs(title = "Really long\ntext")`)
+
+```{r}
+#| label: recreate-me-2
+
+# Do stuff here
+```
+
+
+### Recreate predicted values
+
+Run the code chunk below to see a plot.
+
+```{r}
+#| label: recreate-me-3
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-3-1.png")
+```
+
+This shows what happens to the predicted number of total minutes as a typical player increases the number of games they've played—unsurprisingly, it goes up! This is actually the same stuff we saw in the coefficient plot—the slope for `games_played` here is ≈15, so total minutes increases by 15 for each game played; the coefficient for `starter` is 172, so the line is 172 minutes higher for starters.
+
+Use `predictions()` (from the {marginaleffects} package) and `geom_line()` and `geom_ribbon()` in the chunk below to re-create the predictions plot.
+
+- Refer to the ["Predicted values and marginal effects in 2026"](https://datavizsp26.classes.andrewheiss.com/example/07-example.html#predicted-values-and-marginal-effects-in-2026) section of the example page!
+
+- You'll need to create a dataset of predicted values first. You'll do something like this:
+
+  ```r
+  my_predictions <- predictions(
+    NAME_OF_YOUR_MODEL,
+    newdata = datagrid(
+      games_played = seq(1, 34, by = 1),
+      starter = c(FALSE, TRUE)
+    )
+  )
+  ```
+
+- To get the color and fill correct on both the line and the ribbon, you'll need to use the fill aesthetic in `geom_ribbon()` and the color aesthetic in `geom_line()`.
+
+```{r}
+#| label: recreate-me-3
+
+# Do stuff here
+```
+
+
+# Task 3: Extension
+
+Try one of these things for your extension:
+
+- **Different model**: Interact `starter` with `games_played` in the model (do this by multiplying the variables instead of adding them, like `starter * games played`) and make a predicted values plot. Interpret the plot. What's different about this version of the model?
+- **Correlogram**: Create a correlogram heatmap, either with `geom_tile()` or with points sized by the correlation. Use any variables you want from `wnba`.
+- **Anything else**: The theme for this week is relationships, so do something neat to show how different variables are related in the `wnba` data.
+
+**This is your chance to play around and explore.**
+
+```{r}
+#| label: extension
+
+# Do stuff here
+```

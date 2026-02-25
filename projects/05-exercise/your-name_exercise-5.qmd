@@ -1,0 +1,177 @@
+---
+title: "Themes"
+subtitle: "Exercise 5 --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  typst:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+# Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+# Task 2: Cheese!
+
+## Data description and cleaning
+
+This data comes from [cheese.com](https://cheese.com/), and it was a [#TidyTuesday dataset in June 2024](https://github.com/rfordatascience/tidytuesday/tree/main/data/2024/2024-06-04)
+
+There are 19 columns, and [they're documented here](https://github.com/rfordatascience/tidytuesday/tree/main/data/2024/2024-06-04#data-dictionary)---make sure you consult that page!
+
+The code below loads and cleans the data, resulting in a data frame named `cheeses_milk_country` that contains the number of cheeses made by the top 8 cheese-producing countries, across three types of milk. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: load-clean-data
+#| warning: false
+#| message: false
+
+library(tidyverse)
+
+# Load the full data
+cheeses_raw <- read_csv("data/cheeses.csv")
+
+# The milk and country columns contain multiple values, like "cow, goat" and 
+# "Italy, France". separate_longer_delim() splits those into separate rows 
+# based on the ",", so that "cow, goat" would turn into one row for cow and one 
+# for goat, and so on
+cheeses <- cheeses_raw |> 
+  separate_longer_delim(milk, delim = ", ") |> 
+  separate_longer_delim(country, delim = ", ") |> 
+  # Technically England, Scotland, GB, and the UK are all different things, but
+  # for the sake of visualization, we can lump them all together
+  mutate(country = case_match(country,
+    "England" ~ "United Kingdom",
+    "Great Britain" ~ "United Kingdom",
+    "Scotland" ~ "United Kingdom",
+    .default = country
+  ))
+
+# Find the most common milk types
+top_milk_types <- cheeses |> 
+  group_by(milk) |> 
+  summarize(total = n()) |> 
+  filter(total > 100)
+
+# Find the most common countries
+top_countries <- cheeses |> 
+  group_by(country) |> 
+  summarize(total = n()) |> 
+  filter(total > 30)
+
+# Calculate the number of milk types across the most common countries
+cheeses_milk_country <- cheeses |> 
+  filter(milk %in% top_milk_types$milk, country %in% top_countries$country) |> 
+  group_by(milk, country) |> 
+  summarize(total = n()) |> 
+  ungroup() |> 
+  # Capitalize the milk types
+  mutate(milk = str_to_title(milk)) |> 
+  # Sort by country and milk type and lock in the order for better plotting 
+  arrange(desc(total), milk) |> 
+  mutate(across(c(country, milk), \(x) fct_inorder(x)))
+cheeses_milk_country
+```
+
+
+## Base plot
+
+Here's a basic bar chart showing the counts of countries and milk types. It's stored as an object named `base_plot`:
+
+```{r}
+base_plot <- ggplot(
+  cheeses_milk_country,
+  aes(x = total, y = fct_rev(country), fill = milk)
+) +
+  geom_col() +
+  guides(fill = "none") +
+  # These colors come from ColorBrewer 2:
+  # https://colorbrewer2.org/#type=qualitative&scheme=Set1&n=3
+  scale_fill_brewer(palette = "Set1") +
+  facet_wrap(vars(milk))
+base_plot
+```
+
+
+### Recreate nice plot
+
+Run the code chunk below to see a plot.
+
+```{r}
+#| label: recreate-me-1
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-plot-1-1.png")
+```
+
+Your job is to use `labs()` and `theme()` to recreate this plot:
+
+**Some helpful big hints:**
+
+- The image is 6 inches wide and 3 inches tall. Use chunk options like `fig-width` and `fig-height` to control the dimensions (see <https://datavizsp26.classes.andrewheiss.com/resource/quarto.html#chunk-options>)
+- Use `labs()` to modify the following things: `x`, `y`, `title`, `subtitle`, and `caption`
+- Use `theme_bw()`
+- Use `theme()` to adjust these things:
+  - Strip text
+  - Axis title
+  - Panel grid major
+  - Plot title
+  - Plot subtitle
+  - Plot caption
+
+In the end, your code will look something like this:
+
+```{.r}
+base_plot + 
+  labs(x = "BLAH", title = "BLAH") +
+  theme_bw() +
+  theme(
+    strip.text = element_text(BLAH),
+    axis.title = element_text(BLAH)
+  )
+```
+
+**MAKE SURE** you use [the theme resources and cheatsheets from the content page](https://datavizsp26.classes.andrewheiss.com/content/05-content.html#readings-you-should-glance-through-and-use-as-resources). Also [consider using {ggthemeassist}](https://datavizsp26.classes.andrewheiss.com/example/05-example.html#bonus-ggthemeassist) to help with the different settings.
+
+```{r}
+#| label: recreation-plot-1
+
+# Do stuff here
+```
+
+# Task 3: ~~Extension~~ Ugly plot
+
+For your extension, forget all the wonderful CRAP design principles you just learned and try your hardest to **make the ugliest plot in the world**. Take `base_plot` and create the worst, ugliest, least CRAPful plot ever.
+
+Change the colors, modify the theme, add labels, etc. and make this ugly. You can leave the `geom_col()` as is, or you can mess with it too (or even change it to a pie chart or heatmap or something if you feel up to it).
+
+**This is your chance to play around and explore.**
+
+```{r}
+#| label: ugly-extension
+
+# Do stuff here
+
+base_plot +
+  theme()
+```

@@ -1,0 +1,92 @@
+---
+title: "Tasks 1 & 2: Interactive plots"
+toc: true
+---
+
+## Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+## Task 2: Interactive plot
+
+The code below loads and cleans the data. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: setup
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(plotly)
+
+# Technically this isn't necessary; you can run `penguins` and start using it 
+# right away since it's a core dataset. This code just puts the dataset in the 
+# environment panel so it's easier to see what's in there.
+penguins <- datasets::penguins
+
+# 11 rows are missing data on penguin sex, so we drop them
+penguins <- penguins |> 
+  drop_na(sex)
+```
+
+### Recreate plot
+
+Use `ggplot()` and `ggplotly()` to recreate [the interactive plot from the instructions website](https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/interactive-plots.html).
+
+```{r}
+# Do that here
+
+```
+
+**Some hints!**
+
+- Don't try to make this interactive right away! [Just like in the example](https://datavizsp26.classes.andrewheiss.com/example/11-example.html){target="_blank"}, first make a regular static version before feeding it into `ggplotly()`.
+- The points are colored with three of R's built-in colors: `darkorange`, `purple`, and `cyan4`. Use `scale_color_manual()` to change the default colors to these (using something like `values = c("darkorange", "purple", "cyan4")`).
+- The points are a little bigger than the default size. Use `size = BLAH` in `geom_point()` to adjust them (but make sure you don't use that inside `aes()`!).
+- Notice that the points use different shapes for each species as well as color!
+- The plot uses `theme_light()`.
+- The interactive tooltip should be structured like this:
+
+  ```default
+  Species (sex on island)
+  Bill depth: X mm
+  Bill length: X mm
+  ```
+
+  You'll need to make a new column in the penguins dataset named `label` (or whatever you want to call it) that builds that label using that template. [The example will be useful](https://datavizsp26.classes.andrewheiss.com/example/11-example.html#including-more-information-in-the-tooltip){target="_blank"}.
+
+  ::: {.callout-tip collapse="true"}
+  ### Bonus tip!
+
+  In the example, I use `paste0()` to build the label text, like this:
+
+  ```{r}
+  penguins |> 
+    mutate(fancy_label = paste0(species, " (", sex, " on ", island, " Island)")) |> 
+    select(fancy_label) |> head(2)
+  ```
+
+  …and that works, but it's *super annoying* to switch between variable names and text and to keep track of where spaces need to be in the text.
+
+  To make life easier, try out [the {glue} package](https://glue.tidyverse.org/){target="_blank"}, which is installed as part of the tidyverse, but not loaded with `library(tidyverse)`. {glue} lets you substitute variable values directly in text without needing to separate everything with commas. Anything inside curly braces `{}` will get replaced with the value in the data:
+
+  ```{r}
+  library(glue)
+
+  penguins |> 
+    mutate(fancy_label = glue("{species} ({sex} on {island} Island)")) |> 
+    select(fancy_label) |> head(2)
+  ```
+
+  :::

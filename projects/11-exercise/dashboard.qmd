@@ -1,0 +1,25 @@
+---
+title: Dashboard
+format: dashboard
+---
+
+```{r}
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(plotly)
+library(leaflet)
+
+# Technically this isn't necessary; you can run `penguins` and start using it 
+# right away since it's a core dataset. This code just puts the dataset in the 
+# environment panel so it's easier to see what's in there.
+penguins <- datasets::penguins
+
+# 11 rows are missing data on penguin sex, so we drop them
+penguins <- penguins |> 
+  drop_na(sex)
+```
+
+<!-- Follow the instructions and hints at https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/instructions.html#task-3-dashboard -->
+<!-- Add whatever chunks, headings, rows, and columns below to recreate the dashboard at https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/dashboard.html -->

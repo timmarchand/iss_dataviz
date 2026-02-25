@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Interactivity</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Andrew Heiss" />
+    <meta name="date" content="2026-02-25" />
+    <script src="libs/header-attrs-2.30/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view-0.2.6/tile-view.js"></script>
+    <script src="libs/clipboard-2.0.6/clipboard.min.js"></script>
+    <link href="libs/shareon-1.4.1/shareon.min.css" rel="stylesheet" />
+    <script src="libs/shareon-1.4.1/shareon.min.js"></script>
+    <link href="libs/xaringanExtra-shareagain-0.2.6/shareagain.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-shareagain-0.2.6/shareagain.js"></script>
+    <link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+    <script src="libs/plotly-binding-4.11.0/plotly.js"></script>
+    <script src="libs/typedarray-0.1/typedarray.min.js"></script>
+    <script src="libs/jquery-3.5.1/jquery.min.js"></script>
+    <link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="css/ath-slides.css" type="text/css" />
+    <link rel="stylesheet" href="css/ath-inferno-fonts.css" type="text/css" />
+    <link rel="stylesheet" href="css/animate.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+
+
+
+
+class: center middle main-title section-title-4
+
+# Interactivity
+
+.class-info[
+
+**Session 11**
+
+.light[PMAP 8551/4551: Data Visualization with R&lt;br&gt;
+Andrew Young School of Policy Studies&lt;br&gt;
+Spring 2026]
+
+]
+
+---
+
+name: outline
+class: title title-inv-7
+
+# Plan for today
+
+--
+
+.box-6.medium.sp-after[Making interactive graphics]
+
+--
+
+.box-2.medium.sp-after[Sharing content]
+
+---
+
+layout: false
+name: interactive-graphs
+class: center middle section-title section-title-6 animated fadeIn
+
+# Making interactive graphics
+
+---
+
+layout: true
+class: title title-6
+
+---
+
+# Three general methods
+
+.box-inv-6.medium[Single plots with {plotly}]
+
+.box-6.small.sp-after[Easy!]
+
+--
+
+.box-inv-6.medium[Dashboards with {flexdashboard}]
+
+.box-6.small.sp-after[Slightly more complicated]
+
+--
+
+.box-inv-6.medium[Complete interactive apps with Shiny]
+
+.box-6.small[Super complicated!]
+
+---
+
+# Single plots with plotly
+
+.box-inv-6[[Plotly](https://plotly.com/graphing-libraries/) is special software for&lt;br&gt;creating interactive plots with JavaScript]
+
+--
+
+.box-inv-6.sp-after[No knowledge of JavaScript needed!]
+
+--
+
+.box-6[`ggplotly()` in the {plotly} R package translates&lt;br&gt;between R and Javascript for you!]
+
+---
+
+# Plotly
+
+.left-code[
+
+``` r
+library(gapminder)
+library(plotly)
+
+gapminder_2007 &lt;- filter(gapminder, 
+                         year == 2007)
+
+my_plot &lt;- ggplot(
+  data = gapminder_2007,
+  mapping = aes(x = gdpPercap, y = lifeExp, 
+                color = continent)) +
+  geom_point() +
+  scale_x_log10() +
+  theme_minimal()
+```
+
+
+``` r
+ggplotly(my_plot)
+```
+]
+
+.pull-right.small-code[
+<div class="plotly html-widget html-fill-item" id="htmlwidget-1b4ff99564eb6e8884a5" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-1b4ff99564eb6e8884a5">{"x":{"data":[{"x":[3.7940254450966644,3.6809906556268164,3.1587498285200959,4.0993301562976825,3.0853023521971163,2.6335398473202094,3.3100759930113757,2.8488148736349985,3.2314858313133699,2.9939420450679588,2.443344140046372,3.5602125331291146,3.1888582353745463,3.3185811659560813,3.7467261069384517,4.0847224390037145,2.8071083194109296,2.8393558343569567,4.120787226641542,2.8766506063906259,3.1230701584328973,2.9743524119826992,2.7628523540039867,3.1653183196828425,3.195714676047237,2.6175322269121151,4.0812572446605149,3.0190207459573766,2.8804419458658828,3.0181100381010961,3.2560322165243099,4.0396913096789095,3.5820832842930348,2.9157614843495785,3.6822408118633683,2.7921653017164396,3.3040545722906871,3.884802303432406,2.9360553118387509,3.2036950046605677,3.2336235137236495,2.9357796251727324,2.9666771427490164,3.9670637023386344,3.4153732150271123,3.6545115842375888,3.0443367476975203,2.9459459204926648,3.8508252467512323,3.0238202200422353,3.1042178448294138,2.6718291573166399],"y":[72.301000000000002,42.731000000000002,56.728000000000002,50.728000000000002,52.295000000000002,49.579999999999998,50.43,44.741,50.651000000000003,65.152000000000001,46.462000000000003,55.322000000000003,48.328000000000003,54.790999999999997,71.337999999999994,51.579000000000001,58.039999999999999,52.947000000000003,56.734999999999999,59.448,60.021999999999998,56.006999999999998,46.387999999999998,54.109999999999999,42.591999999999999,45.677999999999997,73.951999999999998,59.442999999999998,48.302999999999997,54.466999999999999,64.164000000000001,72.801000000000002,71.164000000000001,42.082000000000001,52.905999999999999,56.866999999999997,46.859000000000002,76.441999999999993,46.241999999999997,65.528000000000006,63.061999999999998,42.567999999999998,48.158999999999999,49.338999999999999,58.555999999999997,39.613,52.517000000000003,58.420000000000002,73.923000000000002,51.542000000000002,42.384,43.487000000000002],"text":["gdpPercap:  6223.3675<br />lifeExp: 72.301<br />continent: Africa","gdpPercap:  4797.2313<br />lifeExp: 42.731<br />continent: Africa","gdpPercap:  1441.2849<br />lifeExp: 56.728<br />continent: Africa","gdpPercap: 12569.8518<br />lifeExp: 50.728<br />continent: Africa","gdpPercap:  1217.0330<br />lifeExp: 52.295<br />continent: Africa","gdpPercap:   430.0707<br />lifeExp: 49.580<br />continent: Africa","gdpPercap:  2042.0952<br />lifeExp: 50.430<br />continent: Africa","gdpPercap:   706.0165<br />lifeExp: 44.741<br />continent: Africa","gdpPercap:  1704.0637<br />lifeExp: 50.651<br />continent: Africa","gdpPercap:   986.1479<br />lifeExp: 65.152<br />continent: Africa","gdpPercap:   277.5519<br />lifeExp: 46.462<br />continent: Africa","gdpPercap:  3632.5578<br />lifeExp: 55.322<br />continent: Africa","gdpPercap:  1544.7501<br />lifeExp: 48.328<br />continent: Africa","gdpPercap:  2082.4816<br />lifeExp: 54.791<br />continent: Africa","gdpPercap:  5581.1810<br />lifeExp: 71.338<br />continent: Africa","gdpPercap: 12154.0897<br />lifeExp: 51.579<br />continent: Africa","gdpPercap:   641.3695<br />lifeExp: 58.040<br />continent: Africa","gdpPercap:   690.8056<br />lifeExp: 52.947<br />continent: Africa","gdpPercap: 13206.4845<br />lifeExp: 56.735<br />continent: Africa","gdpPercap:   752.7497<br />lifeExp: 59.448<br />continent: Africa","gdpPercap:  1327.6089<br />lifeExp: 60.022<br />continent: Africa","gdpPercap:   942.6542<br />lifeExp: 56.007<br />continent: Africa","gdpPercap:   579.2317<br />lifeExp: 46.388<br />continent: Africa","gdpPercap:  1463.2493<br />lifeExp: 54.110<br />continent: Africa","gdpPercap:  1569.3314<br />lifeExp: 42.592<br />continent: Africa","gdpPercap:   414.5073<br />lifeExp: 45.678<br />continent: Africa","gdpPercap: 12057.4993<br />lifeExp: 73.952<br />continent: Africa","gdpPercap:  1044.7701<br />lifeExp: 59.443<br />continent: Africa","gdpPercap:   759.3499<br />lifeExp: 48.303<br />continent: Africa","gdpPercap:  1042.5816<br />lifeExp: 54.467<br />continent: Africa","gdpPercap:  1803.1515<br />lifeExp: 64.164<br />continent: Africa","gdpPercap: 10956.9911<br />lifeExp: 72.801<br />continent: Africa","gdpPercap:  3820.1752<br />lifeExp: 71.164<br />continent: Africa","gdpPercap:   823.6856<br />lifeExp: 42.082<br />continent: Africa","gdpPercap:  4811.0604<br />lifeExp: 52.906<br />continent: Africa","gdpPercap:   619.6769<br />lifeExp: 56.867<br />continent: Africa","gdpPercap:  2013.9773<br />lifeExp: 46.859<br />continent: Africa","gdpPercap:  7670.1226<br />lifeExp: 76.442<br />continent: Africa","gdpPercap:   863.0885<br />lifeExp: 46.242<br />continent: Africa","gdpPercap:  1598.4351<br />lifeExp: 65.528<br />continent: Africa","gdpPercap:  1712.4721<br />lifeExp: 63.062<br />continent: Africa","gdpPercap:   862.5408<br />lifeExp: 42.568<br />continent: Africa","gdpPercap:   926.1411<br />lifeExp: 48.159<br />continent: Africa","gdpPercap:  9269.6578<br />lifeExp: 49.339<br />continent: Africa","gdpPercap:  2602.3950<br />lifeExp: 58.556<br />continent: Africa","gdpPercap:  4513.4806<br />lifeExp: 39.613<br />continent: Africa","gdpPercap:  1107.4822<br />lifeExp: 52.517<br />continent: Africa","gdpPercap:   882.9699<br />lifeExp: 58.420<br />continent: Africa","gdpPercap:  7092.9230<br />lifeExp: 73.923<br />continent: Africa","gdpPercap:  1056.3801<br />lifeExp: 51.542<br />continent: Africa","gdpPercap:  1271.2116<br />lifeExp: 42.384<br />continent: Africa","gdpPercap:   469.7093<br />lifeExp: 43.487<br />continent: Africa"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Africa","legendgroup":"Africa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4.1065097720176862,3.5823062593168782,3.957406173408569,4.5601366924251883,4.1196398143870931,3.8455061110473117,3.9843049975871763,3.9517309708016475,3.7799840633073747,3.8371629195761865,3.7580298117512663,3.7148366998460376,3.0797733480287044,3.550024106620056,3.8645633037284566,4.0783688975107708,3.4392254438054342,3.991632953509189,3.6204315729333021,3.8697540590018766,4.2862028478952521,4.2554777630339444,4.6329798832790043,4.0257752637018411,4.0575065679833457],"y":[75.319999999999993,65.554000000000002,72.390000000000001,80.653000000000006,78.552999999999997,72.888999999999996,78.781999999999996,78.272999999999996,72.234999999999999,74.994,71.878,70.259,60.915999999999997,70.197999999999993,72.566999999999993,76.194999999999993,72.899000000000001,75.537000000000006,71.751999999999995,71.421000000000006,78.745999999999995,69.819000000000003,78.242000000000004,76.384,73.747],"text":["gdpPercap: 12779.3796<br />lifeExp: 75.320<br />continent: Americas","gdpPercap:  3822.1371<br />lifeExp: 65.554<br />continent: Americas","gdpPercap:  9065.8008<br />lifeExp: 72.390<br />continent: Americas","gdpPercap: 36319.2350<br />lifeExp: 80.653<br />continent: Americas","gdpPercap: 13171.6388<br />lifeExp: 78.553<br />continent: Americas","gdpPercap:  7006.5804<br />lifeExp: 72.889<br />continent: Americas","gdpPercap:  9645.0614<br />lifeExp: 78.782<br />continent: Americas","gdpPercap:  8948.1029<br />lifeExp: 78.273<br />continent: Americas","gdpPercap:  6025.3748<br />lifeExp: 72.235<br />continent: Americas","gdpPercap:  6873.2623<br />lifeExp: 74.994<br />continent: Americas","gdpPercap:  5728.3535<br />lifeExp: 71.878<br />continent: Americas","gdpPercap:  5186.0500<br />lifeExp: 70.259<br />continent: Americas","gdpPercap:  1201.6372<br />lifeExp: 60.916<br />continent: Americas","gdpPercap:  3548.3308<br />lifeExp: 70.198<br />continent: Americas","gdpPercap:  7320.8803<br />lifeExp: 72.567<br />continent: Americas","gdpPercap: 11977.5750<br />lifeExp: 76.195<br />continent: Americas","gdpPercap:  2749.3210<br />lifeExp: 72.899<br />continent: Americas","gdpPercap:  9809.1856<br />lifeExp: 75.537<br />continent: Americas","gdpPercap:  4172.8385<br />lifeExp: 71.752<br />continent: Americas","gdpPercap:  7408.9056<br />lifeExp: 71.421<br />continent: Americas","gdpPercap: 19328.7090<br />lifeExp: 78.746<br />continent: Americas","gdpPercap: 18008.5092<br />lifeExp: 69.819<br />continent: Americas","gdpPercap: 42951.6531<br />lifeExp: 78.242<br />continent: Americas","gdpPercap: 10611.4630<br />lifeExp: 76.384<br />continent: Americas","gdpPercap: 11415.8057<br />lifeExp: 73.747<br />continent: Americas"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"Americas","legendgroup":"Americas","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.9888176454912858,4.4741586701859664,3.1434063610570009,3.2339547372751722,3.6954041667466049,4.5990636726886356,3.3895577312128795,3.5490831898821575,4.0646718823630357,3.6504106831196688,4.406936435530084,4.5004569709846161,3.6550866594992835,3.2022336270366805,4.3682522837381041,4.6749253140699576,4.0195756382230385,4.095227107013149,3.4907690059237622,2.9749719942980688,3.0379679438446519,4.3486201061894318,3.4159656754035375,3.5038561648270914,4.3355548175826542,4.6734188707962172,3.5988009435983197,3.6216485631534296,4.4581583777244909,3.8726454573379581,3.3876703191654678,3.4807755960325997,3.3580814739680283],"y":[43.828000000000003,75.635000000000005,64.061999999999998,59.722999999999999,72.960999999999999,82.207999999999998,64.697999999999993,70.650000000000006,70.963999999999999,59.545000000000002,80.745000000000005,82.602999999999994,72.534999999999997,67.296999999999997,78.623000000000005,77.587999999999994,71.992999999999995,74.241,66.802999999999997,62.069000000000003,63.784999999999997,75.640000000000001,65.483000000000004,71.688000000000002,72.777000000000001,79.971999999999994,72.396000000000001,74.143000000000001,78.400000000000006,70.616,74.248999999999995,73.421999999999997,62.698],"text":["gdpPercap:   974.5803<br />lifeExp: 43.828<br />continent: Asia","gdpPercap: 29796.0483<br />lifeExp: 75.635<br />continent: Asia","gdpPercap:  1391.2538<br />lifeExp: 64.062<br />continent: Asia","gdpPercap:  1713.7787<br />lifeExp: 59.723<br />continent: Asia","gdpPercap:  4959.1149<br />lifeExp: 72.961<br />continent: Asia","gdpPercap: 39724.9787<br />lifeExp: 82.208<br />continent: Asia","gdpPercap:  2452.2104<br />lifeExp: 64.698<br />continent: Asia","gdpPercap:  3540.6516<br />lifeExp: 70.650<br />continent: Asia","gdpPercap: 11605.7145<br />lifeExp: 70.964<br />continent: Asia","gdpPercap:  4471.0619<br />lifeExp: 59.545<br />continent: Asia","gdpPercap: 25523.2771<br />lifeExp: 80.745<br />continent: Asia","gdpPercap: 31656.0681<br />lifeExp: 82.603<br />continent: Asia","gdpPercap:  4519.4612<br />lifeExp: 72.535<br />continent: Asia","gdpPercap:  1593.0655<br />lifeExp: 67.297<br />continent: Asia","gdpPercap: 23348.1397<br />lifeExp: 78.623<br />continent: Asia","gdpPercap: 47306.9898<br />lifeExp: 77.588<br />continent: Asia","gdpPercap: 10461.0587<br />lifeExp: 71.993<br />continent: Asia","gdpPercap: 12451.6558<br />lifeExp: 74.241<br />continent: Asia","gdpPercap:  3095.7723<br />lifeExp: 66.803<br />continent: Asia","gdpPercap:   944.0000<br />lifeExp: 62.069<br />continent: Asia","gdpPercap:  1091.3598<br />lifeExp: 63.785<br />continent: Asia","gdpPercap: 22316.1929<br />lifeExp: 75.640<br />continent: Asia","gdpPercap:  2605.9476<br />lifeExp: 65.483<br />continent: Asia","gdpPercap:  3190.4810<br />lifeExp: 71.688<br />continent: Asia","gdpPercap: 21654.8319<br />lifeExp: 72.777<br />continent: Asia","gdpPercap: 47143.1796<br />lifeExp: 79.972<br />continent: Asia","gdpPercap:  3970.0954<br />lifeExp: 72.396<br />continent: Asia","gdpPercap:  4184.5481<br />lifeExp: 74.143<br />continent: Asia","gdpPercap: 28718.2768<br />lifeExp: 78.400<br />continent: Asia","gdpPercap:  7458.3963<br />lifeExp: 70.616<br />continent: Asia","gdpPercap:  2441.5764<br />lifeExp: 74.249<br />continent: Asia","gdpPercap:  3025.3498<br />lifeExp: 73.422<br />continent: Asia","gdpPercap:  2280.7699<br />lifeExp: 62.698<br />continent: Asia"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"Asia","legendgroup":"Asia","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3.7735692087621691,4.5578258006221848,4.5275345915133105,3.8719404594797928,4.0286034909483179,4.1649242825131747,4.3585688446278343,4.5475091108168488,4.5212307459814749,4.4838726922507623,4.5074561155365247,4.4399388911990529,4.2554882582210949,4.5584780356339154,4.6093381996914395,4.4559059795027833,3.9663246195778949,4.5658234281049346,4.6933504280025318,4.1872364943512697,4.3119582019159575,4.0337644468812863,3.9906289409349966,4.271337680163577,4.4110850532178922,4.4597100052953031,4.5296837260525233,4.574105601810623,3.927281872119107,4.5211807429313629],"y":[76.423000000000002,79.828999999999994,79.441000000000003,74.852000000000004,73.004999999999995,75.748000000000005,76.486000000000004,78.331999999999994,79.313000000000002,80.656999999999996,79.406000000000006,79.483000000000004,73.337999999999994,81.757000000000005,78.885000000000005,80.546000000000006,74.543000000000006,79.762,80.195999999999998,75.563000000000002,78.097999999999999,72.475999999999999,74.001999999999995,74.662999999999997,77.926000000000002,80.941000000000003,80.884,81.700999999999993,71.777000000000001,79.424999999999997],"text":["gdpPercap:  5937.0295<br />lifeExp: 76.423<br />continent: Europe","gdpPercap: 36126.4927<br />lifeExp: 79.829<br />continent: Europe","gdpPercap: 33692.6051<br />lifeExp: 79.441<br />continent: Europe","gdpPercap:  7446.2988<br />lifeExp: 74.852<br />continent: Europe","gdpPercap: 10680.7928<br />lifeExp: 73.005<br />continent: Europe","gdpPercap: 14619.2227<br />lifeExp: 75.748<br />continent: Europe","gdpPercap: 22833.3085<br />lifeExp: 76.486<br />continent: Europe","gdpPercap: 35278.4187<br />lifeExp: 78.332<br />continent: Europe","gdpPercap: 33207.0844<br />lifeExp: 79.313<br />continent: Europe","gdpPercap: 30470.0167<br />lifeExp: 80.657<br />continent: Europe","gdpPercap: 32170.3744<br />lifeExp: 79.406<br />continent: Europe","gdpPercap: 27538.4119<br />lifeExp: 79.483<br />continent: Europe","gdpPercap: 18008.9444<br />lifeExp: 73.338<br />continent: Europe","gdpPercap: 36180.7892<br />lifeExp: 81.757<br />continent: Europe","gdpPercap: 40675.9964<br />lifeExp: 78.885<br />continent: Europe","gdpPercap: 28569.7197<br />lifeExp: 80.546<br />continent: Europe","gdpPercap:  9253.8961<br />lifeExp: 74.543<br />continent: Europe","gdpPercap: 36797.9333<br />lifeExp: 79.762<br />continent: Europe","gdpPercap: 49357.1902<br />lifeExp: 80.196<br />continent: Europe","gdpPercap: 15389.9247<br />lifeExp: 75.563<br />continent: Europe","gdpPercap: 20509.6478<br />lifeExp: 78.098<br />continent: Europe","gdpPercap: 10808.4756<br />lifeExp: 72.476<br />continent: Europe","gdpPercap:  9786.5347<br />lifeExp: 74.002<br />continent: Europe","gdpPercap: 18678.3144<br />lifeExp: 74.663<br />continent: Europe","gdpPercap: 25768.2576<br />lifeExp: 77.926<br />continent: Europe","gdpPercap: 28821.0637<br />lifeExp: 80.941<br />continent: Europe","gdpPercap: 33859.7484<br />lifeExp: 80.884<br />continent: Europe","gdpPercap: 37506.4191<br />lifeExp: 81.701<br />continent: Europe","gdpPercap:  8458.2764<br />lifeExp: 71.777<br />continent: Europe","gdpPercap: 33203.2613<br />lifeExp: 79.425<br />continent: Europe"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"Europe","legendgroup":"Europe","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4.5370047214526892,4.4011421122881123],"y":[81.234999999999999,80.203999999999994],"text":["gdpPercap: 34435.3674<br />lifeExp: 81.235<br />continent: Oceania","gdpPercap: 25185.0091<br />lifeExp: 80.204<br />continent: Oceania"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"Oceania","legendgroup":"Oceania","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":37.260273972602747},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2.330843825648564,4.8058507424003398],"tickmode":"array","ticktext":["300","1000","3000","10000","30000"],"tickvals":[2.4771212547196626,3,3.4771212547196626,4,4.4771212547196626],"categoryorder":"array","categoryarray":["300","1000","3000","10000","30000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"gdpPercap","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[37.463499999999996,84.752499999999998],"tickmode":"array","ticktext":["40","50","60","70","80"],"tickvals":[40,50,60,70,80],"categoryorder":"array","categoryarray":["40","50","60","70","80"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"lifeExp","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"continent","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"1737064d9a5d2":{"x":{},"y":{},"colour":{},"type":"scatter"}},"cur_data":"1737064d9a5d2","visdat":{"1737064d9a5d2":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+# Plotly tooltips
+
+.left-code[
+
+``` r
+my_plot &lt;- ggplot(
+  data = gapminder_2007,
+  mapping = aes(x = gdpPercap, y = lifeExp, 
+                color = continent)) +
+* geom_point(aes(text = country)) +
+  scale_x_log10() +
+  theme_minimal()
+```
+
+
+``` r
+*interactive_plot &lt;- ggplotly(
+* my_plot, tooltip = "text"
+*) 
+*interactive_plot
+```
+]
+
+.pull-right.small-code[
+<div class="plotly html-widget html-fill-item" id="htmlwidget-8f836166d559454ecd73" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-8f836166d559454ecd73">{"x":{"data":[{"x":[3.7940254450966644,3.6809906556268164,3.1587498285200959,4.0993301562976825,3.0853023521971163,2.6335398473202094,3.3100759930113757,2.8488148736349985,3.2314858313133699,2.9939420450679588,2.443344140046372,3.5602125331291146,3.1888582353745463,3.3185811659560813,3.7467261069384517,4.0847224390037145,2.8071083194109296,2.8393558343569567,4.120787226641542,2.8766506063906259,3.1230701584328973,2.9743524119826992,2.7628523540039867,3.1653183196828425,3.195714676047237,2.6175322269121151,4.0812572446605149,3.0190207459573766,2.8804419458658828,3.0181100381010961,3.2560322165243099,4.0396913096789095,3.5820832842930348,2.9157614843495785,3.6822408118633683,2.7921653017164396,3.3040545722906871,3.884802303432406,2.9360553118387509,3.2036950046605677,3.2336235137236495,2.9357796251727324,2.9666771427490164,3.9670637023386344,3.4153732150271123,3.6545115842375888,3.0443367476975203,2.9459459204926648,3.8508252467512323,3.0238202200422353,3.1042178448294138,2.6718291573166399],"y":[72.301000000000002,42.731000000000002,56.728000000000002,50.728000000000002,52.295000000000002,49.579999999999998,50.43,44.741,50.651000000000003,65.152000000000001,46.462000000000003,55.322000000000003,48.328000000000003,54.790999999999997,71.337999999999994,51.579000000000001,58.039999999999999,52.947000000000003,56.734999999999999,59.448,60.021999999999998,56.006999999999998,46.387999999999998,54.109999999999999,42.591999999999999,45.677999999999997,73.951999999999998,59.442999999999998,48.302999999999997,54.466999999999999,64.164000000000001,72.801000000000002,71.164000000000001,42.082000000000001,52.905999999999999,56.866999999999997,46.859000000000002,76.441999999999993,46.241999999999997,65.528000000000006,63.061999999999998,42.567999999999998,48.158999999999999,49.338999999999999,58.555999999999997,39.613,52.517000000000003,58.420000000000002,73.923000000000002,51.542000000000002,42.384,43.487000000000002],"text":["Algeria","Angola","Benin","Botswana","Burkina Faso","Burundi","Cameroon","Central African Republic","Chad","Comoros","Congo, Dem. Rep.","Congo, Rep.","Cote d'Ivoire","Djibouti","Egypt","Equatorial Guinea","Eritrea","Ethiopia","Gabon","Gambia","Ghana","Guinea","Guinea-Bissau","Kenya","Lesotho","Liberia","Libya","Madagascar","Malawi","Mali","Mauritania","Mauritius","Morocco","Mozambique","Namibia","Niger","Nigeria","Reunion","Rwanda","Sao Tome and Principe","Senegal","Sierra Leone","Somalia","South Africa","Sudan","Swaziland","Tanzania","Togo","Tunisia","Uganda","Zambia","Zimbabwe"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(248,118,109,1)"}},"hoveron":"points","name":"Africa","legendgroup":"Africa","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4.1065097720176862,3.5823062593168782,3.957406173408569,4.5601366924251883,4.1196398143870931,3.8455061110473117,3.9843049975871763,3.9517309708016475,3.7799840633073747,3.8371629195761865,3.7580298117512663,3.7148366998460376,3.0797733480287044,3.550024106620056,3.8645633037284566,4.0783688975107708,3.4392254438054342,3.991632953509189,3.6204315729333021,3.8697540590018766,4.2862028478952521,4.2554777630339444,4.6329798832790043,4.0257752637018411,4.0575065679833457],"y":[75.319999999999993,65.554000000000002,72.390000000000001,80.653000000000006,78.552999999999997,72.888999999999996,78.781999999999996,78.272999999999996,72.234999999999999,74.994,71.878,70.259,60.915999999999997,70.197999999999993,72.566999999999993,76.194999999999993,72.899000000000001,75.537000000000006,71.751999999999995,71.421000000000006,78.745999999999995,69.819000000000003,78.242000000000004,76.384,73.747],"text":["Argentina","Bolivia","Brazil","Canada","Chile","Colombia","Costa Rica","Cuba","Dominican Republic","Ecuador","El Salvador","Guatemala","Haiti","Honduras","Jamaica","Mexico","Nicaragua","Panama","Paraguay","Peru","Puerto Rico","Trinidad and Tobago","United States","Uruguay","Venezuela"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(163,165,0,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(163,165,0,1)"}},"hoveron":"points","name":"Americas","legendgroup":"Americas","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[2.9888176454912858,4.4741586701859664,3.1434063610570009,3.2339547372751722,3.6954041667466049,4.5990636726886356,3.3895577312128795,3.5490831898821575,4.0646718823630357,3.6504106831196688,4.406936435530084,4.5004569709846161,3.6550866594992835,3.2022336270366805,4.3682522837381041,4.6749253140699576,4.0195756382230385,4.095227107013149,3.4907690059237622,2.9749719942980688,3.0379679438446519,4.3486201061894318,3.4159656754035375,3.5038561648270914,4.3355548175826542,4.6734188707962172,3.5988009435983197,3.6216485631534296,4.4581583777244909,3.8726454573379581,3.3876703191654678,3.4807755960325997,3.3580814739680283],"y":[43.828000000000003,75.635000000000005,64.061999999999998,59.722999999999999,72.960999999999999,82.207999999999998,64.697999999999993,70.650000000000006,70.963999999999999,59.545000000000002,80.745000000000005,82.602999999999994,72.534999999999997,67.296999999999997,78.623000000000005,77.587999999999994,71.992999999999995,74.241,66.802999999999997,62.069000000000003,63.784999999999997,75.640000000000001,65.483000000000004,71.688000000000002,72.777000000000001,79.971999999999994,72.396000000000001,74.143000000000001,78.400000000000006,70.616,74.248999999999995,73.421999999999997,62.698],"text":["Afghanistan","Bahrain","Bangladesh","Cambodia","China","Hong Kong, China","India","Indonesia","Iran","Iraq","Israel","Japan","Jordan","Korea, Dem. Rep.","Korea, Rep.","Kuwait","Lebanon","Malaysia","Mongolia","Myanmar","Nepal","Oman","Pakistan","Philippines","Saudi Arabia","Singapore","Sri Lanka","Syria","Taiwan","Thailand","Vietnam","West Bank and Gaza","Yemen, Rep."],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,191,125,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,191,125,1)"}},"hoveron":"points","name":"Asia","legendgroup":"Asia","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[3.7735692087621691,4.5578258006221848,4.5275345915133105,3.8719404594797928,4.0286034909483179,4.1649242825131747,4.3585688446278343,4.5475091108168488,4.5212307459814749,4.4838726922507623,4.5074561155365247,4.4399388911990529,4.2554882582210949,4.5584780356339154,4.6093381996914395,4.4559059795027833,3.9663246195778949,4.5658234281049346,4.6933504280025318,4.1872364943512697,4.3119582019159575,4.0337644468812863,3.9906289409349966,4.271337680163577,4.4110850532178922,4.4597100052953031,4.5296837260525233,4.574105601810623,3.927281872119107,4.5211807429313629],"y":[76.423000000000002,79.828999999999994,79.441000000000003,74.852000000000004,73.004999999999995,75.748000000000005,76.486000000000004,78.331999999999994,79.313000000000002,80.656999999999996,79.406000000000006,79.483000000000004,73.337999999999994,81.757000000000005,78.885000000000005,80.546000000000006,74.543000000000006,79.762,80.195999999999998,75.563000000000002,78.097999999999999,72.475999999999999,74.001999999999995,74.662999999999997,77.926000000000002,80.941000000000003,80.884,81.700999999999993,71.777000000000001,79.424999999999997],"text":["Albania","Austria","Belgium","Bosnia and Herzegovina","Bulgaria","Croatia","Czech Republic","Denmark","Finland","France","Germany","Greece","Hungary","Iceland","Ireland","Italy","Montenegro","Netherlands","Norway","Poland","Portugal","Romania","Serbia","Slovak Republic","Slovenia","Spain","Sweden","Switzerland","Turkey","United Kingdom"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,176,246,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(0,176,246,1)"}},"hoveron":"points","name":"Europe","legendgroup":"Europe","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[4.5370047214526892,4.4011421122881123],"y":[81.234999999999999,80.203999999999994],"text":["Australia","New Zealand"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(231,107,243,1)","opacity":1,"size":5.6692913385826778,"symbol":"circle","line":{"width":1.8897637795275593,"color":"rgba(231,107,243,1)"}},"hoveron":"points","name":"Oceania","legendgroup":"Oceania","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":37.260273972602747},"paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[2.330843825648564,4.8058507424003398],"tickmode":"array","ticktext":["300","1000","3000","10000","30000"],"tickvals":[2.4771212547196626,3,3.4771212547196626,4,4.4771212547196626],"categoryorder":"array","categoryarray":["300","1000","3000","10000","30000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"gdpPercap","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[37.463499999999996,84.752499999999998],"tickmode":"array","ticktext":["40","50","60","70","80"],"tickvals":[40,50,60,70,80],"categoryorder":"array","categoryarray":["40","50","60","70","80"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"lifeExp","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498},"title":{"text":"continent","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"173705c179907":{"x":{},"y":{},"colour":{},"text":{},"type":"scatter"}},"cur_data":"173705c179907","visdat":{"173705c179907":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+# Works with most geoms!
+
+.left-code[
+
+``` r
+car_hist &lt;- ggplot(mpg, 
+                   aes(x = hwy)) +
+  geom_histogram(binwdith = 2, 
+                 boundary = 0, 
+                 color = "white")
+```
+
+
+``` r
+ggplotly(car_hist)
+```
+]
+
+.pull-right.small-code[
+<div class="plotly html-widget html-fill-item" id="htmlwidget-0d7db73d03839427d3b7" style="width:504px;height:504px;"></div>
+<script type="application/json" data-for="htmlwidget-0d7db73d03839427d3b7">{"x":{"data":[{"orientation":"v","width":[1.1034482758620712,1.1034482758620712,1.1034482758620676,1.1034482758620712,1.1034482758620712,1.1034482758620641,1.1034482758620712,1.1034482758620641,1.1034482758620641,1.1034482758620712,1.1034482758620641,1.1034482758620641,1.1034482758620712,1.1034482758620641,1.1034482758620712,1.1034482758620641,1.1034482758620641,1.1034482758620712,1.1034482758620641,1.1034482758620676,1.1034482758620641,1.1034482758620641,1.1034482758620641,1.1034482758620641,1.1034482758620641,1.1034482758620641,1.1034482758620641,1.1034482758620641,1.1034482758620641,1.1034482758620641],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[11.586206896551726,12.689655172413794,13.793103448275863,14.896551724137932,16,17.103448275862071,18.206896551724139,19.310344827586206,20.413793103448278,21.517241379310345,22.620689655172413,23.724137931034484,24.827586206896552,25.931034482758619,27.03448275862069,28.137931034482762,29.241379310344826,30.344827586206897,31.448275862068968,32.551724137931032,33.65517241379311,34.758620689655174,35.862068965517238,36.965517241379317,38.068965517241381,39.172413793103445,40.275862068965523,41.379310344827587,42.482758620689651,43.58620689655173],"y":[5,0,2,10,7,31,10,13,11,9,7,13,15,32,14,7,22,4,11,2,1,2,2,1,0,0,0,1,0,2],"text":["count:  5<br />hwy: 11.58621","count:  0<br />hwy: 12.68966","count:  2<br />hwy: 13.79310","count: 10<br />hwy: 14.89655","count:  7<br />hwy: 16.00000","count: 31<br />hwy: 17.10345","count: 10<br />hwy: 18.20690","count: 13<br />hwy: 19.31034","count: 11<br />hwy: 20.41379","count:  9<br />hwy: 21.51724","count:  7<br />hwy: 22.62069","count: 13<br />hwy: 23.72414","count: 15<br />hwy: 24.82759","count: 32<br />hwy: 25.93103","count: 14<br />hwy: 27.03448","count:  7<br />hwy: 28.13793","count: 22<br />hwy: 29.24138","count:  4<br />hwy: 30.34483","count: 11<br />hwy: 31.44828","count:  2<br />hwy: 32.55172","count:  1<br />hwy: 33.65517","count:  2<br />hwy: 34.75862","count:  2<br />hwy: 35.86207","count:  1<br />hwy: 36.96552","count:  0<br />hwy: 38.06897","count:  0<br />hwy: 39.17241","count:  0<br />hwy: 40.27586","count:  1<br />hwy: 41.37931","count:  0<br />hwy: 42.48276","count:  2<br />hwy: 43.58621"],"type":"bar","textposition":"none","marker":{"autocolorscale":false,"color":"rgba(89,89,89,1)","line":{"width":1.8897637795275593,"color":"rgba(255,255,255,1)"}},"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":23.305936073059364,"r":7.3059360730593621,"b":37.260273972602747,"l":37.260273972602747},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[9.3793103448275872,45.793103448275865],"tickmode":"array","ticktext":["10","20","30","40"],"tickvals":[10,20,30.000000000000004,40],"categoryorder":"array","categoryarray":["10","20","30","40"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"hwy","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.6000000000000001,33.600000000000001],"tickmode":"array","ticktext":["0","10","20","30"],"tickvals":[0,10,20,30],"categoryorder":"array","categoryarray":["0","10","20","30"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.6529680365296811,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.68949771689498},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0,"zeroline":false,"anchor":"x","title":{"text":"count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.611872146118724}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","layer":"below","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.68949771689498}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"173702f92b82b":{"x":{},"type":"bar"}},"cur_data":"173702f92b82b","visdat":{"173702f92b82b":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+]
+
+---
+
+# Save as HTML
+
+.box-inv-6[Save a self-contained HTML version of it with&lt;br&gt;`saveWidget()` in the {htmlwidgets} R package]
+
+
+``` r
+# This is like ggsave, but for interactive HTML plots
+htmlwidgets::saveWidget(interactive_plot, "fancy_plot.html")
+```
+
+---
+
+# Fully documented
+
+.box-inv-6[The [documentation](https://plotly.com/ggplot2/) for ggplot2 + plotly is full of&lt;br&gt;examples of how to customize everything]
+
+.box-inv-6[Rely on that ↑ + Google to make&lt;br&gt;really fancy (and easy!) interactive plots]
+
+---
+
+# Three general methods
+
+.box-inv-6.medium[Single plots with {plotly}]
+
+.box-6.small.sp-after[Easy!]
+
+--
+
+.box-inv-6.medium[Dashboards with {flexdashboard}]
+
+.box-6.small.sp-after[Slightly more complicated]
+
+
+---
+
+# Dashboards with {flexdashboard}
+
+.box-inv-6[Use basic R Markdown to build a dashboard!]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/flexdashboard-simple.png" alt="flexdashboard simple layout" title="flexdashboard simple layout" width="80%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Dashboards with {flexdashboard}
+
+.box-inv-6[Make any kind of block arrangement]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/flexdashboard-complex.png" alt="flexdashboard complex layout" title="flexdashboard complex layout" width="75%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Dashboards with {flexdashboard}
+
+.box-inv-6[Add other elements like text and gauges]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/value-boxes.png" alt="flexdashboard value boxes" title="flexdashboard value boxes" width="80%"&gt;
+&lt;/figure&gt;
+
+&lt;figure&gt;
+  &lt;img src="img/11/gauges.png" alt="flexdashboard gauges" title="flexdashboard gauges" width="80%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Example dashboards
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/flexdashboard-example.png" alt="flexdashboard simple example" title="flexdashboard simple example" width="80%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://beta.rstudioconnect.com/jjallaire/htmlwidgets-ggplotly-geoms/" target="_blank"&gt;ggplot2 geoms&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Example dashboards
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/flexdashboard-heatmap.png" alt="flexdashboard heatmap example" title="flexdashboard heatmap example" width="80%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://beta.rstudioconnect.com/jjallaire/htmlwidgets-d3heatmap/" target="_blank"&gt;NBA scoring&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Example dashboards
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/utah-covid.png" alt="Utah's COVID-19 dashboard" title="Utah's COVID-19 dashboard" width="90%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://coronavirus-dashboard.utah.gov/" target="_blank"&gt;Utah's COVID-19 dashboard&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Outstanding documentation
+
+.box-inv-6[The [documentation](https://rmarkdown.rstudio.com/flexdashboard/index.html) for {flexdashboard} is&lt;br&gt;full of examples and details of everything you can do]
+
+.box-inv-6[Rely on that ↑ + Google to make&lt;br&gt;really fancy (and easy!) dashboards!]
+
+
+---
+
+# Three general methods
+
+.box-inv-6.medium[Single plots with {plotly}]
+
+.box-6.small.sp-after[Easy!]
+
+.box-inv-6.medium[Dashboards with {flexdashboard}]
+
+.box-6.small.sp-after[Slightly more complicated]
+
+--
+
+.box-inv-6.medium[Complete interactive apps with Shiny]
+
+.box-6.small[Super complicated!]
+
+---
+
+# Shiny
+
+.box-inv-6.medium[Shiny is a complete web application framework for interactive statistics]
+
+--
+
+.box-inv-6.sp-after[It's super complex and hard for beginners]
+
+--
+
+.box-6.medium[I've never made a standalone Shiny app!]
+
+.box-6.small[(And I don't plan on trying anytime soon)]
+
+---
+
+# Lots of resources to help start
+
+.box-inv-6[RStudio has [a whole website for helping you get started](https://shiny.rstudio.com/tutorial/)]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/shiny-getting-started.png" alt="Getting started with Shiny" title="Getting started with Shiny" width="50%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://shiny.rstudio.com/tutorial/" target="_blank"&gt;Getting started with Shiny&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Really neat examples!
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/isee-shiny.png" alt="iSEE" title="iSEE" width="65%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://shiny.rstudio.com/gallery/isee.html" target="_blank"&gt;iSEE (interactive SummarizedExperiment Explorer)&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Really neat examples!
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/covid-shiny.png" alt="COVID-19 tracker" title="COVID-19 tracker" width="65%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://shiny.rstudio.com/gallery/covid19-tracker.html" target="_blank"&gt;COVID-19 tracker&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# Really neat examples!
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/lego-shiny.png" alt="Living in the LEGO world" title="Living in the LEGO world" width="65%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://shiny.rstudio.com/gallery/lego-world.html" target="_blank"&gt;Living in the LEGO world&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
+
+---
+
+# flexdashboard + Shiny
+
+.box-inv-6[You can [use reactive Shiny things in flexdashboards](https://rmarkdown.rstudio.com/flexdashboard/shiny.html)&lt;br&gt;without building a complete Shiny app!]
+
+.box-6.small[I *have* done this]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/why-donors-donate.png" alt="Why Donors Donate" title="Why Donors Donate" width="45%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+layout: false
+name: sharing-content
+class: center middle section-title section-title-2 animated fadeIn
+
+# Sharing content
+
+---
+
+layout: true
+class: title title-2
+
+---
+
+# What do you do after you knit?
+
+.box-inv-2[When knitting to PDF or Word, you make a standalone file]
+
+.box-2.small.sp-after[E-mail it, message it, Slack it, whatever]
+
+--
+
+.box-inv-2[When knitting to HTML, you make a website]
+
+--
+
+.box-2.small[By default it's a standalone `.html` file with graphics embedded,&lt;br&gt;so you can still e-mail it, etc., but it can get huge if there are lots of images]
+
+--
+
+.box-2.small[Standalone files won't work well if there's anything interactive]
+
+--
+
+.box-2.small[You can also post it online!]
+
+---
+
+# Places to put HTML documents
+
+.box-inv-2[[RPubs](https://rpubs.com/) for knitted HTML documents]
+
+--
+
+.box-2.small.sp-after[Built in to RStudio; works with ggplotly!]
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/11/publish-document.png" alt="Publish document button" title="Publish document button" width="20%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.box-inv-2[[RPubs](https://rpubs.com/) or [shinyapps.io](https://www.shinyapps.io/) for flexdashboards]
+
+--
+
+.box-inv-2[Your own web server for anything, if you have one]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="libs/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false,
+  "ratio": "16:9",
+  "navigation": {
+    "scroll": false
+  }
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

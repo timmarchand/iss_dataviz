@@ -1,0 +1,262 @@
+---
+title: "Time"
+subtitle: "Exercise 13 --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  typst:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+# Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+# Task 2: Atmospheric CO~2~ over time
+
+## Data description and cleaning
+
+The United States's National Oceanic and Atmospheric Administration (NOAA) runs the [Mauna Loa Observatory](https://en.wikipedia.org/wiki/Mauna_Loa_Observatory) (MLO) in Hawai'i, which has taken regular daily measurements of atmospheric parameters since 1958, including levels of carbon dioxide (CO~2~) emissions, measured in parts per million (ppm). In 1958, CO~2~ levels averaged around 320 ppm; in 2025, they averaged 425 ppm—a 33% increase in emissions.
+
+In this exercise, you'll use [data from the Mauna Loa Observatory](https://gml.noaa.gov/ccgg/trends/data.html) to track annual and seasonal trends in CO~2~ over time. I've provided you with three datasets that use different measurement frequencies.[^cleaning-code]
+
+[^cleaning-code]: If you're interested, you can [see the full data cleaning code here](https://github.com/andrewheiss/dataviz-projects_13-time/blob/main/build_data.R). The data is already pretty well structured and clean---all I really do is rename some columns and create some columns for dates.
+
+Here's what you have:
+
+`data/mlo_monthly.csv` *(810 rows, 9 columns)*
+
+- `year`: The year of the recording
+- `month`: The month of the recording
+- `date`: The full date of the month and year (e.g. 2000-07-01)
+- `decimal`: A decimal representation of the year and month (e.g., July 2000 would be ≈2000.5)
+- `average`: The average CO~2~ (ppm) for the month
+- `deseasonalized`: The deseasonalized trend of average CO~2~
+- `ndays`: Number of recorded days in the month
+- `sdev`: Standard deviation of the number of days in the month
+- `unc`: Uncertainty around the monthly average
+
+`data/mlo_weekly.csv` *(2685 rows, 10 columns)*
+
+- `year`: The year of the recording
+- `month`: The month of the recording
+- `day`: The day of the recording
+- `date`: The full date of the month and year (e.g. 2000-07-02)
+- `decimal`: A decimal representation of the year, month, and day (e.g., July 2, 2000 would be 2000.5)
+- `average`: The average CO~2~ (ppm) for the week
+- `ndays`: Number of recorded days in the week
+- `x1_year_ago`: The CO~2~ (ppm) exactly 365 days earlier
+- `x10_years_ago`: The CO~2~ (ppm) exactly (365 × 10) days earlier
+- `increase_since_1800`: The change in CO~2~ (ppm) since 1800
+
+`data/mlo_daily.csv` *(15761 rows, 6 columns)*
+
+- `year`: The year of the recording
+- `month`: The month of the recording
+- `day`: The day of the recording
+- `date`: The full date of the month and year (e.g. 2000-07-02)
+- `decimal`: A decimal representation of the year, month, and day (e.g., July 31, 2000 would be 2000.579)
+- `ppm`: The CO~2~ (ppm) for the day
+
+The code below loads all the packages and datasets you'll need to use. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: load-libraries-data
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(patchwork)
+
+mlo_daily <- read_csv("data/mlo_daily.csv")
+mlo_weekly <- read_csv("data/mlo_weekly.csv")
+mlo_monthly <- read_csv("data/mlo_monthly.csv")
+```
+
+## CO~2~ since 1958
+
+Run the code chunk below to see a plot. It shows the monthly average level of recorded CO~2~ since 1958, as well as a deseasonlized trend.
+
+```{r}
+#| label: recreate-me-show-plot-divisions
+#| message: false
+#| echo: false
+#| out-width: "80%"
+#| fig-align: "center"
+
+knitr::include_graphics("images/recreate-me-plot-since-1958-1.png")
+```
+
+Use the `mlo_monthly` data to recreate this plot with `ggplot()`. 
+
+**Some hints**:
+
+- There are two `geom_line()` layers here---one uses `y = average`, the other uses `y = deseasonlized`
+- The deseasonalized line is colored with `"red"` and uses a line width of 0.5
+- The monthly average line is colored with `"gray50"` and uses a line width of 0.3
+- The plot uses `theme_bw()` and makes the plot title bold with `theme()`
+- The plot is 5 inches wide and 5 inches tall. Use chunk options to match those dimensions.
+- The plot uses `labs()` for nicer axis titles and the title, subtitle, and caption. 
+  - Remember you can use `\n` for line breaks in labels and titles, like `"this is\non two lines"`
+  - Here's a Unicode subscripted 2 that you can copy/paste if you want: ₂
+  - And here's that NOAA URL that you can copy/paste if you don't want to type it out: `https://gml.noaa.gov/ccgg/trends/mlo.html`
+
+```{r}
+#| label: recreate-me-plot-since-1958
+
+# Do stuff here
+```
+
+## CO~2~ since 2020
+
+Run the code chunk below to see a plot. It shows the daily CO~2~ recordings since 2020, along with a deseasonlized trend.
+
+```{r}
+#| label: recreate-me-show-plot-since-2020
+#| message: false
+#| echo: false
+#| out-width: "80%"
+#| fig-align: "center"
+
+knitr::include_graphics("images/recreate-me-plot-since-2020-1.png")
+```
+
+Use the `mlo_monthly` and `mlo_daily` datasets to recreate this plot with `ggplot()`. 
+
+**Some hints**:
+
+- You'll need to make copies of both the `mlo_monthly` and `mlo_daily` datasets that are filtered to only include rows after January 1, 2020 (i.e. `year >= 2020`)
+- The deseasonalized line is colored with `"red"` and uses a line width of 0.5
+- The daily points are sized at 0.1 and colored with `"gray50"`
+- The plot uses `theme_bw()` and makes the plot title bold with `theme()`
+- The plot is 5 inches wide and 5 inches tall. Use chunk options to match those dimensions.
+- The plot uses `labs()` for nicer axis titles and the title, subtitle, and caption. 
+
+```{r}
+#| label: recreate-me-plot-since-2020
+
+# Do stuff here
+```
+
+## CO~2~ seasonal trends
+
+Run the code chunk below to see a plot. It shows the seasonality inherent in CO~2~ values over the course of 2024, with higher values in the late spring and lower values in the early fall (This is because of plants! New plant growth in the spring takes CO~2~ out of the atmosphere because of photosynthesis, and CO~2~ rises later in the year because the plants die off in the winter and release CO~2~ back into the air as they decay.)
+
+```{r}
+#| label: recreate-me-show-plot-seasonality
+#| message: false
+#| echo: false
+#| out-width: "60%"
+#| fig-align: "center"
+
+knitr::include_graphics("images/recreate-me-plot-seasonality-1.png")
+```
+
+Use the `mlo_monthly` dataset to recreate this plot with `ggplot()`. 
+
+**Some hints**:
+
+- You'll need to make a copy of the `mlo_monthly` dataset that only includes values from 2024 (i.e. `year == 2024`)
+- Add a new column with `mutate()` called `diff_from_mean` that finds the difference between each month's average CO~2~ ppm and the average ppm for the year (i.e. `average - mean(average)`)
+- The line is created with `geom_smooth()`, not `geom_line()`. Play with the `span` argument in `geom_smooth()` to control the smoothness of the line (i.e. try things like `span = 0.1` and `span = 2.1`, etc. until the smoothed line crosses most of the points)
+- Turn off the standard error ribbon in `geom_smooth()` with `se = FALSE`
+- The plot uses `theme_bw()` and makes the plot title bold with `theme()`
+- The plot is 4 inches wide and 2.5 inches tall. Use chunk options to match those dimensions.
+- The plot uses `labs()` for nicer axis titles and the title 
+
+```{r}
+#| label: recreate-me-plot-seasonality
+
+# Do stuff here
+```
+
+## Combined plot
+
+Run the code chunk below to see a plot. It shows the same plot you made earlier with the monthly average level of recorded CO~2~ since 1958, with the seasonality plot placed inside.
+
+```{r}
+#| label: recreate-me-show-plot-combined
+#| message: false
+#| echo: false
+#| out-width: "80%"
+#| fig-align: "center"
+
+knitr::include_graphics("images/recreate-me-plot-combined-1.png")
+```
+
+Use {patchwork} to recreate this plot.
+
+**Some hints**:
+
+- You already have the code for both of these plots! Store them each as objects like `plot_all` and `plot_seasonality` (or whatever you want to call them), and then use {patchwork} to place `plot_seasonality` inside `plot_all`.
+- Refer to [the documentation for placing plots as insets](https://patchwork.data-imaginist.com/articles/guides/layout.html#insets) with {patchwork}
+- Shrink the font size in `plot_seasonality` by adjusting the `base_size` argument in `theme_bw()`. By default it's `theme_bw(base_size = 11)`.
+- The plot is 5 inches wide and 5 inches tall. Use chunk options to match those dimensions.
+
+(Check out the Wikipedia article for the [Keeling Curve](https://en.wikipedia.org/wiki/Keeling_Curve)---this is the same plot, but made by you!)
+
+```{r}
+#| label: recreate-me-plot-combined
+
+# Do stuff here
+```
+
+
+# Task 3: Extension
+
+The `data` folder contains two other climate-related datasets:
+
+- **CO~2~ emissions per capita** from [Our World In Data](https://ourworldindata.org/grapher/co-emissions-per-capita). Contains four columns:
+  - `entity`: Country or region (or world)
+  - `code`: [ISO3 country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)
+  - `year`: Year
+  - `annual_co2_emissions_per_capita`: Annual CO~2~ emissions per capita, in tonnes per person
+- **Gloal surface temperature changes over time** from the [Met Office Hadley Centre HadCRUT5 data](https://www.metoffice.gov.uk/hadobs/hadcrut5/). Contains four columns:
+  - `year`: Year
+  - `anomaly`: Difference from average temperature between 1961--1990, in Celsius (e.g., in 2023, global surface temperatures were 1.11° C (2° F) higher than the 1961--1990 average)
+  - `conf_low` and `conf_high`: Lower and upper bounds of the 95% confidence interval around the anomaly, in Celsius
+
+For your extension, use one of these datasets and make a plot showing some sort of time-based visualization. Some possible ideas:
+
+- At Our World In Data, they [show a plot](https://ourworldindata.org/grapher/co-emissions-per-capita) with lines for some countries and regions over time. You could make something similar (and practice direct labeling!)
+- You may have seen [these famous warming stripes](https://showyourstripes.info/). The HadCRUT5 temperature data is the basis for those stripes. Each stripe is a column in a column chart---in the official warming stripes plot, each column has the same height (like `y = 1`); in the bar chart version, each column uses `y = anomaly`. You could try making your own warming stripes plot (the original stripes use the [RdBu palette at ColorBrewer](https://colorbrewer2.org/#type=diverging&scheme=RdBu&n=11))
+- Anything else! There's a lot of neat data here to play with—have at it!
+
+**This is your chance to play around and explore. Do something neat.**
+
+Here's the code to load the data:
+
+```{r}
+#| label: load-extension-data
+#| warning: false
+#| message: false
+
+hadcrut <- read_csv("data/hadcrut.csv")
+owid <- read_csv("data/emissions_per_capita.csv")
+```
+
+And here's a chunk you can use!
+
+```{r}
+#| label: extension
+
+# Do stuff here
+```

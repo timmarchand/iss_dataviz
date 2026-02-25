@@ -1,0 +1,63 @@
+---
+title: "Global measles cases"
+subtitle: "Mini project 1 --- PMAP 8551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+---
+
+# Load and clean data
+
+```{r}
+#| label: load-libraries-data
+#| warning: false
+#| message: false
+
+library(tidyverse)
+
+measles_raw <- read_csv("data/measles_cases_year.csv")
+
+# Create a new column with nicer region names. See the official WHO regions:
+# https://en.wikipedia.org/wiki/List_of_WHO_regions
+measles <- measles_raw |> 
+  mutate(region_nice = case_match(region,
+    "AFRO" ~ "Africa",
+    "AMRO" ~ "Americas",
+    "EMRO" ~ "Eastern Mediterranean",
+    "EURO" ~ "Europe",
+    "SEARO" ~ "South-East Asia",
+    "WPRO" ~ "Western Pacific"
+  ))
+```
+
+# Plot
+
+Insert as many chunks as you need to **make one (1) plot** telling a story from the data.
+
+
+# Memo
+
+::: {.callout-important}
+### Memo instructions
+
+Write a memo (no word limit) explaining your process. I'm specifically looking for a discussion of the following:
+
+- What story are you telling with your new graphic?
+- How did you apply the principles of CRAP?
+- How did you apply Kieran Healy's principles of great visualizations or Alberto Cairo's five qualities of great visualizations?
+
+You can approach this in a couple different ways—you can write the memo and then include the full figure and code at the end, or you can write the memo in an incremental way, describing the different steps of creating the figure, ultimately arriving at a clean final figure.
+
+*(You can delete this instruction section—make sure you delete both the starting `::: {.callout-important}` and the ending `:::`.)*
+:::
+
+WRITE MEMO HERE (or intersperse it with your plot if you're showing how you gradually built it---that's fine too.)

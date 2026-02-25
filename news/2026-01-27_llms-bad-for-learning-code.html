@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>LLMs are bad and dangerous for learning how to code in this class – ISS Data Visualiation and Analysis</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="..//files/favicon-512.png" rel="icon" type="image/png">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-1b3db88def35042d172274863c1cdcf0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-4b54fd47631bf6c5f3ebf8ab231abb68.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style type="text/css">
+hr.dinkus {
+    width: 50px;
+    margin: 2em auto 2em;
+    border-top: 5px dotted #454545;
+}
+
+div.column-margin+hr.dinkus {
+    margin: 1em auto 2em;
+}
+</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">ISS Data Visualiation and Analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../schedule.html"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../content/index.html"> 
+<span class="menu-text">Content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../lesson/index.html"> 
+<span class="menu-text">Lessons</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../assignment/index.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../resource/index.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../news/index.html"> 
+<span class="menu-text">News</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://discord.com/"> <i class="bi bi-discord" role="img" aria-label="Discord">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://posit.cloud"> <i class="bi bi-cloud-fill" role="img" aria-label="Posit.cloud">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#llms-are-only-useful-if-you-know-what-youre-doing-already" id="toc-llms-are-only-useful-if-you-know-what-youre-doing-already" class="nav-link active" data-scroll-target="#llms-are-only-useful-if-you-know-what-youre-doing-already">LLMs are only useful if you know what you’re doing already</a></li>
+  <li><a href="#possible-ways-to-use-llms-to-help-with-learning-kind-of" id="toc-possible-ways-to-use-llms-to-help-with-learning-kind-of" class="nav-link" data-scroll-target="#possible-ways-to-use-llms-to-help-with-learning-kind-of">Possible ways to use LLMs to help with learning, kind of</a></li>
+  <li><a href="#even-if-you-use-them-to-help-you-learn-they-can-teach-you-the-wrong-things" id="toc-even-if-you-use-them-to-help-you-learn-they-can-teach-you-the-wrong-things" class="nav-link" data-scroll-target="#even-if-you-use-them-to-help-you-learn-they-can-teach-you-the-wrong-things">Even if you use them to help you learn, they can teach you the wrong things</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content page-columns page-full" id="quarto-document-content">
+
+<div class="back-nav"><a href="../news/">← News</a></div>
+
+<header id="title-block-header" class="news quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">LLMs are bad and dangerous for learning how to code in this class</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">advice</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Posted</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">Tuesday January 27, 2026 at 11:27 AM</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>In <a href="../content/01-content.html">the first week of class</a>, I had you read an article about how ChatGPT is <a href="https://doi.org/10.1007/s10676-024-09775-5">philosophical “bullshit”</a>, as well as <a href="../resource/ai-bs.html">this other post about AI and LLMs in this class</a>.</p>
+<p>In the past couple semesters, I’ve seen a surprising increase in the amount of ChatGPT-based weekly check-ins and graph interpretations in the exercises. (In the past, I’ve even had students tell me they put PDFs of the slides into ChatGPT to generate interesting and confusing things.) Don’t do this! <strong>LLMs cannot find three things that you personally found interesting from the readings. LLMs are not <em>you</em>.</strong></p>
+<p>It’s a <strong><em>huge waste of time</em></strong> for all of us for me to spend time evaluating and grading output from ChatGPT. I want to read what <em>you</em> think and do, not what a computer invents.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>My personal stance on AI and LLMs
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Many of you have asked about how I think about and use LLMs in my own work (and in the class materials). <a href="https://www.andrewheiss.com/ai/">Please check this short little page</a> where I explain what I do with text, images, code, research, and learning.</p>
+<p>In short, <strong>I do not use LLMs to create any of the materials for this class, and I do not use them to grade or evaluate any of your work.</strong></p>
+</div>
+</div>
+<hr class="dinkus">
+<section id="llms-are-only-useful-if-you-know-what-youre-doing-already" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="llms-are-only-useful-if-you-know-what-youre-doing-already">LLMs are only useful if you know what you’re doing already</h3>
+<p>As I mention <a href="../resource/ai-bs.html">in that post</a>, LLMs are great resources for coding <strong><em>when you already know what you are doing</em></strong>. If you don’t know what you’re doing, they’re actually really, really, <em>really</em> detrimental to learning.</p>
+<p>The main theme of this class is that you can use graphs to represent the truth of data, but there’s been an alarming increase in completely fake data in many assignments.</p>
+<p>ChatGPT is advanced enough that you can upload one the plots that you have to recreate for an exercise and have it generate working R code to recreate it—or something close to it.</p>
+<p>Magical, I guess?</p>
+<p>But also awful. First, <strong>you’re not learning anything</strong>, and second, the only way it can do that with the datasets I’m giving you is by <strong>creating fake data</strong>.</p>
+<p>This is tricky because making synthetic data is good practice for humans to do. In week 8 <a href="../content/08-content.html#reproducible-examples">you will learn about reprexes</a> and how you should simplify complex plots down into minimal working examples to ask for help. This often involves either making a fake little toy dataset or using one of the built-in ones like <code>mpg</code> or <code>penguins</code> so that other people can run the code on their computer without needing to download and load and clean your specific data. After getting help and figuring out what’s wrong, it’s then your job to adapt the fix to your specific issue.</p>
+<p>ChatGPT is doing kind of the same thing. It doesn’t know what your data looks like, so it makes up an example dataset. For instance, if you ask it to make a histogram of inflation-adjusted, per child spending on K-12 education in 2010 (which you’ll do in exercise 8), it might give you something like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>kids_k12 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">inf_adj_perchild =</span> <span class="fu">rnorm</span>(<span class="dv">1000</span>, <span class="at">mean =</span> <span class="dv">1000</span>, <span class="at">sd =</span> <span class="dv">800</span>),</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">region =</span> <span class="fu">sample</span>(</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">c</span>(<span class="st">"West"</span>, <span class="st">"Midwest"</span>, <span class="st">"South"</span>, <span class="st">"Northeast"</span>),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1000</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">replace =</span> <span class="cn">TRUE</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(kids_k12, <span class="fu">aes</span>(<span class="at">x =</span> inf_adj_perchild, <span class="at">fill =</span> region)) <span class="sc">+</span> </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1000</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="fu">vars</span>(region))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>↑ That’s good practice for a reproducible example. That creates a column called <code>inf_adj_perchild</code> with 1000 numbers in it with an average of $1000 and a standard deviation of $800, and it creates a column called <code>region</code> that randomly chooses one of those four regions. It even makes a histogram. Run it in R and it’ll work. Go ahead! Try it!</p>
+<p><strong>But none of that is real. Literally nothing.</strong></p>
+<p>Remember the definition of philosophical bullshit: it’s “speech or text produced without concern for its truth.” LLMs don’t care whether the text or code or data they generate are true—they only care about whether it looks plausible.</p>
+<p>For the past couple semesters, as ChatGPT has become (seemingly) more powerful, I’ve had more and more students regularly paste its code output directly in their assignments, likely because they think it’s real, since RStudio actually does run the code successfully.</p>
+<p>I’ve even had several students submit completely made up stuff for mini projects and final projects. In your final project, your job is to take a dataset, make three different plots with it, and combine the plots into one graphic that tells some sort of story. I’ve (really truly) received projects like this:</p>
+<div class="quarto-figure quarto-figure-center page-columns page-full">
+<figure class="figure page-columns page-full">
+<p><img src="img/llms/chatgpt-fake-final-project.png" class="img-fluid figure-img"></p>
+<figcaption class="margin-caption">A simulated version of several actual final projects I’ve received in this class</figcaption>
+</figure>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p>I created that image by going to ChatGPT and typing this:</p>
+<blockquote class="blockquote">
+<p>Generate an infographic based on the gapminder dataset from R that has three plot types—a map, a scatterplot, and a bar chart. Give it some sort of title and short description in the subtitle, and a caption and use a good color scheme and make the background of the image fancy with a subtle gradient. Add some arrows and text boxes to annotate interesting things. Make sure each subplot has an informative title.</p>
+</blockquote>
+</div></div><p>At a <em>very</em> quick glance, that looks like a plausible image. But holy crap it falls apart fast, both comically and tragically. Comically because, like, look at the y-axis in the scatterplot; or the x-axis ticks in the population growth chart that are sometimes spaced every 20 years, sometimes every 10 years, and has 1980 there twice; or the weird blobs in the map.</p>
+<p>Tragically—and most importantly—literally nothing in this image is real and none of the annotations make sense and none of the colors make sense and everything here is completely meaningless and devoid of any information. It’s pure philosophical bullshit—an image “produced without concern for its truth.”</p>
+<p>(Again, I’m not even kidding that I’ve received projects exactly like this, or projects that create and use completely make up random data. This is increasingly common!)</p>
+<hr class="dinkus">
+</section>
+<section id="possible-ways-to-use-llms-to-help-with-learning-kind-of" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="possible-ways-to-use-llms-to-help-with-learning-kind-of">Possible ways to use LLMs to help with learning, kind of</h3>
+<p>If you do want to use an LLM to help with coding, one relatively okay way is to treat it as <strong>forgetful and sorta unreliable</strong> interactive documentation. Ask what different lines of code are doing and why things work the way they do.</p>
+<p><strong>If you ever see arguments and options that you don’t understand, you can ask about them.</strong> Don’t just include mystery arguments and functions in your code—make sure you know what each thing is doing.</p>
+<p>Here are some examples of what that process looks like—two where the LLM is helpful, and one where it is subtly misleading and forgetful and unreliable.</p>
+<hr class="dinkus">
+<p>Easy helpful one first. I asked this:</p>
+<blockquote class="blockquote">
+<p>I’m using geom_label() and I saw an example online that had an argument with <code>hjust = 0</code>. What does that do?</p>
+</blockquote>
+<p>And it gave an explanation and an example and a bonus tip about <code>nudge_x</code>:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Part 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Part 2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="img/llms/easy-1.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="img/llms/easy-2.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<p>That’s neat! (But also you could’ve found the same information by running <code>?geom_label</code> and looking at the help page)</p>
+<hr class="dinkus">
+<p>Another easy helpful one. I asked this:</p>
+<blockquote class="blockquote">
+<p>I have a ggplot plot and I want all the points to be blue, but when I used this with geom_point, all the points were red</p>
+<p>```<br>
+geom_point(aes(color = “blue”))<br>
+```</p>
+</blockquote>
+<p>And it gave an explanation and an example and a helpful rule of thumb <em>and</em> a bonus reminder about color vs.&nbsp;fill:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Part 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Part 2</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><img src="img/llms/easy-again-1.png" class="img-fluid"></p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p><img src="img/llms/easy-again-2.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<p>This one is cool because you <em>can’t</em> find that exact information anywhere in the documentation. It’s a more complex situation, but the LLM figured out the different moving parts and used all that information to confidently stumble into the right answer.</p>
+<hr class="dinkus">
+<p>Now for one that’s more complex and subtly wrong/misleading.</p>
+<p>Some context first.</p>
+<p>When you use <code>group_by()</code> and <code>summarize()</code> on two groups, R will stop grouping by the last one and leave the others after it’s done summarizing. That’s why you’ve seen messages like this all semester:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode default code-with-copy"><code class="sourceCode default"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>'summarise()' has grouped output by 'Gender'. You can </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>override using the '.groups' argument</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>It’s generally nothing to worry about (unless you’re using <code>mutate()</code> later and doing things like calculating proportions, like you did in Exercise 4).</p>
+<p>If you ask ChatGPT for code to calculate the average city MPG for cars by class in the <code>mpg</code> dataset, it will happily do it, and it’ll generate something like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the required libraries</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate the average value of cty by class</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>average_cty_by_class <span class="ot">&lt;-</span> mpg <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(class) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">average_cty =</span> <span class="fu">mean</span>(cty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Show the results</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(average_cty_by_class)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>And that code will run, and it is actually correct.</p>
+<p>BUT it’s doing some weird roundabout things. First, <code>print(average_cty_by_class)</code> is unnecessary. If you just run the name of the object by itself like <code>average_cty_by_class</code>, it’ll print. The explicit <code>print()</code> function is redundant (and a good sign that this was created by ChatGPT).</p>
+<p>The bigger issue, though is the <code>summarize()</code> function that it generated. It’s doing two weird things:</p>
+<ol type="1">
+<li>It includes <code>.groups = "drop"</code> and,</li>
+<li>It includes <code>na.rm = TRUE</code></li>
+</ol>
+<p>Neither of those are necessary, since</p>
+<ol type="1">
+<li>You only have one group (<code>class</code>) and it automatically gets dropped after <code>summarize()</code>, and</li>
+<li>There are no missing values in <code>cty</code> and general best practice (for me, at least) is to not enable <code>na.rm = TRUE</code> everywhere all the time.</li>
+</ol>
+<p>BUT that code is technically not wrong, and it <em>is</em> a useful reminder of how <code>group_by() |&gt; summarize()</code> works.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;But as a beginner, you don’t know that.</p></div></div><p>Don’t just copy/paste that code and hope it works and submit your assignment. Let’s use the LLM as a way to interact with the documentation.</p>
+<p>I asked ChatGPT this:</p>
+<blockquote class="blockquote">
+<p>I’m using R and tidyverse to calculate the average of a column across a group from another column. I have code that looks like this:</p>
+<p>```<br>
+mpg |&gt;<br>
+group_by(class) |&gt;<br>
+summarize(average_cty = mean(cty, na.rm = TRUE), .groups = “drop”)<br>
+```</p>
+<p>but I’m not sure what na.rm means here, or what .groups = “drop” means here. Can you explain it?</p>
+</blockquote>
+<p>And it generated a big long answer. First, it made some explanations:</p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" role="tab" aria-controls="tabset-3-1" aria-selected="true" href="">Part 1</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" role="tab" aria-controls="tabset-3-2" aria-selected="false" href="">Part 2</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" role="tab" aria-controls="tabset-3-3" aria-selected="false" href="">Part 3</a></li></ul>
+<div class="tab-content">
+<div id="tabset-3-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-3-1-tab">
+<p><img src="img/llms/hard-1.png" class="img-fluid"></p>
+</div>
+<div id="tabset-3-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-2-tab">
+<p><img src="img/llms/hard-2.png" class="img-fluid"></p>
+</div>
+<div id="tabset-3-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-3-3-tab">
+<p><img src="img/llms/hard-3.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<p>That’s all generally correct.</p>
+<p>But it’s missing some detail. We’re only grouping by one thing, so R will automatically drop the last (and only) group and return an ungrouped data frame. So I asked a follow-up question:</p>
+<p><img src="img/llms/hard-4.png" class="img-fluid"></p>
+<p>It shows an example with two groups (NOTICE THE FAKE DATA HERE! It makes up values of 1, 2, 3, and 4 for Japan, China, France, and Germany, and THAT’S TOTALLY FINE because this is just an illustration!), and it shows the leftover continent grouping:</p>
+<p><img src="img/llms/hard-5.png" class="img-fluid"></p>
+<p>It then shows what that data looks like if you drop the groups:</p>
+<p><img src="img/llms/hard-6.png" class="img-fluid"></p>
+<p>That’s all good. It then shows my original question with one group:</p>
+<p><img src="img/llms/hard-7.png" class="img-fluid"></p>
+<p>And—here’s the wild part—it concludes by saying that <code>.groups = "drop"</code> isn’t necessary.</p>
+<p>In the middle of generating all that explanation, it forgot that it had started out trying to show me that <code>.groups = "drop"</code> was important, and it ended its explanation by saying that it’s not actually needed.</p>
+<p><em>That’s</em> what I mean when I say that it’s a forgetful and unreliable resource. Lots of that code is helpful as an illustration of what’s going on. Lots of the explanation is good and fine. But it subtly changed its mind halfway through and didn’t realize it (because it can’t realize it! it’s just a chain of statistically likely text!)</p>
+<hr class="dinkus">
+</section>
+<section id="even-if-you-use-them-to-help-you-learn-they-can-teach-you-the-wrong-things" class="level3">
+<h3 class="anchored" data-anchor-id="even-if-you-use-them-to-help-you-learn-they-can-teach-you-the-wrong-things">Even if you use them to help you learn, they can teach you the wrong things</h3>
+<p>Hopefully you can see where this is dangerous for learning. It can often “teach” you wrong, and you can only recognize that if you know stuff already.</p>
+<p>It’s extra dangerous if you then take that example output, paste it into your exercise, and submit it.</p>
+<p>I’m not even concerned about the plagiarism aspect of that—code is code and there are only a few ways to write {dplyr} code that will do this, and it’s easy to adapt from real human-based examples online, so I’m less worried about stealing other people’s work here.</p>
+<p>I’m concerned that it’s not real data.</p>
+<p>It made up values of 1, 2, 3, and 4 for some countries to illustrate grouping and summarizing. That’s good and normal.</p>
+<p><strong>None of that is real. Don’t treat it as real.</strong></p>
+
+
+</section>
+
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/timmarchand\.github\.io\/ISS_dataviz\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

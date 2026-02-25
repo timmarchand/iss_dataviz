@@ -1,0 +1,364 @@
+---
+title: "Comparisons"
+subtitle: "Exercise 8 --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  typst:
+    toc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+# Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+# Task 2: US presidential elections
+
+```{r}
+#| label: setup
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(ggrepel)
+```
+
+## Data description
+
+This data comes from the [MIT Election Lab](https://electionlab.mit.edu/data) and contains county-level vote counts for US presidential elections from 2000 to 2024.^[The full data is hosted at the [MIT Election Data + Science Lab Dataverse](https://doi.org/10.7910/DVN/VOQCHQ) and is licensed as [Creative Commons Public Domain](http://creativecommons.org/publicdomain/zero/1.0).] Because of differences in how states report election data, the original MIT data was really tricky to work with. To simplify things, I've provided you with a pre-cleaned dataset with one row per candidate-county-year.[^cleaning-code] I also merged in region and division data from the US Census.
+
+[^cleaning-code]: For the morbidly curious, [see here for the full data cleaning code](https://github.com/andrewheiss/dataviz-projects_08-comparisons/blob/main/build_data.R).
+
+There are 15 columns:
+
+| Variable         | Definition                                                 |
+|:-----------------|:-----------------------------------------------------------|
+| `year`           | Election year                                              |
+| `year_cat`       | Election year (categorical version)                        |
+| `state_po`       | State postal abbreviation                                  |
+| `state`          | State name                                                 |
+| `region`         | US Census region                                           |
+| `division`       | US Census division                                         |
+| `county_name`    | County name                                                |
+| `county_fips`    | County FIPS code                                           |
+| `office`         | Election type (President)                                  |
+| `candidate`      | Candidate name                                             |
+| `party`          | Candidate party                                            |
+| `candidatevotes` | Votes received by this candidate for this particular party |
+| `totalvotes`     | Total number of votes cast in this county-year             |
+| `version`        | Date when dataset was finalized                            |
+| `mode`           | Mode of ballots cast                                       |
+
+The code below loads and cleans the data. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: load-election-data
+#| warning: false
+#| message: false
+
+county_results <- read_csv("data/county-pres-results_2000-2024.csv") |>
+  # MIT stores county, candidate, and party names in ALL CAPS, so we change
+  # them to Title Case instead
+  mutate(
+    county_name = str_to_title(county_name),
+    candidate = str_to_title(candidate),
+    party = str_to_title(party)
+  ) |> 
+  # Make a categorical version of year
+  mutate(year_cat = factor(year))
+```
+
+
+## Recreate data summary
+
+Right now there's a row for each candidate in each county in each year, which means there are `{r} nrow(county_results)` rows to deal with. That's too much data to plot. We need to condense that down with `group_by()` and `summarize()`.
+
+Use `filter()`, `group_by()` and `summarize()` and `mutate()` to create a data frame named `state_prop_gop` that looks like this:
+
+```r
+#> # A tibble: 357 × 6
+#> # Groups:   state, year_cat [357]
+#>    state   year_cat region candidatevotes_total totalvotes_total prop_gop
+#>    <chr>   <fct>    <chr>                 <dbl>            <dbl>    <dbl>
+#>  1 Alabama 2000     South                944409          1672551    0.565
+#>  2 Alabama 2004     South               1176394          1883415    0.625
+#>  3 Alabama 2008     South               1266546          2099819    0.603
+#>  4 Alabama 2012     South               1255925          2070353    0.607
+#>  5 Alabama 2016     South               1318250          2123367    0.621
+#>  6 Alabama 2020     South               1441170          2323282    0.620
+#>  7 Alabama 2024     South               1462616          2264972    0.646
+#>  8 Alaska  2000     West                 167398           285530    0.586
+#>  9 Alaska  2004     West                 292267           488693    0.598
+#> 10 Alaska  2008     West                 193841           326197    0.594
+#> # ℹ 347 more rows
+#> # ℹ Use `print(n = ...)` to see more rows
+```
+
+**Some hints!**
+
+- You need to filter the data so that it only includes counts for the Republican party
+- You need to group by multiple things---year (the categorical version), state, and region
+- You need to create two summarized columns in `summarize()` with `sum()` to add the total number of `candidatevotes` and `totalvotes` in each group
+- Make a new column named `prop_gop` that is the total number of votes for the candidate divided by the total number of votes in the state/year
+
+```{r}
+#| label: recreate-me-small-multiples-data
+
+# Do stuff here
+```
+
+## Recreate small multiples plot
+
+Run the code chunk below to see a plot.
+
+```{r}
+#| label: recreate-me-show-small-multiples
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-1-1.png")
+```
+
+Use `ggplot()` in the chunk below to re-create the plot above using the `state_prop_gop` dataset.
+
+**Some hints!**
+
+- Because you're using `year_cat`, ggplot won't want to draw lines across the categories. Add `aes(group = state)` to `geom_line()` to let it draw lines across the years
+- There's a thin (`linewidth = 0.5`) dotted red horizontal line at 50% (or 0.5). Add this with `geom_hline()` (check the documentation!)
+- Use 6 columns with `facet_wrap()`
+- Use free y axis scales with `facet_wrap()` (check the documentation!)
+- Because there are 51 states here, you'll need to adjust `fig-width` and `fig-height` in the chunk options so that it's visible when you render it. The recreation plot above is 8 inches wide and 9 inches tall
+- This plot uses `theme_light(base_size = 9)` with some other theme adjustments, like a rotated x-axis
+
+```{r}
+#| label: recreate-me-small-multiples-plot
+
+# Do stuff here
+```
+
+## Interpret small multiples plot
+
+What does this plot tell us? In a paragraph, explore a story in this plot. Which states are solidly Republican? Solidly Democratic? Which states have been shifting over time? What's up with Utah in 2016?
+
+Do that here.
+
+
+# Task 3: *Shelby County v. Holder* and polling places
+
+## Data description
+
+Sections 4 and 5 of the Voting Rights Act of 1965 required that some states and counties obtain federal preclearance before making any changes in any policies related to voting. The preclearance requirement was based on historical patterns in racial discrimination---generally speaking, if a state or county engaged in racial discrimination when setting voting policy, it was subject to preclearance rules. @fig-preclearance shows all the counties that faced these requirements:
+
+![All counties that were subject to preclearance requirements under the Voting Rights Act of 1965](images/map_preclearance.png){#fig-preclearance width="100%"}
+
+In 2013 in *Shelby County v. Holder*, the United States Supreme Court [struck down Section 4(b)](https://en.wikipedia.org/wiki/Shelby_County_v._Holder) of the Voting Rights Act, which essentially invalidated the preclearance rule and opened the door for all counties to set voting policies without federal oversight. This was done based on the rationale that the US had made sufficient racial progress and that preclearance processes were no longer necessary.
+
+In a dissent joined by Stephen Breyer, Sonia Sotomayor, and Elena Kagan, Ruth Bader Ginsburg [criticized the ruling](https://supreme.justia.com/cases/federal/us/570/529/#tab-opinion-1970751), saying that
+
+> [t]hrowing out preclearance when it has worked and is continuing to work to stop discriminatory changes is like throwing away your umbrella in a rainstorm because you are not getting wet.
+
+In this exercise you'll compare the number of polling places in counties compare the number of polling places in preclearance counties before and after *Shelby*. The data comes from a 2019 report published by The Leadership Conference on Civil and Human Rights, [*Democracy Diverted: Polling Place Closures and the Right to Vote*](https://civilrights.org/democracy-diverted/). 
+
+The data contains 16 columns:
+
+| Variable               | Definition                                            |
+|:-----------------------|:------------------------------------------------------|
+| `geoid`                | US Census county ID                                   |
+| `county`               | County name                                           |
+| `state_po`             | State postal abbreviation                             |
+| `year`                 | Year                                                  |
+| `polling_places`       | Number of polling places in the county                |
+| `period`               | Before vs. after the 2013 *Shelby* ruling             |
+| `population`           | Population in 2019                                    |
+| `prop_high_poverty`    | Proportion of residents facing high poverty[^poverty] |
+| `prop_hispanic_latino` | Proportion Hispanic or Latino                         |
+| `prop_2more`           | Proportion two or more races                          |
+| `prop_aian`            | Proportion American Indian and Alaska Native          |
+| `prop_asian`           | Proportion Asian                                      |
+| `prop_black`           | Proportion Black or African American                  |
+| `prop_nhpi`            | Proportion Native Hawaiian and Pacific Islander       |
+| `prop_other`           | Proportion some other race                            |
+| `prop_white`           | Proportion white                                      |
+
+[^poverty]: The Leadership Conference on Civil and Human Rights defines this as the proportion for whom the ratio of income to the federal poverty level is less than 2.
+
+The code below loads and cleans and merges the data. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: load-shelby-data
+#| warning: false
+#| message: false
+
+shelby_counties <- read_csv("data/shelby_counties.csv") |>
+  # Make sure that "Before" comes before "After" in plots
+  mutate(period = factor(period, levels = c("Before", "After"))) |>
+  # Remove states with only a handful of counties
+  filter(!(state_po %in% c("CA", "FL", "SD", "NY")))
+```
+
+## Recreate data summary
+
+The data currently has two rows for each county---one for before and one for after the *Shelby* decision. We want to compare state-level counts of polling places, so we need to collapse the data a bit.
+
+Use `group_by()` and `summarize()` to create a data frame named `state_totals` that looks like this:
+
+```r
+#> # A tibble: 18 × 3
+#>    state_po period total
+#>    <chr>    <fct>  <dbl>
+#>  1 AK       Before  1134
+#>  2 AK       After   1100
+#>  3 AL       Before  2022
+#>  4 AL       After   1971
+#>  5 AZ       Before  1452
+#>  6 AZ       After   1135
+#>  7 GA       Before  2811
+#>  8 GA       After   2631
+#>  9 LA       Before  2166
+#> 10 LA       After   2047
+#> 11 MS       Before  1843
+#> 12 MS       After   1761
+#> 13 NC       Before   945
+#> 14 NC       After    918
+#> 15 SC       Before  1922
+#> 16 SC       After   1967
+#> 17 TX       Before  6314
+#> 18 TX       After   5608
+```
+
+```{r}
+#| label: recreate-me-slope-data
+
+# Do stuff here
+```
+
+
+## Recreate slopegraph
+
+Run the code chunk below to see a plot.
+
+```{r}
+#| label: recreate-me-show-slope
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-2-1.png")
+```
+
+Use `ggplot()` in the chunk below to re-create the slopegraph above using the `state_totals` dataset.
+
+**Some hints!** (beyond the example on the class website, which will be very helpful too):
+
+- Because you're using `period` on the x-axis, ggplot won't want to draw lines across the categories. Add `aes(group = state_po)` to `geom_line()` to let it draw lines across the before/after categories
+- You'll need two `geom_text_repel()` layers: one for before that uses a negative `nudge_x` value and one for after that uses a positive `nudge_x` value
+- Control the thickness and color of the repel guidelines with `segment.size` and `segment.color`
+- Use `seed = 1234` in `geom_text_repel()` to get the same random positioning each time
+- This plot uses `theme_minimal()`
+
+```{r}
+#| label: recreate-me-slopegraph
+
+# Do stuff here
+```
+
+## Interpret slopegraph
+
+What does this slopegraph tell us? In a paragraph, explore a story in this plot. Which states saw the biggest changes?
+
+Do that here.
+
+## Recreate data summary
+
+One way to compare changes is to calculate the percent change between two periods. You can calculate percent change with this formula:
+
+$$
+\text{percent change} = \frac{\text{new} - \text{old}}{\text{old}}
+$$
+
+You can remember this as **NOO**, for "**n**ew minus **o**ld divided by **o**ld." If a state had 500 polling places before and 400 polling places after, that's a decrease of 100 polling places. The percent change would be 400 (new) - 500 (old) divided by 500 (old), or $\frac{400 - 500}{500}$, or -0.2, or a 20% decrease.
+
+Percent changes are helpful because they make it easier to compare units with different amounts. See the slopegraph above where Texas is all alone at the top because it has so many polling places (since it's so big)---Texas closing 700 polling places is not the same as Georgia closing 700 polling places. Comparing the percent changes between states gives a different view of the changes in polling place counts before and after *Shelby*.
+
+The data currently has two rows for each county---one for before and one for after the *Shelby* decision. To calculate the percent change, we need two *columns* for the counts---one for before and one for after. This will let us do something like `mutate(pct_change = (After - Before) / Before)` to make a column for each state's percent change.
+
+Use `pivot_wider()` and `mutate()` on the `state_totals` data frame you made earlier to create a new data frame named  `pct_changes` that looks like this:
+
+```r
+#> # A tibble: 9 × 4
+#>   state_po Before After pct_change
+#>   <chr>     <dbl> <dbl>      <dbl>
+#> 1 AK         1134  1100    -0.0300
+#> 2 AL         2022  1971    -0.0252
+#> 3 AZ         1452  1135    -0.218 
+#> 4 GA         2811  2631    -0.0640
+#> 5 LA         2166  2047    -0.0549
+#> 6 MS         1843  1761    -0.0445
+#> 7 NC          945   918    -0.0286
+#> 8 SC         1922  1967     0.0234
+#> 9 TX         6314  5608    -0.112 
+```
+
+## Recreate percent change plot
+
+Run the code chunk below to see a plot.
+
+```{r}
+#| label: recreate-me-show-pct-change
+#| message: false
+#| echo: false
+
+knitr::include_graphics("images/recreate-me-3-1.png")
+```
+
+Use `ggplot()` in the chunk below to re-create the plot above using the `pct_changes` dataset.
+
+**Some hints!**
+
+- Make sure you order the states in the x-axis by percent change. There's a huge hint in the plot, since I purposely left the ugly axis label. You can also look at your work in Exercise 6 where you reordered categories for your lollipop chart.
+- Format the y-axis labels as percents. See the Week 6 FAQs at the course website for how.
+- This plot uses `theme_minimal()`
+
+```{r}
+#| label: recreate-me-pct-change
+
+# Do stuff here
+```
+
+## Interpret percent change plot
+
+What does this plot tell us? In a paragraph, explore a story in this plot. Which states saw the biggest changes?
+
+Do that here.
+
+
+# Task 4: Extension
+
+Copy the code for one of your plots above and paste it into the chunk below. Do some extra things to it, like changing the labels, changing the colors, adding a new geom, plotting a different variable from the dataset (there are lots of them!), changing the theme, or whatever.
+
+Or, even better, explore some of the other columns in the data---there are a lot of interesting things in there! Look at election trends in specific regions; look at whether poverty or race is related to changes in polling place counts.
+
+**This is your chance to play around and explore.**
+
+```{r}
+#| label: extension
+
+# Do stuff here
+```

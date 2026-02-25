@@ -1,0 +1,135 @@
+---
+title: "Annotations"
+subtitle: "Exercise 9 --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+bibliography: "bib/references.bib"
+csl: "bib/chicago-notes.csl"
+format:
+  html:
+    toc: true
+    link-citations: false 
+  typst:
+    toc: true
+    citeproc: true
+  pdf:
+    toc: true
+  docx:
+    toc: true
+---
+
+# Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+# Task 2: Qatar Cars
+
+```{r}
+#| label: setup
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(scales)
+```
+
+## Data description
+
+One of the most common example datasets in R is `mtcars`, which contains data on a bunch of cars from 1974 (!). Some of the car companies in there don't even exist anymore, like Datsun. In 2020 [someone tracked down pictures of all the cars](https://www.robertmylesmcdonnell.com/posts/mtcars) in that dataset and they *scream* 1970s.
+
+The `mpg` dataset that comes with {ggplot2} was designed to be an improvement on `mtcars` and includes vehicles from 1999 and 2008, and lots of people use it for examples. I use it all the time! However, both `mpg` and `mtcars` are highly US-centric (many of you don't think in gallons and miles and feet and inches), and neither include details about electic cars, which are increasingly common today.
+
+To fix this, Paul Musgrave (based at Georgetown University in Qatar) and students in his international politics course collected data on cars for sale in 2025 in Qatar. See [his blog post here](https://musgrave.substack.com/p/introducing-the-qatar-cars-dataset) or his article in the *Journal of Political Science Education* [@Musgrave:2025] for more details about how and why he built it.
+
+Qatar Cars provides a more internationally-focused, modern cars-based demonstration dataset. It mirrors many of the columns in `mtcars`, but uses (1) non-US-centric makes and models, (2) 2025 prices, and (3) metric measurements, making it more appropriate for use as an example dataset outside the United States. It includes almost exactly the same variables as the `mtcars` dataset:
+
+- `origin` (the country associated with the car brand)
+- `make` (the brand of the car, such as Toyota or Land Rover)
+- `model` (the specific type of car, such as Land Cruiser or Defender)
+- `length`, `width`, and `height` (all in meters)
+- `trunk` capacity (measured in liters)
+- fuel `economy` (measured in liters per 100 km)
+- `performance` (time in seconds to accelerate from 0 to 100km/h)
+- `mass` in kilograms
+- `price` in 2025 Qatari riyals
+- `type` (the type of the car, such as coupe, sedan, or SUV)
+- `enginetype` (electric, hybrid, or petrol)
+
+Paul and I created an R package for the data named [{qatarcars}](https://profmusgrave.github.io/qatarcars/) that can be used as a toy dataset and general replacement for `mtcars` and `mpg`. 
+
+For this exercise, you're going to play with it!
+
+The code below loads and cleans the data. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+::: {.callout-note}
+Technically all you really need to do is run `library(qatarcars)`, but we only recently submitted this to CRAN and it not might be accepted and published when you do this assignment. So for now you're loading a special kind of .rds file that's like a CSV, but works only with R. If you want a CSV version or a Stata version, find those at <https://profmusgrave.github.io/qatarcars/>
+:::
+
+```{r}
+#| label: load-data
+#| warning: false
+#| message: false
+
+qatarcars <- readRDS("data/qatarcars.rds")
+```
+
+## Recreate plot
+
+Run the code chunk below to see a plot.
+
+```{r}
+#| label: recreate-me-show-plot
+#| message: false
+#| echo: false
+#| out-width: "100%"
+
+knitr::include_graphics("images/recreate-me-1-1.png")
+```
+
+Use `ggplot()` and some `annotate()` layers in the chunk below to re-create the plot above using the `qatarcars` dataset.
+
+**Some hints!**
+
+- You'll need to rerun the plot code a lot as you fiddle with exact positioning. Don't try to add all the annotations and adjustments all at once---focus on one little thing at at time.
+- This plot is 6 inches wide and 4.25 inches tall. I recommend setting those dimensions in the chunk options before you start tinkering so that the annotations are positioned and sized the way you intend them to be when you render the document.
+- At the time of data collection in January 2025, 1 USD ≈ 3.64 QAR. To convert from Qatari Riyals to US dollars, divide `price` by 3.64. You'll probably want to make a copy of `qatarcars` and use `mutate()` to make USD version of price.
+- Notice that the y-axis is logged and uses automatic dollar labels. You'll want to use `scale_y_log10()` and something from the {scales} package for adjusting the labels. [See this FAQ post](https://datavizsp26.classes.andrewheiss.com/news/2025-10-08_faqs_week_06.html#i-have-numbers-like-20000-and-want-them-formatted-with-commas-like-20000.-can-i-do-that-automatically) for help.
+- The points are colored using the "Set1" palette from Color Brewer (see <https://colorbrewer2.org/#type=qualitative&scheme=Set1&n=3>). You can use that automatically with `scale_color_brewer(SOMETHING)`.
+- The hex codes for those colors (if you want your anotations to match the points) are `#e41a1c`, `#377eb8`, and `#4daf4a`
+- Remember that you can use `\n` to add a linebreak in a label, like `label = "First line\nsecond line"`
+- This plot uses `theme_minimal()` and uses `theme()` to make the plot title bold
+
+```{r}
+#| label: recreate-me-plot
+#| fig-width: 6
+#| fig-height: 4.25
+
+# Do stuff here
+```
+
+
+# Task 3: Extension
+
+Make another plot from `qatarcars`. It can be whatever you want: another scatterplot, a histogram, a density plot, a lollipop chart. Anything!
+
+Add some annotations to it with {ggrepel} or `geom_text()` or `geom_label()` or `annotate()`. Color some text with {ggtext} or {marquee}. Do something neat.
+
+**This is your chance to play around and explore.**
+
+```{r}
+#| label: extension
+
+# Do stuff here
+```

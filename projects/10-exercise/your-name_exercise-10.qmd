@@ -1,0 +1,134 @@
+---
+title: "Enhancing graphics"
+subtitle: "Exercise 10 --- PMAP 8551/4551, Spring 2026"
+author: "YOUR NAME HERE"
+date: "DATE GOES HERE"
+date-format: "long"
+format:
+  html:
+    toc: true
+  typst:
+    toc: true
+  pdf:
+    toc: true
+    knitr:
+      opts_chunk:
+        dev: "cairo_pdf"
+  docx:
+    toc: true
+---
+
+# Task 1: Session check-in
+
+Three interesting or exciting things:
+
+1. Something
+2. Something
+3. Something
+
+Three muddy or unclear things:
+
+1. Something
+2. Something
+3. Something
+
+
+# Task 2: Following a style guide and enhancing plots
+
+## Data description
+
+This data comes from the [Urban Institute](https://datacatalog.urban.org/dataset/state-state-spending-kids-dataset). You already used this data in Exercise 6---refer to it for more details about what the different columns mean.
+
+## Recreating a publication-worthy plot
+
+For this exercise, you don't need to worry about any data manipuluation or anything. I've given you all the code you need to run.
+
+Instead, your job is to take a ggplot plot and enhance it, following the guidelines from an organizational style guide. You'll use Illustrator, Inkscape, or some other vector editing program to recreate this image:
+
+![](img/enhanced-plot.svg){width="100%"}
+
+The code below (1) loads and cleans the data, (2) creates a barebones plot with {ggplot2}, and (3) saves that plot as both a vector-based PDF and a vector-based SVG. **You don't need to modify anything in this chunk of code---you only need to run it.**
+
+```{r}
+#| label: load-data-make-base-plot
+#| warning: false
+#| message: false
+#| fig-width: 6.25
+#| fig-height: 3
+#| out-width: "70%"
+#| fig-align: center
+
+library(tidyverse)
+library(scales)
+
+# If you're using Windows, this will load the Lato font into your R session (But
+# only if you've installed it on your computer first! Make sure you do that!)
+#
+# If you're not using Windows, you don't have to do this (and this code won't 
+# run---it'll only run on Windows). But still make sure the font is installed.
+if (.Platform$OS.type == "windows") {
+  windowsFonts(`Lato` = windowsFont("Lato"))
+}
+
+# Load and clean kids data
+kids <- read_csv("data/kids.csv") |>
+  # These values are stored as 1000s of dollars, so this scales them 
+  # back up by multiplying them by 1000
+  mutate(across(c(raw, inf_adj, inf_adj_perchild), \(x) x * 1000))
+
+kids_k12 <- kids |> 
+  filter(variable == "PK12ed") |> 
+  filter(state %in% c("Virginia", "Georgia", "North Carolina", "Kentucky"))
+
+plot_kids_south <- ggplot(
+  kids_k12,
+  aes(x = year, y = inf_adj_perchild, color = state)
+) +
+  geom_line(linewidth = 1) +
+  geom_point(size = 2.5, pch = 21, fill = "white", stroke = 1) +
+  scale_x_continuous(
+    limits = c(1996, 2016),
+    breaks = seq(1996, 2016, by = 2),
+    expand = expansion(mult = 0.02)
+  ) +
+  scale_y_continuous(limits = c(3800, 8000), labels = label_currency()) +
+  scale_color_manual(
+    values = c("#ec008b", "#fdbf11", "#1696d2", "#000000"),
+    guide = "none"
+  ) +
+  labs(x = NULL, y = NULL) +
+  theme_minimal(base_family = "Lato") +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.major.y = element_line(color = "#DEDDDD"),
+    panel.grid.minor = element_blank(),
+    axis.line.x = element_line(color = "#000000"),
+    # Leave some extra space on the right margin for manual direct labels
+    plot.margin = margin(t = 2, r = 50, b = 2, l = 2)
+  )
+
+# Save the plot as a vector image for later editing/enhancing
+ggsave(
+  plot_kids_south, filename = "base_plot.pdf", device = cairo_pdf,
+  width = 6.25, height = 3, units = "in", bg = "transparent"
+)
+
+ggsave(
+  plot_kids_south, filename = "base_plot.svg",
+  width = 6.25, height = 3, units = "in", bg = "transparent"
+)
+
+# Show the barebones plot
+plot_kids_south
+```
+
+## Finished version
+
+Include your finished version of the plot here! Place the exported PDF or PNG in the same folder as this `.qmd` file and use Markdown syntax to include the image in the document.
+
+DO THAT HERE.
+
+
+# ~~Task 3: Extension~~
+
+There is no extension for this exercise! You'll be doing more of this in Mini Project 2 and in the final project.

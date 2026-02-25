@@ -1,0 +1,21 @@
+project:
+  type: website
+
+subtitle: "Exercise 11 --- PMAP 8551/4551, SEMESTER YEAR"
+author: "YOUR NAME HERE"
+date: "2025-11-03"
+date-format: "long"
+
+website:
+  title: "Interactivity"
+  navbar:
+    background: "#008B8B"
+    left:
+      - text: "Home"
+        href: index.qmd
+      - text: "Instructions + how to submit"
+        href: instructions.qmd
+      - text: "Tasks 1 and 2"
+        href: interactive-plots.qmd
+      - text: "Task 3"
+        href: dashboard.qmd

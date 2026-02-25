@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Data Visualization (Spring 2026 PMAP 8551/4551) News</title>
+<link>https://timmarchand.github.io/ISS_dataviz/news_feed.html</link>
+<atom:link href="https://timmarchand.github.io/ISS_dataviz/news_feed.xml" rel="self" type="application/rss+xml"/>
+<description>Updates and FAQs for PMAP 8551/4551 at Georgia State University, Spring 2026</description>
+<language>en</language>
+<generator>quarto-1.8.26</generator>
+<lastBuildDate>Tue, 03 Feb 2026 07:28:00 GMT</lastBuildDate>
+<item>
+  <title>Week 3 FAQs</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-02-03_faqs_week-03.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>FAQs</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-02-03_faqs_week-03.html</guid>
+  <pubDate>Tue, 03 Feb 2026 07:28:00 GMT</pubDate>
+</item>
+<item>
+  <title>Week 2 FAQs</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-27_faqs_week-02.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>FAQs</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-27_faqs_week-02.html</guid>
+  <pubDate>Tue, 27 Jan 2026 07:07:00 GMT</pubDate>
+</item>
+<item>
+  <title>FAQs about LLMs, R, and this class</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-27_llms-and-r.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>FAQs</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-27_llms-and-r.html</guid>
+  <pubDate>Tue, 27 Jan 2026 02:35:00 GMT</pubDate>
+</item>
+<item>
+  <title>LLMs are bad and dangerous for learning how to code in this class</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-27_llms-bad-for-learning-code.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>advice</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-27_llms-bad-for-learning-code.html</guid>
+  <pubDate>Tue, 27 Jan 2026 02:27:00 GMT</pubDate>
+</item>
+<item>
+  <title>Making cleaner, nicer Quarto documents</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-26_cleaner-nicer-qmd-output.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>advice</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-26_cleaner-nicer-qmd-output.html</guid>
+  <pubDate>Mon, 26 Jan 2026 14:21:00 GMT</pubDate>
+</item>
+<item>
+  <title>Copy, paste, and tweak</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-26_copy-paste-tweak.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>advice</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-26_copy-paste-tweak.html</guid>
+  <pubDate>Mon, 26 Jan 2026 14:06:00 GMT</pubDate>
+</item>
+<item>
+  <title>Week 1 tips and FAQs</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-26_faqs_week-01.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>FAQs</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-26_faqs_week-01.html</guid>
+  <pubDate>Mon, 26 Jan 2026 14:03:00 GMT</pubDate>
+</item>
+<item>
+  <title>How to ask for help</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-12_how-to-ask-for-help.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>advice</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-12_how-to-ask-for-help.html</guid>
+  <pubDate>Mon, 12 Jan 2026 00:02:00 GMT</pubDate>
+</item>
+<item>
+  <title>First day of class!</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-12_first-day-of-class.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>getting started</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-12_first-day-of-class.html</guid>
+  <pubDate>Sun, 11 Jan 2026 23:52:00 GMT</pubDate>
+</item>
+<item>
+  <title>Building community on Discord</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_building-community.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>advice</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_building-community.html</guid>
+  <pubDate>Mon, 05 Jan 2026 03:35:00 GMT</pubDate>
+</item>
+<item>
+  <title>Important R stuff</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_important-r-stuff.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>getting started</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_important-r-stuff.html</guid>
+  <pubDate>Mon, 05 Jan 2026 03:13:00 GMT</pubDate>
+</item>
+<item>
+  <title>Announcements and updates</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_announcements-updates.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>getting started</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_announcements-updates.html</guid>
+  <pubDate>Mon, 05 Jan 2026 02:55:00 GMT</pubDate>
+</item>
+<item>
+  <title>Welcome to class!</title>
+  <link>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_welcome.html</link>
+  <description><![CDATA[  ]]></description>
+  <category>getting started</category>
+  <guid>https://timmarchand.github.io/ISS_dataviz/news/2026-01-05_welcome.html</guid>
+  <pubDate>Mon, 05 Jan 2026 02:26:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
