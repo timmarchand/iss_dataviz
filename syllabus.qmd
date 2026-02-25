@@ -32,34 +32,32 @@ library(tinytable)
 knitr::opts_chunk$set(fig.align = "center")
 ```
 
-:::: {.grid .course-details .course-details-smaller}
-
+:::::: {.grid .course-details .course-details-smaller}
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ### Instructor
 
-- [{{< fa user >}}]{.fa-li} [{{< var instructor.name >}}]({{< var instructor.url >}})
-- [{{< fa university >}}]{.fa-li} {{< var instructor.office >}}
-- [{{< fa envelope >}}]{.fa-li} <a href='mailto:{{< var instructor.email >}}'>{{< var instructor.email >}}</a>
-- [{{< iconify fa6-brands bluesky size=1.1em title='Bluesky' >}}]{.fa-li} [Bluesky]({{< var instructor.bluesky >}})
+-   [{{< fa user >}}]{.fa-li} [{{< var instructor.name >}}]({{< var instructor.url >}})
+-   [{{< fa university >}}]{.fa-li} {{< var instructor.office >}}
+-   [{{< fa envelope >}}]{.fa-li} <a href='mailto:{{< var instructor.email >}}'>{{< var instructor.email >}}</a>
+-   [{{< iconify fa6-brands bluesky size=1.1em title='Bluesky' >}}]{.fa-li} [Bluesky]({{< var instructor.bluesky >}})
 :::
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
 ### Course details
 
-- [{{< fa calendar >}}]{.fa-li} {{< var course.days >}}
-- [{{< fa calendar-alt >}}]{.fa-li} {{< var course.dates >}}
-- [{{< fa clock >}}]{.fa-li} {{< var course.time >}}
-- [{{< fa location-dot >}}]{.fa-li} {{< var course.location >}}
+-   [{{< fa calendar >}}]{.fa-li} {{< var course.days >}}
+-   [{{< fa calendar-alt >}}]{.fa-li} {{< var course.dates >}}
+-   [{{< fa clock >}}]{.fa-li} {{< var course.time >}}
+-   [{{< fa location-dot >}}]{.fa-li} {{< var course.location >}}
 :::
 
 ::: {.g-col-12 .g-col-md-4 .contact-policy}
 ### Contacting me
 
-- [{{< fa calendar-check >}}]{.fa-li} [Schedule an appointment]({{< var instructor.appointment_url >}})
-- [{{< fa brands discord >}}]{.fa-li} [Discord]({{< var course.discord >}})
+-   [{{< fa calendar-check >}}]{.fa-li} [Schedule an appointment]({{< var instructor.appointment_url >}})
+-   [{{< fa brands discord >}}]{.fa-li} [Discord]({{< var course.discord >}})
 :::
-
-::::
+::::::
 
 ## Course objectives
 
@@ -69,25 +67,24 @@ In this class, you'll learn how to use industry-standard graphic and data design
 
 By the end of this course, you will become (1) literate in data and graphic design principles, and (2) an ethical data communicator, by producing beautiful, powerful, and clear visualizations of your own data. Specifically, you should:
 
-- Understand the principles of data and graphic design
-- Evaluate the credibility, ethics, and aesthetics of data visualizations
-- Create well-designed data visualizations with appropriate tools
-- Share data and graphics in open forums
-- Feel comfortable with R
-- Be curious and confident in consuming and producing data visualizations
+-   Understand the principles of data and graphic design
+-   Evaluate the credibility, ethics, and aesthetics of data visualizations
+-   Create well-designed data visualizations with appropriate tools
+-   Share data and graphics in open forums
+-   Feel comfortable with R
+-   Be curious and confident in consuming and producing data visualizations
 
 This class will expose you to [R](https://cran.r-project.org/)—one of the most popular, sought-after, and in-demand statistical programming languages. Armed with the foundation of R skills you'll learn in this class, you'll know enough to be able to find how to visualize and analyze any sort of data-based question in the future.
-
 
 ## Important pep talk!
 
 I *promise* you can succeed in this class.
 
-Learning R can be difficult at first—it's like learning a new language, just like Spanish, French, or Chinese. Hadley Wickham—the chief data scientist at RStudio and the author of some amazing R packages you'll be using like {ggplot2}—[made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/): 
+Learning R can be difficult at first—it's like learning a new language, just like Spanish, French, or Chinese. Hadley Wickham—the chief data scientist at RStudio and the author of some amazing R packages you'll be using like {ggplot2}—[made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
 
 > It's easy when you start out programming to get really frustrated and think, "Oh it's me, I'm really stupid," or, "I'm not made out to program." But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It's just a natural part of programming. So, it happens to everyone and gets less and less over time. Don't blame yourself. Just take a break, do something fun, and then come back and try again later.
 
-Even experienced programmers find themselves bashing their heads against seemingly intractable errors. If you're finding yourself taking way too long hitting your head against a wall and not understanding, take a break, talk to classmates, e-mail me, etc. 
+Even experienced programmers find themselves bashing their heads against seemingly intractable errors. If you're finding yourself taking way too long hitting your head against a wall and not understanding, take a break, talk to classmates, e-mail me, etc.
 
 ```{r}
 #| include: false
@@ -100,7 +97,6 @@ Even experienced programmers find themselves bashing their heads against seeming
 
 ![Alison Horst: Gator error](/files/img/syllabus/gator_error.jpg)
 
-
 ## Course materials
 
 All of the readings and software in this class are **free**. There are free online versions of all the textbooks, R and RStudio are inherently free, and you can use [free vector editing software](/resource/graphics-editors.qmd).
@@ -109,13 +105,13 @@ All of the readings and software in this class are **free**. There are free onli
 
 We'll rely heavily on these books, which are all available online (**for free!**). I recommend getting the printed versions of these books if you are interested, but it is not required.
 
-- Alberto Cairo, *The Truthful Art: Data, Charts, and Maps for Communication* (Berkeley, California: New Riders, 2016). \$20 used, \$50 new at [Amazon](https://www.amazon.com/Truthful-Art-Data-Charts-Communication/dp/0321934075). 
+-   Alberto Cairo, *The Truthful Art: Data, Charts, and Maps for Communication* (Berkeley, California: New Riders, 2016). \$20 used, \$50 new at [Amazon](https://www.amazon.com/Truthful-Art-Data-Charts-Communication/dp/0321934075).
 
-  A **free** eBook version is available through GSU's library through O'Reilly's Higher Education database. The easiest way to access it is to visit a special URL (<http://go.oreilly.com/georgia-state-university>), log in with your GSU account, and then search for "The Truthful Art".
+    A **free** eBook version is available through GSU's library through O'Reilly's Higher Education database. The easiest way to access it is to visit a special URL (<http://go.oreilly.com/georgia-state-university>), log in with your GSU account, and then search for "The Truthful Art".
 
-- Kieran Healy, *Data Visualization: A Practical Introduction* (Princeton: Princeton University Press, 2018), <http://socviz.co/>. [**FREE** online](http://socviz.co/); \$20 used, \$40 new at [Amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624/).
+-   Kieran Healy, *Data Visualization: A Practical Introduction* (Princeton: Princeton University Press, 2018), <http://socviz.co/>. [**FREE** online](http://socviz.co/); \$20 used, \$40 new at [Amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624/).
 
-- Claus E. Wilke, *Fundamentals of Data Visualization* (Sebastopol, California: O’Reilly Media, 2018), <https://serialmentor.com/dataviz/>. [**FREE** online](https://clauswilke.com/dataviz/); \$36 used, $50 new at [Amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089). An eBook version is also available through [the O'Reilly database](http://go.oreilly.com/georgia-state-university), but you can just use [the online version](https://clauswilke.com/dataviz/).
+-   Claus E. Wilke, *Fundamentals of Data Visualization* (Sebastopol, California: O’Reilly Media, 2018), <https://serialmentor.com/dataviz/>. [**FREE** online](https://clauswilke.com/dataviz/); \$36 used, \$50 new at [Amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089). An eBook version is also available through [the O'Reilly database](http://go.oreilly.com/georgia-state-university), but you can just use [the online version](https://clauswilke.com/dataviz/).
 
 There will occasionally be additional articles and videos to read and watch. When this happens, links to these other resources will be included on the content page for that session.
 
@@ -133,7 +129,7 @@ You can [find instructions for installing R, RStudio, and all the tidyverse pack
 
 Data science and statistical programming can be difficult. Computers are stupid and little errors in your code can cause hours of headache (even if you've been doing this stuff for years!).
 
-Fortunately there are tons of online resources to help you with this. 
+Fortunately there are tons of online resources to help you with this.
 
 #### Class community on Discord
 
@@ -149,16 +145,17 @@ Searching for help with R on Google can sometimes be tricky because the program 
 
 You can also check out the [Posit Community](https://community.rstudio.com/), a forum specifically designed for people using RStudio and the tidyverse (i.e. you).
 
-
 ## AI, LLMs, BS, and vibe coding
 
-I *highly recommend* **not** using ChatGPT or similar large language models (LLMs) in this class. 
+I *highly recommend* **not** using ChatGPT or similar large language models (LLMs) in this class.
 
 I am deeply opposed to LLMs for writing.
 
 I am kinda opposed to LLMs for code, but I am deeply opposed to them for beginners at code.
 
-By definition, LLMs and other AI tools cannot produce truth (or even lies). They generate [bullshit](https://doi.org/10.1007/s10676-024-09775-5)^[I'm a super straight-laced Mormon and, like, never ever swear or curse, but in this case, the word has a formal philosophical meaning [@Frankfurt:2005], so it doesn't count :)]—a formal philosophical term that refers to text or speech that has no regard for truth [@HicksHumphriesSlater:2024; @Frankfurt:2005].
+By definition, LLMs and other AI tools cannot produce truth (or even lies). They generate [bullshit](https://doi.org/10.1007/s10676-024-09775-5)[^1]—a formal philosophical term that refers to text or speech that has no regard for truth [@HicksHumphriesSlater:2024; @Frankfurt:2005].
+
+[^1]: I'm a super straight-laced Mormon and, like, never ever swear or curse, but in this case, the word has a formal philosophical meaning [@Frankfurt:2005], so it doesn't count :)
 
 [Please read this](/resource/ai-bs.qmd) to better understand how LLMs circumvent the writing and learning process.
 
@@ -168,11 +165,13 @@ A key theme of the class is the search for truth. Generating useless content wil
 
 In your session check-ins and assignments, I want to see good engagement with the readings. I want to see your thinking process. I want to see you make connections between the readings. I want to see your personal insights. I don't want to see a bunch of words that look like a human wrote them. That's not useful for future-you. That's not useful for me. That's a waste of time.
 
-I will not spend time trying to guess if your assignments are AI-generated.^[There are tools that purport to be able to identify the percentage of a given text that is AI, but they do not work and result in all sorts of false positives.] If you do turn in AI-produced content, I won't automatically give you a zero, with one exception: *if your work contains fake data, it will receive a zero*. I'll grade your work based on its own merits. I've found that AI-produced content will typically earn a ✓− (50%) or lower on my check-based grading system without me even needing to look for clues that it might have come from an LLM. Remember that text generated by these platforms is philosophical bullshit. Since it has nothing to do with truth, it will not—by definition—earn good grades.
+I will not spend time trying to guess if your assignments are AI-generated.[^2] If you do turn in AI-produced content, I won't automatically give you a zero, with one exception: *if your work contains fake data, it will receive a zero*. I'll grade your work based on its own merits. I've found that AI-produced content will typically earn a ✓− (50%) or lower on my check-based grading system without me even needing to look for clues that it might have come from an LLM. Remember that text generated by these platforms is philosophical bullshit. Since it has nothing to do with truth, it will not—by definition—earn good grades.
+
+[^2]: There are tools that purport to be able to identify the percentage of a given text that is AI, but they do not work and result in all sorts of false positives.
 
 ## Course schedule
 
-We have no regularly scheduled meeting times. 
+We have no regularly scheduled meeting times.
 
 Instead, 100% of the class content is asynchronous. You can do the readings and watch the videos on your own schedule at whatever time works best for you. Many of you work full time and you have childcare and parental care responsibilities, leaving you with only evenings for coursework. I've designed this asynchronous system with *you specifically* in mind. I also can only really do teaching work at night when my kids are in bed—I recorded all these videos between like 10 PM and 2 AM. We're all in similar pandemic boats.
 
@@ -180,9 +179,9 @@ Each week has (1) a set of readings and an accompanying lecture, (2) a lesson, (
 
 I recommend following this general process for each session:
 
-- Do everything on the content page ({{< fa book-open-reader >}})
-- Work through the lesson page ({{< fa chalkboard-teacher >}})
-- Complete the assignment ({{< fa pen-ruler >}}) while referencing the example ({{< fa laptop-code >}})
+-   Do everything on the content page ({{< fa book-open-reader >}})
+-   Work through the lesson page ({{< fa chalkboard-teacher >}})
+-   Complete the assignment ({{< fa pen-ruler >}}) while referencing the example ({{< fa laptop-code >}})
 
 ## Learning in troubled times
 
@@ -200,8 +199,7 @@ If you need extra help, or if you need more time with something, or if you feel 
 
 *Please* sign up for a time to meet with me during student hours at <https://scheduler.zoom.us/andrewheiss>. I'm also available through e-mail and Discord. I've enabled notifications on my Discord account, so I'll see your messages quickly!
 
-I want you to learn lots of things from this class (Graphic design! Fancy charts! R! ggplot!), but I primarily want you to stay healthy, balanced, and grounded during these chaotic, awful times. 
-
+I want you to learn lots of things from this class (Graphic design! Fancy charts! R! ggplot!), but I primarily want you to stay healthy, balanced, and grounded during these chaotic, awful times.
 
 ## Course policies
 
@@ -215,15 +213,21 @@ This syllabus reflects a plan for the semester. Deviations may become necessary 
 
 Please watch [this video](https://vimeo.com/270014784): <small>(*this is not me, btw—this is a different Andrew*)</small>
 
-<div class="ratio ratio-16x9">
-<iframe src="https://player.vimeo.com/video/270014784" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="display: block; margin: 0 auto 1rem;"></iframe>
-</div>
+::: {.ratio .ratio-16x9}
+<iframe src="https://player.vimeo.com/video/270014784" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="display: block; margin: 0 auto 1rem;">
 
-\ 
+</iframe>
+:::
 
-Student hours are set times dedicated to all of you (most professors call these "office hours"; I don't^[There's fairly widespread misunderstanding about what office hours actually are! [Many students often think that they are the times I *shouldn't* be disturbed](https://www.chronicle.com/article/Can-This-Man-Change-How-Elite/245714/), which is the exact opposite of what they're for!]). This means that I will be waiting for you to talk to me (in person or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns.
+ 
 
-Since my schedule is often chaotic^[Shuttling 5 kids around to different sports and music lessons, parenting while my wife is in her classes (she's a PhD student at UGA), meeting and traveling for research, and so on] I don't have official permanently-set student hours every week. Instead, the best way to meet with me is to [make an appointment with me here](https://scheduler.zoom.us/andrewheiss). You can choose an online or in-person slot—if you choose an online slot, the confirmation e-mail will contain a link for a Zoom meeting. You can also find me through e-mail and Discord.
+Student hours are set times dedicated to all of you (most professors call these "office hours"; I don't[^3]). This means that I will be waiting for you to talk to me (in person or remotely) with whatever questions you have. This is the best and easiest way to find me and the best chance for discussing class material and concerns.
+
+[^3]: There's fairly widespread misunderstanding about what office hours actually are! [Many students often think that they are the times I *shouldn't* be disturbed](https://www.chronicle.com/article/Can-This-Man-Change-How-Elite/245714/), which is the exact opposite of what they're for!
+
+Since my schedule is often chaotic[^4] I don't have official permanently-set student hours every week. Instead, the best way to meet with me is to [make an appointment with me here](https://scheduler.zoom.us/andrewheiss). You can choose an online or in-person slot—if you choose an online slot, the confirmation e-mail will contain a link for a Zoom meeting. You can also find me through e-mail and Discord.
+
+[^4]: Shuttling 5 kids around to different sports and music lessons, parenting while my wife is in her classes (she's a PhD student at UGA), meeting and traveling for research, and so on
 
 ### Late work
 
@@ -236,7 +240,6 @@ So to counter this, **I use kinda-sorta-hard-ish deadlines** to help you stay on
 You will lose 0.5 points per day for each day an exercise is late. This is designed to not be a huge penalty (3 days late = 18.5/20 points on an exercise/session check-in that gets a ✓), but instead is a commitment device to help you stay on schedule.
 
 I will (typically) not accept work that is more than two weeks late. Again, this is not designed to be punitive—this is to help keep you on schedule. Being four or five weeks behind will only make you fall even more behind. HOWEVER if you have extenuating circumstances, I'm more than happy to accommodate. Just check in with me and let me know what's up.
-
 
 ### Counseling and Psychological Services (CPS)
 
@@ -260,14 +263,15 @@ Any form of sexual harassment or violence will not be excused or tolerated at Ge
 
 ### Academic honesty
 
-Violation of [GSU's Policy on Academic Honesty](https://deanofstudents.gsu.edu/faculty-staff-resources/academic-honesty/) will result in an F in the course and possible disciplinary action.^[So seriously, just don't cheat or plagiarize!] All violations will be formally reported to the Dean of Students.
+Violation of [GSU's Policy on Academic Honesty](https://deanofstudents.gsu.edu/faculty-staff-resources/academic-honesty/) will result in an F in the course and possible disciplinary action.[^5] All violations will be formally reported to the Dean of Students.
+
+[^5]: So seriously, just don't cheat or plagiarize!
 
 ### Special needs
 
 Students who wish to request accommodation for a disability may do so by registering with the [Office of Disability Services](https://disability.gsu.edu/). Students may only be accommodated upon issuance by the Office of Disability Services of a signed [Accommodation Plan](https://disability.gsu.edu/services/how-to-register/) and are responsible for providing a copy of that plan to instructors of all classes in which accommodations are sought.
 
 Students with special needs should then make an appointment with me during the first week of class to discuss any accommodations that need to be made.
-
 
 ## Assignments and grades
 
@@ -298,8 +302,7 @@ grading <- tribble(
 )
 ```
 
-::: {.centered-table}
-
+::: centered-table
 ```{r show-assignments-table, echo=FALSE}
 assignments |>
   tt() |> 
@@ -308,11 +311,9 @@ assignments |>
   format_tt(j = 3, fn = scales::label_percent()) |> 
   format_tt(escape = TRUE)
 ```
-
 :::
 
-::: {.centered-table}
-
+::: centered-table
 ```{r show-grades-table, echo=FALSE}
 grading |>
   setNames(c("Grade", "Range", "Grade", "Range")) |> 
@@ -321,20 +322,16 @@ grading |>
   style_tt(i = 1, line = "t", line_width = 0.1, line_color = "#d3d8dc") |> 
   style_tt(j = 2, bootstrap_css = "border-right: 0.1em dashed #d3d8dc;")
 ```
-
 :::
-
 
 ## Recipes
 
 Once you have read this entire syllabus and [the assignments page](/assignment/index.qmd), post your **favorite recipe** (either a link or the text) to the `#recipes` channel on Discord. I love cooking ([see here for a feed of some of my cooking adventures](https://bsky.app/search?q=from%3Aandrew.heiss.phd+%23pacooks)) and I'm always on the lookout for new things!
 
-:::::: {.content-visible when-format="typst"}
-
+:::: {.content-visible when-format="typst"}
 ## Schedule
 
-::: {.schedule-table}
-
+::: schedule-table
 ```{r}
 #| label: schedule-table
 #| warning: false
@@ -413,7 +410,7 @@ tbl_data |>
   style_tt(i = highlight_rows, background = "#eeeeee") |>
   format_tt(j = 3, markdown = TRUE)
 ```
-
 :::
+::::
 
-::::::
+**Acknowledgments**: This course is a derivative of [PMAP 8551](https://datavizsp26.classes.andrewheiss.com/) designed by Andrew Heiss at Georgia State University. I have adapted the materials for the ISS context at Gakushuin University.

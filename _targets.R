@@ -51,13 +51,13 @@ source("R/tar_calendar.R")
 list(
   ## Slides ----
   # Render all the slides and make PDFs
-  build_slides,
-  
-  # The main index.qmd page loads all_slides as a target to link it as a dependency
-  tar_combine(
-    all_slides,
-    tar_select_targets(build_slides, starts_with("slide_pdf_"))
-  ),
+  # build_slides,
+  # 
+  # # The main index.qmd page loads all_slides as a target to link it as a dependency
+  # tar_combine(
+  #   all_slides,
+  #   tar_select_targets(build_slides, starts_with("slide_pdf_"))
+  # ),
 
   
   ## Project folders ----
@@ -96,8 +96,8 @@ list(
   
 
   ## Build site ----
+  ## Build site ----
   tar_quarto(site, path = ".", quiet = FALSE),
-
   
   ## Upload site ----
   tar_target(deploy_script, here_rel("deploy.sh"), format = "file"),

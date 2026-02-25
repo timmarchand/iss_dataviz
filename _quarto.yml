@@ -25,9 +25,11 @@ bibliography: files/bib/readings.bib
 csl: files/bib/chicago-author-date.csl
 
 website:
-  title: "Data Visualization with R"
-  description: "Use R, ggplot2, and the principles of graphic design to create beautiful and truthful visualizations of data"
-  site-url: "https://datavizsp26.classes.andrewheiss.com"
+  title: "ISS Data Visualiation and Analysis"
+  description: "Course materials for ISS Data Visualization and Analysis Course at Gakushuin University"
+  site-url: "https://timmarchand.github.io/ISS_dataviz/"
+  repo-url: "https://github.com/timmarchand/ISS_dataviz"
+  
 
   draft-mode: unlinked
 
@@ -40,19 +42,7 @@ website:
 
   favicon: "/files/favicon-512.png"
 
-  twitter-card:
-    image: "/files/social-image-sp26.png"
-    card-style: summary_large_image
-    creator: "@andrewheiss"
-    # site: "@andrewheiss"
 
-  open-graph:
-    image: "/files/social-image-sp26.png"
-    locale: en_US
-
-  repo-url: "https://github.com/andrewheiss/datavizsp26.classes.andrewheiss.com"
-  repo-actions: [source, issue]
-  
   page-navigation: true
 
   navbar:
@@ -65,8 +55,8 @@ website:
         file: content/index.qmd
       - text: "Lessons"
         file: lesson/index.qmd
-      - text: "Examples"
-        file: example/index.qmd
+     # - text: "Examples"
+      #  file: example/index.qmd
       - text: "Assignments"
         file: assignment/index.qmd
       - text: "Resources"
@@ -284,16 +274,14 @@ website:
             - resource/unzipping.qmd
 
 
-  page-footer:
+page-footer:
     left: |
-      Content {{< fa brands creative-commons >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
-      All content licensed under a {{< fa brands creative-commons >}}
-      {{< fa brands creative-commons-by >}} {{< fa brands creative-commons-nc >}}
-      [Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/)
+      Content {{< fa brands creative-commons >}} 2026 by [Tim Marchand](your_url) <br>
+      Adapted from [Andrew Heiss's Data Visualization course](https://datavizsp26.classes.andrewheiss.com/)
     right: |
       Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
       [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})
-
+      
 format:
   html:
     theme:

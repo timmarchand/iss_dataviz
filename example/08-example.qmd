@@ -4,7 +4,17 @@ date: "2026-03-02"
 date_end: "2026-03-06"
 ---
 
+
 ```{r load-targets, include=FALSE}
+library(targets)
+
+# 1. Pull the data from targets
+tar_load(get_data_wdi_annotations)
+
+# 2. Rename it to what the rest of the file expects
+wdi_clean <- get_data_wdi_annotations
+
+# 3. Ensure the WDI path for the download link works
 withr::with_dir(here::here(), {
   wdi_path <- targets::tar_read(data_wdi_comparisons)
 })
@@ -109,6 +119,7 @@ head(wdi_clean)
 First we can make some small multiples plots and show life expectancy over time for a handful of countries. We'll make a list of some countries chosen at random while I scrolled through the data, and then filter our data to include only those rows. We then plot life expectancy, faceting by country.
 
 ```{r life-expectancy-small}
+#| eval: false
 life_expectancy_small <- wdi_clean |>
   filter(country %in% c("Argentina", "Bolivia", "Brazil", 
                         "Belize", "Canada", "Chile"))
@@ -124,6 +135,7 @@ Small multiples! That's all we need to do.
 We can do some fancier things, though. We can make this plot hyper minimalist:
 
 ```{r life-expectancy-small-minimalist}
+#| eval: false
 ggplot(data = life_expectancy_small, 
        mapping = aes(x = year, y = life_expectancy)) +
   geom_line(linewidth = 1) +
@@ -135,6 +147,7 @@ ggplot(data = life_expectancy_small,
 We can do a whole part of a continent (poor Iraq and Syria `r emoji::emoji("sad")`)
 
 ```{r life-expectancy-mena, fig.width=10, fig.height=3.5}
+#| eval: false
 life_expectancy_mena <- wdi_clean |> 
   filter(region == "Middle East & North Africa")
 
@@ -149,6 +162,7 @@ ggplot(data = life_expectancy_mena,
 We can use the [{geofacet} package](https://hafen.github.io/geofacet/) to arrange these facets by geography:
 
 ```{r life-expectancy-eu, warning=FALSE, message=FALSE, fig.width=10, fig.height=8}
+#| eval: false
 life_expectancy_eu <- wdi_clean |> 
   filter(region == "Europe & Central Asia")
 
@@ -211,6 +225,7 @@ We can make a slopegraph to show changes in GDP per capita between two time peri
 We then add a couple special columns for labels. The `paste0()` function concatenates strings and variables together, so that `paste0("2 + 2 = ", 2 + 2)` would show "2 + 2 = 4". Here we make labels that say either "Country name: \$GDP" or "\$GDP" depending on the year.
 
 ```{r slopegraph-sa-data}
+#| eval: false
 gdp_south_asia <- wdi_clean |> 
   filter(region == "South Asia") |> 
   filter(year %in% c(1995, 2015)) |> 
@@ -231,6 +246,7 @@ gdp_south_asia <- wdi_clean |>
 With the data filtered like this, we can plot it by mapping year to the x-axis, GDP per capita to the y-axis, and coloring by country. To make the lines go across the two categorical labels in the x-axis (since we made year a factor/category), we need to also specify the `group` aesthetic.
 
 ```{r slopegraph-sa-simple}
+#| eval: false
 ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
   geom_line(linewidth = 1.5)
 ```
@@ -238,6 +254,7 @@ ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = c
 Cool! We're getting closer. We can definitely see different slopes, but with 7 different colors, it's hard to see exactly which country is which. Instead, we can directly label each of these lines with `geom_text()`:
 
 ```{r slopegraph-sa-simple-text}
+#| eval: false
 ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
   geom_line(linewidth = 1.5) +
   geom_text(aes(label = country)) +
@@ -247,6 +264,7 @@ ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = c
 That gets us a *little* closer, but the country labels are hard to see, and we could include more information, like the actual values. Remember those `label_first` and `label_last` columns we made? Let's use those instead:
 
 ```{r slopegraph-sa-simple-text-fancier, warning=FALSE}
+#| eval: false
 ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
   geom_line(linewidth = 1.5) +
   geom_text(aes(label = label_first)) +
@@ -257,6 +275,7 @@ ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = c
 Now we have dollar amounts and country names, but the labels are still overlapping and really hard to read. To fix this, we can make the labels repel away from each other and randomly position in a way that makes them not overlap. The [{ggrepel} package](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html) lets us do this with `geom_text_repel()`
 
 ```{r slopegraph-sa-getting-warmer, warning=FALSE}
+#| eval: false
 ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
   geom_line(linewidth = 1.5) +
   geom_text_repel(aes(label = label_first)) +
@@ -267,6 +286,7 @@ ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = c
 Now none of the labels are on top of each other, but the labels are still on top of the lines. Also, some of the labels moved inward and outward along the x-axis, but they don't need to do that—they just need to shift up and down. We can force the labels to only move up and down by setting the `direction = "y"` argument, and we can move all the labels to the left or right with the `nudge_x` argument. The `seed` argument makes sure that the random label placement is the same every time we run this. It can be whatever number you want—it just has to be a number.
 
 ```{r slopegraph-sa-fancier, warning=FALSE}
+#| eval: false
 ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
   geom_line(linewidth = 1.5) +
   geom_text_repel(aes(label = label_first), direction = "y", nudge_x = -1, seed = 1234) +
@@ -277,6 +297,7 @@ ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = c
 That's it! Let's take the theme off completely, change the colors a little, and it should be perfect.
 
 ```{r slopegraph-sa-done, warning=FALSE}
+#| eval: false
 ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = country)) +
   geom_line(linewidth = 1.5) +
   geom_text_repel(aes(label = label_first), direction = "y", nudge_x = -1, seed = 1234) +
@@ -292,6 +313,7 @@ ggplot(gdp_south_asia, aes(x = year, y = gdp_per_cap, group = country, color = c
 Finally, we can make a bump chart that shows changes in rankings over time. We'll look at CO<sub>2</sub> emissions in South Asia. First we need to calculate a new variable that shows the rank of each country within each year. We can do this if we group by year and then use the `rank()` function to rank countries by the `co2_emissions` column.
 
 ```{r filter-bump-data}
+#| eval: false
 sa_co2 <- wdi_clean |> 
   filter(region == "South Asia") |> 
   filter(year >= 2004, year < 2015) |> 
@@ -302,6 +324,7 @@ sa_co2 <- wdi_clean |>
 We then plot this with points and lines, reversing the y-axis so 1 is at the top:
 
 ```{r make-bump-plot}
+#| eval: false
 ggplot(sa_co2, aes(x = year, y = rank, color = country)) +
   geom_line() +
   geom_point() +
@@ -313,6 +336,7 @@ Afghanistan and Nepal switched around for the number 1 spot, while Pakistan boun
 As with the slopegraph, there are 8 different colors in the legend and it's hard to line them all up with the different lines, so we can plot the text directly instead. We'll use `geom_text()` again. We don't need to repel anything, since the text should fit in each row just fine. We need to change the `data` argument in `geom_text()` though and filter the data to only include one year, otherwise we'll get labels on every point, which is excessive. We can also adjust the theme and colors to make it cleaner.
 
 ```{r bump-plot-fancier, fig.width=7, fig.height=4.2}
+#| eval: false
 ggplot(sa_co2, aes(x = year, y = rank, color = country)) +
   geom_line(linewidth = 2) +
   geom_point(size = 4) +
