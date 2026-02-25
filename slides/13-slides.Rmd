@@ -1,6 +1,6 @@
 ---
 title: "Time"
-author: "Andrew Heiss"
+author: "Tim Marchand"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -58,8 +58,8 @@ class: center middle main-title section-title-4
 
 **Session 13**
 
-.light[PMAP 8551/4551: Data Visualization with R<br>
-Andrew Young School of Policy Studies<br>
+.light[ISS Data Visualization with R<br>
+Faculty of International Social Sciences, Gakushuin University<br>
 Spring 2026]
 
 ]

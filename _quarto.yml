@@ -47,7 +47,7 @@ website:
 
   navbar:
     pinned: true
-    background: "#E16462"
+    background: "#003366"
     right:
       - syllabus.qmd
       - schedule.qmd
