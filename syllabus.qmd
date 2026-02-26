@@ -42,7 +42,9 @@ knitr::opts_chunk$set(fig.align = "center")
 ::: {.g-col-12 .g-col-md-4 .contact-policy}
 ### Contacting me
 
--   [{{< fa calendar-check >}}]{.fa-li} [Schedule an appointment]({{< var instructor.appointment_url >}})
+- [{{< fa envelope >}}]{.fa-li} <a href='mailto:{{< var instructor.email >}}'>{{< var instructor.email >}}</a>
+- [{{< fa calendar-check >}}]{.fa-li} [Schedule an appointment]({{< var instructor.appointment_url >}})
+- [{{< fa graduation-cap >}}]{.fa-li} [Moodle]({{< var course.moodle >}})
 :::
 ::::::
 
