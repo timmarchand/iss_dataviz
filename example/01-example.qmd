@@ -1,7 +1,7 @@
 ---
 title: "Introduction to R and the tidyverse"
-date: "2026-01-12"
-date_end: "2026-01-16"
+date: "2026-04-16"
+date_end: "2026-04-22"
 ---
 
 ## Basic process for working with RStudio
@@ -10,7 +10,7 @@ For this example, I'm going to create a new RStudio project, download some data,
 
 To follow along, download this CSV file here (you may need to right click on it and select "Save As…"):
 
-- [{{< fa file-csv >}} `gapminder.csv`](/files/data/package_data/gapminder.csv)
+- [{{< fa file-csv >}} `gapminder.csv`](../files/data/package_data/gapminder.csv)
 
 Here's a video walkthrough of how to get started:
 

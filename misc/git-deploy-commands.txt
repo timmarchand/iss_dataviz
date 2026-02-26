@@ -5,3 +5,7 @@ git push origin main
 
 # Publish the newly built HTML slides to the live website
 quarto publish gh-pages
+
+
+# Undo uncommited changes
+git checkout .

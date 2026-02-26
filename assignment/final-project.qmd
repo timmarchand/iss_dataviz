@@ -1,6 +1,6 @@
 ---
 title: "Final project"
-date: "2026-05-03"
+date: "2026-05-02"
 ---
 
 You made it to the end of our whirlwind tour of data visualization principles! Congratulations!

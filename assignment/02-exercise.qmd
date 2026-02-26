@@ -1,6 +1,6 @@
 ---
 title: "Graphic design"
-date: "2026-01-26"
+date: "2026-04-22"
 ---
 
 ::: {.callout-note}

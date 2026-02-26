@@ -1,7 +1,7 @@
 ---
 title: "Enhancing graphics"
-date: "2026-03-23"
-date_end: "2026-03-27"
+date: "2026-06-18"
+date_end: "2026-06-24"
 ---
 
 ## Why enhance graphics?

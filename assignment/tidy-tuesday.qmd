@@ -1,6 +1,6 @@
 ---
 title: "#TidyTuesday"
-date: "2026-04-28"
+date: "2026-04-27"
 ---
 
 The objectives of this class include "Be curious and confident in consuming and producing data visualizations", "Feel comfortable with R", and "Share data and graphics in open forums." To help you with this, you will participate in a #TidyTuesday challenge.

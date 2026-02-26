@@ -1,6 +1,6 @@
 ---
 title: "Interactivity"
-date: "2026-04-06"
+date: "2026-06-24"
 ---
 
 ```{r setup, include=FALSE}
