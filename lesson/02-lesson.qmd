@@ -15,7 +15,7 @@ Recall from the [last section of the lecture](/slides/02-slides.html#image-types
 Bitmaps store image information as tiny squares, or pixels. Specific files types compress these images in different ways: JPEG files smudge together groups of similarly colored pixels to save repetition, while PNG and GIF files look for fields of the exact same color.
 
 ```{r bitmap-example, echo=FALSE, out.width="30%"}
-knitr::include_graphics("/slides/img/02/example-bitmap.png", error = FALSE)
+knitr::include_graphics("../slides/img/02/example-bitmap.png", error = FALSE)
 ```
 
 You use bitmap images for things that go on the internet and when you place images in Word (technically modern versions of Word can handle some types of vector images, but that support isn't universal yet). 
@@ -23,7 +23,7 @@ You use bitmap images for things that go on the internet and when you place imag
 Vector images, on the other hand, do not store image information as pixels. Instead, these use mathematical formulas to draw lines and curves and fill areas with specific colors. This makes them a little more complicated to draw and create, but it also means that you can scale them up or down infinitely—a vector image will look just as crisp on a postage stamp as it would on a billboard. 
 
 ```{r vector-example, echo=FALSE, out.width="30%"}
-knitr::include_graphics("/slides/img/02/example-vector.png", error = FALSE)
+knitr::include_graphics("../slides/img/02/example-vector.png", error = FALSE)
 ```
 
 Here are some general guidelines:
@@ -46,7 +46,7 @@ library(checkdown)
 ::: {.question}
 
 ```{r atlanta-sign, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/files/img/lesson/file-types/atlanta-sign.jpg", error = FALSE)
+knitr::include_graphics("../files/img/lesson/file-types/atlanta-sign.jpg", error = FALSE)
 ```
 
 ```{r atlanta-sign-question, echo=FALSE, results="asis"}
@@ -63,7 +63,7 @@ check_question("JPG", options = c("PNG", "JPG", "PDF"), type = "radio",
 ::: {.question}
 
 ```{r gsu-logo, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/files/img/lesson/file-types/gsu-logo.png", error = FALSE)
+knitr::include_graphics("../files/img/lesson/file-types/gsu-logo.png", error = FALSE)
 ```
 
 ```{r gsu-logo-question, echo=FALSE, results="asis"}
@@ -80,7 +80,7 @@ check_question(c("PNG", "PDF"), options = c("PNG", "JPG", "PDF"), type = "radio"
 ::: {.question}
 
 ```{r pie-chart, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/files/img/lesson/file-types/pie_chart.png", error = FALSE)
+knitr::include_graphics("../files/img/lesson/file-types/pie_chart.png", error = FALSE)
 ```
 
 ```{r pie-chart-question, echo=FALSE, results="asis"}
@@ -114,7 +114,7 @@ check_question("JPG", options = c("PNG", "JPG", "PDF"), type = "radio",
 ::: {.question}
 
 ```{r butterflies, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/files/img/lesson/file-types/butterflies.png", error = FALSE)
+knitr::include_graphics("../files/img/lesson/file-types/butterflies.png", error = FALSE)
 ```
 
 ```{r butterflies-question, echo=FALSE, results="asis"}
@@ -131,7 +131,7 @@ check_question(c("PNG", "PDF"), options = c("PNG", "JPG", "PDF"), type = "radio"
 ::: {.question}
 
 ```{r atlanta-night, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/files/img/lesson/file-types/atlanta-night.jpg", error = FALSE)
+knitr::include_graphics("../files/img/lesson/file-types/atlanta-night.jpg", error = FALSE)
 ```
 
 ```{r atlanta-night-question, echo=FALSE, results="asis"}

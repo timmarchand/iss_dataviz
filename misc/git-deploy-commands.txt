@@ -1,0 +1,7 @@
+# Save your underlying code changes
+git add .
+git commit -m "COMMENT"
+git push origin main
+
+# Publish the newly built HTML slides to the live website
+quarto publish gh-pages
