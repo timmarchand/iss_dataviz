@@ -1,6 +1,6 @@
 ---
 title: "Themes"
-subtitle: "Exercise 5 --- PMAP 8551/4551, Spring 2026"
+subtitle: "Exercise 5 --- ISS dataviz, Spring 2026"
 author: "YOUR NAME HERE"
 date: "DATE GOES HERE"
 date-format: "long"

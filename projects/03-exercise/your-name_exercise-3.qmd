@@ -1,6 +1,6 @@
 ---
 title: "Mapping data to graphics"
-subtitle: "Exercise 3 --- PMAP 8551/4551, Spring 2026"
+subtitle: "Exercise 3 --- ISS dataviz, Spring 2026"
 author: "YOUR NAME HERE"
 date: "DATE GOES HERE"
 date-format: "long"

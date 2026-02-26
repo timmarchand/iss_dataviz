@@ -143,6 +143,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Lessons</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="../example/index.html"> 
+<span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="../assignment/index.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
@@ -150,17 +154,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../resource/index.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="../news/index.html"> 
-<span class="menu-text">News</span></a>
-  </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://discord.com/"> <i class="bi bi-discord" role="img" aria-label="Discord">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://posit.cloud"> <i class="bi bi-cloud-fill" role="img" aria-label="Posit.cloud">
+    <a class="nav-link" href="https://moodle.univ.gakushuin.ac.jp/course/view.php?id=26121"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Moodle">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -183,7 +178,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#whats-the-difference-between-source-and-visual-mode-in-the-editor-window" id="toc-whats-the-difference-between-source-and-visual-mode-in-the-editor-window" class="nav-link active" data-scroll-target="#whats-the-difference-between-source-and-visual-mode-in-the-editor-window">What’s the difference between Source and Visual mode in the editor window?</a></li>
   <li><a href="#whats-the-difference-between-r-markdown-and-quarto" id="toc-whats-the-difference-between-r-markdown-and-quarto" class="nav-link" data-scroll-target="#whats-the-difference-between-r-markdown-and-quarto">What’s the difference between R Markdown and Quarto?</a></li>
   <li><a href="#why-dont-i-have-options-to-render-to-pdf-or-word-or-html" id="toc-why-dont-i-have-options-to-render-to-pdf-or-word-or-html" class="nav-link" data-scroll-target="#why-dont-i-have-options-to-render-to-pdf-or-word-or-html">Why don’t I have options to render to PDF (or Word or HTML)?</a></li>
-  <li><a href="#rendered-document-format-for-icollege" id="toc-rendered-document-format-for-icollege" class="nav-link" data-scroll-target="#rendered-document-format-for-icollege">Rendered document format for iCollege</a></li>
+  <li><a href="#rendered-document-format-for-moodle" id="toc-rendered-document-format-for-moodle" class="nav-link" data-scroll-target="#rendered-document-format-for-moodle">Rendered document format for Moodle</a></li>
   <li><a href="#what-is-this-typst-thing-that-we-can-render-to" id="toc-what-is-this-typst-thing-that-we-can-render-to" class="nav-link" data-scroll-target="#what-is-this-typst-thing-that-we-can-render-to">What is this “typst” thing that we can render to?</a></li>
   <li><a href="#how-does-group_by-work-why-did-we-have-to-group-by-island-and-not-body_mass-and-island" id="toc-how-does-group_by-work-why-did-we-have-to-group-by-island-and-not-body_mass-and-island" class="nav-link" data-scroll-target="#how-does-group_by-work-why-did-we-have-to-group-by-island-and-not-body_mass-and-island">How does <code>group_by()</code> work? Why did we have to group by <code>island</code> and not <code>body_mass</code> and <code>island</code>?</a></li>
   <li><a href="#how-do-we-know-which-type-of-graph-to-use-for-different-types-of-data" id="toc-how-do-we-know-which-type-of-graph-to-use-for-different-types-of-data" class="nav-link" data-scroll-target="#how-do-we-know-which-type-of-graph-to-use-for-different-types-of-data">How do we know which type of graph to use for different types of data?</a></li>
@@ -257,7 +252,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="whats-the-difference-between-r-markdown-and-quarto" class="level3">
 <h3 class="anchored" data-anchor-id="whats-the-difference-between-r-markdown-and-quarto">What’s the difference between R Markdown and Quarto?</h3>
-<p>In the videos, you’ll see examples of using R Markdown (i.e.&nbsp;files with an <code>.Rmd</code> extension), but in the instructions for the exercises and the answer keys on iCollege, I have you use Quarto (i.e.&nbsp;files with a <code>.qmd</code> extension) instead. Why?</p>
+<p>In the videos, you’ll see examples of using R Markdown (i.e.&nbsp;files with an <code>.Rmd</code> extension), but in the instructions for the exercises and the answer keys on Moodle, I have you use Quarto (i.e.&nbsp;files with a <code>.qmd</code> extension) instead. Why?</p>
 <p><a href="https://quarto.org/">Quarto Markdown</a> is <a href="../resource/markdown.html">regular Markdown</a> with R code and output sprinkled in. You can do everything you can with <a href="../resource/markdown.html">regular Markdown</a>, but you can incorporate graphs, tables, and other code output directly in your document. You can create HTML, PDF, and Word documents, PowerPoint and HTML presentations, websites, books, and even interactive dashboards with Quarto. This whole course website is created with Quarto.</p>
 <p>Quarto’s predecessor was R Markdown and worked exclusively with R (though there are ways to use other languages in document). <strong>Quarto is essentially “R Markdown 2.0,”</strong> but it is designed to be language agnostic. You can <a href="https://quarto.org/docs/computations/r.html">use R</a>, <a href="https://quarto.org/docs/computations/julia.html">Python</a>, <a href="https://quarto.org/docs/computations/julia.html">Julia</a>, <a href="https://quarto.org/docs/computations/ojs.html">Observable JS</a>, and even <a href="https://gist.github.com/andrewheiss/f38ceb81d362a7fc7cda3ae9ccf1283c">Stata</a> code all in the same document. It is magical.</p>
 <p>The core idea behind R Markdown—that you can intersperse text with code chunks—is the same in Quarto, and the syntax is the same too. Everything R Markdown-related in the videos should work just the same in Quarto.</p>
@@ -292,10 +287,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>That makes it so that HTML, PDF, typst (fancier, faster PDFs), and Word all appear in the dropdown menu. Additionally, it enables an automatic table of contents (<code>toc: true</code>) in each format. There are a ton of different format-specific settings you can change—<a href="../news/2026-01-26_cleaner-nicer-qmd-output.html#fancy-document-settings">see here for more details and examples</a>.</p>
 </section>
-<section id="rendered-document-format-for-icollege" class="level3">
-<h3 class="anchored" data-anchor-id="rendered-document-format-for-icollege">Rendered document format for iCollege</h3>
+<section id="rendered-document-format-for-moodle" class="level3">
+<h3 class="anchored" data-anchor-id="rendered-document-format-for-moodle">Rendered document format for Moodle</h3>
 <p>Quarto is great and wonderful in part because you can write a document in one <code>.qmd</code> file and have it magically turn into an HTML file, a Word file, or a PDF (or if you want to get extra fancy later, a slideshow, a dashboard, or even a full website).</p>
-<p>iCollege doesn’t like HTML files, though. It won’t show images that get uploaded because of weird server restrictions or something. <strong>So when you submit your exercises, make sure you render as PDF or Word.</strong>. Don’t upload HTML files, and don’t upload your <code>.qmd</code> file.</p>
+<p>Moodle doesn’t like HTML files, though. It won’t show images that get uploaded because of weird server restrictions or something. <strong>So when you submit your exercises, make sure you render as PDF or Word.</strong>. Don’t upload HTML files, and don’t upload your <code>.qmd</code> file.</p>
 <p>I’d recommend rendering as HTML often as you work on the exercise. Rendering as PDF takes a few extra seconds, and rendering as Word is a hassle because Word gets mad if you have a previous version of the document open when rendering. HTML is pretty instantaneous. When I work on Quarto files, I put a browser window on one of my monitors and RStudio on the other and render and re-render often to HTML while working. Once I’m done and the document all works and the images, tables, text, etc. are all working, I’ll render as PDF or Word or whatever final format I want.</p>
 </section>
 <section id="what-is-this-typst-thing-that-we-can-render-to" class="level3">

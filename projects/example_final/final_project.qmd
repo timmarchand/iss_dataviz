@@ -1,6 +1,6 @@
 ---
 title: "Analysis of life in the Good Place"
-subtitle: "Final project--- PMAP 8551, Spring 2026"
+subtitle: "Final project--- ISS dataviz, Spring 2026"
 author: "Eleanor Shellstrop"
 date: "2024-12-16"
 date-format: "long"

@@ -162,9 +162,9 @@ Create a new `.qmd` file, make something in it, and add it to the navigation bar
 If you're *super brave*, check out [Quarto Live](https://r-wasm.github.io/quarto-live/) or [Observable JS](https://quarto.org/docs/interactive/ojs/) for super advanced interactivity. Or just do something simple. Whatever you want! Learn something cool!
 
 
-## Publishing the site and submitting to iCollege
+## Publishing the site and submitting to Moodle
 
-**You will not upload a rendered PDF or Word file to iCollege.** Instead, you'll submit a link to your website.
+**You will not upload a rendered PDF or Word file to Moodle.** Instead, you'll submit a link to your website.
 
 Here's how to do it:
 
@@ -206,7 +206,7 @@ Here's how to do it:
 
    You can view your [Quarto Pub account page](https://quartopub.com/) later to manage the site (like changing its URL or deleting the page, etc.)
 
-6. In iCollege, paste the URL of your website into the submission form for Exercise 11.
+6. In Moodle, paste the URL of your website into the submission form for Exercise 11.
 
 7. You're done!
 

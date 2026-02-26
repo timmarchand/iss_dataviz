@@ -63,7 +63,6 @@ div.csl-indent {
 <link href="site_libs/bootstrap/bootstrap-39e54efe698d158150328aebe0ca31b1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<script src="site_libs/quarto-contrib/iconify-2.1.0/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -129,6 +128,10 @@ div.csl-indent {
 <span class="menu-text">Lessons</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./example/index.html"> 
+<span class="menu-text">Examples</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./assignment/index.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
@@ -136,17 +139,8 @@ div.csl-indent {
     <a class="nav-link" href="./resource/index.html"> 
 <span class="menu-text">Resources</span></a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="./news/index.html"> 
-<span class="menu-text">News</span></a>
-  </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://discord.com/"> <i class="bi bi-discord" role="img" aria-label="Discord">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
-    <a class="nav-link" href="https://posit.cloud"> <i class="bi bi-cloud-fill" role="img" aria-label="Posit.cloud">
+    <a class="nav-link" href="https://moodle.univ.gakushuin.ac.jp/course/view.php?id=26121"> <i class="bi bi-mortarboard-fill" role="img" aria-label="Moodle">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -166,7 +160,8 @@ div.csl-indent {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link active" data-scroll-target="#course-objectives">Course objectives</a>
+  <li><a href="#course-objectives" id="toc-course-objectives" class="nav-link active" data-scroll-target="#course-objectives">Course objectives</a></li>
+  <li><a href="#course-introduction" id="toc-course-introduction" class="nav-link" data-scroll-target="#course-introduction">Course introduction</a>
   <ul class="collapse">
   <li><a href="#mandatory-registration-requirement" id="toc-mandatory-registration-requirement" class="nav-link" data-scroll-target="#mandatory-registration-requirement">Mandatory Registration Requirement</a></li>
   </ul></li>
@@ -180,7 +175,6 @@ div.csl-indent {
   <li><a href="#ai-llms-bs-and-vibe-coding" id="toc-ai-llms-bs-and-vibe-coding" class="nav-link" data-scroll-target="#ai-llms-bs-and-vibe-coding">AI, LLMs, BS, and vibe coding</a></li>
   <li><a href="#course-schedule" id="toc-course-schedule" class="nav-link" data-scroll-target="#course-schedule">Course schedule</a></li>
   <li><a href="#assignments-and-grades" id="toc-assignments-and-grades" class="nav-link" data-scroll-target="#assignments-and-grades">Assignments and grades</a></li>
-  <li><a href="#recipes" id="toc-recipes" class="nav-link" data-scroll-target="#recipes">Recipes</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="ISS-DATAVIZ-MARCHAND-SP26.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
     </div>
@@ -210,10 +204,9 @@ div.csl-indent {
 <section id="instructor" class="level3 g-col-12 g-col-sm-6 g-col-md-4">
 <h3 class="anchored" data-anchor-id="instructor">Instructor</h3>
 <ul>
-<li><span class="fa-li"><i class="fa-solid fa-user" aria-label="user"></i></span> <a href="?var:instructor.url">Prof.&nbsp;Tim Marchand</a></li>
+<li><span class="fa-li"><i class="fa-solid fa-user" aria-label="user"></i></span> <a href="https://www.univ.gakushuin.ac.jp/iss/en/faculty/t007.html">Prof.&nbsp;Tim Marchand</a></li>
 <li><span class="fa-li"><i class="fa-solid fa-university" aria-label="university"></i></span> minami-2, Room 411</li>
 <li><span class="fa-li"><i class="fa-solid fa-envelope" aria-label="envelope"></i></span> <a href="mailto:tim.marchand@gakushuin.ac.jp">tim.marchand@gakushuin.ac.jp</a></li>
-<li><span class="fa-li"><iconify-icon inline="" icon="fa6-brands:bluesky" style="font-size: 1.1em;" aria-label="Icon bluesky from fa6-brands Iconify.design set." title="Bluesky"></iconify-icon></span> <a href="?var:instructor.bluesky">Bluesky</a></li>
 </ul>
 </section>
 <section id="course-details" class="level3 g-col-12 g-col-sm-6 g-col-md-4">
@@ -222,14 +215,13 @@ div.csl-indent {
 <li><span class="fa-li"><i class="fa-solid fa-calendar" aria-label="calendar"></i></span> Thursday</li>
 <li><span class="fa-li"><i class="fa-solid fa-calendar-alt" aria-label="calendar-alt"></i></span> April 16 – July 17, 2026</li>
 <li><span class="fa-li"><i class="fa-solid fa-clock" aria-label="clock"></i></span> Period 3: 13:15 ~ 15:00</li>
-<li><span class="fa-li"><i class="fa-solid fa-location-dot" aria-label="location-dot"></i></span> Anywhere</li>
+<li><span class="fa-li"><i class="fa-solid fa-location-dot" aria-label="location-dot"></i></span> kita-1, Room 307</li>
 </ul>
 </section>
 <section id="contacting-me" class="level3 g-col-12 g-col-md-4 contact-policy">
 <h3 class="anchored" data-anchor-id="contacting-me">Contacting me</h3>
 <ul>
 <li><span class="fa-li"><i class="fa-solid fa-calendar-check" aria-label="calendar-check"></i></span> <a href="?var:instructor.appointment_url">Schedule an appointment</a></li>
-<li><span class="fa-li"><i class="fa-brands fa-discord" aria-label="discord"></i></span> <a href="?var:course.discord">Discord</a></li>
 </ul>
 </section>
 </div>
@@ -237,6 +229,9 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="course-objectives">Course objectives</h2>
 <p>This course offers an in-depth exploration of data visualisation and analysis techniques for the social sciences. It covers a range of topics including data types, sources, and the practical application of various visualisation tools such as charts, graphs, and maps.</p>
 <p>As well as equipping the students with the skills to produce publication-ready plots, emphasis is placed on interpreting social science data accurately and ethically. The course methodology includes practical exercises, project work, and group discussions to reinforce learning. It builds upon foundational knowledge in social sciences, enhancing students’ ability to present and analyse data effectively.</p>
+</section>
+<section id="course-introduction" class="level2">
+<h2 class="anchored" data-anchor-id="course-introduction">Course introduction</h2>
 <p><strong>Data rarely speaks for itself.</strong> On their own, the facts contained in raw data are difficult to understand, and in the absence of beauty and order, it is impossible to understand the truth that the data shows.</p>
 <p>In this class, you’ll learn how to use industry-standard graphic and data design techniques to create beautiful, understandable visualizations and uncover truth in data.</p>
 <p>By the end of this course, you will become (1) literate in data and graphic design principles, and (2) an ethical data communicator, by producing beautiful, powerful, and clear visualizations of your own data. Specifically, you should:</p>
@@ -293,7 +288,7 @@ div.csl-indent {
 <section id="r-and-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="r-and-rstudio">R and RStudio</h3>
 <p>You will do all of your analysis with the open source (and free!) programming language <a href="https://cran.r-project.org/">R</a>. You will use <a href="https://www.rstudio.com/">RStudio</a> as the main program to access R. <strong>Think of R as an engine and RStudio as a car dashboard</strong>—R handles all the calculations produces the actual statistics and graphical output, while RStudio provides a nice interface for running R code.</p>
-<p>R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free <a href="http://posit.cloud/">Posit.cloud</a> service, which lets you run a full instance of RStudio in your web browser. This means you won’t have to install anything on your computer to get started with R! We will have a shared class workspace in Posit.cloud that will let you quickly copy templates for examples, exercises, and mini projects.</p>
+<p>R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free <a href="http://posit.cloud/">Posit.cloud</a> service, which lets you run a full instance of RStudio in your web browser. This means you won’t have to install anything on your computer to get started with R!</p>
 <p>Posit.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis and graphics. You also can’t use your own custom fonts with Posit.cloud. Over the course of the semester, you’ll probably want to get around to installing R, RStudio, and other R packages on your computer and wean yourself off of Posit.cloud. This isn’t 100% necessary, but it’s helpful.</p>
 <p>You can <a href="./resource/install.html">find instructions for installing R, RStudio, and all the tidyverse packages here.</a></p>
 </section>
@@ -301,11 +296,6 @@ div.csl-indent {
 <h3 class="anchored" data-anchor-id="online-help">Online help</h3>
 <p>Data science and statistical programming can be difficult. Computers are stupid and little errors in your code can cause hours of headache (even if you’ve been doing this stuff for years!).</p>
 <p>Fortunately there are tons of online resources to help you with this.</p>
-<section id="class-community-on-discord" class="level4">
-<h4 class="anchored" data-anchor-id="class-community-on-discord">Class community on Discord</h4>
-<p>We have a class Discord server where anyone in the class can ask questions and anyone can answer. The invitation to the server is on iCollege since that’s a password protected place and I want the server to be limited to only students in the class.</p>
-<p><strong>I will monitor Discord regularly and will respond quickly.</strong> (It’s one of the rare Discord servers where I actually have notifications enabled!) Ask questions about the readings, exercises, and mini projects. You’ll likely have similar questions as your peers, and you’ll likely be able to answer other peoples’ questions too.</p>
-</section>
 <section id="online-communities" class="level4">
 <h4 class="anchored" data-anchor-id="online-communities">Online communities</h4>
 <p>If you use Bluesky or Mastodon or Threads or LinkedIn, post R-related questions and content with <code>#rstats</code>. The R community is exceptionally generous and helpful.</p>
@@ -318,24 +308,25 @@ div.csl-indent {
 <h2 class="anchored" data-anchor-id="ai-llms-bs-and-vibe-coding">AI, LLMs, BS, and vibe coding</h2>
 <p>I <em>highly recommend</em> <strong>not</strong> using ChatGPT or similar large language models (LLMs) in this class.</p>
 <p>I am deeply opposed to LLMs for writing.</p>
-<p>I am kinda opposed to LLMs for code, but I am deeply opposed to them for beginners at code.</p>
+<p>I am a little more lenient using LLMs in coding, but I am deeply opposed to them for beginners at code.</p>
 <p>By definition, LLMs and other AI tools cannot produce truth (or even lies). They generate <a href="https://doi.org/10.1007/s10676-024-09775-5">bullshit</a><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>—a formal philosophical term that refers to text or speech that has no regard for truth <span class="citation" data-cites="HicksHumphriesSlater:2024 Frankfurt:2005">(<a href="#ref-HicksHumphriesSlater:2024" role="doc-biblioref">Hicks, Humphries, and Slater 2024</a>; <a href="#ref-Frankfurt:2005" role="doc-biblioref">Frankfurt 2005</a>)</span>.</p>
-<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;I’m a super straight-laced Mormon and, like, never ever swear or curse, but in this case, the word has a formal philosophical meaning <span class="citation" data-cites="Frankfurt:2005">(<a href="#ref-Frankfurt:2005" role="doc-biblioref">Frankfurt 2005</a>)</span>, so it doesn’t count :)</p></div></div><p><a href="./resource/ai-bs.html">Please read this</a> to better understand how LLMs circumvent the writing and learning process.</p>
+<div class="no-row-height column-margin column-container"><div id="fn1"><p><sup>1</sup>&nbsp;As a faculty member at Gakushuin University, it is not my habit to swear or curse, but in this case, the word has a formal philosophical meaning <span class="citation" data-cites="Frankfurt:2005">(<a href="#ref-Frankfurt:2005" role="doc-biblioref">Frankfurt 2005</a>)</span>, so it doesn’t count :)</p></div></div><p><a href="./resource/ai-bs.html">Please read this</a> to better understand how LLMs circumvent the writing and learning process.</p>
 <p><strong>Do not replace the important work of writing with AI BS slop.</strong> The point of writing is to help crystalize your thinking. Chugging out words that make it look like you read and understood the content will not help you learn. Chugging out code that you hope works is <a href="https://www.npr.org/2025/05/30/nx-s1-5413387/vibe-coding-ai-software-development">vibe coding</a> and it will not help you learn.</p>
 <p>A key theme of the class is the search for truth. Generating useless content will not help with that.</p>
+<p>The main exception to my opposition to LLMs is using Gen AI to help understand any error messages that R might produce when you code. In that case, I’d recommend Claude over the others (a lot of its background coding is done in R, unlike other chatbots which tend to use Python).</p>
 <p>In your session check-ins and assignments, I want to see good engagement with the readings. I want to see your thinking process. I want to see you make connections between the readings. I want to see your personal insights. I don’t want to see a bunch of words that look like a human wrote them. That’s not useful for future-you. That’s not useful for me. That’s a waste of time.</p>
 <p>I will not spend time trying to guess if your assignments are AI-generated.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> If you do turn in AI-produced content, I won’t automatically give you a zero, with one exception: <em>if your work contains fake data, it will receive a zero</em>. I’ll grade your work based on its own merits. I’ve found that AI-produced content will typically earn a ✓− (50%) or lower on my check-based grading system without me even needing to look for clues that it might have come from an LLM. Remember that text generated by these platforms is philosophical bullshit. Since it has nothing to do with truth, it will not—by definition—earn good grades.</p>
 <div class="no-row-height column-margin column-container"><div id="fn2"><p><sup>2</sup>&nbsp;There are tools that purport to be able to identify the percentage of a given text that is AI, but they do not work and result in all sorts of false positives.</p></div></div></section>
 <section id="course-schedule" class="level2">
 <h2 class="anchored" data-anchor-id="course-schedule">Course schedule</h2>
-<p>[cite_start]We meet in person every Thursday during the 3rd period on the Mejiro Campus[cite: 22, 23].</p>
-<p>This is a hands-on, synchronous course. [cite_start]Our time together will consist of lectures and discussions about the principles of data visualisation, followed directly by coding practice in class[cite: 117, 119]. [cite_start]Because of this, <strong>you are required to bring your computer (PC or Mac) to every class meeting</strong>.</p>
+<p>We meet in person every Thursday during the 3rd period on the Mejiro Campus.</p>
+<p>This is a hands-on, synchronous course. Our time together will consist of lectures and discussions about the principles of data visualisation, followed directly by coding practice in class. Because of this, <strong>you are required to bring your computer (PC or Mac) to every class meeting</strong>.</p>
 <p>Each week revolves around a central theme and includes (1) a set of foundational readings, (2) an interactive coding lesson, and (3) reference examples with reproducible code. The <a href="./schedule.html">schedule page</a> provides an overview of all these moving parts.</p>
 <p>To succeed in this course, I recommend following this general process for each session:</p>
 <ul>
 <li><strong>Before class:</strong> Complete the assigned readings on the content page (<i class="fa-solid fa-book-open-reader" aria-label="book-open-reader"></i>) to understand the core design and ethical principles for that week.</li>
 <li><strong>During class:</strong> Participate in the discussion and work through the coding lesson (<i class="fa-solid fa-chalkboard-teacher" aria-label="chalkboard-teacher"></i>) and examples (<i class="fa-solid fa-laptop-code" aria-label="laptop-code"></i>).</li>
-<li>[cite_start]<strong>After class:</strong> Spend an absolute minimum of 1.5 hours on coding practice and reflection. You will use this time to build your chart gallery and script portfolio, and work on your research project. [cite_start]Expect to spend more time outside of class as we approach the end of the semester[cite: 138].</li>
+<li><strong>After class:</strong> Spend an absolute minimum of 1.5 hours on coding practice and reflection. You will use this time to build your chart gallery and script portfolio, and work on your research project. Expect to spend more time outside of class as we approach the end of the semester.</li>
 </ul>
 </section>
 <section id="assignments-and-grades" class="level2">
@@ -350,20 +341,20 @@ div.csl-indent {
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_zhhblawrmbp51bojic7i = TinyTable.createTableFunctions("tinytable_zhhblawrmbp51bojic7i");
+      const tableFns_582vfkrn75qeclvdocny = TinyTable.createTableFunctions("tinytable_582vfkrn75qeclvdocny");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_n3ipibxnkgyvoeafw54x',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_n08z5c01vi1sp0sgwvho',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_k7epuqt5mw6h7klvv3b0',}, 
+          { positions: [ { i: '4', j: 1 }, { i: '4', j: 2 }, { i: '4', j: 3 } ], css_id: 'tinytable_css_pvegwy49xxd9id95532s',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '2', j: 1 }, { i: '3', j: 1 }, { i: '1', j: 2 }, { i: '2', j: 2 }, { i: '3', j: 2 }, { i: '1', j: 3 }, { i: '2', j: 3 }, { i: '3', j: 3 } ], css_id: 'tinytable_css_g9mb2ize6nn2kbm6leui',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 } ], css_id: 'tinytable_css_3ystkruo4r7z3h2lswwx',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_zhhblawrmbp51bojic7i.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_582vfkrn75qeclvdocny.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -372,12 +363,12 @@ div.csl-indent {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_zhhblawrmbp51bojic7i td.tinytable_css_n3ipibxnkgyvoeafw54x, #tinytable_zhhblawrmbp51bojic7i th.tinytable_css_n3ipibxnkgyvoeafw54x {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
-    #tinytable_zhhblawrmbp51bojic7i td.tinytable_css_n08z5c01vi1sp0sgwvho, #tinytable_zhhblawrmbp51bojic7i th.tinytable_css_n08z5c01vi1sp0sgwvho {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_zhhblawrmbp51bojic7i td.tinytable_css_k7epuqt5mw6h7klvv3b0, #tinytable_zhhblawrmbp51bojic7i th.tinytable_css_k7epuqt5mw6h7klvv3b0 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_582vfkrn75qeclvdocny td.tinytable_css_pvegwy49xxd9id95532s, #tinytable_582vfkrn75qeclvdocny th.tinytable_css_pvegwy49xxd9id95532s {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%; ; font-weight: bold }
+    #tinytable_582vfkrn75qeclvdocny td.tinytable_css_g9mb2ize6nn2kbm6leui, #tinytable_582vfkrn75qeclvdocny th.tinytable_css_g9mb2ize6nn2kbm6leui {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_582vfkrn75qeclvdocny td.tinytable_css_3ystkruo4r7z3h2lswwx, #tinytable_582vfkrn75qeclvdocny th.tinytable_css_3ystkruo4r7z3h2lswwx {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_zhhblawrmbp51bojic7i" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_582vfkrn75qeclvdocny" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -424,21 +415,21 @@ div.csl-indent {
 
     <script>
       // Create table-specific functions using external factory
-      const tableFns_k3lc59m185a5t3bodcvq = TinyTable.createTableFunctions("tinytable_k3lc59m185a5t3bodcvq");
+      const tableFns_81xx8zj0gafbj3n93lvk = TinyTable.createTableFunctions("tinytable_81xx8zj0gafbj3n93lvk");
       // tinytable span after
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_oguizr0yhnw3ym5g556w',}, 
-          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_n3ky1tigeoec9oeqnqoc',}, 
-          { positions: [ { i: '1', j: 1 }, { i: '1', j: 2 }, { i: '1', j: 3 }, { i: '1', j: 4 } ], css_id: 'tinytable_css_eixqx1mkhu8e6lrf21np',}, 
-          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_l79rum4dvljumpnjvs6e',}, 
+          { positions: [ { i: '3', j: 1 }, { i: '3', j: 2 }, { i: '3', j: 3 }, { i: '3', j: 4 } ], css_id: 'tinytable_css_2y2ba5s7x8rerfe5sx0c',}, 
+          { positions: [ { i: '2', j: 1 }, { i: '2', j: 2 }, { i: '2', j: 3 }, { i: '2', j: 4 } ], css_id: 'tinytable_css_1t4k1q9v3ezjkhdihucu',}, 
+          { positions: [ { i: '1', j: 1 }, { i: '1', j: 2 }, { i: '1', j: 3 }, { i: '1', j: 4 } ], css_id: 'tinytable_css_aoos3yqltmgp4tfc2ta8',}, 
+          { positions: [ { i: '0', j: 1 }, { i: '0', j: 2 }, { i: '0', j: 3 }, { i: '0', j: 4 } ], css_id: 'tinytable_css_fxa3axda36ont6pss9o6',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  tableFns_k3lc59m185a5t3bodcvq.styleCell(cell.i, cell.j, group.css_id);
+                  tableFns_81xx8zj0gafbj3n93lvk.styleCell(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -447,13 +438,13 @@ div.csl-indent {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vincentarelbundock/tinytable@main/inst/tinytable.css">
     <style>
     /* tinytable css entries after */
-    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_oguizr0yhnw3ym5g556w, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_oguizr0yhnw3ym5g556w {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_n3ky1tigeoec9oeqnqoc, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_n3ky1tigeoec9oeqnqoc {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_eixqx1mkhu8e6lrf21np, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_eixqx1mkhu8e6lrf21np {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
-    #tinytable_k3lc59m185a5t3bodcvq td.tinytable_css_l79rum4dvljumpnjvs6e, #tinytable_k3lc59m185a5t3bodcvq th.tinytable_css_l79rum4dvljumpnjvs6e {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_81xx8zj0gafbj3n93lvk td.tinytable_css_2y2ba5s7x8rerfe5sx0c, #tinytable_81xx8zj0gafbj3n93lvk th.tinytable_css_2y2ba5s7x8rerfe5sx0c {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.1em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_81xx8zj0gafbj3n93lvk td.tinytable_css_1t4k1q9v3ezjkhdihucu, #tinytable_81xx8zj0gafbj3n93lvk th.tinytable_css_1t4k1q9v3ezjkhdihucu {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 0; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_81xx8zj0gafbj3n93lvk td.tinytable_css_aoos3yqltmgp4tfc2ta8, #tinytable_81xx8zj0gafbj3n93lvk th.tinytable_css_aoos3yqltmgp4tfc2ta8 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: #d3d8dc; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
+    #tinytable_81xx8zj0gafbj3n93lvk td.tinytable_css_fxa3axda36ont6pss9o6, #tinytable_81xx8zj0gafbj3n93lvk th.tinytable_css_fxa3axda36ont6pss9o6 {  position: relative; --border-bottom: 1; --border-left: 0; --border-right: 0; --border-top: 1; --line-color-bottom: #d3d8dc; --line-color-left: black; --line-color-right: black; --line-color-top: black; --line-width-bottom: 0.05em; --line-width-left: 0.1em; --line-width-right: 0.1em; --line-width-top: 0.1em; --trim-bottom-left: 0%; --trim-bottom-right: 0%; --trim-left-bottom: 0%; --trim-left-top: 0%; --trim-right-bottom: 0%; --trim-right-top: 0%; --trim-top-left: 0%; --trim-top-right: 0%;  }
     </style>
     <div class="container">
-      <table class="tinytable" id="tinytable_k3lc59m185a5t3bodcvq" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="tinytable" id="tinytable_81xx8zj0gafbj3n93lvk" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         
         <thead>
               <tr>
@@ -490,10 +481,6 @@ div.csl-indent {
 </div>
 </div>
 </div>
-</section>
-<section id="recipes" class="level2">
-<h2 class="anchored" data-anchor-id="recipes">Recipes</h2>
-<p>Once you have read this entire syllabus and <a href="./assignment/index.html">the assignments page</a>, post your <strong>favorite recipe</strong> (either a link or the text) to the <code>#recipes</code> channel on Discord. I love cooking (<a href="https://bsky.app/search?q=from%3Aandrew.heiss.phd+%23pacooks">see here for a feed of some of my cooking adventures</a>) and I’m always on the lookout for new things!</p>
 <p><strong>Acknowledgments</strong>: This course is a derivative of <a href="https://datavizsp26.classes.andrewheiss.com/">PMAP 8551</a> designed by Andrew Heiss at Georgia State University. I have adapted the materials for the ISS context at Gakushuin University.</p>
 
 
