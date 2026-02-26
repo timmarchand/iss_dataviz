@@ -21,7 +21,7 @@ Hi everyone!
 
 Great work with session 3! You're all done with the primers and from now on, the lessons should be a lot shorter. The first few sessions of this class are rough because you're learning the foundations of R and ggplot, but things really truly should start clicking more now—I promise!
 
-Many of you had similar questions and I left lots of similar comments and tips on iCollege, so I’ve compiled the most common issues here. There are a bunch here, but they’re hopefully all useful.
+Many of you had similar questions and I left lots of similar comments and tips on Moodle, so I’ve compiled the most common issues here. There are a bunch here, but they’re hopefully all useful.
 
 ### What's the difference between the `|>` and `%>%` pipes?
 

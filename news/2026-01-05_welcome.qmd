@@ -6,13 +6,13 @@ categories: [getting started]
 
 Hello everyone!
 
-I'm Andrew Heiss, your professor for PMAP 8551/4551 (Data visualization with R) this spring, and I'm so excited for the class! Out of all the different classes I teach, this is probably my favorite. It's so satisfying to run a few lines of code and see beautiful data-based graphics.
+I'm Andrew Heiss, your professor for M510302101 (Data visualization with R) this spring, and I'm so excited for the class! Out of all the different classes I teach, this is probably my favorite. It's so satisfying to run a few lines of code and see beautiful data-based graphics.
 
 I have a few important announcements before class:
 
-- Before class, I'd love to get to know each you a little first, so I've created a quick survey to fill out. I've sent you a link to it via iCollege. Please take it at your earliest convenience.
+- Before class, I'd love to get to know each you a little first, so I've created a quick survey to fill out. I've sent you a link to it via Moodle. Please take it at your earliest convenience.
 
-- The entire course is available at a special class website at <https://datavizsp26.classes.andrewheiss.com/> (surprise—you're at it right now). Bookmark this site—it'll be your best friend for the next couple months. I only use iCollege for collecting your assignments and posting answer keys (since it's password protected). This website is the official source of dates and all other class information. Because it's not part of iCollege, you'll be able to reference it even after you graduate and lose access to GSU resources. You can even share it with others—it's just a website!
+- The entire course is available at a special class website at <https://datavizsp26.classes.andrewheiss.com/> (surprise—you're at it right now). Bookmark this site—it'll be your best friend for the next couple months. I only use Moodle for collecting your assignments and posting answer keys (since it's password protected). This website is the official source of dates and all other class information. Because it's not part of Moodle, you'll be able to reference it even after you graduate and lose access to GSU resources. You can even share it with others—it's just a website!
 
 - **Please read the main explanatory pages at your earliest convenience.** The instructions and expectations for the class are divided across different pages, all accessible from the menu bar at the top of the site. Please read the main pages for the [syllabus](/syllabus.qmd), [content](/content/index.qmd), [lessons](/lesson/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd).
 

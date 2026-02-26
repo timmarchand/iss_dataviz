@@ -28,7 +28,6 @@ knitr::opts_chunk$set(fig.align = "center")
 -   [{{< fa user >}}]{.fa-li} [{{< var instructor.name >}}]({{< var instructor.url >}})
 -   [{{< fa university >}}]{.fa-li} {{< var instructor.office >}}
 -   [{{< fa envelope >}}]{.fa-li} <a href='mailto:{{< var instructor.email >}}'>{{< var instructor.email >}}</a>
--   [{{< iconify fa6-brands bluesky size=1.1em title='Bluesky' >}}]{.fa-li} [Bluesky]({{< var instructor.bluesky >}})
 :::
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
@@ -44,7 +43,6 @@ knitr::opts_chunk$set(fig.align = "center")
 ### Contacting me
 
 -   [{{< fa calendar-check >}}]{.fa-li} [Schedule an appointment]({{< var instructor.appointment_url >}})
--   [{{< fa brands discord >}}]{.fa-li} [Discord]({{< var course.discord >}})
 :::
 ::::::
 
@@ -53,6 +51,8 @@ knitr::opts_chunk$set(fig.align = "center")
 This course offers an in-depth exploration of data visualisation and analysis techniques for the social sciences. It covers a range of topics including data types, sources, and the practical application of various visualisation tools such as charts, graphs, and maps. 
 
 As well as equipping the students with the skills to produce publication-ready plots, emphasis is placed on interpreting social science data accurately and ethically. The course methodology includes practical exercises, project work, and group discussions to reinforce learning. It builds upon foundational knowledge in social sciences, enhancing students' ability to present and analyse data effectively.
+
+## Course introduction
 
 **Data rarely speaks for itself.** On their own, the facts contained in raw data are difficult to understand, and in the absence of beauty and order, it is impossible to understand the truth that the data shows.
 
@@ -119,7 +119,7 @@ There will occasionally be additional articles and videos to read and watch. Whe
 
 You will do all of your analysis with the open source (and free!) programming language [R](https://cran.r-project.org/). You will use [RStudio](https://www.rstudio.com/) as the main program to access R. **Think of R as an engine and RStudio as a car dashboard**—R handles all the calculations produces the actual statistics and graphical output, while RStudio provides a nice interface for running R code.
 
-R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free [Posit.cloud](http://posit.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! We will have a shared class workspace in Posit.cloud that will let you quickly copy templates for examples, exercises, and mini projects.
+R is free, but it can sometimes be a pain to install and configure. To make life easier, you can (and should!) use the free [Posit.cloud](http://posit.cloud/) service, which lets you run a full instance of RStudio in your web browser. This means you won't have to install anything on your computer to get started with R! 
 
 Posit.cloud is convenient, but it can be slow and it is not designed to be able to handle larger datasets or more complicated analysis and graphics. You also can't use your own custom fonts with Posit.cloud. Over the course of the semester, you'll probably want to get around to installing R, RStudio, and other R packages on your computer and wean yourself off of Posit.cloud. This isn't 100% necessary, but it's helpful.
 
@@ -130,12 +130,6 @@ You can [find instructions for installing R, RStudio, and all the tidyverse pack
 Data science and statistical programming can be difficult. Computers are stupid and little errors in your code can cause hours of headache (even if you've been doing this stuff for years!).
 
 Fortunately there are tons of online resources to help you with this.
-
-#### Class community on Discord
-
-We have a class Discord server where anyone in the class can ask questions and anyone can answer. The invitation to the server is on iCollege since that's a password protected place and I want the server to be limited to only students in the class.
-
-**I will monitor Discord regularly and will respond quickly.** (It's one of the rare Discord servers where I actually have notifications enabled!) Ask questions about the readings, exercises, and mini projects. You'll likely have similar questions as your peers, and you'll likely be able to answer other peoples' questions too.
 
 #### Online communities
 
@@ -151,17 +145,19 @@ I *highly recommend* **not** using ChatGPT or similar large language models (LLM
 
 I am deeply opposed to LLMs for writing.
 
-I am kinda opposed to LLMs for code, but I am deeply opposed to them for beginners at code.
+I am a little more lenient using LLMs in coding, but I am deeply opposed to them for beginners at code. 
 
 By definition, LLMs and other AI tools cannot produce truth (or even lies). They generate [bullshit](https://doi.org/10.1007/s10676-024-09775-5)[^1]—a formal philosophical term that refers to text or speech that has no regard for truth [@HicksHumphriesSlater:2024; @Frankfurt:2005].
 
-[^1]: I'm a super straight-laced Mormon and, like, never ever swear or curse, but in this case, the word has a formal philosophical meaning [@Frankfurt:2005], so it doesn't count :)
+[^1]: As a faculty member at Gakushuin University, it is not my habit to swear or curse, but in this case, the word has a formal philosophical meaning [@Frankfurt:2005], so it doesn't count :)
 
 [Please read this](/resource/ai-bs.qmd) to better understand how LLMs circumvent the writing and learning process.
 
 **Do not replace the important work of writing with AI BS slop.** The point of writing is to help crystalize your thinking. Chugging out words that make it look like you read and understood the content will not help you learn. Chugging out code that you hope works is [vibe coding](https://www.npr.org/2025/05/30/nx-s1-5413387/vibe-coding-ai-software-development) and it will not help you learn.
 
 A key theme of the class is the search for truth. Generating useless content will not help with that.
+
+The main exception to my opposition to LLMs is using Gen AI to help understand any error messages that R might produce when you code. In that case, I'd recommend Claude over the others (a lot of its background coding is done in R, unlike other chatbots which tend to use Python).
 
 In your session check-ins and assignments, I want to see good engagement with the readings. I want to see your thinking process. I want to see you make connections between the readings. I want to see your personal insights. I don't want to see a bunch of words that look like a human wrote them. That's not useful for future-you. That's not useful for me. That's a waste of time.
 
@@ -171,9 +167,9 @@ I will not spend time trying to guess if your assignments are AI-generated.[^2] 
 
 ## Course schedule
 
-[cite_start]We meet in person every Thursday during the 3rd period on the Mejiro Campus[cite: 22, 23]. 
+We meet in person every Thursday during the 3rd period on the Mejiro Campus. 
 
-This is a hands-on, synchronous course. [cite_start]Our time together will consist of lectures and discussions about the principles of data visualisation, followed directly by coding practice in class[cite: 117, 119]. [cite_start]Because of this, **you are required to bring your computer (PC or Mac) to every class meeting**.
+This is a hands-on, synchronous course. Our time together will consist of lectures and discussions about the principles of data visualisation, followed directly by coding practice in class. Because of this, **you are required to bring your computer (PC or Mac) to every class meeting**.
 
 Each week revolves around a central theme and includes (1) a set of foundational readings, (2) an interactive coding lesson, and (3) reference examples with reproducible code. The [schedule page](/schedule.qmd) provides an overview of all these moving parts.
 
@@ -181,7 +177,7 @@ To succeed in this course, I recommend following this general process for each s
 
 -   **Before class:** Complete the assigned readings on the content page ({{< fa book-open-reader >}}) to understand the core design and ethical principles for that week.
 -   **During class:** Participate in the discussion and work through the coding lesson ({{< fa chalkboard-teacher >}}) and examples ({{< fa laptop-code >}}).
--   [cite_start]**After class:** Spend an absolute minimum of 1.5 hours on coding practice and reflection. You will use this time to build your chart gallery and script portfolio, and work on your research project. [cite_start]Expect to spend more time outside of class as we approach the end of the semester[cite: 138].
+-   **After class:** Spend an absolute minimum of 1.5 hours on coding practice and reflection. You will use this time to build your chart gallery and script portfolio, and work on your research project. Expect to spend more time outside of class as we approach the end of the semester.
 
 
 ## Assignments and grades
@@ -228,10 +224,6 @@ grading |>
   style_tt(j = 2, bootstrap_css = "border-right: 0.1em dashed #d3d8dc;")
 ```
 :::
-
-## Recipes
-
-Once you have read this entire syllabus and [the assignments page](/assignment/index.qmd), post your **favorite recipe** (either a link or the text) to the `#recipes` channel on Discord. I love cooking ([see here for a feed of some of my cooking adventures](https://bsky.app/search?q=from%3Aandrew.heiss.phd+%23pacooks)) and I'm always on the lookout for new things!
 
 :::: {.content-visible when-format="typst"}
 ## Schedule

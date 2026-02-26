@@ -57,4 +57,4 @@ I will grade these check-ins using a check system:
 
 Notice that is essentially a pass/fail or completion-based system. I'm not grading your writing ability, I'm not counting the exact number of words you're writing, and I'm not looking for encyclopedic citations of every single reading to prove that you did indeed read everything. I'm looking for thoughtful engagement, three interesting things, and three questions. That's all. Do good work and you'll get a ✓.
 
-You will submit these check-ins via iCollege. You will write them using Quarto and they will be the first section of your weekly exercises.
+You will submit these check-ins via Moodle. You will write them using Quarto and they will be the first section of your weekly exercises.

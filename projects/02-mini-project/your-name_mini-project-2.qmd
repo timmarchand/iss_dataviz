@@ -1,6 +1,6 @@
 ---
 title: "Global refugees"
-subtitle: "Mini project 2 --- PMAP 8551, Spring 2026"
+subtitle: "Mini project 2 --- ISS dataviz, Spring 2026"
 author: "YOUR NAME HERE"
 date: "DATE GOES HERE"
 date-format: "long"

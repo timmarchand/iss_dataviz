@@ -1,6 +1,6 @@
 ---
 title: "Mini project 2"
-date: "2026-04-22"
+date: "2026-05-27"
 ---
 
 As of 2024, there are nearly 31 million refugees around the world. Refugee services and care remain a critical—but underfunded and often politically unpopular—public policy issue.
@@ -102,7 +102,7 @@ I'd recommend doing as much polishing and refining as you can in R—make adjust
 
    You can approach this in a couple different ways—you can write the memo and then include the full figure and code at the end, or you can write the memo in an incremental way, describing the different steps of creating the figure, ultimately arriving at a clean final figure.
 
-8. Upload the following **three (3) outputs** to iCollege:
+8. Upload the following **three (3) outputs** to Moodle:
 
    1. A PDF or Word file of your memo with your your final code, intermediate graphic (the one you create in R), and final graphic (the one you enhance) embedded in it, rendered with Quarto. Remember to use `![Caption](figure_file_name.pdf)` to include external images in Markdown
 

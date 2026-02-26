@@ -22,7 +22,7 @@ The example page for this week will be helpful!
 - [{{< fa laptop-code >}} Enhancing graphics](/example/10-example.qmd)
 :::
 
-As always, if you're struggling, *please* use Discord and talk to me and your classmates! Don't suffer in silence!
+As always, if you're struggling, *please* use ouR Questions on Moodle and talk to me and your classmates! Don't suffer in silence!
 
 
 ## Instructions
@@ -103,7 +103,7 @@ Edit the base plot in Illustrator, Inkscape, or some other vector editing progra
 
 2. Render your Quarto document as a Typst (pdf), PDF, or Word version.
 
-3. Upload **three (3) things** to iCollege:
+3. Upload **three (3) things** to Moodle:
 
    - Your rendered `.qmd` file with your check-in and the exported image included in it
    - A standalone PNG version of your exported image

@@ -1,6 +1,6 @@
 ---
 title: "Global measles cases"
-subtitle: "Mini project 1 --- PMAP 8551, Spring 2026"
+subtitle: "Mini project 1 --- ISS dataviz, Spring 2026"
 author: "YOUR NAME HERE"
 date: "DATE GOES HERE"
 date-format: "long"

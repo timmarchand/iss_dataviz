@@ -1,6 +1,6 @@
 ---
 title: "Mini project 1"
-date: "2026-04-15"
+date: "2026-04-29"
 format: 
   html: 
     include-in-header: 
@@ -90,7 +90,7 @@ For this mini project, you will create **one (1) plot**. But with so many column
 
    You can approach this in a couple different ways—you can write the memo and then include the full figure and code at the end, or you can write the memo in an incremental way, describing the different steps of creating the figure, ultimately arriving at a clean final figure.
 
-6. Upload the following **three (3) outputs** to iCollege:
+6. Upload the following **three (3) outputs** to Moodle:
 
    1. A PDF or Word file of your memo with your final code and graphic embedded in it, rendered with Quarto.
 

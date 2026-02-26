@@ -1,11 +1,11 @@
 ---
-title: "Data Visualization (Spring 2026 PMAP 8551/4551) News"
+title: "Data Visualization (Spring 2026 M510302101) News"
 search: false
 listing:
   sort: "date desc"
   feed: 
-    title: "Data Visualization (Spring 2026 PMAP 8551/4551) News"
-    description: "Updates and FAQs for PMAP 8551/4551 at Georgia State University, Spring 2026"
+    title: "Data Visualization (Spring 2026 M510302101) News"
+    description: "Updates and FAQs for M510302101 at Georgia State University, Spring 2026"
     items: 100
     type: metadata
     language: en

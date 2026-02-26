@@ -5,25 +5,27 @@ instructor:
   name_no_title: Tim Marchand
   email: tim.marchand@gakushuin.ac.jp
   github: timmarchand
+  url: https://www.univ.gakushuin.ac.jp/iss/en/faculty/t007.html
   office: "minami-2, Room 411"
   contact_policy: >-
-    E-mail is the best way to get in contact with me. I will try to respond to all course-related e-mails within 48 hours (*really*), but also remember that life can be busy and chaotic for everyone (including me!), so if I don't respond right away, don't worry!
-
+    E-mail is the best way to get in contact with me, but you have specific code related questions, you can use the forum discussions set up on Moodle.
+  
 course:
-  number: "PMAP 8551/4551"
+  number: "M510302101"
   semester: "Spring 2026"
   days: "Thursday"
   time: "Period 3: 13:15 ~ 15:00"
-  location: "Anywhere"
+  location: "kita-1, Room 307"
   dates: "April 16 – July 17, 2026"
   github: "https://github.com/timmarchand/iss_dataviz"
   url: "https://timmarchand.github.io/iss_dataviz/"
   copyright_year: "2026"
+  moodle: "https://moodle.univ.gakushuin.ac.jp/course/view.php?id=26121"
 
 university:
   name: Gakushuin University
   url: "https://www.univ.gakushuin.ac.jp/en/"
 
-faculty:
+school:
   name: Faculty of International Social Sciences
   url: "https://www.univ.gakushuin.ac.jp/academics/iss/"

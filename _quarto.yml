@@ -61,6 +61,9 @@ website:
         file: assignment/index.qmd
       - text: "Resources"
         file: resource/index.qmd
+      - icon: mortarboard-fill
+        href: "https://moodle.univ.gakushuin.ac.jp/course/view.php?id=26121"
+        aria-label: Moodle
       # - text: "News"
       #   file: news/index.qmd
       # - icon: discord

@@ -50,7 +50,7 @@ I personally like to use source mode when working with R, and I'll often switch 
 
 ### What's the difference between R Markdown and Quarto?
 
-In the videos, you'll see examples of using R Markdown (i.e. files with an `.Rmd` extension), but in the instructions for the exercises and the answer keys on iCollege, I have you use Quarto (i.e. files with a `.qmd` extension) instead. Why?
+In the videos, you'll see examples of using R Markdown (i.e. files with an `.Rmd` extension), but in the instructions for the exercises and the answer keys on Moodle, I have you use Quarto (i.e. files with a `.qmd` extension) instead. Why?
 
 [Quarto Markdown](https://quarto.org/) is [regular Markdown](/resource/markdown.qmd) with R code and output sprinkled in. You can do everything you can with [regular Markdown](/resource/markdown.qmd), but you can incorporate graphs, tables, and other code output directly in your document. You can create HTML, PDF, and Word documents, PowerPoint and HTML presentations, websites, books, and even interactive dashboards with Quarto. This whole course website is created with Quarto.
 
@@ -90,11 +90,11 @@ format:
 That makes it so that HTML, PDF, typst (fancier, faster PDFs), and Word all appear in the dropdown menu. Additionally, it enables an automatic table of contents (`toc: true`) in each format. There are a ton of different format-specific settings you can change—[see here for more details and examples](/news/2026-01-26_cleaner-nicer-qmd-output.qmd#fancy-document-settings).
 
 
-### Rendered document format for iCollege
+### Rendered document format for Moodle
 
 Quarto is great and wonderful in part because you can write a document in one `.qmd` file and have it magically turn into an HTML file, a Word file, or a PDF (or if you want to get extra fancy later, a slideshow, a dashboard, or even a full website).
 
-iCollege doesn't like HTML files, though. It won't show images that get uploaded because of weird server restrictions or something. **So when you submit your exercises, make sure you render as PDF or Word.**. Don't upload HTML files, and don't upload your `.qmd` file.
+Moodle doesn't like HTML files, though. It won't show images that get uploaded because of weird server restrictions or something. **So when you submit your exercises, make sure you render as PDF or Word.**. Don't upload HTML files, and don't upload your `.qmd` file.
 
 I'd recommend rendering as HTML often as you work on the exercise. Rendering as PDF takes a few extra seconds, and rendering as Word is a hassle because Word gets mad if you have a previous version of the document open when rendering. HTML is pretty instantaneous. When I work on Quarto files, I put a browser window on one of my monitors and RStudio on the other and render and re-render often to HTML while working. Once I'm done and the document all works and the images, tables, text, etc. are all working, I'll render as PDF or Word or whatever final format I want.
 

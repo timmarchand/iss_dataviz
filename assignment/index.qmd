@@ -28,7 +28,7 @@ Note that this is also essentially a pass/fail system. I'm not grading your codi
 
 You may (and should!) work together on the exercises, but you must turn in your own answers.
 
-You will turn these exercises in using iCollege. You will include your session check-in in the first part of the document—the rest will be your exercise tasks.
+You will turn these exercises in using Moodle. You will include your session check-in in the first part of the document—the rest will be your exercise tasks.
 
 
 ## Mini projects

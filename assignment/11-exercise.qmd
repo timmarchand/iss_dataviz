@@ -37,4 +37,4 @@ The example page for this week will be helpful!
 
 2. Follow [the instructions here](https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/instructions.html) and complete the different tasks in the different `.qmd` files. Check [the data description](https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/) to learn more about what all the columns mean.
 
-3. When you're all done, [follow the instructions about publishing the site](https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/instructions.html#publishing-the-site-and-submitting-to-icollege). **Do not try to render as PDF or Word.** In iCollege, paste the URL of your website into the submission form.
+3. When you're all done, [follow the instructions about publishing the site](https://andrewheiss.quarto.pub/datavizsp26_11-exercise-recreate/instructions.html#publishing-the-site-and-submitting-to-Moodle). **Do not try to render as PDF or Word.** In Moodle, paste the URL of your website into the submission form.

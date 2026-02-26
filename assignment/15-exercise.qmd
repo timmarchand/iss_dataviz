@@ -26,6 +26,6 @@ You might explore a few of these summative questions (**but definitely don't jus
 
 ## Turning everything in
 
-When you're all done, upload the document with both tasks to iCollege.
+When you're all done, upload the document with both tasks to Moodle.
 
 `r emoji::emoji("tada")` Congratulations! You did it! `r emoji::emoji("tada")`

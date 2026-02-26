@@ -9,7 +9,7 @@ knitr::opts_chunk$set(fig.align = "center")
 
 For this exercise you'll practice visualizing relationships by making scatterplots and visualizing a regression model. You'll use data from <https://www.basketball-reference.com/wnba/players/> about WNBA basketball players from the 2019 season. The data was originally collected for the book [*Bayes Rules! An Introduction to Applied Bayesian Modeling*](https://www.bayesrulesbook.com/) and was included in the [{bayesrules} package](https://bayes-rules.github.io/bayesrules/docs/index.html) as `basketball`.
 
-As always, if you're struggling, *please* use Discord and talk to me and your classmates! Don't suffer in silence!
+As always, if you're struggling, *please* use ouR Questions on Moodle and talk to me and your classmates! Don't suffer in silence!
 
 ::: {.callout-important}
 ### Check the example!
@@ -30,7 +30,7 @@ The example page for this week will be helpful!
 
 3. Complete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or [the example page](/example/07-example.qmd)—don't try to write everything from scratch!
 
-4. When you're all done, click on the "Render" button at the top of the editing window and create a Typst (pdf), PDF, or Word version of your document. Upload that file to iCollege. **Do not upload a rendered HTML file** (they don't work on iCollege).
+4. When you're all done, click on the "Render" button at the top of the editing window and create a Typst (pdf), PDF, or Word version of your document. Upload that file to Moodle. **Do not upload a rendered HTML file** (they don't work on Moodle).
 
 ```{r render-button, echo=FALSE, out.width="50%", indent="   ", fig.align="center"}
 knitr::include_graphics("/files/img/assignments/render-button.png", error = FALSE)

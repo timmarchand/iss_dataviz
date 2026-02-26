@@ -1,6 +1,6 @@
 ---
 title: "#TidyTuesday"
-date: "2026-04-27"
+date: "2026-07-09"
 ---
 
 The objectives of this class include "Be curious and confident in consuming and producing data visualizations", "Feel comfortable with R", and "Share data and graphics in open forums." To help you with this, you will participate in a #TidyTuesday challenge.
@@ -30,7 +30,7 @@ At some point before the end of the semester, you'll need to participate in a Ti
 
 ## How you'll be graded
 
-On iCollege, you'll submit two things:
+On Moodle, you'll submit two things:
 
 1. A rendered Quarto document with your code and output
 2. A link to wherever you've shared your TidyTuesday creation (Bluesky, LinkedIn, Instagram, a webpage or blog, or whatever).

@@ -1,6 +1,6 @@
 ---
 title: "Final project"
-date: "2026-05-02"
+date: "2026-07-26"
 ---
 
 You made it to the end of our whirlwind tour of data visualization principles! Congratulations!
@@ -47,7 +47,7 @@ Remember to follow Quarto etiquette rules and style—don't have it output extra
 
 ## Final deliverables
 
-Upload the following files to iCollege:
+Upload the following files to Moodle:
 
 1. A memo introducing and describing your final graphic (see full instructions above)
 2. A standalone PDF of your graphic exported from Illustrator/Affinity/Inkscape

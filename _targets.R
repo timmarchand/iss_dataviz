@@ -2,7 +2,7 @@ library(targets)
 library(tarchetypes)
 suppressPackageStartupMessages(library(tidyverse))
 
-class_number <- "PMAP 8551/4551"
+class_number <- "M510302101"
 base_url <- "https://datavizsp26.classes.andrewheiss.com/"
 page_suffix <- ".html"
 
