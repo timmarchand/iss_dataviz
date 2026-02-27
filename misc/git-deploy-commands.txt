@@ -1,6 +1,6 @@
 # Save your underlying code changes
 git add .
-git commit -m "COMMENT"
+git commit -m "add goatcounter"
 git push origin main
 
 # Publish the newly built HTML slides to the live website
@@ -9,3 +9,7 @@ quarto publish gh-pages
 
 # Undo uncommited changes
 git checkout .
+
+
+# Check if ahead or behind
+git status
