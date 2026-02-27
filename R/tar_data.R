@@ -136,6 +136,7 @@ get_wdi_comparisons <- function() {
   wdi_raw <- WDI(
     country = "all",
     c(
+      population = "SP.POP.TOTL",
       life_expectancy = "SP.DYN.LE00.IN",
       access_to_electricity = "EG.ELC.ACCS.ZS",
       co2_emissions = "EN.GHG.CO2.PC.CE.AR5",
@@ -156,7 +157,7 @@ get_wdi_annotations <- function() {
     country = "all",
     c(
       population = "SP.POP.TOTL",
-      co2_emissions = "EN.GHG.CO2.PC.CE.AR5",
+      co2_emissions = "EN.ATM.CO2E.PC",
       gdp_per_cap = "NY.GDP.PCAP.KD"
     ),
     extra = TRUE,
