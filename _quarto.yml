@@ -286,7 +286,8 @@ page-footer:
       [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})
       
 format:
-  html:
+   html:
+    include-before-body: html/goatcounter.html
     theme:
       - litera
       - html/custom.scss
