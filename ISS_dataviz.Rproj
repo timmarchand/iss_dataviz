@@ -14,4 +14,4 @@ LaTeX: pdfLaTeX
 
 AutoAppendNewline: Yes
 
-ProjectName: Data Visualization {Spring 2026}
+ProjectName: DataViz_{Spring 2026}

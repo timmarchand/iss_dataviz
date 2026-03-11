@@ -1,6 +1,6 @@
 # Save your underlying code changes
 git add .
-git commit -m "add goatcounter"
+git commit -m "update git comamnds"
 git push origin main
 
 # Publish the newly built HTML slides to the live website
