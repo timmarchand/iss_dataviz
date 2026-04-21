@@ -35,7 +35,7 @@ Remember to do this for your check-in:
 
 ## Task 2: Poster redesign
 
-Here's a typical poster you might see in your workplace or on campus. (I found this on a table on the 6th floor in 55 Park Place near the economics department)
+Here's a typical poster you might see in your workplace or on an American campus.
 
 **Do the four tasks below while consulting this poster**
 
@@ -79,9 +79,3 @@ In 1–2 paragraphs, critique your new design using the CRAP checklist. How did 
 ## Turning everything in
 
 On Moodle, submit a PDF of your new poster, along with a PDF of your check-in and all the other writing tasks.
-
-::: {.callout-tip}
-### Share!
-
-[As part of building class community](/news/2026-01-05_building-community.qmd), consider showing off your redesigned poster in the `#bragging` channel on Discord!
-:::

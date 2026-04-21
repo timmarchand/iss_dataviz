@@ -4,10 +4,10 @@ date: "2026-04-23"
 date_end: "2026-04-29"
 ---
 
-For this example, I'm going to critique and improve this random flyer I found posted in the BYU library in September 2018:
+For this example, here we are goint to critique and improve this random flyer  found posted in an American university library in September 2018:
 
 ```{r safe-kids-bad, echo=FALSE, out.width="50%", fig.align="center"}
-knitr::include_graphics("/projects/02-example/original-from-hbll.jpg", error = FALSE)
+knitr::include_graphics("../projects/02-example/original-from-hbll.jpg", error = FALSE)
 ```
 
 It's not the best designed poster, but it's incredibly typical of what you see in the real world. By applying the principles of CRAP, we can improve the poster significantly.

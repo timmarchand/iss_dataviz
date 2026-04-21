@@ -2,14 +2,16 @@
 title: "Annotations"
 subtitle: "Exercise 9 --- ISS dataviz, Spring 2026"
 author: "YOUR NAME HERE"
-date: "DATE GOES HERE"
+date: today
 date-format: "long"
 bibliography: "bib/references.bib"
 csl: "bib/chicago-notes.csl"
 format:
   html:
     toc: true
-    link-citations: false 
+    link-citations: false
+    embed-resources: true
+    code-tools: true 
   typst:
     toc: true
     citeproc: true

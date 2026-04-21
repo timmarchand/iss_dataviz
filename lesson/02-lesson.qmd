@@ -97,7 +97,7 @@ check_question(c("PNG", "PDF"), options = c("PNG", "JPG", "PDF"), type = "radio"
 ::: {.question}
 
 ```{r solo, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/files/img/lesson/file-types/solo.jpg", error = FALSE)
+knitr::include_graphics("../files/img/lesson/file-types/solo.jpg", error = FALSE)
 ```
 
 ```{r solo-question, echo=FALSE, results="asis"}
