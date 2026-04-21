@@ -42,16 +42,14 @@ That'll replace the normal version of {gghalves} with the fixed version for ggpl
 
 ## Instructions
 
-1. Open the project either on your computer or in Posit.cloud
+1. Open the project either on your computer
 
    - [{{< fa file-archive >}} `06-exercise.zip`](/projects/06-exercise.zip): If you're using R on your own computer, download this file, [*unzip it*](/resource/unzipping.qmd), and double click on the file named `06-exercise.Rproj`
-   - [{{< fa cloud >}} Posit.cloud project](https://posit.cloud/spaces/737277/content/11693232): Use this link if you're using Posit.cloud in your browser
-
 2. Rename the Quarto file named `your-name_exercise-6.qmd` to something that matches your name and open it in RStudio.
 
 3. Complete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or [the example page](/example/06-example.qmd)—don't try to write everything from scratch!
 
-4. When you're all done, click on the "Render" button at the top of the editing window and create a Typst (pdf), PDF, or Word version of your document. Upload that file to Moodle. **Do not upload a rendered HTML file** (they don't work on Moodle).
+4. When you're all done, click on the "Render" button at the top of the editing window and create an html file Upload that file to Moodle.
 
 ```{r render-button, echo=FALSE, out.width="50%", indent="   ", fig.align="center"}
 knitr::include_graphics("/files/img/assignments/render-button.png", error = FALSE)
