@@ -27,10 +27,10 @@ Before starting this exercise, make sure you complete the Posit Primers at [the 
 
 3. Complete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or [the example page](/example/03-example.qmd)—don't try to write everything from scratch!
 
-4. When you're all done, click on the "Render" button at the top of the editing window and create an html file Upload that file to Moodle.
+4. When you're all done, click on the "Render" button at the top of the editing window and create an `html` file. Upload that file to Moodle.
 
 ```{r render-button, echo=FALSE, out.width="50%", indent="   ", fig.align="center"}
-knitr::include_graphics("/files/img/assignments/render-button.png", error = FALSE)
+knitr::include_graphics("../files/img/assignments/render-button.png", error = FALSE)
 ```
 
 ## Tips
