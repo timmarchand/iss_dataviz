@@ -2,7 +2,7 @@
 title: "Enhancing graphics"
 subtitle: "Exercise 10 --- ISS dataviz, Spring 2026"
 author: "YOUR NAME HERE"
-date: "DATE GOES HERE"
+date: today
 date-format: "long"
 format:
   html:

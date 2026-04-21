@@ -2,20 +2,15 @@
 title: "Uncertainty"
 subtitle: "Exercise 6 --- ISS dataviz, Spring 2026"
 author: "YOUR NAME HERE"
-date: "DATE GOES HERE"
+date: today
 date-format: "long"
 format:
   html:
     toc: true
-  typst:
-    toc: true
-  pdf:
-    toc: true
-  docx:
-    toc: true
+    embed-resources: true
+    code-tools: true
 ---
 
----
 
 # Task 1: Session check-in
 
