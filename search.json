@@ -1915,7 +1915,7 @@
     "href": "assignment/08-exercise.html#instructions",
     "title": "Comparisons",
     "section": "Instructions",
-    "text": "Instructions\n\nOpen the project either on your computer\n\n 08-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 08-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-8.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file Upload that file to Moodle.",
+    "text": "Instructions\n\nOpen the project either on your computer\n\n 08-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 08-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-8.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file. Upload that file to Moodle.",
     "crumbs": [
       "Assignments",
       "Exercises",
@@ -1951,7 +1951,7 @@
     "href": "assignment/06-exercise.html#instructions",
     "title": "Uncertainty",
     "section": "Instructions",
-    "text": "Instructions\n\nOpen the project either on your computer\n\n 06-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 06-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-6.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file Upload that file to Moodle.",
+    "text": "Instructions\n\nOpen the project either on your computer\n\n 06-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 06-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-6.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file. Upload that file to Moodle.",
     "crumbs": [
       "Assignments",
       "Exercises",
@@ -2155,7 +2155,7 @@
     "href": "assignment/01-exercise.html#instructions",
     "title": "Introduction to R and the tidyverse",
     "section": "Instructions",
-    "text": "Instructions\n\nOpen the project either on your computer (follow these instructions to get started!)\n\n 01-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 01-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-1.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file Upload that file to Moodle.",
+    "text": "Instructions\n\nOpen the project either on your computer (follow these instructions to get started!)\n\n 01-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 01-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-1.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file. Upload that file to Moodle.",
     "crumbs": [
       "Assignments",
       "Exercises",
@@ -2311,7 +2311,7 @@
     "href": "assignment/07-exercise.html#instructions",
     "title": "Relationships",
     "section": "Instructions",
-    "text": "Instructions\n\nOpen the project either on your computer\n\n 07-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 07-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-7.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file Upload that file to Moodle.",
+    "text": "Instructions\n\nOpen the project either on your computer\n\n 07-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 07-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-7.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file. Upload that file to Moodle.\n\n::: {.cell layout-align=“center”} ::: {.cell-output-display}  ::: :::",
     "crumbs": [
       "Assignments",
       "Exercises",
@@ -2347,7 +2347,7 @@
     "href": "assignment/09-exercise.html#instructions",
     "title": "Annotations",
     "section": "Instructions",
-    "text": "Instructions\n\nOpen the project either on your computer\n\n 09-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 09-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-9.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file Upload that file to Moodle.",
+    "text": "Instructions\n\nOpen the project either on your computer\n\n 09-exercise.zip: If you’re using R on your own computer, download this file, unzip it, and double click on the file named 09-exercise.Rproj\n\nRename the Quarto file named your-name_exercise-9.qmd to something that matches your name and open it in RStudio.\nComplete the tasks given in the Quarto file. You can definitely copy, paste, and adapt from other code in the document or the example page—don’t try to write everything from scratch!\nWhen you’re all done, click on the “Render” button at the top of the editing window and create an html file. Upload that file to Moodle.",
     "crumbs": [
       "Assignments",
       "Exercises",
