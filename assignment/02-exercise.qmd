@@ -40,7 +40,7 @@ Here's a typical poster you might see in your workplace or on an American campus
 **Do the four tasks below while consulting this poster**
 
 ```{r project-structure, echo=FALSE, out.width="90%", fig.align="center"}
-knitr::include_graphics("/projects/02-exercise/excen-flyer.jpg", error = FALSE)
+knitr::include_graphics("../projects/02-exercise/excen-flyer.jpg", error = FALSE)
 ```
 
 ### Part 1: Audience analysis
