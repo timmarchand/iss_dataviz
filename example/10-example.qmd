@@ -22,7 +22,7 @@ Big data-focused organizations have been using a process like this for years. Na
 For instance, in his first chapter, he guides you through the process of creating the skeleton of this chart in R, exporting it as a PDF, and adding all the titles and annotations and arrows and extra lines in Illustrator ([original post from 2008](https://flowingdata.com/2008/07/03/nathans-annual-hot-dog-eating-contest-kobayashi-vs-chestnut/)):
 
 ```{r hotdogs, echo=FALSE, out.width="100%"}
-knitr::include_graphics("/files/img/assignments/hot-dogs.gif", error = FALSE)
+knitr::include_graphics("../files/img/assignments/hot-dogs.gif", error = FALSE)
 ```
 
 ## Enhancing graphics in 2025

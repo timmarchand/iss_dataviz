@@ -50,7 +50,7 @@ Here are the most important things you'll need to know about Quarto in this clas
   You can render by clicking on the "Render" button at the top of the editor window, or by pressing `⌘⇧K` on macOS or `control + shift + K` on Windows.
 
 ```{r render-button, echo=FALSE, out.width="50%", indent="  "}
-knitr::include_graphics("/files/img/assignments/render-button.png", error = FALSE)
+knitr::include_graphics("../files/img/assignments/render-button.png", error = FALSE)
 ```
 
 
@@ -63,7 +63,7 @@ There are three ways to insert chunks:
 - Click on the "Insert" button at the top of the editor window
 
 ```{r insert-chunk, echo=FALSE, out.width="30%", indent="  "}
-knitr::include_graphics("/files/img/reference/insert-chunk.png", error = FALSE)
+knitr::include_graphics("../files/img/reference/insert-chunk.png", error = FALSE)
 ```
 
 - Manually type all the backticks and curly braces (don't do this)
@@ -74,7 +74,7 @@ knitr::include_graphics("/files/img/reference/insert-chunk.png", error = FALSE)
 You can add names to chunks to make it easier to navigate your document. If you click on the little dropdown menu at the bottom of your editor in RStudio, you can see a table of contents that shows all the headings and chunks. If you name chunks, they'll appear in the list. If you don't include a name, the chunk will still show up, but you won't know what it does.
 
 ```{r chunk-toc, echo=FALSE, out.width="40%"}
-knitr::include_graphics("/files/img/reference/chunk-toc.png", error = FALSE)
+knitr::include_graphics("../files/img/reference/chunk-toc.png", error = FALSE)
 ```
 
 There are two ways to add a chunk name:

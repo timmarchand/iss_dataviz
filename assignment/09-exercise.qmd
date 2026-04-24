@@ -56,7 +56,7 @@ You'll need to insert some of your own code chunks. Rather than typing them by h
 #| echo: false
 #| out-width: 19%
 #| fig-align: center
-knitr::include_graphics("/files/img/assignments/insert-chunk-button.png", error = FALSE)
+knitr::include_graphics("../files/img/assignments/insert-chunk-button.png", error = FALSE)
 ```
 
 :::

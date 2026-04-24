@@ -16,7 +16,7 @@ Unzipping files on macOS is trivial, but unzipping files on Windows can mess you
 Double click on the downloaded `.zip` file. macOS will automatically create a new folder with the same name as the `.zip` file, and all the file's contents will be inside. Double click on the RStudio Project file (`.Rproj`) to get started.
 
 ```{r, echo=FALSE, out.width="60%"}
-knitr::include_graphics("/files/img/unzipping/unzip-mac.png", error = FALSE)
+knitr::include_graphics("../files/img/unzipping/unzip-mac.png", error = FALSE)
 ```
 
 
