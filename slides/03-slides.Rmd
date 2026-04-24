@@ -1,6 +1,6 @@
 ---
 title: "Mapping data to graphics"
-author: "Tim Marchand"
+author: "Tim"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:

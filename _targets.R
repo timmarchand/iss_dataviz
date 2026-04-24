@@ -89,6 +89,8 @@ list(
     format = "file"
   ),
   
+  ## Build slides ----
+  build_slides,
   
   ## Knit the README ----
   tar_target(workflow_graph, build_graph(), format = "file"),
