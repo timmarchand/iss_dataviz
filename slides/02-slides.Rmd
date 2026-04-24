@@ -425,9 +425,11 @@ Photo by [Brad Huchteman](https://unsplash.com/photos/sR1Kz2auNJE) on Unsplash
 
 # Perceptually uniform colors
 
-```{r echo=FALSE}
-counties_ga <- tigris::counties(state = 13)
+```{r echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+sf::sf_use_s2(FALSE)
+counties_ga <- tigris::counties(state = 13, progress_bar = FALSE)
 ```
+
 
 .pull-left-3[
 <figure>
@@ -457,8 +459,8 @@ ggplot(counties_ga) +
 </figure>
 ]
 
---
 
+--
 .pull-right-3[
 <figure>
 ```{r ga3, echo=FALSE, fig.width=5, fig.height=6}
