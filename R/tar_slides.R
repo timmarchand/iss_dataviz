@@ -70,19 +70,24 @@ render_xaringan <- function(slide_path) {
 
 xaringan_to_pdf <- function(slide_path) {
   path_sans_ext <- tools::file_path_sans_ext(slide_path)
-
+  
   if (path_sans_ext == "slides/12-slides") {
-    return(here_rel("slides/12-slides.pdf"))
+    pdf_path <- here_rel("slides/12-slides.pdf")
+    if (file.exists(pdf_path)) return(pdf_path)
+    message("Skipping 12-slides.pdf — run manually with renderthis::to_pdf(complex_slides = TRUE)")
+    return(invisible(NULL))
   }
-
+  
   if (path_sans_ext == "slides/15-slides") {
-    return(here_rel("slides/15-slides.pdf"))
+    pdf_path <- here_rel("slides/15-slides.pdf")
+    if (file.exists(pdf_path)) return(pdf_path)
+    message("Skipping 15-slides.pdf — run manually with renderthis::to_pdf(complex_slides = TRUE)")
+    return(invisible(NULL))
   }
   
   renderthis::to_pdf(
     slide_path,
     to = paste0(path_sans_ext, ".pdf")
   )
-
   return(paste0(tools::file_path_sans_ext(slide_path), ".pdf"))
 }

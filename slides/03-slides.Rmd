@@ -1,6 +1,6 @@
 ---
 title: "Mapping data to graphics"
-author: "Tim"
+author: "Tim Marchand"
 date: "`r Sys.Date()`"
 output:
   xaringan::moon_reader:
@@ -1386,7 +1386,7 @@ ggplot(gapminder, aes(x = gdpPercap, y = lifeExp,
 ]
 
 ---
-
+exclude: true
 # Sound
 
 .box-inv-3[Visualize internal rhyming schemes in music]
@@ -1400,7 +1400,7 @@ ggplot(gapminder, aes(x = gdpPercap, y = lifeExp,
 ]
 
 ---
-
+exclude: true
 layout: false
 
 .center[
@@ -1414,12 +1414,12 @@ layout: false
 ]
 
 ---
-
+exclude: true
 layout: true
 class: title title-3
 
 ---
-
+exclude: true
 # Animation, time, and sound
 
 .center[
