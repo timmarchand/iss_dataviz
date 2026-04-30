@@ -1,8 +1,8 @@
 group,session,date,end_date,title,flag,deadline,content,lesson,example,assignment,project,note
 Foundations,Session 1,2026-04-14,2026-04-20,"Course introduction, data types, R and RStudio",,2026-04-20 23:59,content/01-content,,example/01-example,assignment/01-exercise,,
 Foundations,Session 2,2026-04-21,2026-04-27,"R basics 1: Vectors, data frames, lists, basic scripts",,2026-04-27 23:59,content/02-content,,example/02-example,assignment/02-exercise,,
-Foundations,Session 3,2026-04-28,2026-05-04,R basics 2: Data visualisation,,2026-05-04 23:59,content/03-content,,example/03-example,assignment/03-exercise,project/02-ps,
-Core concepts,Session 4,2026-05-12,2026-05-18,Sampling and probability,,2026-05-18 23:59,content/04-content,,example/04-example,assignment/04-exercise,,
+Foundations,Session 3,2026-04-28,2026-05-04,R basics 2: Data visualisation,,2026-05-04 23:59,content/03-content,,example/03-example,assignment/03-exercise,,
+Core concepts,Session 4,2026-05-12,2026-05-18,Sampling and probability,,2026-05-18 23:59,content/04-content,,example/04-example,assignment/04-exercise,project/02-ps,
 Core concepts,Session 5,2026-05-19,2026-05-25,Visualising probability,,2026-05-25 23:59,content/05-content,,example/05-example,assignment/05-exercise,,
 Core concepts,Session 6,2026-05-26,2026-06-01,Manipulating data 1: Data project intro,,2026-06-01 23:59,content/06-content,,example/06-example,assignment/06-exercise,project/03-ps,
 Core concepts,Session 7,2026-06-02,2026-06-08,Manipulating data 2,,2026-06-08 23:59,content/07-content,,example/07-example,assignment/07-exercise,,

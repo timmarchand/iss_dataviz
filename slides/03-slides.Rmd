@@ -1284,7 +1284,7 @@ class: title title-2
 # Describing graphs with the grammar
 
 .left-code[
-.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the y-axis with a log, and facet by year]
+.box-2.small[Map wealth to the x-axis, health to the y-axis, add points, color by continent, size by population, scale the x-axis with a log, and facet by year]
 
 ```{r describe-1, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3.75), out.width="100%"}
 ggplot(data = filter(gapminder, year %in% c(2002, 2007)), 
