@@ -5,19 +5,63 @@ date_end: "2026-05-20"
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.width = 8, fig.height = 4.8, fig.align = "center", collapse = TRUE)
+knitr::opts_chunk$set(
+  fig.width = 8,
+  fig.height = 4.8,
+  fig.align = "center",
+  collapse = TRUE,
+  dev = "png"
+)
 set.seed(1234)
+
+library(showtext)
+font_add_google("Roboto Condensed", "Roboto Condensed")
+showtext_auto()
 ```
 
 The [lesson for this week's session](/lesson/05-lesson.qmd) is a fairly comprehensive introduction to using the `theme()` function in ggplot, and [this page by Henry Wang](https://henrywang.nl/ggplot2-theme-elements-demonstration/) is a good cheat sheet for remembering which theme elements are which on a plot—and I like [this PDF cheatsheet by Clara Granell](https://github.com/claragranell/ggplot2/blob/main/ggplot_theme_system_cheatsheet.pdf) even better.
 
-For [your exercise](/assignment/05-exercise.qmd), you're going to create the world's ugliest plot. For this example, we'll use the principles of CRAP to make a great theme. 
+For [your exercise](/assignment/05-exercise.qmd), you're going to create the world's ugliest plot. For this example, we'll use the principles of CRAP to make a great theme.
 
 I'm going to build the theme semi-incrementally here. Instead of showing how the plot updates with each change in setting, I do most of the updates all at once, with tons of comments explaining what each line does. **Importantly**, I did *not* write this all at once. When you're tinkering with themes, you generally start with something like `theme_minimal()` or `theme_bw()` and then gradually add new things to `theme()`, like modifying `plot.title`, then `plot.subtitle`, etc. It's a very iterative process with lots of tinkering. Because of this, **there is no live-coding video for this example**—it would be incredibly long and boring. Instead, look through each of the lines and see what they're doing.
 
 For this example, I'm going to use the `gapminder` dataset that we've been using throughout this week. Instead of using the CSV file like we did before, we'll load the data from the {gapminder} package. Once you run `library(gapminder)`, you'll automatically have access to a dataset named `gapminder`.
 
-I'm also going to use the [Roboto Condensed font](https://fonts.google.com/specimen/Roboto+Condensed) in the theme. Download and install it on your computer if you don't have it.
+We'll also use the [Roboto Condensed font](https://fonts.google.com/specimen/Roboto+Condensed) in the theme. The setup chunk at the top of this document loads it automatically via the `{showtext}` package, so no manual font installation is needed.
+
+
+## Bonus: {ggThemeAssist}
+
+Before we dive into building a theme from scratch, let's look at a tool that can help you explore theme elements interactively. {ggThemeAssist} provides a point-and-click interface for tweaking theme settings, and then generates the corresponding code for you — great for discovering what's possible before you start writing theme code by hand.
+
+Install it with:
+
+```{r install-ggthemeassist, eval=FALSE}
+remotes::install_github("timmarchand/ggthemeassist")
+library(ggThemeAssist)
+```
+
+To use it, first create a ggplot object, select its name in your script, then go to **Addins → ggplot Theme Assistant**. Here's a simple plot to try it on:
+
+```{r ggthemeassist-demo, eval = FALSE}
+library(tidyverse)
+
+demo_plot <- ggplot(data = mpg,
+                    mapping = aes(x = displ, y = hwy, color = class)) +
+  geom_point(size = 3) +
+  labs(x = "Displacement", y = "Highway MPG", color = "Car class",
+       title = "Heavier cars get worse mileage",
+       subtitle = "Except for two-seaters?",
+       caption = "Source: ggplot2::mpg")
+
+demo_plot
+```
+
+Select `demo_plot` in your script and launch the addin. Once you're happy with the result, the generated `theme()` code gets inserted directly into your script. Here's a brief video showing the workflow:
+
+<div class="ratio ratio-16x9">
+<iframe src="https://www.youtube.com/embed/9ldrTCUSReM" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0"></iframe>
+</div>
 
 
 ## Basic plot
@@ -59,7 +103,7 @@ base_plot +
   theme_minimal()
 ```
 
-That gets rid of the grey background and is a good start, but we can make lots of improvements. First let's deal with the gridlines. There are too many. We can get rid of the minor gridlines with by setting them to `element_blank()`:
+That gets rid of the grey background and is a good start, but we can make lots of improvements. First let's deal with the gridlines. There are too many. We can get rid of the minor gridlines by setting them to `element_blank()`:
 
 ```{r theme1}
 base_plot +
@@ -67,53 +111,9 @@ base_plot +
   theme(panel.grid.minor = element_blank())
 ```
 
-Next let's add some typographic contrast. We'll use Roboto Condensed Regular as the base font. Before trying this, make sure you do the following:
+Next let's add some typographic contrast. We'll use Roboto Condensed Regular as the base font, which is already loaded via `{showtext}` in the setup chunk.
 
-**On macOS**:
-
-- Run `capabilities()` in your console and verify that `TRUE` shows up under `cairo`
-- If not, download and install [XQuartz](https://www.xquartz.org/)
-
-**On Windows**:
-
-- Run `windowsFonts()` in your console and you'll see a list of all the fonts you can use with R. It's not a very big list.
-
-  ```default
-  #> $serif
-  #> [1] "TT Times New Roman"
-  #>
-  #> $sans
-  #> [1] "TT Arial"
-  #> 
-  #> $mono
-  #> [1] "TT Courier New"
-  ```
-  
-  You can add Roboto Condensed to your current R session by running this in your console:
-
-  ```{r windowsfonts, eval=FALSE}
-  windowsFonts(`Roboto Condensed` = windowsFont("Roboto Condensed"))
-  ```
-
-  Now if you run `windowsFonts()`, you'll see it in the list:
-  
-  ```default
-  #> $serif
-  #> [1] "TT Times New Roman"
-  #>
-  #> $sans
-  #> [1] "TT Arial"
-  #> 
-  #> $mono
-  #> [1] "TT Courier New"
-  #>
-  #> $`Roboto Condensed`
-  #> [1] "Roboto Condensed"
-  ```
-
-  This only takes effect for your current R session, so if you are knitting a document or if you ever plan on closing RStudio, you'll need to incorporate this font creation code into your script.
-
-We'll use the font as the `base_family` argument. Note how I make it bold with `face` and change the size with `rel()`. Instead of manually setting some arbitrary size, I use `rel()` to resize the text in relation to the `base_size` argument. Using `rel(1.7)` means 1.7 × `base_size`, or 20.4 That will rescale according to whatever `base_size` is—if I shrink it to `base_size = 8`, the title will scale down accordingly.
+We'll use the font as the `base_family` argument. Note how I make it bold with `face` and change the size with `rel()`. Instead of manually setting some arbitrary size, I use `rel()` to resize the text in relation to the `base_size` argument. Using `rel(1.7)` means 1.7 × `base_size`, or 20.4. That will rescale according to whatever `base_size` is—if I shrink it to `base_size = 8`, the title will scale down accordingly.
 
 ```{r theme2}
 plot_with_good_typography <- base_plot +
@@ -141,7 +141,7 @@ plot_with_good_typography
 
 Whoa. That gets us most of the way there! We have good contrast with the typography, with the strong bold and the lighter regular font (**✓ contrast**). Everything is aligned left (**✓ alignment** and **✓ repetition**). By moving the axis titles a little bit away from the labels, we've enhanced proximity, since they were too close together (**✓ proximity**). We repeat grey in both the caption and the subtitle (**✓ repetition**).
 
-The only thing I don't like is that the 2002 isn't quite aligned with the title and subtitle. This is because the facet labels are in boxes along the top of each plot, and in some themes (like `theme_grey()` and `theme_bw()`) those facet labels have grey backgrounds. We can turn off the margin in those boxes, or we can add a background, which will then be perfectly aligned with the title and subtitle.
+The only thing I don't like is that the 2002 facet label isn't quite aligned with the title and subtitle. This is because the facet labels are in boxes along the top of each plot, and in some themes (like `theme_grey()` and `theme_bw()`) those facet labels have grey backgrounds. We can add a background, which will then be perfectly aligned with the title and subtitle.
 
 ```{r theme3}
 plot_with_good_typography +
@@ -212,18 +212,7 @@ This custom theme we just made is just one iteration of a theme. There are count
 - [{tvthemes}](https://ryo-n7.github.io/2019-05-16-introducing-tvthemes-package/)
 - [{ggpomological}](https://www.garrickadenbuie.com/project/ggpomological/) (this one is incredible!)
 
-Check [this blog post](https://rfortherestofus.com/2019/08/themes-to-improve-your-ggplot-figures/) for examples of a bunch of others
-
-
-## Bonus: {ggthemeassist}
-
-If you're intimidated by constantly referring to the documentation and figuring out what little line of code affects which part of the graph, install and check out the {ggthemeassist} package. It provides an interactive menu for manipulating different theme elements, and then generates all the corresponding code, which is really magical.
-
-Here's a brief example of how to use it.
-
-<div class="ratio ratio-16x9">
-<iframe src="https://www.youtube.com/embed/9ldrTCUSReM" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0"></iframe>
-</div>
+Check [this blog post](https://rfortherestofus.com/2019/08/themes-to-improve-your-ggplot-figures/) for examples of a bunch of others.
 
 
 ## Saving plots
@@ -238,13 +227,13 @@ We then feed our saved plot object to `ggsave()` and specify the filename and di
 
 ```{r save-plots, eval=FALSE}
 # Add my_pretty_theme to the gapminder base_plot and save as an object
-final_gampinder_plot <- base_plot +
+final_gapminder_plot <- base_plot +
   my_pretty_theme
 
 # Save as PNG and PDF
-ggsave("fancy_gapminder.png", final_gampinder_plot,
+ggsave("fancy_gapminder.png", final_gapminder_plot,
        width = 8, height = 5, units = "in")
-ggsave("fancy_gapminder.pdf", final_gampinder_plot,
+ggsave("fancy_gapminder.pdf", final_gapminder_plot,
        width = 8, height = 5, units = "in", device = cairo_pdf)
 
 # Save the mpg plot as PNG and PDF
