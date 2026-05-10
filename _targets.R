@@ -3,7 +3,7 @@ library(tarchetypes)
 suppressPackageStartupMessages(library(tidyverse))
 
 class_number <- "M510302101"
-base_url <- "https://datavizsp26.classes.andrewheiss.com/"
+base_url <- "https://timmarchand.github.io/iss_dataviz/"
 page_suffix <- ".html"
 
 options(

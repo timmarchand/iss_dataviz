@@ -312,4 +312,4 @@ tbl_data |>
 :::
 ::::
 
-**Acknowledgments**: This course is a derivative of [PMAP 8551](https://datavizsp26.classes.andrewheiss.com/) designed by Andrew Heiss at Georgia State University. I have adapted the materials for the ISS context at Gakushuin University.
+**Acknowledgments**: This course is a derivative of [PMAP 8551](https://timmarchand.github.io/iss_dataviz/) designed by Andrew Heiss at Georgia State University. I have adapted the materials for the ISS context at Gakushuin University.

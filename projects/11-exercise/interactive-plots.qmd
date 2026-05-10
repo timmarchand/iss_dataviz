@@ -51,7 +51,7 @@ Use `ggplot()` and `ggplotly()` to recreate [the interactive plot from the instr
 
 **Some hints!**
 
-- Don't try to make this interactive right away! [Just like in the example](https://datavizsp26.classes.andrewheiss.com/example/11-example.html){target="_blank"}, first make a regular static version before feeding it into `ggplotly()`.
+- Don't try to make this interactive right away! [Just like in the example](https://timmarchand.github.io/iss_dataviz/example/11-example.html){target="_blank"}, first make a regular static version before feeding it into `ggplotly()`.
 - The points are colored with three of R's built-in colors: `darkorange`, `purple`, and `cyan4`. Use `scale_color_manual()` to change the default colors to these (using something like `values = c("darkorange", "purple", "cyan4")`).
 - The points are a little bigger than the default size. Use `size = BLAH` in `geom_point()` to adjust them (but make sure you don't use that inside `aes()`!).
 - Notice that the points use different shapes for each species as well as color!
@@ -64,7 +64,7 @@ Use `ggplot()` and `ggplotly()` to recreate [the interactive plot from the instr
   Bill length: X mm
   ```
 
-  You'll need to make a new column in the penguins dataset named `label` (or whatever you want to call it) that builds that label using that template. [The example will be useful](https://datavizsp26.classes.andrewheiss.com/example/11-example.html#including-more-information-in-the-tooltip){target="_blank"}.
+  You'll need to make a new column in the penguins dataset named `label` (or whatever you want to call it) that builds that label using that template. [The example will be useful](https://timmarchand.github.io/iss_dataviz/example/11-example.html#including-more-information-in-the-tooltip){target="_blank"}.
 
   ::: {.callout-tip collapse="true"}
   ### Bonus tip!

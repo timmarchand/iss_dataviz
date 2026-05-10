@@ -17,7 +17,7 @@ Accordingly, you have total freedom in what data you can use for this project. [
 
 Here's what you'll need to do:
 
-0. Create a [new](https://datavizsp26.classes.andrewheiss.com/lesson/01-lesson.html#part-3-rstudio-projects) **RStudio project** on your computer, or use an empty starter project here:
+0. Create a [new](https://timmarchand.github.io/iss_dataviz/lesson/01-lesson.html#part-3-rstudio-projects) **RStudio project** on your computer, or use an empty starter project here:
 
    - [{{< fa file-archive >}} `final-project.zip`](/projects/final-project.zip): If you're using R on your own computer, download this file, [*unzip it*](/resource/unzipping.qmd), and double click on the file named `final-project.Rproj`
 

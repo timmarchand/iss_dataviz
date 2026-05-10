@@ -280,7 +280,7 @@ website:
 page-footer:
     left: |
       Content {{< fa brands creative-commons >}} 2026 by [Tim Marchand](your_url) <br>
-      Adapted from [Andrew Heiss's Data Visualization course](https://datavizsp26.classes.andrewheiss.com/)
+      Adapted from [Andrew Heiss's Data Visualization course](https://timmarchand.github.io/iss_dataviz/)
     right: |
       Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
       [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})

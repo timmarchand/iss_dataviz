@@ -164,7 +164,7 @@ This shows what happens to the predicted number of total minutes as a typical pl
 
 Use `predictions()` (from the {marginaleffects} package) and `geom_line()` and `geom_ribbon()` in the chunk below to re-create the predictions plot.
 
-- Refer to the ["Predicted values and marginal effects in 2026"](https://datavizsp26.classes.andrewheiss.com/example/07-example.html#predicted-values-and-marginal-effects-in-2026) section of the example page!
+- Refer to the ["Predicted values and marginal effects in 2026"](https://timmarchand.github.io/iss_dataviz/example/07-example.html#predicted-values-and-marginal-effects-in-2026) section of the example page!
 
 - You'll need to create a dataset of predicted values first. You'll do something like this:
 
