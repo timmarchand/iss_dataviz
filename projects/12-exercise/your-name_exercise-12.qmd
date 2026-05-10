@@ -158,7 +158,7 @@ knitr::include_graphics("images/recreate-me-plot-divisions-1.png")
 
 Use `ggplot()` and `geom_sf()` in the chunk below to re-create the plot above using your newly merged `states_with_regions` dataset. **Some hints**:
 
-- You'll need to make a copy of `states_with_regions` that has the states shifted around using `shift_geometry()` ([see the example](https://datavizsp26.classes.andrewheiss.com/example/12-example.html#us-map-with-non-continguous-parts))
+- You'll need to make a copy of `states_with_regions` that has the states shifted around using `shift_geometry()` ([see the example](https://timmarchand.github.io/iss_dataviz/example/12-example.html#us-map-with-non-continguous-parts))
 - The legend is at the top. Control this with `theme(legend.position = "SOMETHING")`
 - The divisions are filled with the "turbo" palette from viridis (use `scale_fill_viridis_d(option = "SOMETHING")`)
 - The plot uses `theme_void()`
@@ -227,7 +227,7 @@ knitr::include_graphics("images/recreate-me-plot-state-snap-1.png")
 Use `left_join()`, `ggplot()` and `geom_sf()` in the chunk below to re-create the plot above using your newly merged `snap_by_state` dataset. **Some hints**:
 
 - You'll need to left join `snap_by_state` into `states`.
-- You'll need to make a copy of that joined dataset that has the states shifted around using `shift_geometry()` ([see the example](https://datavizsp26.classes.andrewheiss.com/example/12-example.html#us-map-with-non-continguous-parts))
+- You'll need to make a copy of that joined dataset that has the states shifted around using `shift_geometry()` ([see the example](https://timmarchand.github.io/iss_dataviz/example/12-example.html#us-map-with-non-continguous-parts))
 - The legend is at the bottom. Control this with `theme(legend.position = "SOMETHING")`
 - Remember that you can add linebreaks to labels with `\n`, like `"Proportion of households\nusing SNAP"`
 - The states are filled with the "plasma" palette from viridis (use `scale_fill_viridis_d(option = "SOMETHING")`)
@@ -362,7 +362,7 @@ Use `ggplot()` and `geom_sf()` in the chunk below to create a **similar** plot f
 
 Draw your own map with your own points. This could be a map of places you've lived, or a map of places you've visited, or a map of places you want to visit. Anything!
 
-The only requirement is that you find an appropriate shapefile (states, counties, world, etc.), collect latitude and longitude data from Google Maps, and plot the points (with or without labels) on a map. Use multiple shapefiles if you want—add roads, rivers, lakes, whatever. Basically follow the code from the example in the section named ["Making your own geocoded data"](https://datavizsp26.classes.andrewheiss.com/example/12-example.html#making-your-own-geocoded-data). Make sure you choose an appropriate projection.
+The only requirement is that you find an appropriate shapefile (states, counties, world, etc.), collect latitude and longitude data from Google Maps, and plot the points (with or without labels) on a map. Use multiple shapefiles if you want—add roads, rivers, lakes, whatever. Basically follow the code from the example in the section named ["Making your own geocoded data"](https://timmarchand.github.io/iss_dataviz/example/12-example.html#making-your-own-geocoded-data). Make sure you choose an appropriate projection.
 
 The example page has links to a bunch of different shapefiles. You can also use [the {rnaturalearth} package](https://github.com/ropensci/rnaturalearth) to get country-level world data from Natural Earth without needing to download any shapefiles. Like, look how easy this is! (Obviously this code can't be your entire extension—you'd need to filter it or do *something* to it.)
 

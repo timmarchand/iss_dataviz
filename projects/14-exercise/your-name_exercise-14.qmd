@@ -131,12 +131,12 @@ Use the `all_words` data to recreate this plot with `ggplot()`.
 
 **Some hints**:
 
-- You'll need to make a smaller dataset (maybe named `top_words`, or whatever you want!) to calculate the count of words using either `group_by() |> summarize()` or `count()` ([see this from the example](https://datavizsp26.classes.andrewheiss.com/example/14-example.html#count) for the difference between the two approaches). You'll need to then keep the top 10 words using `slice_max()`
+- You'll need to make a smaller dataset (maybe named `top_words`, or whatever you want!) to calculate the count of words using either `group_by() |> summarize()` or `count()` ([see this from the example](https://timmarchand.github.io/iss_dataviz/example/14-example.html#count) for the difference between the two approaches). You'll need to then keep the top 10 words using `slice_max()`
 - Make sure the words are plotted in descending order. You've done this several times in past exercises (like exercises 4, 6, 8) with functions like `fct_inorder()` or `fct_reorder()`
 - The plot uses `theme_bw()` and makes the plot title bold with `theme()`
 - The plot is 5 inches wide and 3.5 inches tall. Use chunk options to match those dimensions.
 - The plot uses `labs()` for nicer axis titles and the title, subtitle, and caption.
-- The x-axis is formatted with commas ([see this](https://datavizsp26.classes.andrewheiss.com/news/2025-10-08_faqs_week_06.html#i-have-numbers-like-20000-and-want-them-formatted-with-commas-like-20000.-can-i-do-that-automatically))
+- The x-axis is formatted with commas ([see this](https://timmarchand.github.io/iss_dataviz/news/2025-10-08_faqs_week_06.html#i-have-numbers-like-20000-and-want-them-formatted-with-commas-like-20000.-can-i-do-that-automatically))
 
 ```{r}
 #| label: recreate-me-total-words-plot
@@ -308,13 +308,13 @@ Use the `prop_positive_character` data to recreate this plot with `ggplot()`.
 **Some hints**:
 
 - The lollipops are created with `geom_pointrange()` with `aes(xmin = 0, xmax = prop_positive, color = prop_positive)`
-- The lollipops are colored with the "managua" [diverging palette](https://datavizsp26.classes.andrewheiss.com/resource/colors.html#diverging) from {scico} ([see here for more](https://datavizsp26.classes.andrewheiss.com/resource/colors.html#scientific-colour-maps)). Make it so that the midpoint of the color palette is at 0.5 (since 0.5 here represents neutral sentiment). Look the help page for `scale_color_scico()` to see how to do that.
+- The lollipops are colored with the "managua" [diverging palette](https://timmarchand.github.io/iss_dataviz/resource/colors.html#diverging) from {scico} ([see here for more](https://timmarchand.github.io/iss_dataviz/resource/colors.html#scientific-colour-maps)). Make it so that the midpoint of the color palette is at 0.5 (since 0.5 here represents neutral sentiment). Look the help page for `scale_color_scico()` to see how to do that.
 - Make sure the characters are plotted in descending order by proportion. You've done this several times in past exercises (like exercises 4, 6, 8) with functions like `fct_inorder()` or `fct_reorder()`.
 - The legend is removed because it's redundant with the x-axis.
 - The plot uses `theme_bw()` and makes the plot title bold with `theme()`
 - The plot is 5 inches wide and 3.5 inches tall. Use chunk options to match those dimensions.
 - The plot uses `labs()` for nicer axis titles and the title and subtitle.
-- The x-axis is formatted with percents ([see this](https://datavizsp26.classes.andrewheiss.com/news/2025-10-08_faqs_week_06.html#i-have-numbers-like-20000-and-want-them-formatted-with-commas-like-20000.-can-i-do-that-automatically))
+- The x-axis is formatted with percents ([see this](https://timmarchand.github.io/iss_dataviz/news/2025-10-08_faqs_week_06.html#i-have-numbers-like-20000-and-want-them-formatted-with-commas-like-20000.-can-i-do-that-automatically))
 
 ```{r}
 #| label: recreate-me-sentiment-plot

@@ -124,7 +124,7 @@ Your job is to use `labs()` and `theme()` to recreate this plot:
 
 **Some helpful big hints:**
 
-- The image is 6 inches wide and 3 inches tall. Use chunk options like `fig-width` and `fig-height` to control the dimensions (see <https://datavizsp26.classes.andrewheiss.com/resource/quarto.html#chunk-options>)
+- The image is 6 inches wide and 3 inches tall. Use chunk options like `fig-width` and `fig-height` to control the dimensions (see <https://timmarchand.github.io/iss_dataviz/resource/quarto.html#chunk-options>)
 - Use `labs()` to modify the following things: `x`, `y`, `title`, `subtitle`, and `caption`
 - Use `theme_bw()`
 - Use `theme()` to adjust these things:
@@ -147,7 +147,7 @@ base_plot +
   )
 ```
 
-**MAKE SURE** you use [the theme resources and cheatsheets from the content page](https://datavizsp26.classes.andrewheiss.com/content/05-content.html#readings-you-should-glance-through-and-use-as-resources). Also [consider using {ggthemeassist}](https://datavizsp26.classes.andrewheiss.com/example/05-example.html#bonus-ggthemeassist) to help with the different settings.
+**MAKE SURE** you use [the theme resources and cheatsheets from the content page](https://timmarchand.github.io/iss_dataviz/content/05-content.html#readings-you-should-glance-through-and-use-as-resources). Also [consider using {ggthemeassist}](https://timmarchand.github.io/iss_dataviz/example/05-example.html#bonus-ggthemeassist) to help with the different settings.
 
 ```{r}
 #| label: recreation-plot-1
