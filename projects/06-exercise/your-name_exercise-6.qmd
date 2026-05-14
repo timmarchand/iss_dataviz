@@ -202,3 +202,15 @@ Copy the code for one of your plots above and paste it into the chunk below. Do 
 
 # Do stuff here
 ```
+
+# Task 4: ~~Extension~~ Uncertainty plots
+
+If you have covered the previous unit too, look at the `Uncertainty_plots.R` code, and play around with the themes for the `pyramid`, `ridges`, `halves`, and `raincloud` plots. 
+
+```{r}
+#| label: uncertainty-extension
+source("Uncertainty_plots.R")
+
+# Do stuff here
+
+```
