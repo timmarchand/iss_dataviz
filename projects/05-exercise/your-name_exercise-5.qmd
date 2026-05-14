@@ -172,7 +172,7 @@ base_plot +
   theme()
 ```
 
-# Task 4: ~~Extension~~ Uncertainty plots
+# Task 4: Optional: Uncertainty plots
 
 If you have covered the following unit too, look at the `Uncertainty_plots.R` code, and play around with the themes for the `pyramid`, `ridges`, `halves`, and `raincloud` plots. 
 
