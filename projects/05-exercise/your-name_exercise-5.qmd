@@ -171,3 +171,16 @@ Change the colors, modify the theme, add labels, etc. and make this ugly. You ca
 base_plot +
   theme()
 ```
+
+# Task 4: ~~Extension~~ Uncertainty plots
+
+If you have covered the following unit too, look at the `Uncertainty_plots.R` code, and play around with the themes for the `pyramid`, `ridges`, `halves`, and `raincloud` plots. 
+
+```{r}
+#| label: uncertainty-extension
+source("Uncertainty_plots.R")
+
+# Do stuff here
+
+```
+
