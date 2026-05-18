@@ -4,7 +4,7 @@
     <title>Mapping data to graphics</title>
     <meta charset="utf-8" />
     <meta name="author" content="Tim Marchand" />
-    <meta name="date" content="2026-04-28" />
+    <meta name="date" content="2026-05-18" />
     <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -240,10 +240,20 @@ class: title title-4
 # `ggplot()` template
 
 
+&lt;pre&gt;&lt;code&gt;ggplot(data = &lt;b style="background:#CBB5FF"&gt;DATA&lt;/b&gt;) +
+  &lt;b style="background:#FFDFD1"&gt;GEOM_FUNCTION&lt;/b&gt;(mapping = aes(&lt;b style="background:#FFD0CF"&gt;AESTHETIC MAPPINGS&lt;/b&gt;))
+&lt;/code&gt;&lt;/pre&gt;
+
 
 --
 
 
+&lt;pre&gt;&lt;code&gt;ggplot(data = &lt;b style="background:#CBB5FF"&gt;troops&lt;/b&gt;) +
+  &lt;b style="background:#FFDFD1"&gt;geom_path&lt;/b&gt;(mapping = aes(x = &lt;b style="background:#FFD0CF"&gt;longitude&lt;/b&gt;,
+                          y = &lt;b style="background:#FFD0CF"&gt;latitude&lt;/b&gt;,
+                          color = &lt;b style="background:#FFD0CF"&gt;direction&lt;/b&gt;,
+                          linewidth = &lt;b style="background:#FFD0CF"&gt;survivors&lt;/b&gt;))
+&lt;/code&gt;&lt;/pre&gt;
 
 ---
 
