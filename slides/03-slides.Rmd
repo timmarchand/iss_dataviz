@@ -271,30 +271,26 @@ class: title title-4
 
 # `ggplot()` template
 
-```{r show-ggplot-template, echo=FALSE, tidy=FALSE}
-decorate('
-ggplot(data = DATA) +
-  GEOM_FUNCTION(mapping = aes(AESTHETIC MAPPINGS))
-', eval = FALSE) |> 
-  flair("DATA", background = "#CBB5FF", before = "<b>", after = "</b>") |> 
-  flair("GEOM_FUNCTION", background = "#FFDFD1", before = "<b>", after = "</b>") |> 
-  flair("AESTHETIC MAPPINGS", background = "#FFD0CF", before = "<b>", after = "</b>")
+```{r show-ggplot-template, echo=FALSE, results='asis'}
+cat('
+<pre><code>ggplot(data = <b style="background:#CBB5FF">DATA</b>) +
+  <b style="background:#FFDFD1">GEOM_FUNCTION</b>(mapping = aes(<b style="background:#FFD0CF">AESTHETIC MAPPINGS</b>))
+</code></pre>
+')
 ```
+
 
 --
 
-```{r ggplot-template-example, echo=FALSE}
-decorate('
-ggplot(data = troops) +
-  geom_path(mapping = aes(x = longitude,
-                          y = latitude,
-                          color = direction,
-                          linewidth = survivors))
-', eval = FALSE) |>
-  flair("troops", background = "#CBB5FF", before = "<b>", after = "</b>") |> 
-  flair("geom_path", background = "#FFDFD1", before = "<b>", after = "</b>") |> 
-  flair_rx("x = longitude|y = latitude|color = direction|linewidth = survivors", 
-           background = "#FFD0CF", before = "<b>", after = "</b>")
+```{r ggplot-template-example, echo=FALSE, results='asis'}
+cat('
+<pre><code>ggplot(data = <b style="background:#CBB5FF">troops</b>) +
+  <b style="background:#FFDFD1">geom_path</b>(mapping = aes(x = <b style="background:#FFD0CF">longitude</b>,
+                          y = <b style="background:#FFD0CF">latitude</b>,
+                          color = <b style="background:#FFD0CF">direction</b>,
+                          linewidth = <b style="background:#FFD0CF">survivors</b>))
+</code></pre>
+')
 ```
 
 ---

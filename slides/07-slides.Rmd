@@ -21,7 +21,10 @@ editor_options:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE, 
-                      fig.retina = 3, fig.align = "center")
+                      fig.retina = 3, fig.align = "center",
+                      comment = NA)
+options(crayon.enabled = FALSE)
+options(pillar.bold = FALSE)
 ```
 
 ```{r packages-data, include=FALSE}
@@ -640,6 +643,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ```{r tidy-car-model}
 tidy(car_model, conf.int = TRUE)
 ```
+
 ]
 
 --
@@ -648,6 +652,7 @@ tidy(car_model, conf.int = TRUE)
 ```{r glance-car-model}
 glance(car_model)
 ```
+
 ]
 
 ---
@@ -661,6 +666,7 @@ glance(car_model)
 tidy(car_model, conf.int = TRUE) |> 
   select(term, estimate)
 ```
+
 ]
 
 .small[
@@ -732,6 +738,7 @@ $$
 ```{r tidy-car-model-big}
 tidy(car_model_big, conf.int = TRUE)
 ```
+
 ]
 
 --
@@ -839,6 +846,7 @@ car_coefs <- tidy(car_model_big, conf.int = TRUE) |>
   filter(term != "(Intercept)")  # We can typically skip plotting the intercept, so remove it
 car_coefs
 ```
+
 ]
 
 ---
@@ -904,6 +912,7 @@ cars_new_data <- tibble(displ = seq(2, 7, by = 0.1),
 
 head(cars_new_data)
 ```
+
 ]
 
 ---
@@ -919,6 +928,7 @@ predicted_mpg <- augment(car_model_big, newdata = cars_new_data,
 
 head(predicted_mpg)
 ```
+
 ]
 
 ---
@@ -977,6 +987,7 @@ cars_new_data_fancy <- expand_grid(displ = seq(2, 7, by = 0.1),
 
 head(cars_new_data_fancy)
 ```
+
 ]
 
 ---
@@ -992,6 +1003,7 @@ predicted_mpg_fancy <- augment(car_model_big, newdata = cars_new_data_fancy,
 
 head(predicted_mpg_fancy)
 ```
+
 ]
 
 ---
