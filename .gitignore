@@ -21,3 +21,5 @@ projects/*.zip
 typst-pdf-stuff/*.pdf
 
 **/*.quarto_ipynb
+.DS_Store
+**/.DS_Store
