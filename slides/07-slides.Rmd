@@ -24,6 +24,7 @@ knitr::opts_chunk$set(warning = FALSE, message = FALSE,
                       fig.retina = 3, fig.align = "center",
                       comment = NA)
 options(crayon.enabled = FALSE)
+options(cli.num_colors = 0)
 options(pillar.bold = FALSE)
 ```
 
@@ -846,7 +847,6 @@ car_coefs <- tidy(car_model_big, conf.int = TRUE) |>
   filter(term != "(Intercept)")  # We can typically skip plotting the intercept, so remove it
 car_coefs
 ```
-
 ]
 
 ---
