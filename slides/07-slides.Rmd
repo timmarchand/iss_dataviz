@@ -162,7 +162,7 @@ ggplot(weather_atl, aes(x = time, y = temperatureHigh)) +
   geom_line() +
   geom_smooth() +
   scale_y_continuous(sec.axis = 
-                       sec_axis(trans = ~ (32 - .) * -5/9,
+                       sec_axis(transform =~ (32 - .) * -5/9,
                                 name = "Celsius")) +
   labs(x = NULL, y = "Fahrenheit",
        title = "Daily high temperatures in Atlanta",
@@ -188,7 +188,7 @@ ggplot(weather_atl,
   geom_smooth() +
   scale_y_continuous(
     sec.axis = 
-      sec_axis(trans = ~ (32 - .) * -5/9,
+      sec_axis(transform =~ (32 - .) * -5/9,
                name = "Celsius")
   ) +
   labs(x = NULL, y = "Fahrenheit")
@@ -217,7 +217,7 @@ ggplot(car_counts,
   geom_col() +
   scale_y_continuous(
     sec.axis = sec_axis(
-      trans = ~ . / total_cars,
+      transform =~ . / total_cars,
       labels = scales::label_percent())
   ) +
   guides(fill = "none")
@@ -894,11 +894,11 @@ ggplot(car_coefs,
 
 # Marginal effects plots
 
-.box-inv-6[Create a data frame of values you want to<br>manipulate and values you want to hold constant]
+.box-inv-6[Create a grid of values you want to<br>manipulate and values you want to hold constant]
 
 --
 
-.box-6[Must include all the explanatory variables in the model]
+.box-6[Use `datagrid()` from `marginaleffects` — no need to build the tibble manually]
 
 ---
 
@@ -906,9 +906,12 @@ ggplot(car_coefs,
 
 .small-code[
 ```{r build-simple-new-data}
-cars_new_data <- tibble(displ = seq(2, 7, by = 0.1),
-                        cyl = mean(mpg$cyl),
-                        drv = "f")
+library(marginaleffects)
+
+cars_new_data <- datagrid(model = car_model_big,
+                          displ = seq(2, 7, by = 0.1),
+                          cyl   = mean(mpg$cyl),
+                          drv   = "f")
 
 head(cars_new_data)
 ```
@@ -919,12 +922,11 @@ head(cars_new_data)
 
 # Marginal effects plots
 
-.box-inv-6[Plug each of those rows of data into the model with `augment()`]
+.box-inv-6[Plug each row into the model with `predictions()`]
 
 .small-code[
-```{r agument-simple-cars-data}
-predicted_mpg <- augment(car_model_big, newdata = cars_new_data,
-                         se_fit = TRUE)
+```{r predict-simple-cars-data}
+predicted_mpg <- predictions(car_model_big, newdata = cars_new_data)
 
 head(predicted_mpg)
 ```
@@ -942,14 +944,12 @@ head(predicted_mpg)
 .left-code[
 ```{r mfx-plot-cars, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
 ggplot(predicted_mpg,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit)),
-              fill = "#5601A4", 
+       aes(x = displ, y = estimate)) +
+  geom_ribbon(aes(ymin = conf.low,
+                  ymax = conf.high),
+              fill = "#5601A4",
               alpha = 0.5) +
-  geom_line(size = 1, color = "#5601A4")
+  geom_line(linewidth = 1, color = "#5601A4")
 ```
 ]
 
@@ -973,7 +973,7 @@ ggplot(predicted_mpg,
 
 .box-inv-6[Create a new dataset with varying displacement<br>*and* varying drive, holding cylinders at its mean]
 
-.box-6[The `expand_grid()` function does this]
+.box-6[Pass multiple values to `datagrid()` — it creates all combinations automatically]
 
 ---
 
@@ -981,9 +981,10 @@ ggplot(predicted_mpg,
 
 .small-code[
 ```{r build-complex-new-data}
-cars_new_data_fancy <- expand_grid(displ = seq(2, 7, by = 0.1),
-                                   cyl = mean(mpg$cyl),
-                                   drv = c("f", "r", "4"))
+cars_new_data_fancy <- datagrid(model = car_model_big,
+                                displ = seq(2, 7, by = 0.1),
+                                cyl   = mean(mpg$cyl),
+                                drv   = c("f", "r", "4"))
 
 head(cars_new_data_fancy)
 ```
@@ -994,12 +995,11 @@ head(cars_new_data_fancy)
 
 # Multiple effects at once
 
-.box-inv-6[Plug each of those rows of data into the model with `augment()`]
+.box-inv-6[Plug each row into the model with `predictions()`]
 
 .small-code[
-```{r agument-complex-cars-data}
-predicted_mpg_fancy <- augment(car_model_big, newdata = cars_new_data_fancy,
-                               se_fit = TRUE)
+```{r predict-complex-cars-data}
+predicted_mpg_fancy <- predictions(car_model_big, newdata = cars_new_data_fancy)
 
 head(predicted_mpg_fancy)
 ```
@@ -1017,11 +1017,9 @@ head(predicted_mpg_fancy)
 .left-code[
 ```{r mfx-plot-cars-fancy, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
 ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit),
+       aes(x = displ, y = estimate)) +
+  geom_ribbon(aes(ymin = conf.low,
+                  ymax = conf.high,
                   fill = drv),
               alpha = 0.5) +
   geom_line(aes(color = drv), linewidth = 1)
@@ -1043,14 +1041,12 @@ ggplot(predicted_mpg_fancy,
 .left-code[
 ```{r mfx-plot-cars-fancy-facet, tidy=FALSE, message=FALSE, fig.show="hide", fig.dim=c(4.8, 3), out.width="100%"}
 ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit),
+       aes(x = displ, y = estimate)) +
+  geom_ribbon(aes(ymin = conf.low,
+                  ymax = conf.high,
                   fill = drv),
               alpha = 0.5) +
-  geom_line(aes(color = drv), linewidth = 1) + 
+  geom_line(aes(color = drv), linewidth = 1) +
   guides(fill = "none", color = "none") + #<<
   facet_wrap(vars(drv)) #<<
 ```
