@@ -4,7 +4,7 @@
     <title>Relationships</title>
     <meta charset="utf-8" />
     <meta name="author" content="Tim Marchand" />
-    <meta name="date" content="2026-05-18" />
+    <meta name="date" content="2026-05-21" />
     <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -164,7 +164,7 @@ ggplot(weather_atl,
   geom_smooth() +
   scale_y_continuous(
     sec.axis = 
-      sec_axis(trans = ~ (32 - .) * -5/9,
+      sec_axis(transform =~ (32 - .) * -5/9,
                name = "Celsius")
   ) +
   labs(x = NULL, y = "Fahrenheit")
@@ -194,7 +194,7 @@ ggplot(car_counts,
   geom_col() +
   scale_y_continuous(
     sec.axis = sec_axis(
-      trans = ~ . / total_cars,
+      transform =~ . / total_cars,
       labels = scales::label_percent())
   ) +
   guides(fill = "none")
@@ -554,11 +554,10 @@ glance(car_model)
 
 ```
 # A tibble: 1 × 12
-  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC
-      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
-1     0.587         0.585  3.84      329. 2.04e-46     1  -646. 1297.
-# ℹ 4 more variables: BIC &lt;dbl&gt;, deviance &lt;dbl&gt;, df.residual &lt;int&gt;,
-#   nobs &lt;int&gt;
+  r.squared adj.r.squared sigma statistic  p.value    df logLik   AIC   BIC
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1     0.587         0.585  3.84      329. 2.04e-46     1  -646. 1297. 1308.
+# ℹ 3 more variables: deviance &lt;dbl&gt;, df.residual &lt;int&gt;, nobs &lt;int&gt;
 ```
 
 ]
@@ -777,7 +776,6 @@ car_coefs
 3 drvf      5.04     0.513      9.83 3.07e-19     4.03     6.06 
 4 drvr      4.89     0.712      6.86 6.20e-11     3.48     6.29 
 ```
-
 ]
 
 ---
@@ -826,11 +824,11 @@ ggplot(car_coefs,
 
 # Marginal effects plots
 
-.box-inv-6[Create a data frame of values you want to&lt;br&gt;manipulate and values you want to hold constant]
+.box-inv-6[Create a grid of values you want to&lt;br&gt;manipulate and values you want to hold constant]
 
 --
 
-.box-6[Must include all the explanatory variables in the model]
+.box-6[Use `datagrid()` from `marginaleffects` — no need to build the tibble manually]
 
 ---
 
@@ -839,23 +837,24 @@ ggplot(car_coefs,
 .small-code[
 
 ``` r
-cars_new_data &lt;- tibble(displ = seq(2, 7, by = 0.1),
-                        cyl = mean(mpg$cyl),
-                        drv = "f")
+library(marginaleffects)
+
+cars_new_data &lt;- datagrid(model = car_model_big,
+                          displ = seq(2, 7, by = 0.1),
+                          cyl   = mean(mpg$cyl),
+                          drv   = "f")
 
 head(cars_new_data)
 ```
 
 ```
-# A tibble: 6 × 3
-  displ   cyl drv  
-  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
-1   2    5.89 f    
-2   2.1  5.89 f    
-3   2.2  5.89 f    
-4   2.3  5.89 f    
-5   2.4  5.89 f    
-6   2.5  5.89 f    
+  rowid hwy displ      cyl drv
+1     1  23   2.0 5.888889   f
+2     2  23   2.1 5.888889   f
+3     3  23   2.2 5.888889   f
+4     4  23   2.3 5.888889   f
+5     5  23   2.4 5.888889   f
+6     6  23   2.5 5.888889   f
 ```
 
 ]
@@ -864,27 +863,27 @@ head(cars_new_data)
 
 # Marginal effects plots
 
-.box-inv-6[Plug each of those rows of data into the model with `augment()`]
+.box-inv-6[Plug each row into the model with `predictions()`]
 
 .small-code[
 
 ``` r
-predicted_mpg &lt;- augment(car_model_big, newdata = cars_new_data,
-                         se_fit = TRUE)
+predicted_mpg &lt;- predictions(car_model_big, newdata = cars_new_data)
 
 head(predicted_mpg)
 ```
 
 ```
-# A tibble: 6 × 5
-  displ   cyl drv   .fitted .se.fit
-  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1   2    5.89 f        27.3   0.644
-2   2.1  5.89 f        27.2   0.604
-3   2.2  5.89 f        27.1   0.566
-4   2.3  5.89 f        27.0   0.529
-5   2.4  5.89 f        26.9   0.494
-6   2.5  5.89 f        26.8   0.460
+
+ displ  cyl drv Estimate Std. Error    z Pr(&gt;|z|)   S 2.5 % 97.5 %
+   2.0 5.89   f     27.3      0.644 42.5   &lt;0.001 Inf  26.1   28.6
+   2.1 5.89   f     27.2      0.604 45.0   &lt;0.001 Inf  26.0   28.4
+   2.2 5.89   f     27.1      0.566 47.9   &lt;0.001 Inf  26.0   28.2
+   2.3 5.89   f     27.0      0.529 51.0   &lt;0.001 Inf  26.0   28.0
+   2.4 5.89   f     26.9      0.494 54.5   &lt;0.001 Inf  25.9   27.9
+   2.5 5.89   f     26.8      0.460 58.2   &lt;0.001 Inf  25.9   27.7
+
+Type: response
 ```
 
 ]
@@ -901,14 +900,12 @@ head(predicted_mpg)
 
 ``` r
 ggplot(predicted_mpg,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit)),
-              fill = "#5601A4", 
+       aes(x = displ, y = estimate)) +
+  geom_ribbon(aes(ymin = conf.low,
+                  ymax = conf.high),
+              fill = "#5601A4",
               alpha = 0.5) +
-  geom_line(size = 1, color = "#5601A4")
+  geom_line(linewidth = 1, color = "#5601A4")
 ```
 ]
 
@@ -932,7 +929,7 @@ ggplot(predicted_mpg,
 
 .box-inv-6[Create a new dataset with varying displacement&lt;br&gt;*and* varying drive, holding cylinders at its mean]
 
-.box-6[The `expand_grid()` function does this]
+.box-6[Pass multiple values to `datagrid()` — it creates all combinations automatically]
 
 ---
 
@@ -941,23 +938,22 @@ ggplot(predicted_mpg,
 .small-code[
 
 ``` r
-cars_new_data_fancy &lt;- expand_grid(displ = seq(2, 7, by = 0.1),
-                                   cyl = mean(mpg$cyl),
-                                   drv = c("f", "r", "4"))
+cars_new_data_fancy &lt;- datagrid(model = car_model_big,
+                                displ = seq(2, 7, by = 0.1),
+                                cyl   = mean(mpg$cyl),
+                                drv   = c("f", "r", "4"))
 
 head(cars_new_data_fancy)
 ```
 
 ```
-# A tibble: 6 × 3
-  displ   cyl drv  
-  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;
-1   2    5.89 f    
-2   2    5.89 r    
-3   2    5.89 4    
-4   2.1  5.89 f    
-5   2.1  5.89 r    
-6   2.1  5.89 4    
+  rowid hwy displ      cyl drv
+1     1  23   2.0 5.888889   4
+2     2  23   2.0 5.888889   f
+3     3  23   2.0 5.888889   r
+4     4  23   2.1 5.888889   4
+5     5  23   2.1 5.888889   f
+6     6  23   2.1 5.888889   r
 ```
 
 ]
@@ -966,27 +962,27 @@ head(cars_new_data_fancy)
 
 # Multiple effects at once
 
-.box-inv-6[Plug each of those rows of data into the model with `augment()`]
+.box-inv-6[Plug each row into the model with `predictions()`]
 
 .small-code[
 
 ``` r
-predicted_mpg_fancy &lt;- augment(car_model_big, newdata = cars_new_data_fancy,
-                               se_fit = TRUE)
+predicted_mpg_fancy &lt;- predictions(car_model_big, newdata = cars_new_data_fancy)
 
 head(predicted_mpg_fancy)
 ```
 
 ```
-# A tibble: 6 × 5
-  displ   cyl drv   .fitted .se.fit
-  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1   2    5.89 f        27.3   0.644
-2   2    5.89 r        27.2   1.14 
-3   2    5.89 4        22.3   0.805
-4   2.1  5.89 f        27.2   0.604
-5   2.1  5.89 r        27.1   1.10 
-6   2.1  5.89 4        22.2   0.763
+
+ displ  cyl drv Estimate Std. Error    z Pr(&gt;|z|)     S 2.5 % 97.5 %
+   2.0 5.89   4     22.3      0.805 27.7   &lt;0.001 557.7  20.7   23.9
+   2.0 5.89   f     27.3      0.644 42.5   &lt;0.001   Inf  26.1   28.6
+   2.0 5.89   r     27.2      1.139 23.8   &lt;0.001 415.2  24.9   29.4
+   2.1 5.89   4     22.2      0.763 29.1   &lt;0.001 614.8  20.7   23.7
+   2.1 5.89   f     27.2      0.604 45.0   &lt;0.001   Inf  26.0   28.4
+   2.1 5.89   r     27.1      1.102 24.6   &lt;0.001 440.0  24.9   29.2
+
+Type: response
 ```
 
 ]
@@ -1003,11 +999,9 @@ head(predicted_mpg_fancy)
 
 ``` r
 ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit),
+       aes(x = displ, y = estimate)) +
+  geom_ribbon(aes(ymin = conf.low,
+                  ymax = conf.high,
                   fill = drv),
               alpha = 0.5) +
   geom_line(aes(color = drv), linewidth = 1)
@@ -1030,14 +1024,12 @@ ggplot(predicted_mpg_fancy,
 
 ``` r
 ggplot(predicted_mpg_fancy,
-       aes(x = displ, y = .fitted)) +
-  geom_ribbon(aes(ymin = .fitted + 
-                    (-1.96 * .se.fit),
-                  ymax = .fitted + 
-                    (1.96 * .se.fit),
+       aes(x = displ, y = estimate)) +
+  geom_ribbon(aes(ymin = conf.low,
+                  ymax = conf.high,
                   fill = drv),
               alpha = 0.5) +
-  geom_line(aes(color = drv), linewidth = 1) + 
+  geom_line(aes(color = drv), linewidth = 1) +
 * guides(fill = "none", color = "none") +
 * facet_wrap(vars(drv))
 ```

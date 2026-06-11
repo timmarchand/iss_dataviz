@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Themes</title>
+    <title>Comparisons</title>
     <meta charset="utf-8" />
     <meta name="author" content="Tim Marchand" />
-    <meta name="date" content="2026-05-20" />
+    <meta name="date" content="2026-06-11" />
     <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -30,11 +30,11 @@
 
 class: center middle main-title section-title-4
 
-# Themes
+# Comparisons
 
 .class-info[
 
-**Session 5**
+**Session 8**
 
 .light[ISS Data Visualization with R&lt;br&gt;
 Faculty of International Social Sciences, Gakushuin University&lt;br&gt;
@@ -51,247 +51,305 @@ class: title title-inv-7
 
 --
 
-.box-5.medium.sp-after-half[CRAP and ggplot]
+.box-2.medium.sp-after-half[Visualizing comparisons]
 
 --
 
-.box-6.medium.sp-after-half[The anatomy of a ggplot theme]
-
-
----
-
-name: crap-ggplot
-class: center middle section-title section-title-5 animated fadeIn
-
-# CRAP and ggplot
-
----
-
-layout: true
-class: title title-5
-
----
-
-# Universal principles
-
-.box-inv-5[Contrast]
-
-.box-inv-5[Repetition]
-
-.box-inv-5[Alignment]
-
-.box-inv-5.sp-after[Proximity]
-
---
-
-.box-5.medium[These design principles apply everywhere!]
-
-.box-inv-5.small[Graphic design, art, music, architecture… and graphs!]
-
----
-
-# Is that gray background okay?
-
-&lt;img src="05-slides_files/figure-html/standard-grey-1.png" width="100%" style="display: block; margin: auto;" /&gt;
-
---
-
-.box-inv-5[It adds contrast! Some people just don't like it 🤷]
-
----
-
-# Applying CRAP to ggplot
-
-.box-inv-5.sp-after[We can follow CRAP principles to make big&lt;br&gt;improvements to our plots]
-
-.box-inv-5.sp-after[Claus Wilke's chapter covers lots of&lt;br&gt;these graph-specific principles]
-
-.box-inv-5.medium[We can apply these principles to ggplot plots]
-
----
-
-# Like this!
-
-.left-code[
-
-``` r
-library(hrbrthemes)
-
-ggplot(mpg, aes(x = displ, y = hwy, 
-                color = drv)) +
-  geom_point(size = 2) +
-  theme_ipsum()
-```
-]
-
-.right-plot[
-![](05-slides_files/figure-html/hrbrlight-1.png)
-]
-
----
-
-# And this!
-
-
-
-.left-code[
-
-``` r
-library(hrbrthemes)
-
-ggplot(mpg, aes(x = displ, y = hwy, 
-                color = drv)) +
-  geom_point(size = 2) +
-  theme_modern_rc()
-```
-]
-
-.right-plot[
-![](05-slides_files/figure-html/hrbrdark-1.png)
-]
-
-
-
----
-
-# Or this!
-
-.left-code[
-
-``` r
-library(ggthemes)
-
-ggplot(mpg, aes(x = displ, y = hwy, 
-                color = drv)) +
-  geom_point(size = 2) +
-  scale_color_economist() +
-  theme_economist()
-```
-]
-
-.right-plot[
-![](05-slides_files/figure-html/economist-1.png)
-]
-
----
-
-# And even this!
-
-.left-code[
-
-``` r
-library(ggpomological)
-
-ggplot(mpg, aes(x = displ, y = hwy, 
-                color = drv)) +
-  geom_point(size = 2) +
-  scale_color_pomological() +
-  theme_pomological_fancy()
-```
-]
-
-.right-plot[
-![](05-slides_files/figure-html/pomological-1.png)
-]
-
----
-
-# One magic, powerful function
-
-&amp;nbsp;
-
-&amp;nbsp;
-
-.box-inv-5.huge[`theme()`]
+.box-4.medium.sp-after-half[Reproducible examples]
 
 ---
 
 layout: false
-name: anatomy
-class: center middle section-title section-title-6 animated fadeIn
+name: comparisons
+class: center middle section-title section-title-2 animated fadeIn
 
-# The anatomy of&lt;br&gt;a `ggplot()` theme
+# Visualizing comparisons
 
 ---
 
 layout: true
-class: title title-6
+class: title title-2
 
 ---
 
-# Theme system
+# Lollipops and bars
 
 .center[
 &lt;figure&gt;
-  &lt;a href="https://henrywang.nl/ggplot2-theme-elements-demonstration/" target="_blank"&gt;&lt;img src="img/05/theme_elements-1024x755.png" alt="ggplot theme elements" title="ggplot theme elements" width="65%"&gt;&lt;/a&gt;
+  &lt;img src="img/08/3-issues-worked-on.png" alt="NGO issues worked on from dissertation" title="NGO issues worked on from dissertation" width="90%"&gt;
+&lt;/figure&gt;
+]
+
+---
+
+layout: false
+class: bg-full
+background-image: url("img/08/life_expectancy_sparklines.png")
+
+???
+
+Source: [FlowingData](https://flowingdata.com/2017/01/24/one-dataset-visualized-25-ways/02-time-series-sparklines-2/)
+
+---
+
+layout: true
+class: title title-2
+
+---
+
+# Small multiples
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/08/fivethirtyeight-approval.png" alt="Trump approval ratings compared to past presidents" title="Trump approval ratings compared to past presidents" width="75%"&gt;
+  &lt;figcaption&gt;&lt;a href="https://projects.fivethirtyeight.com/trump-approval-ratings/" target="_blank"&gt;FiveThirtyEight, Trump approval ratings&lt;/a&gt;&lt;/figcaption&gt;
 &lt;/figure&gt;
 ]
 
 ???
 
-By [Henry Wang](https://henrywang.nl/ggplot2-theme-elements-demonstration/)
+Source: [FiveThirtyEight](https://projects.fivethirtyeight.com/trump-approval-ratings/)
 
 ---
 
-# Theme elements
+# Small multiples with larger shapes
 
-.box-inv-6.medium[Each element in the plot can be targeted]
-
---
-
-.box-6[Plot title = `plot.title`]
-
---
-
-.box-6[Grid lines = `panel.grid`]
-
---
-
-.box-6[Legend background = `legend.background`]
+.center[
+&lt;figure&gt;
+  &lt;img src="img/08/geofacet.png" alt="geofacet package" title="geofacet package" width="65%"&gt;
+  &lt;figcaption&gt;&lt;code&gt;facet_geo()&lt;/code&gt; in the &lt;a href="https://hafen.github.io/geofacet/" target="_blank"&gt;&lt;strong&gt;geofacet&lt;/strong&gt; package&lt;/a&gt;&lt;/figcaption&gt;
+&lt;/figure&gt;
+]
 
 ---
 
-# Theme functions
+# Sparklines
 
-.box-inv-6.medium[Use special functions to&lt;br&gt;manipulate specific elements]
+.pull-left-wide[
+&lt;figure&gt;
+  &lt;img src="img/08/sparklines.png" alt="Sparks font project" title="Sparks font project" width="100%"&gt;
+&lt;/figure&gt;
+]
 
---
+.pull-right-narrow[
+&lt;figure&gt;
+  &lt;img src="img/08/apple-watch.png" alt="Sparklines on an Apple Watch" title="Sparklines on an Apple Watch" width="100%"&gt;
+&lt;/figure&gt;
+]
 
-.box-6[Text-based things = `element_text()`]
+???
 
---
+In-text sparklines from the now-retired [Sparks project](http://tools.aftertheflood.com/sparks/)
 
-.box-6[Rectangular things (backgrounds) = `element_rect()`]
-
---
-
-.box-6[Line-based things (axis lines, grid lines) = `element_line()`]
-
---
-
-.box-6[Disable element completely = `element_blank()`]
-
----
-
-# How to learn `theme()`
-
-.box-inv-6.medium[The `theme()` function has&lt;br&gt;**94** possible arguments(!!!)]
-
-.box-inv-6.small.sp-after[You can get hyper-specific with things like&lt;br&gt;`axis.ticks.length.x.bottom`]
-
-.box-6[The only way to learn how to use `theme()`&lt;br&gt;is to use it and tinker with it]
+[Apple Watch example](https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0001OR)
 
 ---
 
-# How to learn `theme()`
+# Slopegraphs
 
-&amp;nbsp;
+.center[
+&lt;figure&gt;
+  &lt;img src="img/08/good-stuff-slopegraph.png" alt="Stephanie Evergreen New Year slopegraph" title="Stephanie Evergreen New Year slopegraph" width="35%"&gt;
+&lt;/figure&gt;
+]
 
-&amp;nbsp;
+???
 
-.box-6.medium[I cannot show you everything]
+Original by [Stephanie Evergreen](https://www.zazzle.com/slopegraph_holiday_card_for_data_nerds-137238378061787506?rf=238910033403516222)
 
-.box-inv-6[That's why we have the lesson, example, and exercise!]
+---
+
+# Slopegraphs
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/08/nyt-slope.gif" alt="Slopegraph from the NYT" title="Slopegraph from the NYT" width="27%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://archive.nytimes.com/www.nytimes.com/imagepages/2009/04/06/health/infant_stats.html
+
+---
+
+# Slopegraphs
+
+.pull-left[
+&lt;figure&gt;
+  &lt;img src="img/08/tufte-cancer-table.gif" alt="Slopegraph from the NYT" title="Slopegraph from the NYT" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+.pull-right[
+&lt;figure&gt;
+  &lt;img src="img/08/tufte-cancer-slopes.gif" alt="Slopegraph from the NYT" title="Slopegraph from the NYT" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Jr
+
+---
+
+# Bump charts
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/08/bumps.png" alt="Bump plot of the 2018 medal count" title="Bump plot of the 2018 medal count" width="55%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+&lt;https://dominikkoch.github.io/Bump-Chart/&gt;
+
+---
+
+layout: false
+name: reprex
+class: center middle section-title section-title-4 animated fadeIn
+
+# Reproducible examples
+
+---
+
+layout: true
+class: title title-4
+
+---
+
+# This is 100% normal!
+
+.center[
+&lt;figure&gt;
+  &lt;img src="img/08/looking-stuff-up.png" alt="Brandon Rohrer on looking code up" title="Brandon Rohrer on looking code up" width="70%"&gt;
+&lt;/figure&gt;
+]
+
+???
+
+https://twitter.com/_brohrer_/status/1049388373541089280?s=12
+
+---
+
+# Broken cake
+
+.pull-left[
+&lt;figure&gt;
+  &lt;img src="img/08/cake.jpg" alt="Collapsed cake" title="Collapsed cake" width="100%"&gt;
+&lt;/figure&gt;
+]
+
+--
+
+.pull-right[
+.box-inv-4[Help! My cake broke!]
+
+.box-4.small[vs.]
+
+.box-inv-4[Help! I followed these&lt;br&gt;6 steps and my cake broke!]
+
+.box-1[Same principle&lt;br&gt;applies to code]
+]
+
+???
+
+https://www.flickr.com/photos/slushpup/3700756035
+
+---
+
+# Reprexes
+
+.box-inv-4.medium.sp-after[**Rep**roducible **ex**ampl**es**]
+
+.box-4[Something anyone can run on their computer&lt;br&gt;to reproduce the problem you're facing]
+
+---
+
+# Debugging and reprexes
+
+.box-inv-4[Simplify your code down to something very basic]
+
+--
+
+.box-inv-4[Add additional things until stuff breaks]
+
+--
+
+.box-inv-4[Use a subset of your data or invent fake data]
+
+--
+
+.box-inv-4[Restart your session and see if it runs in a new session]
+
+--
+
+.box-inv-4.sp-after[Ask the internet for help using your toy example]
+
+--
+
+.box-4[75% of the time you'll find what's wrong as you make the reprex!]
+
+---
+
+# Making datasets with `tribble()`
+
+.pull-left[
+
+``` r
+my_data &lt;- tribble(
+  ~animal, ~number,
+  "cat", 5,
+  "dog", 4,
+  "bear", 7,
+  "bison", 1
+)
+```
+]
+
+--
+
+.pull-right[
+
+``` r
+my_data
+```
+
+```
+## [38;5;246m# A tibble: 4 × 2[39m
+##   animal number
+##   [3m[38;5;246m&lt;chr&gt;[39m[23m   [3m[38;5;246m&lt;dbl&gt;[39m[23m
+## [38;5;250m1[39m cat         5
+## [38;5;250m2[39m dog         4
+## [38;5;250m3[39m bear        7
+## [38;5;250m4[39m bison       1
+```
+]
+
+---
+
+# Example reprex
+
+.small-code[
+
+``` r
+my_data &lt;- tribble(
+  ~animal, ~number,
+  "cat", 5,
+  "dog", 4,
+  "bear", 7,
+  "bison", 1
+)
+
+# This plot has a fill legend, but I want to remove it because it's redundant
+# What's the best way to get rid of the fill?
+ggplot(fake_data, aes(x = animal, y = number, fill = animal)) +
+  geom_col() 
+  # I add something here, but what?
+```
+]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="libs/remark-latest.min.js"></script>
