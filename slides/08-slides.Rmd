@@ -1,5 +1,5 @@
 ---
-title: "Comparisons"
+title: "Comparisons & Logistic Regression"
 author: "Tim Marchand"
 date: "`r Sys.Date()`"
 output:
@@ -35,7 +35,7 @@ xaringanExtra::use_xaringan_extra(c("tile_view", "share_again"))
 
 class: center middle main-title section-title-4
 
-# Comparisons
+# Comparisons &<br>Logistic Regression
 
 .class-info[
 
@@ -60,7 +60,11 @@ class: title title-inv-7
 
 --
 
-.box-4.medium.sp-after-half[Reproducible examples]
+.box-5.medium.sp-after-half[Small multiples as a bridge]
+
+--
+
+.box-4.medium.sp-after-half[Probability, odds & logistic regression]
 
 ---
 
@@ -213,10 +217,87 @@ https://www.edwardtufte.com/bboard/q-and-a-fetch-msg?msg_id=0000Jr
 ---
 
 layout: false
-name: reprex
+name: small-multiples-bridge
+class: center middle section-title section-title-5 animated fadeIn
+
+# Small multiples
+
+---
+
+layout: true
+class: title title-5
+
+---
+
+# The core principle
+
+.pull-left[
+.box-inv-5[**One chart per group**]
+
+.box-inv-5[**Identical axes everywhere**]
+
+.box-inv-5[**Comparison is spatial**]
+
+.box-inv-5[**`facet_wrap()` in ggplot2**]
+]
+
+.pull-right[
+> "Illustrations of postage-stamp size are indexed by category or a label, encoded with not more than two or three variables, and placed within the eyespan."
+>
+> — Edward Tufte, *Envisioning Information*
+]
+
+---
+
+# Why not one chart?
+
+.pull-left[
+.box-inv-5.small[**One chart — hard to read**]
+
+.center[
+Four groups, four colours, overlapping lines,<br>busy legend — the comparison is buried
+]
+]
+
+--
+
+.pull-right[
+.box-5.small[**Small multiples — easy to read**]
+
+.center[
+Same four groups, one panel each —<br>differences jump out spatially
+]
+]
+
+--
+
+.box-inv-5.medium.sp-before[The eye does the comparison work.<br>You don't have to decode a legend.]
+
+---
+
+# Small multiples → logistic regression
+
+.box-inv-5[We've seen small multiples for **comparing distributions**]
+
+--
+
+.box-inv-5[They work just as well for comparing **model predictions**]
+
+--
+
+.box-inv-5[A logistic regression with a **moderator** produces one predicted curve per group]
+
+--
+
+.box-5.medium.sp-before[`facet_wrap(~ group)` turns a<br>moderation effect into a small multiples plot]
+
+---
+
+layout: false
+name: logistic
 class: center middle section-title section-title-4 animated fadeIn
 
-# Reproducible examples
+# Probability, odds &<br>logistic regression
 
 ---
 
@@ -225,120 +306,307 @@ class: title title-4
 
 ---
 
-# This is 100% normal!
-
-.center[
-<figure>
-  <img src="img/08/looking-stuff-up.png" alt="Brandon Rohrer on looking code up" title="Brandon Rohrer on looking code up" width="70%">
-</figure>
-]
-
-???
-
-https://twitter.com/_brohrer_/status/1049388373541089280?s=12
-
----
-
-# Broken cake
+# 1. Start with probability
 
 .pull-left[
-<figure>
-  <img src="img/08/cake.jpg" alt="Collapsed cake" title="Collapsed cake" width="100%">
-</figure>
+.box-inv-4[**Probability (p)**]
+
+How likely something is to happen
+
+Ranges from **0** (never) to **1** (always)
+
+.sp-after[&nbsp;]
+
+**Example:**
+
+75% chance of winning a game
+
+$$p = 0.75$$
 ]
 
 --
 
 .pull-right[
-.box-inv-4[Help! My cake broke!]
+.box-4[But probabilities have a problem...]
 
-.box-4.small[vs.]
+For regression, we need outcomes that can range from $-\infty$ to $+\infty$
 
-.box-inv-4[Help! I followed these<br>6 steps and my cake broke!]
+Probabilities are **stuck between 0 and 1**
 
-.box-1[Same principle<br>applies to code]
+We need a way to **unlock** them
 ]
 
-???
-
-https://www.flickr.com/photos/slushpup/3700756035
-
 ---
 
-# Reprexes
-
-.box-inv-4.medium.sp-after[**Rep**roducible **ex**ampl**es**]
-
-.box-4[Something anyone can run on their computer<br>to reproduce the problem you're facing]
-
----
-
-# Debugging and reprexes
-
-.box-inv-4[Simplify your code down to something very basic]
-
---
-
-.box-inv-4[Add additional things until stuff breaks]
-
---
-
-.box-inv-4[Use a subset of your data or invent fake data]
-
---
-
-.box-inv-4[Restart your session and see if it runs in a new session]
-
---
-
-.box-inv-4.sp-after[Ask the internet for help using your toy example]
-
---
-
-.box-4[75% of the time you'll find what's wrong as you make the reprex!]
-
----
-
-# Making datasets with `tribble()`
+# 2. Odds
 
 .pull-left[
-```{r tribble-example}
-my_data <- tribble(
-  ~animal, ~number,
-  "cat", 5,
-  "dog", 4,
-  "bear", 7,
-  "bison", 1
-)
-```
+Odds compare the chance of something **happening** to it **not happening**:
+
+$$\text{Odds} = \frac{p}{1 - p}$$
+
+.sp-after[&nbsp;]
+
+**Example:** if $p = 0.75$
+
+$$\text{Odds} = \frac{0.75}{0.25} = 3$$
+
+The event is **3 times more likely** to happen than not
 ]
 
 --
 
 .pull-right[
-```{r show-tribble}
-my_data
+.box-inv-4[**Key intuitions**]
+
+.box-4.small[Odds = 1 → equal chance (coin flip)]
+
+.box-4.small[Odds > 1 → event more likely to happen]
+
+.box-4.small[Odds < 1 → event less likely to happen]
+
+.sp-after[&nbsp;]
+
+Odds are **always positive** — still not quite what we need
+]
+
+---
+
+# 3. Log odds
+
+Taking the **logarithm** of odds gives us something that can be negative, zero, or positive:
+
+$$\text{Log Odds} = \ln(\text{Odds}) = \ln\!\left(\frac{p}{1-p}\right)$$
+
+--
+
+.pull-left[
+.box-inv-4[**Examples**]
+
+If Odds = 3 → Log Odds = $\ln(3) \approx 1.10$
+
+If Odds = 1 → Log Odds = $\ln(1) = 0$
+
+If Odds < 1 → Log Odds is **negative**
+]
+
+--
+
+.pull-right[
+.box-4[**Why log odds?**]
+
+Odds are always positive
+
+Log odds can be **negative, zero, or positive**
+
+This makes them compatible with linear regression
+]
+
+---
+
+# 4. The logit function
+
+.pull-left[
+The **logit** transforms probability into log odds:
+
+$$\text{logit}(p) = \ln\!\left(\frac{p}{1-p}\right)$$
+
+.sp-after[&nbsp;]
+
+.box-inv-4[Probabilities are **stuck**: 0 to 1]
+
+.box-inv-4[Logit **unlocks** them: −∞ to +∞]
+
+.sp-after[&nbsp;]
+
+| p | logit(p) | |
+|---|---|---|
+| 0.10 | −2.20 | ← negative |
+| 0.50 | &nbsp;0.00 | ← zero |
+| 0.75 | &nbsp;1.10 | ← positive |
+| 0.90 | &nbsp;2.20 | ← positive |
+]
+
+.pull-right[
+```{r logit-plot, echo=FALSE, fig.height=4.5, fig.width=5.5}
+library(ggplot2)
+library(tibble)
+
+annotations <- tibble(
+  p     = c(0.10, 0.50, 0.75, 0.90),
+  logit = c(-2.20, 0.00, 1.10, 2.20),
+  label = c("p=0.10\nlogit=−2.20",
+            "p=0.50\nlogit=0",
+            "p=0.75\nlogit=1.10",
+            "p=0.90\nlogit=2.20")
+)
+
+tibble(p = seq(0.01, 0.99, 0.005),
+       logit = log(p / (1 - p))) |>
+  ggplot(aes(x = p, y = logit)) +
+  geom_hline(yintercept = 0, linetype = "dashed",
+             colour = "grey60", linewidth = 0.6) +
+  geom_vline(xintercept = 0.5, linetype = "dashed",
+             colour = "grey60", linewidth = 0.6) +
+  geom_line(colour = "#185FA5", linewidth = 1.4) +
+  geom_point(data = annotations,
+             aes(x = p, y = logit),
+             colour = "#D85A30", size = 3) +
+  geom_label(data = annotations,
+             aes(x = p, y = logit, label = label),
+             hjust = c(1.1, 1.1, -0.1, -0.1),
+             vjust = 0.5,
+             size = 3,
+             colour = "#D85A30",
+             fill  = "white",
+             label.size = 0.2) +
+  annotate("text", x = 0.15, y = 3.8,
+           label = "p > 0.5 → logit > 0",
+           colour = "grey40", size = 3.2, hjust = 0) +
+  annotate("text", x = 0.15, y = -3.8,
+           label = "p < 0.5 → logit < 0",
+           colour = "grey40", size = 3.2, hjust = 0) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 1)) +
+  labs(x = "Probability (p)", y = "logit(p) — log odds") +
+  theme_minimal(base_size = 12) +
+  theme(panel.grid.minor = element_blank())
 ```
 ]
 
 ---
 
-# Example reprex
+# 5. A worked example: free throws
 
-.small-code[
-```{r example-reprex, eval=FALSE}
-my_data <- tribble(
-  ~animal, ~number,
-  "cat", 5,
-  "dog", 4,
-  "bear", 7,
-  "bison", 1
-)
+.pull-left[
+A basketball player has a **75% chance** of making a free throw
 
-# This plot has a fill legend, but I want to remove it because it's redundant
-# What's the best way to get rid of the fill?
-ggplot(fake_data, aes(x = animal, y = number, fill = animal)) +
-  geom_col() 
-  # I add something here, but what?
+$$p = 0.75$$
+
+**Step 1 — Odds:**
+
+$$\frac{0.75}{0.25} = 3$$
+
+The player is 3× more likely to make it than miss
+
+**Step 2 — Log odds:**
+
+$$\ln(3) \approx 1.10$$
+]
+
+--
+
+.pull-right[
+.box-inv-4[**Three ways to say the same thing**]
+
+.box-4.small[**Probability:** 75% chance of success<br>*(intuitive, limited to 0–1)*]
+
+.box-4.small[**Odds:** 3 to 1 in favour<br>*(useful for comparing success vs. failure)*]
+
+.box-4.small[**Log odds:** 1.10<br>*(mathematical, usable in regression)*]
+
+.box-inv-4.sp-before[Logistic regression works on the<br>log-odds scale, then converts back<br>to probability for interpretation]
+]
+
+---
+
+# The logistic S-curve
+
+```{r scurve-plot, echo=FALSE, fig.height=4.2, fig.width=9}
+library(ggplot2)
+library(tibble)
+library(dplyr)
+
+# Show two curves: one steep (β1 large), one shallow (β1 small)
+crossing(
+  x    = seq(-6, 6, length.out = 300),
+  type = c("Weak predictor (β₁ = 0.8)", "Strong predictor (β₁ = 2.5)")
+) |>
+  mutate(
+    b1 = if_else(type == "Strong predictor (β₁ = 2.5)", 2.5, 0.8),
+    p  = plogis(b1 * x)
+  ) |>
+  ggplot(aes(x = x, y = p, colour = type)) +
+  geom_hline(yintercept = c(0, 1), linetype = "dotted",
+             colour = "grey70", linewidth = 0.5) +
+  geom_hline(yintercept = 0.5, linetype = "dashed",
+             colour = "grey50", linewidth = 0.6) +
+  geom_line(linewidth = 1.4) +
+  annotate("text", x = 0.15, y = 0.53,
+           label = "p = 0.5 (decision boundary)",
+           colour = "grey40", size = 3.5, hjust = 0) +
+  scale_colour_manual(values = c("#B5D4F4", "#185FA5"),
+                      name = NULL) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 1),
+                     limits = c(0, 1)) +
+  labs(
+    title = "The logistic curve is always bounded between 0 and 1",
+    x     = "Value of predictor (x)",
+    y     = "P(outcome)"
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "bottom",
+        panel.grid.minor = element_blank())
 ```
+
+---
+
+# 6. The logistic model
+
+For a binary outcome $y$ and a predictor $x$:
+
+$$\text{logit}(p) = \beta_0 + \beta_1 x$$
+
+--
+
+Because the logit is **invertible**, we can also write this as:
+
+$$p = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}$$
+
+--
+
+.pull-left[
+.box-inv-4[This is the S-shaped logistic curve]
+
+.box-inv-4[It is always bounded between 0 and 1]
+
+.box-inv-4[$\beta_0$ and $\beta_1$ are estimated from data using `glm()`]
+]
+
+.pull-right[
+.box-4[**Admissions example**]
+
+$$\beta_0 = -12.04, \quad \beta_1 = 4.08$$
+
+$$\text{logit}(p) = -12.04 + 4.08 \times \text{GPA}$$
+
+Each 1-point GPA increase multiplies odds by $e^{4.08} \approx 59$
+]
+
+---
+
+# From theory to code
+
+.box-inv-4[In R, logistic regression uses `glm()` with `family = "binomial"`]
+
+.sp-after[&nbsp;]
+
+```r
+model <- glm(admitted ~ gpa,
+             data   = admissions,
+             family = "binomial")
+```
+
+.sp-after[&nbsp;]
+
+.pull-left[
+.box-4.small[`glm()` = Generalised Linear Model]
+.box-4.small[`family = "binomial"` = binary outcome]
+.box-4.small[`"logit"` link is the default for binomial]
+]
+
+.pull-right[
+.box-inv-4.small[See the practical session for]
+.box-inv-4.small[model fitting, evaluation,]
+.box-inv-4.small[confusion matrices, and]
+.box-inv-4.small[small multiples of predictions]
 ]
