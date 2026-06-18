@@ -273,7 +273,7 @@ ggplot(gapminder_europe,
   geom_text(aes(label = country))
 ```
 
-.box-2[Ew.]
+.box-2[Yuck]
 ]
 
 .right-plot[
@@ -292,7 +292,7 @@ ggplot(gapminder_europe,
   geom_label(aes(label = country)) #<<
 ```
 
-.box-2[Still ew. Labels are neat,<br>but cover the points.]
+.box-2[Still yuck. Labels are neat,<br>but cover the points.]
 ]
 
 .right-plot[
@@ -728,7 +728,7 @@ random_numbers_seed <- rnorm(3)
 
 --
 
-.box-6[20200519]
+.box-6[20260618]
 
 --
 
