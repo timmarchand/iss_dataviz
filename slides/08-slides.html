@@ -4,7 +4,7 @@
     <title>Comparisons &amp; Logistic Regression</title>
     <meta charset="utf-8" />
     <meta name="author" content="Tim Marchand" />
-    <meta name="date" content="2026-06-11" />
+    <meta name="date" content="2026-06-18" />
     <script src="libs/header-attrs-2.30/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/tile-view-0.2.6/tile-view.css" rel="stylesheet" />
@@ -340,8 +340,6 @@ Odds compare the chance of something **happening** to it **not happening**:
 
 `$$\text{Odds} = \frac{p}{1 - p}$$`
 
-.sp-after[&amp;nbsp;]
-
 **Example:** if `\(p = 0.75\)`
 
 `$$\text{Odds} = \frac{0.75}{0.25} = 3$$`
@@ -356,36 +354,30 @@ The event is **3 times more likely** to happen than not
 
 .box-4.small[Odds = 1 → equal chance (coin flip)]
 
-.box-4.small[Odds &gt; 1 → event more likely to happen]
+.box-4.small[Odds &gt; 1 → event more likely]
 
-.box-4.small[Odds &lt; 1 → event less likely to happen]
+.box-4.small[Odds &lt; 1 → event less likely]
 
-.sp-after[&amp;nbsp;]
-
-Odds are **always positive** — still not quite what we need
+Odds are **always positive** — not quite what we need
 ]
-
 ---
+
 
 # 3. Log odds
 
-Taking the **logarithm** of odds gives us something that can be negative, zero, or positive:
+Taking the **logarithm** of odds gives something that can be negative, zero, or positive:
 
 `$$\text{Log Odds} = \ln(\text{Odds}) = \ln\!\left(\frac{p}{1-p}\right)$$`
-
---
 
 .pull-left[
 .box-inv-4[**Examples**]
 
-If Odds = 3 → Log Odds = `\(\ln(3) \approx 1.10\)`
+If Odds = 3 → `\(\ln(3) \approx 1.10\)`
 
-If Odds = 1 → Log Odds = `\(\ln(1) = 0\)`
+If Odds = 1 → `\(\ln(1) = 0\)`
 
-If Odds &lt; 1 → Log Odds is **negative**
+If Odds &lt; 1 → **negative**
 ]
-
---
 
 .pull-right[
 .box-4[**Why log odds?**]
@@ -394,7 +386,7 @@ Odds are always positive
 
 Log odds can be **negative, zero, or positive**
 
-This makes them compatible with linear regression
+Compatible with linear regression
 ]
 
 ---
@@ -406,60 +398,42 @@ The **logit** transforms probability into log odds:
 
 `$$\text{logit}(p) = \ln\!\left(\frac{p}{1-p}\right)$$`
 
-.sp-after[&amp;nbsp;]
-
 .box-inv-4[Probabilities are **stuck**: 0 to 1]
 
 .box-inv-4[Logit **unlocks** them: −∞ to +∞]
 
-.sp-after[&amp;nbsp;]
-
-| p | logit(p) | |
-|---|---|---|
-| 0.10 | −2.20 | ← negative |
-| 0.50 | &amp;nbsp;0.00 | ← zero |
-| 0.75 | &amp;nbsp;1.10 | ← positive |
-| 0.90 | &amp;nbsp;2.20 | ← positive |
+| p | logit(p) |
+|---|---|
+| 0.10 | −2.20 |
+| 0.50 | &amp;nbsp;0.00 |
+| 0.75 | &amp;nbsp;1.10 |
+| 0.90 | &amp;nbsp;2.20 |
 ]
 
 .pull-right[
 &lt;img src="08-slides_files/figure-html/logit-plot-1.png" width="396" style="display: block; margin: auto;" /&gt;
 ]
-
 ---
 
 # 5. A worked example: free throws
 
 .pull-left[
-A basketball player has a **75% chance** of making a free throw
+A basketball player: **75% chance** of a free throw → `\(p = 0.75\)`
 
-`$$p = 0.75$$`
+**Odds:** `\(\dfrac{0.75}{0.25} = 3\)` &amp;nbsp; (3× more likely than miss)
 
-**Step 1 — Odds:**
-
-`$$\frac{0.75}{0.25} = 3$$`
-
-The player is 3× more likely to make it than miss
-
-**Step 2 — Log odds:**
-
-`$$\ln(3) \approx 1.10$$`
+**Log odds:** `\(\ln(3) \approx 1.10\)`
 ]
-
---
 
 .pull-right[
 .box-inv-4[**Three ways to say the same thing**]
 
-.box-4.small[**Probability:** 75% chance of success&lt;br&gt;*(intuitive, limited to 0–1)*]
+.box-4.small[**Probability:** 75% chance&lt;br&gt;*(intuitive, limited to 0–1)*]
 
-.box-4.small[**Odds:** 3 to 1 in favour&lt;br&gt;*(useful for comparing success vs. failure)*]
+.box-4.small[**Odds:** 3 to 1 in favour&lt;br&gt;*(success vs. failure)*]
 
-.box-4.small[**Log odds:** 1.10&lt;br&gt;*(mathematical, usable in regression)*]
-
-.box-inv-4.sp-before[Logistic regression works on the&lt;br&gt;log-odds scale, then converts back&lt;br&gt;to probability for interpretation]
+.box-4.small[**Log odds:** 1.10&lt;br&gt;*(usable in regression)*]
 ]
-
 ---
 
 # The logistic S-curve
@@ -470,43 +444,30 @@ The player is 3× more likely to make it than miss
 
 # 6. The logistic model
 
-For a binary outcome `\(y\)` and a predictor `\(x\)`:
+For a binary outcome `\(y\)` and predictor `\(x\)`: &amp;nbsp; `\(\text{logit}(p) = \beta_0 + \beta_1 x\)`
 
-`$$\text{logit}(p) = \beta_0 + \beta_1 x$$`
-
---
-
-Because the logit is **invertible**, we can also write this as:
-
-`$$p = \frac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}$$`
-
---
+Because the logit is invertible: &amp;nbsp; `\(p = \dfrac{e^{\beta_0 + \beta_1 x}}{1 + e^{\beta_0 + \beta_1 x}}\)`
 
 .pull-left[
-.box-inv-4[This is the S-shaped logistic curve]
+.box-inv-4[S-shaped logistic curve]
 
-.box-inv-4[It is always bounded between 0 and 1]
+.box-inv-4[Always bounded between 0 and 1]
 
-.box-inv-4[$\beta_0$ and `\(\beta_1\)` are estimated from data using `glm()`]
+.box-inv-4[$\beta_0, \beta_1$ estimated via `glm()`]
 ]
 
 .pull-right[
 .box-4[**Admissions example**]
 
-`$$\beta_0 = -12.04, \quad \beta_1 = 4.08$$`
-
 `$$\text{logit}(p) = -12.04 + 4.08 \times \text{GPA}$$`
 
-Each 1-point GPA increase multiplies odds by `\(e^{4.08} \approx 59\)`
+Each 1-point GPA rise multiplies odds by `\(e^{4.08} \approx 59\)`
 ]
-
 ---
 
 # From theory to code
 
 .box-inv-4[In R, logistic regression uses `glm()` with `family = "binomial"`]
-
-.sp-after[&amp;nbsp;]
 
 ```r
 model &lt;- glm(admitted ~ gpa,
@@ -514,19 +475,14 @@ model &lt;- glm(admitted ~ gpa,
              family = "binomial")
 ```
 
-.sp-after[&amp;nbsp;]
-
 .pull-left[
 .box-4.small[`glm()` = Generalised Linear Model]
 .box-4.small[`family = "binomial"` = binary outcome]
-.box-4.small[`"logit"` link is the default for binomial]
+.box-4.small[`"logit"` link is the default]
 ]
 
 .pull-right[
-.box-inv-4.small[See the practical session for]
-.box-inv-4.small[model fitting, evaluation,]
-.box-inv-4.small[confusion matrices, and]
-.box-inv-4.small[small multiples of predictions]
+.box-inv-4.small[See the practical session for model fitting, evaluation, confusion matrices, and small multiples of predictions]
 ]
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>

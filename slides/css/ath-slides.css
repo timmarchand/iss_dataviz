@@ -548,3 +548,8 @@ Coloring and inverse coloring in title bars and content boxes
   background: #BF3984;
   color: #FFFFFF;
 }
+
+
+/* Compact variant for content-dense slides */
+.compact { font-size: 0.95em; }
+.compact p, .compact ul { margin-top: 0.4em; margin-bottom: 0.4em; }
