@@ -4,11 +4,10 @@ date: "2026-07-02"
 date_end: "2026-07-08"
 ---
 
-```{r load-targets, include=FALSE}
-withr::with_dir(here::here(), {
-  geocoded_path <- targets::tar_read(data_geocoded)
-  wdi_path <- targets::tar_read(data_wdi_lifeexp)
-})
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.width = 6, fig.height = 3.6, fig.align = "center", collapse = TRUE)
+set.seed(1234)
+options("digits" = 2, "width" = 150)
 ```
 
 ## Shapefiles
@@ -16,28 +15,28 @@ withr::with_dir(here::here(), {
 Shapefiles are special types of data that include information about geography, such as points (latitude, longitude), paths (a bunch of connected latitudes and longitudes) and areas (a bunch of connected latitudes and longitudes that form a complete shape). Nowadays, most government agencies provide shapefiles for their jurisdictions. For global mapping data, you can use the Natural Earth project:
 
 - [Natural Earth](https://www.naturalearthdata.com/)
-- [US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html)
-- [Georgia GIS Clearinghouse](https://data.georgiaspatial.org/) (requires a free account; the interface is *incredibly* clunky)
-- [Atlanta Regional Council](https://opendata.atlantaregional.com/)
-- [Fulton County GIS Portal](https://gisdata.fultoncountyga.gov/)
-- [City of Atlanta, Department of City Planning](https://dcp-coaplangis.opendata.arcgis.com/)
+- [GADM](https://gadm.org/) — administrative boundaries for every country, down to municipality level
+- [GSI (Geospatial Information Authority of Japan / 国土地理院)](https://www.gsi.go.jp/)
+- [e-Stat 国土数値情報](https://www.e-stat.go.jp/gis) — official Japanese boundary and statistical map data
+- [National Land Numerical Information (国土数値情報ダウンロードサービス)](https://nlftp.mlit.go.jp/ksj/)
 
+The good news for us: most of what we need for Japan and East Asia comes bundled in R packages, so we rarely have to download and unzip a single `.shp` file by hand. We'll lean on `{rnaturalearth}` for that.
 
 ## Projections and coordinate reference systems
 
-As you read in this week's readings, projections matter a lot for maps. You can convert your geographic data between different coordinate systems (or projections) fairly easily with {sf}. You can use `coord_sf(crs = st_crs("XXXX"))` to convert coordinate reference systems (CRS) as you plot, or use `st_transform()` to convert data frames to a different CRS.
+As you read in this week's readings, projections matter a lot for maps. You can convert your geographic data between different coordinate systems (or projections) fairly easily with `{sf}`. You can use `coord_sf(crs = st_crs("XXXX"))` to convert coordinate reference systems (CRS) as you plot, or use `st_transform()` to convert data frames to a different CRS.
 
 ::: {.callout-note}
 ### Not 100% correct
 
-TECHNICALLY coordinate systems and projection systems [are different things](https://gis.stackexchange.com/a/149751/56265), but I'm not a geographer and I don't care that much about the nuance.
+TECHNICALLY coordinate systems and projection systems [are different things](https://gis.stackexchange.com/a/149751/56265), but this is not a geography course, so we don't have to care that much about the nuance.
 :::
 
-There are standard indexes of more than 4,000 of these projections (!!!) at [epsg.io](https://epsg.io/). 
+There are standard indexes of more than 4,000 of these projections (!!!) at [epsg.io](https://epsg.io/).
 
-**Super important**: When using these projections, you need to specify both the projection catalog (ESRI or EPSG; [see here for the difference](https://gis.stackexchange.com/a/169211/56265)) and the projection number, separated by a colon (e.g. "`ESRI:54030`"). Fortunately [epsg.io](http://epsg.io/) makes this super easy: go to the epsg.io page for the projection you want to use and the page title will have the correct name. 
+**Super important**: When using these projections, you need to specify both the projection catalog (ESRI or EPSG; [see here for the difference](https://gis.stackexchange.com/a/169211/56265)) and the projection number, separated by a colon (e.g. "`ESRI:54030`"). Fortunately [epsg.io](http://epsg.io/) makes this super easy: go to the epsg.io page for the projection you want to use and the page title will have the correct name.
 
-Here are some common ones:
+Here are some common ones for world maps:
 
 - [ESRI:54002](http://epsg.io/54002): Equidistant cylindrical projection for the world[^gall-peters]
 - [EPSG:3395](http://epsg.io/3395): Mercator projection for the world
@@ -45,8 +44,14 @@ Here are some common ones:
 - [ESRI:54009](http://epsg.io/54009): Mollweide projection for the world
 - [ESRI:54030](http://epsg.io/54030): Robinson projection for the world (This is my favorite world projection.)
 - [EPSG:4326](http://epsg.io/4326): WGS 84: DOD GPS coordinates (standard −180 to 180 system)
-- [EPSG:4269](http://epsg.io/4269): NAD 83: Relatively common projection for North America
-- [ESRI:102003](https://epsg.io/102003): Albers projection specifically for the contiguous United States
+
+And here are some that are tuned specifically for Japan and East Asia. Just as the US has projections built for North America (NAD83) or even for one single state, Japan has its own national geodetic datum and a set of local plane-rectangular zones:
+
+- [EPSG:6668](https://epsg.io/6668): JGD2011 — the modern Japanese geodetic datum (latitude/longitude)
+- [EPSG:6677](https://epsg.io/6677): JGD2011 / Japan Plane Rectangular CS IX — the zone covering **Tokyo** and the Kantō region
+- [EPSG:4612](https://epsg.io/4612): JGD2000 — the previous national datum, still common in older data
+- [EPSG:30169](https://epsg.io/30169): Old Tokyo datum, Japan Plane Rectangular CS IX (handy for seeing *why* datums get revised)
+- [ESRI:102025](https://epsg.io/102025): Albers equal-area for Asia North, good for whole-region East Asia maps
 
 [^gall-peters]: This is essentially the [Gall-Peters projection](https://en.wikipedia.org/wiki/Gall%E2%80%93Peters_projection) from [the West Wing clip](https://www.youtube.com/watch?v=vVX-PrBRtTY).
 
@@ -54,187 +59,72 @@ Alternatively, instead of using these index numbers, you can use any of the name
 
 - `"+proj=merc"`: Mercator
 - `"+proj=robin"`: Robinson
-- `"+proj=moll"`: Mollweide 
+- `"+proj=moll"`: Mollweide
 - `"+proj=aeqd"`: Azimuthal Equidistant
-- `"+proj=cass"`: Cassini-Soldner
-
-
-## Shapefiles to download
-
-I use a lot of different shapefiles in this example. To save you from having to go find and download each individual one, you can download this zip file:
-
-- [{{< fa file-archive >}} `shapefiles.zip`](/files/data/external_data/shapefiles.zip)
-
-Unzip this and put all the contained folders in a folder named `data` if you want to follow along. **You don't need to follow along!**
-
-Your project should be structured like this:
-
-```default
-your-project-name\
-  some-name.qmd
-  your-project-name.Rproj
-  data\
-    cb_2022_us_county_5m\
-      ...
-      cb_2022_us_county_5m.shp
-      ...
-    cb_2022_us_state_20m\
-    ne_10m_admin_1_states_provinces\
-    ne_10m_lakes\
-    ne_10m_rivers_lake_centerlines\
-    ne_10m_rivers_north_america\
-    ne_110m_admin_0_countries\
-    schools_2009\
-```
-
-These shapefiles all came from these sources:
-
-- {{< fa map >}} **World map**: [110m "Admin 0 - Countries" from Natural Earth](https://www.naturalearthdata.com/downloads/110m-cultural-vectors/)
-- {{< fa map >}} **US states**: [20m 2022 state boundaries from the US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html)
-- {{< fa map >}} **US counties**: [5m 2022 county boundaries from the US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html)
-- {{< fa map >}} **US states high resolution**: [10m "Admin 1 – States, Provinces" from Natural Earth](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/)
-- {{< fa map >}} **Global rivers**: [10m "Rivers + lake centerlines" from Natural Earth](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/)
-- {{< fa map >}} **North American rivers**: [10m "Rivers + lake centerlines, North America supplement" from Natural Earth](https://www.naturalearthdata.com/downloads/10m-physical-vectors/)
-- {{< fa map >}} **Global lakes**: [10m "Lakes + Reservoirs" from Natural Earth](https://www.naturalearthdata.com/downloads/10m-physical-vectors/)
-- {{< fa map >}} **Georgia K–12 schools, 2009**: ["Georgia K-12 Schools" from the Georgia Department of Education](https://data.georgiaspatial.org/index.asp?body=preview&dataId=41516) *(you must be logged in to access this)*
-
-
-## Live coding example
-
-<div class="ratio ratio-16x9">
-<iframe src="https://www.youtube.com/embed/Opzwtegvuv4" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0"></iframe>
-</div>
-
-
-::: {.callout-important}
-### Slight differences from the video
-
-This is a slightly cleaned up version of the code from the video.
-:::
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(fig.width = 6, fig.height = 3.6, fig.align = "center", collapse = TRUE)
-set.seed(1234)
-options("digits" = 2, "width" = 150)
-```
 
 ## Load and look at data
 
-First we'll load the libraries we're going to use:
+First we'll load the libraries we're going to use. The big change from a traditional GIS workflow is `{rnaturalearth}`, which lets us pull country and prefecture boundaries straight into R without hunting down zip files:
 
 ```{r load-libraries, message=FALSE, warning=FALSE}
-library(tidyverse)  # For ggplot, dplyr, and friends
-library(sf)         # For GIS magic
+library(tidyverse)        # For ggplot, dplyr, and friends
+library(sf)               # For GIS magic
+library(rnaturalearth)    # For downloading map data programmatically
+
+# The high-resolution prefecture/state data lives in rnaturalearthhires,
+# which is on GitHub rather than CRAN. Install it once if it's missing.
+if (!requireNamespace("rnaturalearthhires", quietly = TRUE)) {
+  if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+  remotes::install_github("ropensci/rnaturalearthhires")
+}
 ```
 
-Next we'll load all the different shapefiles we downloaded using `read_sf()`: 
+::: {.callout-tip}
+### One-time install
 
-```{r load-shapefiles-fake, eval=FALSE}
-# Download "Admin 0 – Countries" from
-# https://www.naturalearthdata.com/downloads/110m-cultural-vectors/
-world_map <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countries.shp")
+`{rnaturalearth}` needs two data packages. The country data comes with `rnaturalearthdata`, and the high-resolution prefecture/state data comes from `rnaturalearthhires`, which lives on GitHub rather than CRAN:
 
-# Download cb_2022_us_state_20m.zip under "States" from
-# https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
-us_states <- read_sf("data/cb_2022_us_state_20m/cb_2022_us_state_20m.shp")
-
-# Download cb_2022_us_county_5m.zip under "County" from
-# https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
-us_counties <- read_sf("data/cb_2022_us_county_5m/cb_2022_us_county_5m.shp")
-
-# Download "Admin 1 – States, Provinces" from
-# https://www.naturalearthdata.com/downloads/10m-cultural-vectors/
-us_states_hires <- read_sf("data/ne_10m_admin_1_states_provinces/ne_10m_admin_1_states_provinces.shp")
-
-# Download "Rivers + lake centerlines" from
-# https://www.naturalearthdata.com/downloads/10m-physical-vectors/
-rivers_global <- read_sf("data/ne_10m_rivers_lake_centerlines/ne_10m_rivers_lake_centerlines.shp")
-
-# Download "Rivers + lake centerlines, North America supplement" from
-# https://www.naturalearthdata.com/downloads/10m-physical-vectors/
-rivers_na <- read_sf("data/ne_10m_rivers_north_america/ne_10m_rivers_north_america.shp")
-
-# Download "Lakes + Reservoirs" from
-# https://www.naturalearthdata.com/downloads/10m-physical-vectors/
-lakes <- read_sf("data/ne_10m_lakes/ne_10m_lakes.shp")
-
-# Download from https://data.georgiaspatial.org/index.asp?body=preview&dataId=41516
-# after creating an account and logging in
-ga_schools <- read_sf("data/schools_2009/DOE Schools 2009.shp")
+```r
+install.packages("rnaturalearthdata")
+# install.packages("remotes")  # if you don't have it
+remotes::install_github("ropensci/rnaturalearthhires")
 ```
+:::
 
-```{r load-shapefiles-real, include=FALSE}
-world_map <- read_sf(here::here("files", "data", "external_data", "maps",
-                                "ne_110m_admin_0_countries", 
-                                "ne_110m_admin_0_countries.shp"))
+Let's grab a world map and, separately, the prefectures of Japan. `ne_countries()` returns country polygons; `ne_states()` returns the admin-1 boundaries (prefectures in Japan, states in the US, provinces in China, and so on):
 
-us_states <- read_sf(here::here("files", "data", "external_data", "maps",
-                                "cb_2022_us_state_20m",
-                                "cb_2022_us_state_20m.shp"))
+```{r load-shapefiles, message=FALSE, warning=FALSE}
+world_map <- ne_countries(scale = "medium", returnclass = "sf")
 
-us_states_hires <- read_sf(here::here("files", "data", "external_data", "maps",
-                                      "ne_10m_admin_1_states_provinces",
-                                      "ne_10m_admin_1_states_provinces.shp"))
-
-us_counties <- read_sf(here::here("files", "data", "external_data", "maps",
-                                  "cb_2022_us_county_5m",
-                                  "cb_2022_us_county_5m.shp"))
-
-rivers_global <- read_sf(here::here("files", "data", "external_data", "maps",
-                                    "ne_10m_rivers_lake_centerlines",
-                                    "ne_10m_rivers_lake_centerlines.shp"))
-
-rivers_na <- read_sf(here::here("files", "data", "external_data", "maps",
-                                "ne_10m_rivers_north_america",
-                                "ne_10m_rivers_north_america.shp"))
-
-lakes <- read_sf(here::here("files", "data", "external_data", "maps",
-                            "ne_10m_lakes", "ne_10m_lakes.shp"))
-
-ga_schools <- read_sf(here::here("files", "data", "external_data", "maps",
-                                 "schools_2009", "DOE Schools 2009.shp"))
-
-geocoded_addresses <- read_csv(here::here(geocoded_path))
+japan_prefectures <- ne_states(country = "Japan", returnclass = "sf")
 ```
 
 ## Basic plotting
 
-If you look at the `world_map` dataset in RStudio, you'll see it's just a standard data frame with `r nrow(world_map)` rows and `r ncol(world_map)` columns. The last column is the magical `geometry` column with the latitude/longitude details for the borders for every country. RStudio only shows you 50 columns at a time in the RStudio viewer, so you'll need to move to the next page of columns with the » button in the top left corner.
+If you look at the `world_map` dataset in RStudio, you'll see it's just a standard data frame, where the last column is the magical `geometry` column with the latitude/longitude details for the borders of every country. RStudio only shows you 50 columns at a time in the RStudio viewer, so you'll need to move to the next page of columns with the » button in the top left corner.
 
 Because this is just a data frame, we can do all our normal dplyr things to it. Let's get rid of Antarctica, since it takes up a big proportion of the southern hemisphere:
 
 ```{r world-sans-ata}
-world_sans_antarctica <- world_map |> 
-  filter(ISO_A3 != "ATA")
+world_sans_antarctica <- world_map |>
+  filter(name != "Antarctica")
 ```
 
 Ready to plot a map? Here's all you need to do:
 
 ```{r map-super-basic}
-ggplot() + 
+ggplot() +
   geom_sf(data = world_sans_antarctica)
 ```
 
-If you couldn't tell from the lecture, I'm completely blown away by how amazingly easy this every time I plot a map :)
+If you couldn't tell from the lecture, I'm completely blown away by how amazingly easy this is every time I plot a map :)
 
-Because this a regular ggplot geom, all our regular aesthetics and themes and everything work:
+Because this is a regular ggplot geom, all our regular aesthetics and themes and everything work:
 
 ```{r map-super-basic-filled}
-ggplot() + 
-  geom_sf(data = world_sans_antarctica, 
+ggplot() +
+  geom_sf(data = world_sans_antarctica,
           fill = "#669438", color = "#32481B", linewidth = 0.25) +
-  theme_void()
-```
-
-The Natural Earth dataset happens to come with some columns with a coloring scheme with 7–13 colors (`MAPCOLOR7`, `MAPCOLOR9`, etc.) so that no countries with a shared border share a color. We can fill by that column:
-
-```{r map-super-basic-filled-7}
-ggplot() + 
-  geom_sf(data = world_sans_antarctica, 
-          aes(fill = as.factor(MAPCOLOR7)),
-          color = "#401D16", linewidth = 0.25) +
-  scale_fill_viridis_d(option = "plasma") +
-  guides(fill = "none") +
   theme_void()
 ```
 
@@ -245,8 +135,8 @@ Changing projections is trivial: add a `coord_sf()` layer where you specify the 
 Here's Robinson (yay):
 
 ```{r map-basic-robinson}
-ggplot() + 
-  geom_sf(data = world_sans_antarctica, 
+ggplot() +
+  geom_sf(data = world_sans_antarctica,
           fill = "#669438", color = "#32481B", linewidth = 0.25) +
   coord_sf(crs = st_crs("ESRI:54030")) +  # Robinson
   # Or use the name instead of the number
@@ -257,18 +147,18 @@ ggplot() +
 Here's sinusoidal:
 
 ```{r map-basic-sinusoidal}
-ggplot() + 
-  geom_sf(data = world_sans_antarctica, 
+ggplot() +
+  geom_sf(data = world_sans_antarctica,
           fill = "#669438", color = "#32481B", linewidth = 0.25) +
   coord_sf(crs = st_crs("ESRI:54008")) +  # Sinusoidal
   theme_void()
 ```
 
-And here's Mercator (ewww):
+And here's Mercator (use with caution!):
 
 ```{r map-basic-mercator}
-ggplot() + 
-  geom_sf(data = world_sans_antarctica, 
+ggplot() +
+  geom_sf(data = world_sans_antarctica,
           fill = "#669438", color = "#32481B", linewidth = 0.25) +
   coord_sf(crs = st_crs("EPSG:3395")) +  # Mercator
   # Or use the name instead of the number
@@ -276,432 +166,798 @@ ggplot() +
   theme_void()
 ```
 
-## US map with different projections
+## Zooming in on East Asia
 
-This same process works for any shapefile. The map of the US can also be projected differently—two common projections are NAD83 and Albers. We'll take the `us_states` dataset, remove Alaska, Hawaii, and Puerto Rico (they're so far from the rest of the lower 48 states that they make an unusable map—see the next section for a way to include them), and plot it.
+A world map is a fine starting point, but for this class most of us live in (or come from) East Asia, so let's zoom in. We don't need a separate file for this — we can keep the same world data and just restrict the plotting window with `coord_sf()`. The `xlim` and `ylim` arguments take longitude and latitude bounds:
 
-```{r us-nad83}
-lower_48 <- us_states |> 
-  filter(!(NAME %in% c("Alaska", "Hawaii", "Puerto Rico")))
-
-ggplot() + 
-  geom_sf(data = lower_48, fill = "#192DA1", color = "white", linewidth = 0.25) +
-  coord_sf(crs = st_crs("EPSG:4269")) +  # NAD83
+```{r east-asia}
+ggplot() +
+  geom_sf(data = world_sans_antarctica,
+          fill = "#669438", color = "white", linewidth = 0.25) +
+  coord_sf(xlim = c(95, 150), ylim = c(20, 50)) +  # East Asia window
   theme_void()
 ```
 
-```{r us-albers}
-ggplot() + 
-  geom_sf(data = lower_48, fill = "#192DA1", color = "white", linewidth = 0.25) +
-  coord_sf(crs = st_crs("ESRI:102003")) +  # Albers
+That gives us China, the Korean peninsula, Japan, and Taiwan in one frame. We can also fill each country a different colour so the borders pop. Let's filter down to just the East Asian countries and fill by name:
+
+```{r east-asia-filled}
+east_asia <- world_sans_antarctica |>
+  filter(name %in% c("Japan", "China", "South Korea",
+                     "North Korea", "Taiwan", "Mongolia"))
+
+ggplot() +
+  geom_sf(data = east_asia, aes(fill = name), color = "white", linewidth = 0.3) +
+  scale_fill_viridis_d(option = "plasma") +
+  labs(fill = NULL) +
+  coord_sf(crs = st_crs("ESRI:102025")) +  # Albers equal-area for Asia
   theme_void()
 ```
 
-## US map with non-continguous parts
+::: {.callout-note}
+### Country names in Natural Earth
 
-Plotting places like Alaska, Hawaii, and Puerto Rico gets a little tricky since they're far away from the contiguous 48 states. There's an easy way to handle it though!
+The `name` column uses common English names, so it's `"South Korea"` rather than `"Republic of Korea"`. If a `filter()` ever comes back empty, the quickest fix is to run `world_sans_antarctica |> filter(continent == "Asia") |> pull(name)` and copy the exact spelling.
+:::
 
-First, there's a package named [{tigris}](https://github.com/walkerke/tigris) that provides a neat interface for working with spatial data from the [US Census's TIGER shapefiles](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html). In addition to providing a ton of functions for getting shapefiles for states, counties, voting districts, Tribal areas, military bases, and dozens of other things, {tigris} has a `shift_geometry()` function that will change the coordinates for Alaska, Hawaii, and Puerto Rico so that they end up in Mexico and the Gulf of Mexico.
+## Individual countries and prefectures
 
+Because these are really just fancy data frames, we can filter them with normal dplyr functions. Let's pull out just Japan from the world data:
 
-```{r tigris-shifting, warning=FALSE, message=FALSE}
-library(tigris)
-
-# This is the Census shapefile we loaded earlier. Note how we're not filtering
-# out AK, HI, and PR now
-us_states_shifted <- us_states |> 
-  shift_geometry()  # Move AK, HI, and PR around
+```{r only-japan}
+only_japan <- world_sans_antarctica |>
+  filter(name == "Japan")
 
 ggplot() +
-  geom_sf(data = us_states_shifted) +
-  coord_sf(crs = st_crs("ESRI:102003")) +  # Albers
+  geom_sf(data = only_japan, fill = "#EC8E55") +
   theme_void()
 ```
 
-The `shift_geometry()` function should work on any shapefile. What if you have a shapefile with the coordinates of all public libraries in Alaska? Those will use the actual coordinates, not the shifted-to-Mexico coordinates. Feed that data to `shift_geometry()` and it should translate any coordinates you have in Alaska, Hawaii, and Puerto Rico to the Mexico area so they'll plot correctly.
-
-`shift_geometry()` has an optional `position` argument that lets you control where the non-contiguous states go. By default they'll go below the continental US (`position = "below"`), but you can also use `position = "outside"` to place them more in relation to where they are in real life:
-
-```{r tigris-shifting-alt}
-us_states_shifted <- us_states |> 
-  shift_geometry(position = "outside")
-
-ggplot() +
-  geom_sf(data = us_states_shifted) +
-  coord_sf(crs = st_crs("ESRI:102003")) +  # Albers
-  theme_void()
-```
-
-
-## Individual states
-
-Again, because these shapefiles are really just fancy data frames, we can filter them with normal dplyr functions. Let's plot just Georgia:
-
-```{r georgia-only}
-only_georgia <- lower_48 |> 
-  filter(NAME == "Georgia")
-
-ggplot() +
-  geom_sf(data = only_georgia, fill = "#EC8E55") +
-  theme_void()
-```
-
-We can also use a different projection. If we look at [epsg.io](http://epsg.io/), there's [a version of NAD83 that's focused specifically on Georgia](http://epsg.io/2239-1713). 
-
-```{r georgia-only-projection}
-ggplot() +
-  geom_sf(data = only_georgia, fill = "#EC8E55") +
-  theme_void() +
-  coord_sf(crs = st_crs("EPSG:2239"))  # NAD83 focused on Georgia
-```
-
-There's one small final issue though: we're missing all the Atlantic islands in the southeast like Cumberland Island and Amelia Island. That's because we're using the Census's low resolution (20m) data. That's fine for the map of the whole country, but if we're looking at a single state, we probably want better detail in the borders. We can use the Census's high resolution (500k) data, but even then it doesn't include the islands for whatever reason, but [Natural Earth has high resolution US state data](https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/) that *does* have the islands, so we can use that:
-
-```{r georgia-only-hires}
-only_georgia_high <- us_states_hires |> 
-  filter(iso_3166_2 == "US-GA")
-
-ggplot() +
-  geom_sf(data = only_georgia_high, fill = "#EC8E55") +
-  theme_void() +
-  coord_sf(crs = st_crs("EPSG:2239"))  # NAD83 focused on Georgia
-```
-
-Perfect.
-
-
-## Plotting multiple shapefile layers
-
-The state shapefiles from the Census Bureau only include state boundaries. If we want to see counties in Georgia, we need to download and load the Census's county shapefiles (which we did above). We can then add a second `geom_sf()` layer for the counties.
-
-First we need to filter the county data to only include Georgia counties. The counties data doesn't include a column with the state name or state abbreviation, but it does include a column named `STATEFP`, which is the [state FIPS code](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code). Looking at `lower_48` we can see that the state FIPS code for Georgia is 13, so we use that to filter.
-
-```{r get-ga-counties}
-ga_counties <- us_counties |> 
-  filter(STATEFP == 13)
-```
-
-Now we can plot just the counties:
-
-```{r ga-counties-only}
-ggplot() +
-  geom_sf(data = ga_counties) +
-  theme_void()
-```
-
-Technically we can just draw the county boundaries instead of layer the state boundary + the counties, since the borders of the counties make up the border of the state. But there's an advantage to including both: we can use different aesthetics on each, like adding a thicker border on the state:
-
-```{r ga-counties-in-state}
-ggplot() +
-  geom_sf(data = only_georgia_high, color = "#EC8E55", linewidth = 3) +
-  geom_sf(data = ga_counties, fill = "#A5D46A", color = "white") +
-  theme_void()
-```
-
-It's also useful if we want to only show some counties, like metropolitan Atlanta:
-
-```{r atl-counties-in-state}
-atl_counties <- ga_counties |> 
-  filter(NAME %in% c("Cherokee", "Clayton", "Cobb", "DeKalb", "Douglas",
-                     "Fayette", "Fulton", "Gwinnett", "Henry", "Rockdale"))
-ggplot() +
-  geom_sf(data = only_georgia_high, fill = "#EC8E55") +
-  geom_sf(data = atl_counties, fill = "#A5D46A", color = "white") +
-  theme_void()
-```
-
-## Plotting multiple shapefile layers when some are bigger than the parent shape
-
-So far we've been able to filter out states and counties that we don't want to plot using `filter()`, which works because the shapefiles have geometry data for each state or county. But what if you're plotting stuff that doesn't follow state or county boundaries, like freeways, roads, rivers, or lakes? 
-
-At the beginning we loaded a shapefile for all large and small rivers in the US. Look at the first few rows of `rivers_na`:
-
-```{r head-river-small}
-head(rivers_na)
-```
-
-The first row is the whole Colorado river, which flows through seven states. We can't just use `filter()` to only select some parts of it based on states.
-
-Here's what happens if we combine our Georgia map with rivers and lakes:
-
-```{r ga-rivers-bad}
-ggplot() +
-  geom_sf(data = only_georgia, fill = "#EC8E55") +
-  geom_sf(data = rivers_na) +
-  theme_void()
-```
-
-It plots Georgia, and it's filled with orange, but it also plots every single river in North America. Oops.
-
-We need to do a little GIS work to basically use `only_georgia` as a cookie cutter and keep only the rivers that are contained in the `only_georgia` boundaries. Fortunately, there's a function in the {sf} package that does this: `st_intersection()`. Feed it two shapefile datasets and it will select the parts of the second that fall within the boundaries of the first:
-
-```{r ga-cut-rivers-nope, error=TRUE}
-ga_rivers_na <- st_intersection(only_georgia, rivers_na)
-```
-
-Oh no! An error! It's complaining that the reference systems used in these two datasets don't match. We can check the CRS with `st_crs()`:
-
-```{r check-crs}
-st_crs(only_georgia)
-st_crs(rivers_na)
-```
-
-The Georgia map uses EPSG:4269 ([or NAD83](https://epsg.io/4269)), while the rivers map uses EPSG:4326 (or [the GPS system of latitude and longitude](https://epsg.io/4326)). We need to convert one of them to make them match. It doesn't matter which one.
-
-```{r ga-cut-rivers-yep}
-only_georgia_4326 <- only_georgia |> 
-  st_transform(crs = st_crs("EPSG:4326"))
-
-ga_rivers_na <- st_intersection(only_georgia_4326, rivers_na)
-```
-
-You'll get an ominous warning, but you should be okay—it's just because flattening globes into flat planes is hard, and the cutting [might not be 100% accurate](https://github.com/r-spatial/sf/issues/493), but it'll be close enough for our mapping purposes.
-
-Now we can plot our state shape and the truncated rivers:
-
-```{r ga-rivers-good}
-ggplot() +
-  geom_sf(data = only_georgia, fill = "#EC8E55") +
-  geom_sf(data = ga_rivers_na) +
-  theme_void()
-```
-
-Hey! It worked! Let's put all the rivers and lakes on at once and make it a little more artsy. We'll use the high resolution Georgia map too, which conveniently already matches the CRS of the rivers and lakes:
-
-```{r ga-all-water, warning=FALSE, message=FALSE, fig.width=10, fig.height=6}
-ga_rivers_na <- st_intersection(only_georgia_high, rivers_na)
-ga_rivers_global <- st_intersection(only_georgia_high, rivers_global)
-
-# sf v1.0 changed how it handles shapefiles with spherical elements, which
-# apparently the lakes data uses. Currently when using st_intersection() and
-# other GIS-related functions, it breaks. This can be fixed by feeding the lakes
-# data to st_make_valid(), which does something fancy behind the scenes to make
-# it work. See this: https://github.com/r-spatial/sf/issues/1649#issuecomment-853279986
-ga_lakes <- st_intersection(only_georgia_high, st_make_valid(lakes))
-
-ggplot() +
-  geom_sf(data = only_georgia_high, 
-          color = "black", linewidth = 0.1, fill = "black") +
-  geom_sf(data = ga_rivers_global, linewidth = 0.3, color = "grey80") +
-  geom_sf(data = ga_rivers_na, linewidth = 0.15, color = "grey80") +
-  geom_sf(data = ga_lakes, linewidth = 0.3, fill = "grey80", color = NA) +
-  coord_sf(crs = st_crs("EPSG:4326")) +  # NAD83
-  theme_void()
-```
-
-Heck yeah. That's a great map. This is basically what [Kieran Healy did here](https://kieranhealy.org/prints/rivers/), but he used [even more detailed shapefiles from the US Geological Survey](https://www.usgs.gov/core-science-systems/ngp/national-hydrography).
-
-
-## Plotting schools in Georgia
-
-Shapefiles are not limited to just lines and areas—they can also contain points. I made a free account at the Georgia GIS Clearinghouse, searched for "schools" and found a shapefile of all the K–12 schools in 2009. [This is the direct link to the page](https://data.georgiaspatial.org/index.asp?body=preview&dataId=41516), but it only works if you're logged in to their system. [This is the official metadata for the shapefile](https://data.georgiaspatial.org/data/statewide/other/schools_2009.html), which you can see if you're not logged in, but you can't download anything. It's a dumb system and other states are a lot better at offering their GIS data (like, [here's a shapefile of all of Utah's schools and libraries](https://gis.utah.gov/data/society/schools-libraries/) as of 2017, publicly accessible without an account).
-
-We loaded the shapefile up at the top, but now let's look at it:
-
-```{r}
-head(ga_schools)
-```
-
-We have a bunch of columns like `GRADES` that has a list of what grades are included in the school, and `TOTAL`, which I'm guessing is the number of students. Let's map it!
-
-If we add a `geom_sf()` layer just for `ga_schools`, it'll plot a bunch of points:
-
-```{r plot-ga-schools-initial}
-ggplot() +
-  geom_sf(data = ga_schools)
-```
-
-One of these rows is wildly miscoded and ended up Indonesia! If you sort by the `geometry` column in RStudio, you'll see that it's most likely Allatoona High School in Cobb County (id = 22097). The coordinates are different from all the others, and it has no congressional district information. Let's remove it.
-
-```{r plot-ga-schools-fixed}
-ga_schools_fixed <- ga_schools |> 
-  filter(ID != 22097)
-
-ggplot() +
-  geom_sf(data = ga_schools_fixed)
-```
-
-That's better. However, all we're plotting now are the points—we've lost the state and/or county boundaries. Let's include those:
-
-```{r plot-ga-schools-borders}
-ggplot() +
-  geom_sf(data = only_georgia_high) +
-  geom_sf(data = ga_schools_fixed) +
-  theme_void()
-```
-
-We're getting closer. We have some issues with overplotting, so let's shrink the points down and make them a little transparent:
-
-```{r plot-ga-schools-shrunk}
-ggplot() +
-  geom_sf(data = only_georgia_high) +
-  geom_sf(data = ga_schools_fixed, size = 0.5, alpha = 0.5) +
-  theme_void()
-```
-
-Neat. One last thing we can do is map the `TOTAL` column to the color aesthetic and color the points by how many students attend each school:
-
-```{r plot-ga-schools-color}
-ggplot() +
-  geom_sf(data = only_georgia_high) +
-  geom_sf(data = ga_schools_fixed, aes(color = TOTAL), size = 0.75, alpha = 0.5) +
-  scale_color_viridis_c() +
-  theme_void()
-```
-
-Most schools appear to be under 1,000 students, except for a cluster in Gwinnett County north of Atlanta. Its high schools have nearly 4,000 students each!
-
-```{r show-biggest-schools}
-ga_schools_fixed |> 
-  select(COUNTY, SCHOOLNAME, TOTAL) |> 
-  arrange(desc(TOTAL)) |> 
+The country outline from the world data is fairly low resolution, though. If we want the prefectures *inside* Japan, that's where `japan_prefectures` (from `ne_states()`) comes in. It has one row per prefecture:
+
+```{r japan-prefectures-look}
+japan_prefectures |>
+  select(name, region) |>
   head()
 ```
 
+::: {.callout-important}
+### Check the actual prefecture names before filtering
+
+Throughout this page we'll filter prefectures by name — `filter(name == "Tokyo")` and so on. But the exact spelling in the `name` column is set by Natural Earth, and it doesn't always match what you'd type. Depending on the data version you may get `"Tōkyō"` with macrons, `"Tokyo"` plain, or a suffixed form. If a filter silently returns **zero rows**, your map comes out blank — and that's almost always a name-spelling mismatch, not a code error. So look at the real list first:
+
+```{r list-pref-names}
+japan_prefectures |>
+  pull(name) |>
+  sort()
+```
+
+If you see macrons (e.g. `"Kyōto"`), either copy the exact string, or filter case-insensitively on a partial match so your code survives the difference:
+
+```r
+# Robust to "Tokyo", "Tōkyō", "Tokyo Prefecture", etc.
+japan_prefectures |>
+  filter(str_detect(str_to_lower(name), "tokyo|tōkyō"))
+```
+:::
+
+Now we can plot all 47 prefectures:
+
+```{r japan-prefectures-plot}
+ggplot() +
+  geom_sf(data = japan_prefectures, fill = "#A5D46A", color = "white") +
+  theme_void()
+```
+
+## Plotting multiple layers
+
+Just like the Census state + county trick, we can layer a thicker national-ish outline under the prefecture boundaries by drawing two `geom_sf()` layers with different aesthetics:
+
+```{r japan-layers}
+ggplot() +
+  geom_sf(data = only_japan, color = "#EC8E55", linewidth = 2) +
+  geom_sf(data = japan_prefectures, fill = "#A5D46A", color = "white",
+          linewidth = 0.2) +
+  coord_sf(crs = st_crs("EPSG:6668")) +
+  theme_void()
+```
+
+It's also useful if we want to highlight only some prefectures — say, the Greater Tokyo Area (首都圏). We filter the prefecture data and draw it on top in a different colour:
+
+```{r tokyo-area}
+greater_tokyo <- japan_prefectures |>
+  filter(name %in% c("Tokyo", "Kanagawa", "Saitama", "Chiba",
+                     "Ibaraki", "Tochigi", "Gunma"))
+
+ggplot() +
+  geom_sf(data = japan_prefectures, fill = "#EC8E55", color = "white",
+          linewidth = 0.2) +
+  geom_sf(data = greater_tokyo, fill = "#192DA1", color = "white",
+          linewidth = 0.2) +
+  coord_sf(crs = st_crs("EPSG:6668")) +
+  theme_void()
+```
+
+## Repositioning far-flung islands
+
+Japan has the same problem the US does with Alaska and Hawaii: Okinawa (沖縄県) sits hundreds of kilometres southwest of the main islands, so a faithful map leaves a huge empty ocean in the middle and shrinks everything else. The usual fix is to *move* the distant part closer for display — a deliberate cartographic white lie that we signal with an inset box.
+
+### The US approach with {tigris}
+
+For US maps there's a purpose-built tool. The [`{tigris}`](https://github.com/walkerke/tigris) package provides a neat interface to the US Census's TIGER shapefiles, and its `shift_geometry()` function automatically relocates Alaska, Hawaii, and Puerto Rico so they tuck in below the lower 48. It does all the projection and coordinate maths for you:
+
+```{r tigris-shifting, warning=FALSE, message=FALSE}
+if (!requireNamespace("tigris", quietly = TRUE)) install.packages("tigris")
+library(tigris)
+options(tigris_use_cache = TRUE)
+
+# Grab state boundaries straight from the Census
+us_states <- states(cb = TRUE, resolution = "20m", progress_bar = FALSE)
+
+us_states_shifted <- us_states |>
+  shift_geometry()  # Move AK, HI, and PR into view
+
+ggplot() +
+  geom_sf(data = us_states_shifted) +
+  coord_sf(crs = st_crs("ESRI:102003")) +  # Albers
+  theme_void()
+```
+
+`shift_geometry()` has an optional `position` argument (`"below"` by default, or `"outside"` to place the territories roughly where they sit in real life). The catch: it *only* works on US data, because the shift distances are hard-coded for Alaska, Hawaii, and Puerto Rico. There's no `country = "Japan"` switch.
+
+### The Japan approach with {jpmap}
+
+For Japan, the closest equivalent is the [`{jpmap}`](https://github.com/UchidaMizuki/jpmap) package, which ships prefecture geometry plus a `layout_japan()` function that repositions Okinawa automatically — even across facets. Like `rnaturalearthhires`, it's a GitHub-only package, so we guard the install the same way:
+
+```{r jpmap-install, message=FALSE, warning=FALSE}
+if (!requireNamespace("jpmap", quietly = TRUE)) {
+  if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+  remotes::install_github("UchidaMizuki/jpmap")
+}
+```
+
+```{r jpmap-layout, warning=FALSE, message=FALSE, fig.width=7, fig.height=7}
+library(jpmap)
+
+# jpmap::prefecture is an sf object with all 47 prefectures
+base_map <- ggplot(jpmap::prefecture) +
+  geom_sf(fill = "#A5D46A", color = "white", linewidth = 0.2) +
+  theme_void()
+
+# layout_japan() returns a relaid-out plot with Okinawa moved into the inset
+layout_japan(base_map)
+```
+
+### Doing it by hand
+
+`layout_japan()` is convenient, but it hides what's actually happening, and it only works with `{jpmap}`'s own geometry — not the `japan_prefectures` data we already have from `rnaturalearth`. Since these are just `sf` data frames, we can do the shift ourselves, which is worth seeing once because it works on *any* shapefile, for *any* country.
+
+The idea is exactly what `shift_geometry()` does internally: pull the far-flung piece out, add an offset to every coordinate in its geometry to slide it where we want, then stack it back on. We'll work in plain lat/long degrees (EPSG:4326), so the offset reads as "move this many degrees east and north." We want to tuck Okinawa into the empty **Sea of Japan**, northwest of the main islands — that's a move both west and well north, into open water that sits clear of Honshū's coast and the Noto Peninsula. About +5° longitude and +14° latitude drops it neatly into that gap:
+
+```{r okinawa-shift}
+# Separate the mainland from Okinawa
+japan_main <- japan_prefectures |>
+  filter(!str_detect(str_to_lower(name), "okinawa"))
+
+okinawa <- japan_prefectures |>
+  filter(str_detect(str_to_lower(name), "okinawa"))
+
+# How far to slide Okinawa: northwest, into the Sea of Japan.
+offset <- c(5, 14)  # c(longitude, latitude) in degrees
+
+# Slide every coordinate in Okinawa's geometry. Adding a numeric vector to a
+# geometry shifts it, but it STRIPS the CRS, so we re-attach it immediately.
+okinawa_shifted <- okinawa
+st_geometry(okinawa_shifted) <- st_geometry(okinawa) + offset
+st_crs(okinawa_shifted) <- st_crs(okinawa)
+
+# Recombine into one dataset
+japan_shifted <- bind_rows(japan_main, okinawa_shifted)
+```
+
+::: {.callout-warning}
+### Re-attach the CRS!
+
+The line `st_geometry(x) + offset` does raw coordinate arithmetic, and R can't know the offset was meant to be in degrees, so it drops the coordinate reference system. If you forget the `st_crs(okinawa_shifted) <- st_crs(okinawa)` line, the next `coord_sf()` will either error or silently misplace Okinawa. This is the single most common mistake with manual shifting.
+:::
+
+Now we plot the recombined map, and draw a box around the relocated Okinawa to make clear it's been moved — the same honesty the original Alaska/Hawaii maps owe their readers. One catch: we want the box drawn in the *same* coordinate space as the map. If we used `annotate("rect", ...)` with raw numbers, it would be drawn in the projected (metre-based) space and land in the wrong place once `coord_sf()` reprojects everything. The reliable way is to build the box as a real `sf` polygon from the shifted Okinawa's own bounding box, so `geom_sf()` reprojects it along with the rest:
+
+```{r okinawa-shift-plot, fig.width=8, fig.height=8}
+# Build an inset box from the shifted prefecture's own extent, with a little padding
+okinawa_box <- okinawa_shifted |>
+  st_bbox() |>
+  st_as_sfc() |>           # bbox -> polygon
+  st_buffer(0.4)           # pad the edges slightly (degrees)
+
+ggplot() +
+  geom_sf(data = japan_shifted, fill = "#A5D46A", color = "white",
+          linewidth = 0.2) +
+  geom_sf(data = okinawa_box, fill = NA, color = "grey50", linewidth = 0.3) +
+  coord_sf(crs = st_crs("EPSG:6668")) +
+  theme_void()
+```
+
+The same trick works on any data sitting in Okinawa — a shapefile of Okinawan airports, say. Apply the identical `+ offset` to those points and they'll travel along with the prefecture into the inset.
 
 ## Making your own geocoded data
 
-So, plotting shapefiles with `geom_sf()` is magical because {sf} deals with all of the projection issues for us automatically and it figures out how to plot all the latitude and longitude data for us automatically. But lots of data *doesn't* some as shapefiles. The [rats data from mini project 1](/assignment/01-mini-project.qmd), for instance, has two columns indicating the latitude and longitude of each rat sighting, but those are stored as just numbers. If we try to use `geom_sf()` with the rat data, it won't work. We need that magical `geometry` column.
+Plotting boundary shapefiles with `geom_sf()` is magical because `{sf}` deals with all the projection issues for us. But lots of data *doesn't* come as shapefiles. Often you just have two columns of latitude and longitude stored as plain numbers, and `geom_sf()` can't use those directly — it needs that magical `geometry` column.
 
-Fortunately, if we have latitude and longitude information, we can make our own `geometry` column. 
+Fortunately, if we have latitude and longitude information, we can build our own `geometry` column.
 
-Let's say we want to mark some cities on our map of Georgia. We can make a mini dataset using `tribble()`. I found these points from Google Maps: right click anywhere in Google Maps, select "What's here?", and you'll see the exact coordinates for that spot.
+Let's say we want to mark some cities on our map of Japan. We can make a mini dataset with `tribble()`. I found these points from Google Maps: right click anywhere in Google Maps, select "What's here?", and you'll see the exact coordinates for that spot.
 
-```{r mini-cities}
-ga_cities <- tribble(
-  ~city, ~lat, ~long,
-  "Atlanta", 33.748955, -84.388099,
-  "Athens", 33.950794, -83.358884,
-  "Savannah", 32.113192, -81.089350
+```{r japan-cities}
+japan_cities <- tribble(
+  ~city,       ~lat,      ~long,
+  "Tokyo",     35.689487, 139.691711,
+  "Osaka",     34.693738, 135.502165,
+  "Sapporo",   43.062096, 141.354376,
+  "Fukuoka",   33.590355, 130.401716
 )
-ga_cities
+japan_cities
 ```
 
-This is just a normal dataset, and the `lat` and `long` columns are just numbers. R doesn't know that those are actually geographic coordinates. This is similar to the rats data, or any other data that has columns for latitude and longitude.
+This is just a normal dataset, and the `lat` and `long` columns are just numbers. R doesn't know that those are actually geographic coordinates. We convert them to the magic `geometry` column with `st_as_sf()`. We have to define two things: which columns are the longitude and latitude, and what CRS the coordinates use. Google Maps uses [EPSG:4326, the GPS system](http://epsg.io/4326), so we specify that:
 
-We can convert those two columns to the magic `geometry` column with the `st_as_sf()` function. We have to define two things in the function: which coordinates are the longitude and latitude, and what CRS the coordinates are using. Google Maps uses [EPSG:4326, or the GPS system](http://epsg.io/4326), so we specify that:
-
-```{r mini-cities-convert}
-ga_cities_geometry <- ga_cities |> 
+```{r japan-cities-convert}
+japan_cities_geometry <- japan_cities |>
   st_as_sf(coords = c("long", "lat"), crs = st_crs("EPSG:4326"))
-ga_cities_geometry
+japan_cities_geometry
 ```
 
-The longitude and latitude columns are gone now, and we have a single magical `geometry` column. That means we can plot it with `geom_sf()`:
+The longitude and latitude columns are gone, replaced by a single `geometry` column, which means we can plot it with `geom_sf()`:
 
-```{r ga-with-cities}
+```{r japan-with-cities}
 ggplot() +
-  geom_sf(data = only_georgia_high, fill = "#EC8E55") +
-  geom_sf(data = ga_cities_geometry, size = 3) +
+  geom_sf(data = japan_prefectures, fill = "#EC8E55", color = "white",
+          linewidth = 0.2) +
+  geom_sf(data = japan_cities_geometry, size = 3) +
+  coord_sf(crs = st_crs("EPSG:6668")) +
   theme_void()
 ```
 
-We can use `geom_sf_label()` (or `geom_sf_text()`) to add labels in the correct locations too. It will give you a warning, but you can ignore it—again, it's complaining that the positioning might not be 100% accurate because of issues related to taking a globe and flattening it. It's fine.
+We can use `geom_sf_label()` (or `geom_sf_text()`) to add labels in the correct locations too. It will give you a warning, but you can ignore it — it's just complaining that positioning might not be 100% accurate because of the globe-flattening problem.
 
-```{r ga-with-cities-text, warning=FALSE, fig.width=10, fig.height=6}
+```{r japan-with-cities-text, warning=FALSE, fig.width=8, fig.height=8}
 ggplot() +
-  geom_sf(data = only_georgia_high, fill = "#EC8E55") +
-  geom_sf(data = ga_cities_geometry, size = 3) +
-  geom_sf_label(data = ga_cities_geometry, aes(label = city),
-                nudge_y = 0.2) +
+  geom_sf(data = japan_prefectures, fill = "#EC8E55", color = "white",
+          linewidth = 0.2) +
+  geom_sf(data = japan_cities_geometry, size = 3) +
+  geom_sf_label(data = japan_cities_geometry, aes(label = city),
+                nudge_y = 0.15) +
+  coord_sf(crs = st_crs("EPSG:6668")) +
   theme_void()
 ```
+
+### Nudging labels off their points
+
+A single `nudge_y` shoves every label the same direction, which often isn't what you want — a label might end up in the sea for one city and on top of a neighbour for another. You can pass a *vector* instead, one value per city, to move each label its own direction. The order has to match the order of the rows in the data:
+
+```{r japan-cities-nudge, warning=FALSE, fig.width=8, fig.height=8}
+ggplot() +
+  geom_sf(data = japan_prefectures, fill = "#EC8E55", color = "white",
+          linewidth = 0.2) +
+  geom_sf(data = japan_cities_geometry, size = 3) +
+  geom_sf_text(data = japan_cities_geometry, aes(label = city),
+               # Tokyo, Osaka, Sapporo, Fukuoka — one offset each
+               nudge_x = c(-0.7, -0.7,  0.9, -0.8),
+               nudge_y = c( 0.3, -0.3,  0.0, -0.3)) +
+  coord_sf(crs = st_crs("EPSG:6668")) +
+  theme_void()
+```
+
+That works, but hand-tuning offsets gets tedious fast and breaks the moment you add another city.
+
+### Letting {ggrepel} do it automatically
+
+The general solution is the [`{ggrepel}`](https://ggrepel.slowkow.com/) package, which automatically pushes labels away from their points *and* away from each other, drawing a thin leader line back to each marker. Because `ggrepel` predates `{sf}` and doesn't read geometry columns on its own, the trick is to feed it `aes(geometry = geometry)` together with `stat = "sf_coordinates"`, which extracts the point coordinates for it:
+
+```{r japan-cities-repel, warning=FALSE, fig.width=8, fig.height=8}
+library(ggrepel)
+
+ggplot() +
+  geom_sf(data = japan_prefectures, fill = "#EC8E55", color = "white",
+          linewidth = 0.2) +
+  geom_sf(data = japan_cities_geometry, size = 3) +
+  geom_text_repel(data = japan_cities_geometry,
+                  aes(label = city, geometry = geometry),
+                  stat = "sf_coordinates",
+                  size = 4,
+                  min.segment.length = 0,  # always draw the leader line
+                  box.padding = 0.3) +     # how hard to push labels apart
+  coord_sf(crs = st_crs("EPSG:6668")) +
+  theme_void()
+```
+
+For four well-spaced cities `ggrepel` is mild overkill, but it's exactly the tool you'll want the moment labels start colliding — add a fifth and sixth city and the manual `nudge` approach falls apart while this one keeps coping. Use `geom_label_repel()` instead of `geom_text_repel()` if you want each label in its own little box.
 
 ## Automatic geocoding by address
 
-Using `st_as_sf()` is neat when you have latitude and longitude data already, but what if you have a list of addresses or cities instead, with no fancy geographic information? It's easy enough to right click on Google Maps, but you don't really want to do that hundreds of times for large-scale data.
+Using `st_as_sf()` is neat when you already have latitude and longitude, but what if you have a list of addresses instead? It's easy enough to right click on Google Maps, but you don't want to do that hundreds of times for large-scale data.
 
-Fortunately there are a bunch of different online geocoding services that return GIS data for addresses and locations that you feed them, like magic. 
+Fortunately there are online geocoding services that return GIS data for addresses you feed them. The easiest way to use them is the [`{tidygeocoder}`](https://jessecambon.github.io/tidygeocoder/) package, which connects to lots of free and paid services (run `?geo` for full details). Some common methods:
 
-The easiest way to use any of these services is to use the [{tidygeocoder}](https://jessecambon.github.io/tidygeocoder/) package, which connects with all these different free and paid services (run `?geo` in R for complete details):
+- `"osm"`: OpenStreetMap via [Nominatim](https://nominatim.org/). **FREE**, and works worldwide — including Japanese addresses.
+- `"arcgis"`: [ArcGIS](https://developers.arcgis.com/). **FREE** and paid; also global.
+- `"google"`: [Google](https://developers.google.com/maps/documentation/geocoding/overview). Needs an API key in `"GOOGLEGEOCODE_API_KEY"`.
 
-- `"osm"`: OpenStreetMap through [Nominatim](https://nominatim.org/). **FREE**.
-- `"census"`: [US Census](https://geocoding.geo.census.gov/). Geographic coverage is limited to the United States. **FREE**.
-- `"arcgis"`: [ArcGIS](https://developers.arcgis.com/rest/geocode/api-reference/overview-world-geocoding-service.htm). **FREE** and paid.
-- `"geocodio"`: [Geocodio](https://www.geocod.io/). Geographic coverage is limited to the United States and Canada. An API key must be stored in `"GEOCODIO_API_KEY"`.
-- `"iq"`: [Location IQ](https://locationiq.com/). An API key must be stored in `"LOCATIONIQ_API_KEY"`.
-- `"google"`: [Google](https://developers.google.com/maps/documentation/geocoding/overview). An API key must be stored in `"GOOGLEGEOCODE_API_KEY"`.
-- `"opencage"`: [OpenCage](https://opencagedata.com/). An API key must be stored in `"OPENCAGE_KEY"`.
-- `"mapbox"`: [Mapbox](https://docs.mapbox.com/api/search/). An API key must be stored in `"MAPBOX_API_KEY"`.
-- `"here"`: [HERE](https://developer.here.com/products/geocoding-and-search). An API key must be stored in `"HERE_API_KEY"`.
-- `"tomtom"`: [TomTom](https://developer.tomtom.com/search-api/search-api-documentation/geocoding). An API key must be stored in `"TOMTOM_API_KEY"`.
-- `"mapquest"`: [MapQuest](https://developer.mapquest.com/documentation/geocoding-api/). An API key must be stored in `"MAPQUEST_API_KEY"`.
-- `"bing"`: [Bing](https://docs.microsoft.com/en-us/bingmaps/rest-services/locations/). An API key must be stored in `"BINGMAPS_API_KEY"`.
+::: {.callout-important}
+### The US Census geocoder is US-only
 
-Not all services work equally well, and the free ones have rate limits (like, don't try to geocode a million rows of data with the US Census), so you'll have to play around with different services. You can also provide a list of services and {tidygeocoder} will cascade through them—if it can't geocode an address with OpenStreetMap, it can move on to the Census, then ArcGIS, and so on. You need to set the `cascade_order` argument in `geocode()` for this to work.
+The original version of this example used `method = "census"`, but the US Census service only covers the United States — it has no idea where Gakushuin University is. For Japan (or anywhere outside the US), use `"osm"` instead. This is a good habit anyway, since `"osm"` works globally.
+:::
 
-Let's make a little dataset with some addresses to geocode: 
+Let's make a little dataset of places around Tokyo to geocode:
 
 ```{r build-some-addresses}
 some_addresses <- tribble(
-  ~name,             ~address,
-  "The White House", "1600 Pennsylvania Ave NW, Washington, DC",
-  "The Andrew Young School of Policy Studies", "55 Park Place SE, Atlanta, GA 30303"
+  ~name,                  ~address,
+  "Gakushuin University", "1-5-1 Mejiro, Toshima City, Tokyo",
+  "Tokyo Skytree",        "1-1-2 Oshiage, Sumida City, Tokyo",
+  "Shibuya Station",      "Shibuya, Tokyo, Japan"
 )
 
 some_addresses
 ```
 
-To geocode these addresses, we can feed this data into `geocode()` and tell it to use the `address` column. We'll use the Census geocoding system for fun (surely they know where the White House is):
+To geocode these, feed the data into `geocode()` and tell it which column holds the address. We'll use OpenStreetMap:
 
 ```{r geocode-fake, eval=FALSE}
 library(tidygeocoder)
 
-geocoded_addresses <- some_addresses |> 
-  geocode(address, method = "census")
+geocoded_addresses <- some_addresses |>
+  geocode(address, method = "osm")
 
 geocoded_addresses
 ```
 
+```{r geocode-real, include=FALSE}
+# Hard-coded results so the page builds without hitting the API every render.
+# Re-run the chunk above live to confirm these.
+geocoded_addresses <- tribble(
+  ~name,                  ~address,                            ~lat,     ~long,
+  "Gakushuin University", "1-5-1 Mejiro, Toshima City, Tokyo",  35.7211, 139.7065,
+  "Tokyo Skytree",        "1-1-2 Oshiage, Sumida City, Tokyo",  35.7101, 139.8107,
+  "Shibuya Station",      "Shibuya, Tokyo, Japan",              35.6580, 139.7016
+)
+```
+
 ```{r show-geocode, echo=FALSE}
-geocoded_addresses |> 
+geocoded_addresses |>
   select(name, lat, long)
 ```
 
-It worked!
-
-Those are just numbers, though, and not the magical `geometry` column, so we need to use `st_as_sf()` to convert them to actual GIS data.
+It worked! Those are just numbers, though, so we convert them to the magic `geometry` column with `st_as_sf()` exactly as before:
 
 ```{r st-as-sf-geocoded}
-addresses_geometry <- geocoded_addresses |> 
+addresses_geometry <- geocoded_addresses |>
   st_as_sf(coords = c("long", "lat"), crs = st_crs("EPSG:4326"))
 
 addresses_geometry |> select(-address)
 ```
 
-Let's plot these on a US map:
+Let's plot these on a map of Tokyo. We'll grab just Tokyo prefecture as a backdrop — but there's a wrinkle. Tokyo prefecture officially stretches hundreds of kilometres south to include the Izu and Ogasawara Islands, so plotting the raw prefecture leaves our three landmarks squashed into a tiny corner of a very tall, mostly-empty map. We want just the **contiguous mainland** part.
 
-```{r plot-geocoded-cities}
-ggplot() + 
-  geom_sf(data = lower_48, fill = "#192DA1", color = "white", linewidth = 0.25) +
-  geom_sf(data = addresses_geometry, size = 5, color = "#FF851B") +
-  # Albers uses meters as its unit of measurement, so we need to nudge these
-  # labels up by a lot. I only settled on 175,000 here after a bunch of trial
-  # and error, adding single zeroes and rerunning the plot until the labels
-  # moved. 175,000 meters = 108.74 miles
+We can clip the prefecture to a sensible bounding box around the mainland using the same cookie-cutter idea as elsewhere: build a rectangle with `st_bbox()`, turn it into a polygon, and `st_intersection()` the prefecture against it. Everything outside the box (the southern islands) gets trimmed away:
+
+```{r clip-tokyo, warning=FALSE, message=FALSE}
+only_tokyo <- japan_prefectures |>
+  filter(str_detect(str_to_lower(name), "tokyo|tōkyō"))
+
+# A box around mainland Tokyo (the 23 wards + western Tama area).
+# xmin/ymin = bottom-left corner, xmax/ymax = top-right, in lon/lat degrees.
+tokyo_box <- st_bbox(
+  c(xmin = 138.9, ymin = 35.5, xmax = 139.95, ymax = 35.95),
+  crs = st_crs("EPSG:4326")
+) |>
+  st_as_sfc()  # turn the box into a polygon we can cut with
+
+# Make sure both layers share a CRS before intersecting
+tokyo_mainland <- only_tokyo |>
+  st_transform(st_crs("EPSG:4326")) |>
+  st_intersection(tokyo_box)
+```
+
+Now the backdrop is just mainland Tokyo, and our geocoded points sit comfortably across it:
+
+```{r plot-geocoded-tokyo, warning=FALSE, fig.width=8, fig.height=6}
+ggplot() +
+  geom_sf(data = tokyo_mainland, fill = "#192DA1", color = "white") +
+  geom_sf(data = addresses_geometry, size = 4, color = "#FF851B") +
   geom_sf_label(data = addresses_geometry, aes(label = name),
-                size = 4, fill = "#FF851B", nudge_y = 175000) + 
-  coord_sf(crs = st_crs("ESRI:102003")) +  # Albers
+                size = 3, fill = "#FF851B", nudge_y = 0.01) +
+  coord_sf(crs = st_crs("EPSG:6668")) +
   theme_void()
 ```
+
+::: {.callout-note}
+### Clipping vs. windowing
+
+There are two ways to "zoom" a map, and they're not the same. `coord_sf(xlim = ..., ylim = ...)` is *windowing* — it keeps all the data but only shows part of it, like cropping a photo. `st_intersection()` is *clipping* — it actually removes the geometry outside the box, changing the underlying data. Use windowing for a quick visual zoom; use clipping when you genuinely want to drop the far-flung pieces (like Tokyo's islands) so later calculations or layers don't drag them back in.
+:::
+
+## Plotting point data from a file: universities in Tokyo
+
+Shapefiles aren't limited to lines and areas — they can also be collections of points, and points are often what you actually want to map (every school, every station, every café). You don't have to hand-type coordinates into a `tribble()` either; lots of point data is freely available to download.
+
+A great free source is [OpenStreetMap](https://www.openstreetmap.org/) (OSM), the "Wikipedia of maps." Everything in OSM is tagged with simple `key=value` labels — a university is tagged `amenity=university`, a café is `amenity=cafe`, a station is `railway=station`, and so on. We can ask OSM for *every* feature carrying a particular tag inside a particular area and download the result.
+
+::: {.callout-tip}
+### Want to follow along?
+
+Below we walk through querying OSM yourself, but if you just want to follow along you can download the ready-made export here:
+
+- [{{< fa file-code >}} `tokyo_universities.geojson`](/files/data/external_data/tokyo_universities.geojson)
+
+Drop it into a `data` folder in your project, and you can run all the code in this section.
+:::
+
+### Querying OSM with Overpass Turbo
+
+The tool for this is [Overpass Turbo](https://overpass-turbo.eu/), a web front-end to the OSM database. You write a short query in the **Overpass QL** language, run it, and export the matching features as a GeoJSON file — a text-based geographic format that `{sf}` reads natively.
+
+Here's the query for every university in the Tokyo 23 special wards. Paste it into the box at [overpass-turbo.eu](https://overpass-turbo.eu/) and click **Run**:
+
+```default
+[out:json][timeout:60];
+// Define the search area: Tokyo Metropolis (admin_level 4)
+area["name"="東京都"]["admin_level"="4"]->.tokyo;
+// Find universities of all geometry types inside that area
+(
+  node["amenity"="university"](area.tokyo);
+  way["amenity"="university"](area.tokyo);
+  relation["amenity"="university"](area.tokyo);
+);
+out center;
+```
+
+Let's read that line by line, because the structure is reusable for almost any OSM query:
+
+- `[out:json][timeout:60];` — settings: return JSON, and give up after 60 seconds.
+- `area["name"="東京都"]["admin_level"="4"]->.tokyo;` — find the administrative area named 東京都 (Tokyo Metropolis) and store it in a variable called `.tokyo`. `admin_level=4` is the prefecture level in Japan.
+- The block in parentheses collects three things inside that area: `node`s (single points, like a small campus pinned to one spot), `way`s (buildings or campus outlines drawn as shapes), and `relation`s (complex multi-part features). A university might be tagged as any of these, so we ask for all three.
+- `out center;` — output the results, and for the `way`s and `relation`s that are really shapes, return a single *centre point* instead of the full polygon. That's what keeps everything as tidy points rather than a mix of dots and blobs.
+
+::: {.callout-tip}
+### Adapting the query
+
+Want every café in Tokyo instead? Change `amenity=university` to `amenity=cafe`. Want hospitals in Osaka? Change the area name to `大阪府` and the tag to `amenity=hospital`. The skeleton stays identical. The [OSM wiki's map features page](https://wiki.openstreetmap.org/wiki/Map_features) lists all the tags.
+:::
+
+Once it runs, click **Export → download/copy as GeoJSON** and save the file into your project as `data/tokyo_universities.geojson`.
+
+### Reading and cleaning the data
+
+Reading a GeoJSON is exactly like reading a shapefile — `read_sf()` handles both. As with any OSM export, some column names have colons in them (`name:en`, `name:ja`), which aren't valid R names, so we rename them to plain names right away, before any GIS step can mangle them:
+
+```{r read-tokyo-unis-show, eval=FALSE}
+tokyo_unis_raw <- read_sf("data/tokyo_universities.geojson") |>
+  rename(name_en = `name:en`,
+         name_ja = `name:ja`)
+
+tokyo_unis_raw |>
+  select(name, name_en, amenity)
+```
+
+```{r read-tokyo-unis, include=FALSE}
+# This site stores the file under files/data/external_data/; a student following
+# along would just use "data/tokyo_universities.geojson" as shown above.
+tokyo_unis_raw <- read_sf(here::here("files", "data", "external_data",
+                                     "tokyo_universities.geojson")) |>
+  rename(name_en = `name:en`,
+         name_ja = `name:ja`)
+```
+
+```{r read-tokyo-unis-output, echo=FALSE}
+tokyo_unis_raw |>
+  select(name, name_en, amenity)
+```
+
+There's a catch that comes up constantly with OSM data: **one university often appears as several points.** A big institution like the University of Tokyo is tagged once for its Hongō campus, once for Komaba, sometimes again for individual faculties — so a raw count badly overstates how many universities there are, and our later join would attach the same enrolment figure to each duplicate.
+
+For a clean map we want one dot per *institution*, but OSM doesn't give us that. A single university shows up many times — separate campuses, individual faculties, even named buildings — each as its own point with a slightly different `name_en`. Your export had 509 raw points; even after dropping ones without an English name and deduping on the exact name, you'd still be left with ~130 "universities," most of which are really fragments like `"University of Tokyo (Hongo"`, `"Keio University Shinanomachi"`, or `"Okuma Auditorium"` (a Waseda building).
+
+So a simple `distinct(name_en)` isn't enough. We need to **normalise** the messy names to a canonical institution name first. The workhorse is `case_when()` with `str_detect()`: we look for a signature substring (`"Keio"`, `"University of Tokyo"`, `"Waseda"`) and map every matching variant onto one clean name. Anything we don't recognise keeps its original name and will simply show up grey on the map later.
+
+```{r normalise-tokyo-unis}
+tokyo_unis_clean <- tokyo_unis_raw |>
+  filter(!is.na(name_en)) |>
+  mutate(uni_main = case_when(
+    str_detect(name_en, "University of Tokyo|Tokyo, (Hongo|Komaba|Yayoi|Asano)") ~ "University of Tokyo",
+    str_detect(name_en, "Waseda|Okuma")                  ~ "Waseda University",
+    str_detect(name_en, "Keio")                          ~ "Keio University",
+    str_detect(name_en, "Nihon University|Hihon")        ~ "Nihon University",
+    str_detect(name_en, "Nippon Medical")                ~ "Nippon Medical School",
+    str_detect(name_en, "Nippon Sport")                  ~ "Nippon Sport Science University",
+    str_detect(name_en, "Nippon Veterinary")             ~ "Nippon Veterinary and Life Science University",
+    str_detect(name_en, "Meiji Gakuin")                  ~ "Meiji Gakuin University",
+    str_detect(name_en, "Meiji University")              ~ "Meiji University",
+    str_detect(name_en, "Hosei")                         ~ "Hosei University",
+    str_detect(name_en, "Chuo University")               ~ "Chuo University",
+    str_detect(name_en, "Rikkyo|Saint Paul|St\\. Paul")  ~ "Rikkyo University",
+    str_detect(name_en, "Sophia")                        ~ "Sophia University",
+    str_detect(name_en, "Tokyo University of Science")   ~ "Tokyo University of Science",
+    str_detect(name_en, "Aoyama")                        ~ "Aoyama Gakuin University",
+    str_detect(name_en, "Toyo University")               ~ "Toyo University",
+    str_detect(name_en, "Toyo Gakuen")                   ~ "Toyo Gakuen University",
+    str_detect(name_en, "Senshu")                        ~ "Senshu University",
+    str_detect(name_en, "Komazawa")                      ~ "Komazawa University",
+    str_detect(name_en, "Kokugakuin")                    ~ "Kokugakuin University",
+    str_detect(name_en, "Kokushikan")                    ~ "Kokushikan University",
+    str_detect(name_en, "Takushoku")                     ~ "Takushoku University",
+    str_detect(name_en, "Tokyo Metropolitan")            ~ "Tokyo Metropolitan University",
+    str_detect(name_en, "Tokyo Denki")                   ~ "Tokyo Denki University",
+    str_detect(name_en, "Gakushuin")                     ~ "Gakushuin University",
+    str_detect(name_en, "Tokyo University of Agriculture and Technology") ~ "Tokyo University of Agriculture and Technology",
+    str_detect(name_en, "Tokyo University of Agriculture") ~ "Tokyo University of Agriculture",
+    str_detect(name_en, "Seikei")                        ~ "Seikei University",
+    str_detect(name_en, "Tokyo City University")         ~ "Tokyo City University",
+    str_detect(name_en, "Musashino University")          ~ "Musashino University",
+    str_detect(name_en, "Musashi University")            ~ "Musashi University",
+    str_detect(name_en, "Hitotsubashi")                  ~ "Hitotsubashi University",
+    str_detect(name_en, "Ochanomizu")                    ~ "Ochanomizu University",
+    str_detect(name_en, "Tokyo Woman's Christian")       ~ "Tokyo Woman's Christian University",
+    str_detect(name_en, "Tsuda")                         ~ "Tsuda University",
+    str_detect(name_en, "Tokyo University of the Arts")  ~ "Tokyo University of the Arts",
+    str_detect(name_en, "Teikyo Heisei")                 ~ "Teikyo Heisei University",
+    str_detect(name_en, "Teikyo")                        ~ "Teikyo University",
+    str_detect(name_en, "Daito Bunka")                   ~ "Daito Bunka University",
+    str_detect(name_en, "Kogakuin")                      ~ "Kogakuin University",
+    str_detect(name_en, "Kyorin")                        ~ "Kyorin University",
+    str_detect(name_en, "Kyoritsu")                      ~ "Kyoritsu Women's University",
+    str_detect(name_en, "Showa Women")                   ~ "Showa Women's University",
+    str_detect(name_en, "Showa Pharm")                   ~ "Showa Pharmaceutical University",
+    str_detect(name_en, "Seijo")                         ~ "Seijo University",
+    str_detect(name_en, "Otsuma")                        ~ "Otsuma Women's University",
+    str_detect(name_en, "Japan Women")                   ~ "Japan Women's University",
+    str_detect(name_en, "Japan University of Economics") ~ "Japan University of Economics",
+    str_detect(name_en, "Asia University")               ~ "Asia University",
+    str_detect(name_en, "Meisei")                        ~ "Meisei University",
+    str_detect(name_en, "Tamagawa")                      ~ "Tamagawa University",
+    str_detect(name_en, "Tama Art")                      ~ "Tama Art University",
+    str_detect(name_en, "Taisho")                        ~ "Taisho University",
+    str_detect(name_en, "Takachiho")                     ~ "Takachiho University",
+    str_detect(name_en, "Tokyo Gakugei")                 ~ "Tokyo Gakugei University",
+    str_detect(name_en, "Tokyo University of Foreign")   ~ "Tokyo University of Foreign Studies",
+    str_detect(name_en, "Marine Science")                ~ "Tokyo University of Marine Science and Technology",
+    str_detect(name_en, "Pharmacy and Life|Phamacy")     ~ "Tokyo University of Pharmacy and Life Sciences",
+    str_detect(name_en, "Tokyo University of Technology") ~ "Tokyo University of Technology",
+    str_detect(name_en, "Tokyo Women's Medical")         ~ "Tokyo Women's Medical University",
+    str_detect(name_en, "Tokyo Zokei")                   ~ "Tokyo Zokei University",
+    str_detect(name_en, "Tokyo Kasei Gakuin")            ~ "Tokyo Kasei Gakuin University",
+    str_detect(name_en, "Tokyo Kasei University")        ~ "Tokyo Kasei University",
+    str_detect(name_en, "Tokyo Fuji")                    ~ "Tokyo Fuji University",
+    str_detect(name_en, "Tokyo Future")                  ~ "Tokyo Future University",
+    str_detect(name_en, "Tokyo Seitoku")                 ~ "Tokyo Seitoku University",
+    str_detect(name_en, "Tokyo Ariake")                  ~ "Tokyo Ariake University of Medical and Health Sciences",
+    str_detect(name_en, "International Christian")       ~ "International Christian University",
+    str_detect(name_en, "Sacred Heart")                  ~ "University of the Sacred Heart",
+    str_detect(name_en, "Electro-Communications")        ~ "University of Electro-Communications",
+    str_detect(name_en, "Hoshi")                         ~ "Hoshi University",
+    str_detect(name_en, "Kagawa Nutrition")              ~ "Kagawa Nutrition University",
+    str_detect(name_en, "Juntendo")                      ~ "Juntendo University",
+    str_detect(name_en, "Bunka Gakuen")                  ~ "Bunka Gakuen University",
+    str_detect(name_en, "Mejiro")                        ~ "Mejiro University",
+    str_detect(name_en, "Temple University")             ~ "Temple University Japan",
+    str_detect(name_en, "United Nations")                ~ "United Nations University",
+    str_detect(name_en, "Tsukuba")                       ~ "University of Tsukuba (Tokyo)",
+    str_detect(name_en, "Kindai")                        ~ "Kindai University (Tokyo)",
+    str_detect(name_en, "Sanno")                         ~ "Sanno University",
+    str_detect(name_en, "Seitoku")                       ~ "Seitoku University",
+    str_detect(name_en, "Kaetsu")                        ~ "Kaetsu University",
+    str_detect(name_en, "Kawamura")                      ~ "Kawamura Gakuen Woman's University",
+    # anything else keeps its raw name and will be grey on the map
+    TRUE ~ name_en
+  ))
+```
+
+Now we keep one point per canonical institution:
+
+```{r dedupe-tokyo-unis}
+tokyo_unis <- tokyo_unis_clean |>
+  group_by(uni_main) |>
+  slice(1) |>
+  ungroup()
+
+nrow(tokyo_unis)
+```
+
+::: {.callout-note}
+### Normalising is a judgement call
+
+The `case_when()` above is hand-built and imperfect — `str_detect()` matching is only as good as the patterns you write, and the order matters (we test `"Tokyo University of Agriculture and Technology"` *before* the shorter `"Tokyo University of Agriculture"`, otherwise the shorter pattern would swallow both). Genuine non-institutions in the data — `"Building 16"`, `"LEC"`, `"Library of Nihon University"` — will slip through as their own rows; they'll go grey once we join enrolment, which is the honest outcome. This is real data-cleaning work, and there's rarely a perfectly clean answer.
+:::
+
+### Joining student numbers
+
+The OSM data tells us *where* each university is, but not *how many students* attend — there's no enrolment tag. This is the same situation as the Georgia schools example, where the shapefile carried a `TOTAL` column of student counts. Here we don't get that for free, so we bring our own: a table of total enrolment (undergraduate + graduate) keyed on the **canonical `uni_main` names** we just built. Figures are approximate, drawn from each institution's published numbers; institutions we have no reliable figure for are left out and will appear grey.
+
+```{r tokyo-enrolment}
+enrolment <- tribble(
+  ~uni_main,                                              ~students,
+  "University of Tokyo",                                   28500,
+  "Waseda University",                                     47000,
+  "Nihon University",                                      67000,
+  "Keio University",                                       33000,
+  "Toyo University",                                       30000,
+  "Meiji University",                                      32000,
+  "Hosei University",                                      27000,
+  "Chuo University",                                       25000,
+  "Teikyo University",                                     24000,
+  "Rikkyo University",                                     20000,
+  "Tokyo University of Science",                           18000,
+  "Aoyama Gakuin University",                              18000,
+  "Senshu University",                                     18000,
+  "Komazawa University",                                   14000,
+  "Sophia University",                                     13000,
+  "Tokyo University of Agriculture",                       13000,
+  "Meiji Gakuin University",                               12000,
+  "Kokushikan University",                                 12000,
+  "Daito Bunka University",                                12000,
+  "Kokugakuin University",                                 11000,
+  "Gakushuin University",                                  10000,
+  "Tamagawa University",                                   10000,
+  "Asia University",                                        9000,
+  "Tokyo Metropolitan University",                          9000,
+  "Tokyo Denki University",                                 9000,
+  "Kogakuin University",                                    8000,
+  "Takushoku University",                                   8000,
+  "Seikei University",                                      8000,
+  "Showa Women's University",                               7000,
+  "Tokyo City University",                                  7000,
+  "Musashino University",                                   8000,
+  "Meisei University",                                      7000,
+  "Hitotsubashi University",                               6000,
+  "Kyoritsu Women's University",                            6000,
+  "Teikyo Heisei University",                               7000,
+  "Tokyo University of Foreign Studies",                    4500,
+  "Musashi University",                                     4500,
+  "Tokyo Gakugei University",                               4500,
+  "Kyorin University",                                      4000,
+  "Tokyo University of Marine Science and Technology",      4000,
+  "Tokyo University of Pharmacy and Life Sciences",         4000,
+  "Tokyo University of Agriculture and Technology",         5500,
+  "Japan Women's University",                               6000,
+  "Tama Art University",                                    4000,
+  "Otsuma Women's University",                              5000,
+  "Seijo University",                                       5000,
+  "Taisho University",                                      5000,
+  "University of Electro-Communications",                  4500,
+  "Tokyo University of Technology",                         4500,
+  "Ochanomizu University",                                 3000,
+  "Tokyo Woman's Christian University",                    3500,
+  "University of the Sacred Heart",                        3000,
+  "Tokyo University of the Arts",                          3000,
+  "International Christian University",                    3000,
+  "Tsuda University",                                      2500,
+  "Tokyo Zokei University",                                2500,
+  "Tokyo Women's Medical University",                      2000,
+  "Juntendo University",                                   3500,
+  "Nippon Medical School",                                 1000,
+  "Nippon Sport Science University",                       5000,
+  "Hoshi University",                                      2500
+)
+```
+
+Now we join it onto the points, matching on the canonical name. Every university keeps its location; the ones we have a figure for gain a `students` column:
+
+```{r join-tokyo-enrolment}
+tokyo_unis_students <- tokyo_unis |>
+  left_join(enrolment, by = "uni_main")
+```
+
+::: {.callout-important}
+### Check what didn't match
+
+After the join, list the institutions with no enrolment figure. Some will be genuine universities you can add to the table; others will be the data-noise rows (buildings, fragments) that *should* stay grey:
+
+```{r check-join, eval=FALSE}
+tokyo_unis_students |>
+  st_drop_geometry() |>
+  filter(is.na(students)) |>
+  arrange(uni_main) |>
+  pull(uni_main)
+```
+:::
+
+### Adding ward boundaries, like the Georgia counties
+
+In the Georgia example we layered county boundaries under the school points so you could see *which* part of the state things sat in. We can do the same here with Tokyo's 23 special wards (特別区) — the ward layer is the direct analogue of the GA counties.
+
+The wards come from the [`{jpndistrict}`](https://github.com/uribo/jpndistrict) package, which provides municipal boundaries for every Japanese prefecture. `jpn_pref(pref_code = 13)` returns all the municipalities of Tokyo (prefecture code 13), one polygon each:
+
+```{r jpndistrict-install, message=FALSE, warning=FALSE}
+# jpndistrict is GitHub-only, so install it once if it's missing
+if (!requireNamespace("jpndistrict", quietly = TRUE)) {
+  if (!requireNamespace("remotes", quietly = TRUE)) install.packages("remotes")
+  remotes::install_github("uribo/jpndistrict")
+}
+```
+
+```{r tokyo-wards, warning=FALSE, message=FALSE}
+library(jpndistrict)
+
+# All Tokyo municipalities; the 23 special wards have city names ending in "区"
+tokyo_all <- jpn_pref(pref_code = 13)
+
+# Have a quick look at the columns first — the municipality name is in `city`
+glimpse(tokyo_all)
+
+tokyo_wards <- tokyo_all |>
+  filter(str_detect(city, "区$"))   # keep only the special wards (区 = ward)
+```
+
+Just the wards on their own:
+
+```{r tokyo-wards-plot, warning=FALSE, fig.width=8, fig.height=7}
+ggplot() +
+  geom_sf(data = tokyo_wards, fill = "#A5D46A", color = "white") +
+  coord_sf(crs = st_crs("EPSG:6668")) +
+  theme_void()
+```
+
+### Mapping the universities
+
+Now we map the universities the same way the Georgia schools were mapped: ward boundaries underneath, university points on top, and the `students` count mapped to the **colour** aesthetic (just like GA's `aes(color = TOTAL)`). We drop the legend so the map reads cleanly, exactly as the schools map did.
+
+There's one tidy-up first. Our OSM query pulled universities from the whole Tokyo Metropolis, which includes the Tama-area cities to the west — but our backdrop is only the 23 special wards. Points outside the wards would float over empty space. We use the same `st_intersection()` cookie-cutter trick from before, clipping the universities to the ward boundary so we keep only the ones genuinely inside the 23 wards:
+
+```{r clip-unis-to-wards, warning=FALSE, message=FALSE}
+# Match CRS, then keep only universities that fall inside the wards
+tokyo_wards_4326 <- tokyo_wards |>
+  st_transform(st_crs("EPSG:4326"))
+
+tokyo_unis_in_wards <- st_intersection(tokyo_wards_4326, tokyo_unis_students)
+
+nrow(tokyo_unis_in_wards)
+```
+
+Now the map — every point sits on a ward, with student numbers driving **both** the colour and the size of each dot (and we suppress both legends to keep it clean, just like the Georgia schools map). Universities with no enrolment figure would otherwise vanish from a size scale, so we give them a small placeholder size while leaving their colour grey:
+
+```{r plot-tokyo-unis, warning=FALSE, fig.width=8, fig.height=7}
+tokyo_unis_plot <- tokyo_unis_in_wards |>
+  mutate(size_students = ifelse(is.na(students), 1000, students))
+
+ggplot() +
+  geom_sf(data = tokyo_wards, fill = "white", color = "grey80") +
+  geom_sf(data = tokyo_unis_plot,
+          aes(color = students, size = size_students),
+          alpha = 0.8) +
+  scale_color_viridis_c(na.value = "grey75") +
+  scale_size_continuous(range = c(1, 8)) +
+  guides(color = "none", size = "none") +
+  coord_sf(crs = st_crs("EPSG:6668")) +
+  theme_void()
+```
+
+The brightest points are the mega-universities — Nihon, Waseda, Keio — clustered in the central wards. Universities we had no figure for show up grey.
+
+::: {.callout-tip}
+### Counting and summing after a join
+
+Because the points and the enrolment data are now in one object, ordinary dplyr verbs answer real questions. How many students are represented on the map (i.e. across the 23 wards) in total?
+
+```{r sum-students}
+tokyo_unis_in_wards |>
+  st_drop_geometry() |>
+  summarise(total = sum(students, na.rm = TRUE))
+```
+:::
 
 ## Plotting other data on maps
 
 So far we've just plotted whatever data the shapefile creators decided to include and publish in their data. But what if you want to visualize some other variable on a map? We can do this by combining our shapefile data with any other kind of data, as long as the two have a shared column. For instance, we can make a choropleth map of life expectancy with data from the World Bank.
 
-First, let's grab some data from the World Bank for just 2015:
+First, let's grab some data from the World Bank for just 2022:
 
-```{r get-wdi, eval=FALSE}
+```{r get-wdi}
 library(WDI)  # For getting data from the World Bank
 
 indicators <- c(life_expectancy = "SP.DYN.LE00.IN")  # Life expectancy
 
-wdi_raw <- WDI(country = "all", indicators, extra = TRUE, 
-               start = 2015, end = 2015)
-```
-
-```{r load-wdi, include=FALSE}
-wdi_raw <- read_csv(here::here(wdi_path))
+wdi_raw <- WDI(country = "all", indicators, extra = TRUE,
+               start = 2022, end = 2022)
 ```
 
 Let's see what we got:
@@ -712,36 +968,26 @@ head(wdi_raw)
 
 We have a bunch of columns here, but we care about two in particular: life expectancy, and the ISO3 code. This three-letter code is a standard system for identifying countries ([see the full list here](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-3)), and that column will let us combine this World Bank data with the global shapefile, which also has a column for the ISO3 code.
 
-::: {.callout-note}
-### World capitals
-
-We also have columns for the latitude and longitude for each capital, so we could theoretically convert those to a `geometry` column with `st_as_sf()` and plot world capitals, which would be neat, but we won't do that now.
-:::
-
 Let's clean up the WDI data by shrinking it down substantially so we only join the one `life_expectancy` column that we care about:
 
 ```{r clean-wdi}
-wdi_clean_small <- wdi_raw |> 
+wdi_clean_small <- wdi_raw |>
   select(life_expectancy, iso3c)
 wdi_clean_small
 ```
 
-Next we need to merge this tiny dataset into the `world_map_sans_antarctica` shapefile data we were using earlier. To do this we'll use a function named `left_join()`. We feed two data frames into `left_join()`, and R will keep all the rows from the first and include all the columns from both the first and the second wherever the two datasets match with one specific column. That's wordy and weird—[stare at this animation here](https://github.com/gadenbuie/tidyexplain#left-join) for a few seconds to see what's really going to happen. We're essentially going to append the World Bank data to the end of the world shapefiles and line up rows that have matching ISO3 codes. The ISO3 column is named `ISO_A3` in the shapefile data, and it's named `iso3c` in the WDI data, so we tell `left_join()` that those are the same column:
+Next we need to merge this tiny dataset into the `world_sans_antarctica` shapefile data we were using earlier. To do this we'll use a function named `left_join()`. We feed two data frames into `left_join()`, and R will keep all the rows from the first and include all the columns from both wherever the two datasets match with one specific column. We're essentially going to append the World Bank data to the end of the world shapefiles and line up rows that have matching ISO3 codes. The ISO3 column is named `iso_a3` in the shapefile data, and it's named `iso3c` in the WDI data, so we tell `left_join()` that those are the same column:
 
 ```{r combine-map-wdi}
-world_map_with_life_expectancy <- world_sans_antarctica |> 
-  left_join(wdi_clean_small, by = c("ISO_A3" = "iso3c"))
+world_map_with_life_expectancy <- world_sans_antarctica |>
+  left_join(wdi_clean_small, by = c("iso_a3" = "iso3c"))
 ```
 
-If you look at this dataset in RStudio now and look at the last column, you'll see the WDI life expectancy right next to the magic `geometry` column.
+Now that we have a column for life expectancy, we can map it to the fill aesthetic and fill each country by 2022 life expectancy:
 
-We technically didn't need to shrink the WDI data down to just two columns—had we left everything else, all the WDI columns would have come over to the `world_sans_antarctica`, including columns for region and income level, etc. But I generally find it easier and cleaner to only merge in the columns I care about instead of making massive datasets with a billion extra columns.
-
-Now that we have a column for life expectancy, we can map it to the fill aesthetic and fill each country by 2015 life expectancy:
-
-```{r world-life-exp-2015, fig.width=10, fig.height=6}
-ggplot() + 
-  geom_sf(data = world_map_with_life_expectancy, 
+```{r world-life-exp, fig.width=10, fig.height=6}
+ggplot() +
+  geom_sf(data = world_map_with_life_expectancy,
           aes(fill = life_expectancy),
           linewidth = 0.25) +
   coord_sf(crs = st_crs("ESRI:54030")) +  # Robinson
@@ -751,29 +997,27 @@ ggplot() +
   theme(legend.position = "bottom")
 ```
 
-Voila! Global life expectancy in 2015!
-
----
+Voila! Global life expectancy in 2022!
 
 ::: {.callout-tip}
 ### France and Norway
 
-Sharp-eyed readers will notice that France and Norway are grayed out because they're missing data. That's because the `ISO_A3` code in the Natural Earth data is missing for both France and Norway for whatever reason, so the WDI data didn't merge with those rows. To fix that, we can do some manual recoding before joining in the WDI data.
+Sharp-eyed readers will notice that some countries are grayed out because they're missing data. That's because the `iso_a3` code in the Natural Earth data is coded as `-99` for some countries — historically France and Norway in particular — so the WDI data didn't merge with those rows. To fix that, we can do some manual recoding before joining in the WDI data.
 :::
 
-```{r world-life-exp-2015-fixed, fig.width=10, fig.height=6}
-world_sans_antarctica_fixed <- world_sans_antarctica |> 
-  mutate(ISO_A3 = case_when(
+```{r world-life-exp-fixed, fig.width=10, fig.height=6}
+world_sans_antarctica_fixed <- world_sans_antarctica |>
+  mutate(iso_a3 = case_when(
     # If the country name is Norway or France, redo the ISO3 code
-    ADMIN == "Norway" ~ "NOR",
-    ADMIN == "France" ~ "FRA",
+    name == "Norway" ~ "NOR",
+    name == "France" ~ "FRA",
     # Otherwise use the existing ISO3 code
-    TRUE ~ ISO_A3
-  )) |> 
-  left_join(wdi_clean_small, by = c("ISO_A3" = "iso3c"))
+    TRUE ~ iso_a3
+  )) |>
+  left_join(wdi_clean_small, by = c("iso_a3" = "iso3c"))
 
-ggplot() + 
-  geom_sf(data = world_sans_antarctica_fixed, 
+ggplot() +
+  geom_sf(data = world_sans_antarctica_fixed,
           aes(fill = life_expectancy),
           linewidth = 0.25) +
   coord_sf(crs = st_crs("ESRI:54030")) +  # Robinson
