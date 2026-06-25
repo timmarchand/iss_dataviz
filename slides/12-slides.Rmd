@@ -334,10 +334,10 @@ world_shapes <- read_sf("data/ne_110m_admin_0_countries/ne_110m_admin_0_countrie
 
 base_map <- ggplot() + 
   geom_sf(data = world_shapes, fill = "#B2B1F9", linewidth = 0.1, color = "#0D0887") +
-  theme_void(base_family = "Fira Sans Condensed") + 
+  theme_void(base_family = "sans") + 
   theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
         plot.title = element_text(margin = margin(b = 3), face = "bold"),
-        plot.caption = element_text(family = "Consolas", color = "grey50"))
+        plot.caption = element_text(family = "mono", color = "grey50"))
 
 # Longitude/latitude
 map_lat_lon <- base_map +
@@ -352,7 +352,7 @@ map_robinson <- base_map +
   labs(title = "Robinson",
        caption = 'crs = "+proj=robin"')
 
-# Mercator (ew)
+# Mercator (not the best)
 map_mercator <- base_map +
   coord_sf(crs = "+proj=merc") +
   # coord_sf(crs = 54004, datum = NA) +  # Mercator
@@ -389,20 +389,20 @@ map_nad83 <- ggplot() +
   labs(title = "NAD83",
        caption = 'crs = "EPSG:4269"') +
   coord_sf(crs = st_crs("EPSG:4269"), datum = NA) +
-  theme_void(base_family = "Fira Sans Condensed") + 
+  theme_void(base_family = "sans") + 
   theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
         plot.title = element_text(margin = margin(b = 3), face = "bold"),
-        plot.caption = element_text(family = "Consolas", color = "grey50"))
+        plot.caption = element_text(family = "mono", color = "grey50"))
 
 map_albers <- ggplot() +
   geom_sf(data = states_48, fill = "#B2B1F9", linewidth = 0.25, color = "#0D0887") +
   labs(title = "Albers",
        caption = 'crs = "ESRI:102003"') +
   coord_sf(crs = st_crs("ESRI:102003"), datum = NA) +
-  theme_void(base_family = "Fira Sans Condensed") + 
+  theme_void(base_family = "sans") + 
   theme(plot.margin = unit(c(0.5, 0.5, 0.5, 0.5), "lines"),
         plot.title = element_text(margin = margin(b = 3), face = "bold"),
-        plot.caption = element_text(family = "Consolas", color = "grey50"))
+        plot.caption = element_text(family = "mono", color = "grey50"))
 
 map_nad83 | map_albers
 ```
@@ -445,7 +445,7 @@ map_nad83 | map_albers
 
 --
 
-.box-inv-4.small[(but also ew mercator)]
+.box-inv-4.small[(but be wary of mercator)]
 
 ---
 
@@ -729,13 +729,13 @@ ggplot() +
   geom_point(data = point_example, aes(x = x, y = y), size = 5) +
   geom_label(data = point_example, aes(x = x, y = y, label = label),
              nudge_y = 0.8, size = 8,
-             family = "Fira Sans Condensed",) +
+             family = "sans",) +
   geom_text(data = lat_labs, aes(x = x, y = y, label = label),
             hjust = 0.5, vjust = -0.3, size = 6,
-            family = "Fira Sans Condensed",) +
+            family = "sans",) +
   geom_text(data = lon_labs, aes(x = x, y = y, label = label),
             hjust = 1.1, vjust = -0.5, angle = 90, size = 6,
-            family = "Fira Sans Condensed", ) +
+            family = "sans", ) +
   geom_hline(yintercept = 0) +
   geom_vline(xintercept = 0) +
   scale_x_continuous(breaks = seq(-2, 3, 1)) +
@@ -743,7 +743,7 @@ ggplot() +
   coord_equal(xlim = c(-3.5, 3), ylim = c(-3, 3)) +
   labs(x = NULL, y = NULL, caption = "via @sarahbellmaps") +
   # labs(x = NULL, y = NULL) +
-  theme_minimal(base_family = "Fira Sans Condensed") +
+  theme_minimal(base_family = "sans") +
   theme(panel.grid.minor = element_blank(),
         axis.text = element_blank(),
         plot.caption = element_text(size = rel(1), margin = margin(t = 15), color = "grey50"))
@@ -842,6 +842,7 @@ other_data <- tribble(
   "Washington, DC", -77.051314, 38.893843,
 )
 ```
+
 
 ```{r show-other}
 other_data
